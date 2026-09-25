@@ -3,6 +3,7 @@
 import ProviderOverviewPanels from './overview/ProviderOverviewPanels';
 import { carrierColor, carrierLogo } from '@/lib/carriers';
 import { HistorySnapshot } from '@/types/history';
+import { t } from '@/lib/strings';
 
 interface ProviderHistoryModalProps {
   isOpen: boolean;
@@ -50,14 +51,14 @@ export default function ProviderHistoryModal({
             <div>
               <h2 className="text-lg sm:text-xl font-bold text-foreground">{providerName}</h2>
               <p className="text-xs sm:text-sm text-muted-foreground">
-                Historische ontwikkeling pakketpunten
+                {t.overview.providerSubtitle}
               </p>
             </div>
           </div>
           <button
             onClick={onClose}
             className="p-2 -mr-2 text-subtle-foreground hover:text-muted-foreground hover:bg-secondary rounded-full transition"
-            aria-label="Sluiten"
+            aria-label={t.common.close}
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path
@@ -81,7 +82,7 @@ export default function ProviderHistoryModal({
             onClick={onClose}
             className="w-full px-4 py-3 sm:py-2 bg-primary text-white rounded-lg hover:bg-primary/90 active:bg-primary/80 transition font-medium text-base sm:text-sm"
           >
-            Sluiten
+            {t.common.close}
           </button>
         </div>
       </div>

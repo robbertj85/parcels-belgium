@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
 
+import { COUNTRY } from '@/config/country';
 export const dynamic = 'force-dynamic';
 
 export async function GET() {
@@ -37,7 +38,7 @@ export async function GET() {
       carrier_stats: summaryData.carrier_stats || {},
       bronnen,
       // Link to GitHub Actions for detailed logs
-      github_actions_url: 'https://github.com/Ida-BirdsEye/pakketpunten/actions/workflows/update-data.yml'
+      github_actions_url: `${COUNTRY.githubUrl}/actions/workflows/update-data.yml`
     };
 
     return NextResponse.json(updateStatus);

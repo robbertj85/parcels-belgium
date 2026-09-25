@@ -17,6 +17,8 @@ import { Card } from '@/components/ui/card';
 import { carrierColor } from '@/lib/carriers';
 import { HistorySnapshot } from '@/types/history';
 
+import { COUNTRY } from '@/config/country';
+import { t } from '@/lib/strings';
 /**
  * One carrier's history: current standing, growth since the first snapshot,
  * market share, development over time, weekly deltas and the weekly table.
@@ -69,9 +71,9 @@ export default function ProviderOverviewPanels({
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
         <div className="bg-accent rounded-lg p-3 sm:p-4">
           <div className="text-xl sm:text-2xl font-bold text-accent-foreground">
-            {lastEntry?.count.toLocaleString('nl-NL') || 0}
+            {lastEntry?.count.toLocaleString(COUNTRY.locale) || 0}
           </div>
-          <div className="text-xs sm:text-sm text-primary">Huidige stand</div>
+          <div className="text-xs sm:text-sm text-primary">{t.overview.currentCount}</div>
         </div>
         <div
           className={`rounded-lg p-3 sm:p-4 ${totalChange >= 0 ? 'bg-success-muted' : 'bg-destructive-muted'}`}
@@ -80,12 +82,12 @@ export default function ProviderOverviewPanels({
             className={`text-xl sm:text-2xl font-bold ${totalChange >= 0 ? 'text-success' : 'text-destructive'}`}
           >
             {totalChange >= 0 ? '+' : ''}
-            {totalChange.toLocaleString('nl-NL')}
+            {totalChange.toLocaleString(COUNTRY.locale)}
           </div>
           <div
             className={`text-xs sm:text-sm ${totalChange >= 0 ? 'text-success' : 'text-destructive'}`}
           >
-            Sinds {firstEntry?.week}
+            {t.overview.since(firstEntry?.week ?? '')}
           </div>
         </div>
         <div
@@ -100,21 +102,21 @@ export default function ProviderOverviewPanels({
           <div
             className={`text-xs sm:text-sm ${Number(percentageChange) >= 0 ? 'text-success' : 'text-destructive'}`}
           >
-            Groei percentage
+            {t.overview.growthPercentage}
           </div>
         </div>
         <div className="bg-muted rounded-lg p-3 sm:p-4">
           <div className="text-xl sm:text-2xl font-bold text-foreground">
             {marketShareData[marketShareData.length - 1]?.share || 0}%
           </div>
-          <div className="text-xs sm:text-sm text-muted-foreground">Marktaandeel</div>
+          <div className="text-xs sm:text-sm text-muted-foreground">{t.overview.marketShare}</div>
         </div>
       </div>
 
       {/* Main Line Chart */}
       <Card>
         <h3 className="font-semibold text-foreground mb-3 sm:mb-4 text-sm sm:text-base">
-          Aantal pakketpunten over tijd
+          {t.overview.pointsOverTime}
         </h3>
         <div className="h-48 sm:h-64">
           <ResponsiveContainer width="100%" height="100%">
@@ -133,8 +135,8 @@ export default function ProviderOverviewPanels({
                   borderRadius: '8px',
                   fontSize: '12px',
                 }}
-                labelFormatter={(label) => `Week ${label}`}
-                formatter={(value: number) => [value.toLocaleString('nl-NL'), providerName]}
+                labelFormatter={(label) => t.overview.weekLabel(label)}
+                formatter={(value: number) => [value.toLocaleString(COUNTRY.locale), providerName]}
               />
               <Legend />
               <Line
@@ -154,7 +156,7 @@ export default function ProviderOverviewPanels({
       {weeklyChanges.length > 0 && (
         <Card>
           <h3 className="font-semibold text-foreground mb-3 sm:mb-4 text-sm sm:text-base">
-            Wekelijkse verandering
+            {t.overview.weeklyChange}
           </h3>
           <div className="h-40 sm:h-48">
             <ResponsiveContainer width="100%" height="100%">
@@ -173,10 +175,10 @@ export default function ProviderOverviewPanels({
                     borderRadius: '8px',
                     fontSize: '12px',
                   }}
-                  labelFormatter={(label) => `Week ${label}`}
+                  labelFormatter={(label) => t.overview.weekLabel(label)}
                   formatter={(value: number) => [
                     `${value >= 0 ? '+' : ''}${value}`,
-                    'Verandering',
+                    t.overview.change,
                   ]}
                 />
                 <Bar dataKey="change" fill={providerColor} radius={[4, 4, 0, 0]} />
@@ -189,26 +191,26 @@ export default function ProviderOverviewPanels({
       {/* History table */}
       <div className="bg-card border border-border rounded-lg overflow-hidden">
         <div className="px-4 py-3 border-b border-border bg-muted">
-          <h3 className="font-semibold text-foreground">Wekelijkse data</h3>
+          <h3 className="font-semibold text-foreground">{t.overview.weeklyData}</h3>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead className="bg-muted border-b border-border">
               <tr>
                 <th className="px-4 py-3 text-left text-xs font-semibold text-muted-foreground uppercase">
-                  Week
+                  {t.overview.week}
                 </th>
                 <th className="px-4 py-3 text-left text-xs font-semibold text-muted-foreground uppercase">
-                  Periode
+                  {t.overview.period}
                 </th>
                 <th className="px-4 py-3 text-center text-xs font-semibold text-foreground uppercase bg-secondary">
-                  Pakketpunten
+                  {t.common.points}
                 </th>
                 <th className="px-4 py-3 text-center text-xs font-semibold text-muted-foreground uppercase">
-                  Verschil
+                  {t.overview.difference}
                 </th>
                 <th className="px-4 py-3 text-center text-xs font-semibold text-muted-foreground uppercase">
-                  Marktaandeel
+                  {t.overview.marketShare}
                 </th>
               </tr>
             </thead>
@@ -232,7 +234,7 @@ export default function ProviderOverviewPanels({
                       {formatDateRange(snapshot.date_from, snapshot.date_to)}
                     </td>
                     <td className="px-4 py-3 text-center font-semibold text-foreground bg-muted">
-                      {count.toLocaleString('nl-NL')}
+                      {count.toLocaleString(COUNTRY.locale)}
                     </td>
                     <td className="px-4 py-3 text-center">
                       {idx < arr.length - 1 ? (
@@ -271,8 +273,8 @@ function formatDateRange(from: string, to: string): string {
 
   const fromDay = fromDate.getDate();
   const toDay = toDate.getDate();
-  const fromMonth = fromDate.toLocaleString('nl-NL', { month: 'short' });
-  const toMonth = toDate.toLocaleString('nl-NL', { month: 'short' });
+  const fromMonth = fromDate.toLocaleString(COUNTRY.locale, { month: 'short' });
+  const toMonth = toDate.toLocaleString(COUNTRY.locale, { month: 'short' });
 
   if (fromMonth === toMonth) {
     return `${fromDay} - ${toDay} ${fromMonth}`;

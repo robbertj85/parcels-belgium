@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from 'react';
 
+import { COUNTRY } from '@/config/country';
+import { t } from '@/lib/strings';
 interface Municipality {
   name: string;
   slug: string;
@@ -13,27 +15,27 @@ export default function DownloadsPage() {
   const [municipalities, setMunicipalities] = useState<Municipality[]>([]);
   const [downloadStatus, setDownloadStatus] = useState<string>('');
   const [isDownloading, setIsDownloading] = useState(false);
-  const [nederlandStats, setNederlandStats] = useState<{ totalPoints: number; municipalityCount: number }>({ totalPoints: 0, municipalityCount: 0 });
+  const [nationalStats, setNationalStats] = useState<{ totalPoints: number; municipalityCount: number }>({ totalPoints: 0, municipalityCount: 0 });
 
   useEffect(() => {
     fetch('/municipalities.json')
       .then(res => res.json())
       .then(data => {
         setMunicipalities(data);
-        // Count municipalities excluding "Nederland"
-        const municipalityCount = data.filter((m: Municipality) => m.slug !== 'nederland').length;
-        setNederlandStats(prev => ({ ...prev, municipalityCount }));
+        // Count municipalities excluding the national row
+        const municipalityCount = data.filter((m: Municipality) => m.slug !== COUNTRY.nationalSlug).length;
+        setNationalStats(prev => ({ ...prev, municipalityCount }));
       })
       .catch(err => console.error('Error loading municipalities:', err));
 
-    // Fetch Nederland data to get total pakketpunten count
-    fetch('/data/nederland.geojson')
+    // Fetch the national file to get the total pakketpunten count
+    fetch(`/data/${COUNTRY.nationalSlug}.geojson`)
       .then(res => res.json())
       .then(data => {
         const totalPoints = data.features.filter((f: any) => f.properties.type === 'pakketpunt').length;
-        setNederlandStats(prev => ({ ...prev, totalPoints }));
+        setNationalStats(prev => ({ ...prev, totalPoints }));
       })
-      .catch(err => console.error('Error loading Nederland data:', err));
+      .catch(err => console.error('Error loading national data:', err));
   }, []);
 
   const handleDownload = async (slug: string, format: 'json' | 'csv') => {
@@ -44,13 +46,13 @@ export default function DownloadsPage() {
       const response = await fetch(`/api/download?slug=${slug}&format=${format}`);
 
       if (response.status === 429) {
-        setDownloadStatus('⚠️ Te veel downloads. Probeer later opnieuw (max 5 downloads per uur).');
+        setDownloadStatus(`⚠️ ${t.dataExport.tooManyDownloads}`);
         setIsDownloading(false);
         return;
       }
 
       if (!response.ok) {
-        throw new Error(`Download mislukt: ${response.statusText}`);
+        throw new Error(t.dataExport.downloadFailed(response.statusText));
       }
 
       const blob = await response.blob();
@@ -63,16 +65,16 @@ export default function DownloadsPage() {
       window.URL.revokeObjectURL(url);
       document.body.removeChild(a);
 
-      setDownloadStatus('✅ Download gestart!');
+      setDownloadStatus(`✅ ${t.dataExport.downloadStarted}`);
     } catch (error) {
-      setDownloadStatus(`❌ Error: ${error instanceof Error ? error.message : 'Onbekende fout'}`);
+      setDownloadStatus(`❌ ${t.dataExport.errorPrefix} ${error instanceof Error ? error.message : t.dataExport.unknownError}`);
     } finally {
       setIsDownloading(false);
     }
   };
 
-  const nationalData = municipalities.find(m => m.slug === 'nederland');
-  const cityData = municipalities.filter(m => m.slug !== 'nederland');
+  const nationalData = municipalities.find(m => m.slug === COUNTRY.nationalSlug);
+  const cityData = municipalities.filter(m => m.slug !== COUNTRY.nationalSlug);
 
   return (
     <>
@@ -90,26 +92,26 @@ export default function DownloadsPage() {
         {/* National data */}
         {nationalData && (
           <section className="mb-8">
-            <h2 className="text-xl font-bold text-foreground mb-4">Landelijke Data</h2>
+            <h2 className="text-xl font-bold text-foreground mb-4">{t.dataExport.nationalTitle}</h2>
             <div className="bg-card rounded-lg shadow-md p-6">
               <div className="flex items-start justify-between">
                 <div className="flex-1">
                   <h3 className="text-lg font-semibold text-foreground">{nationalData.name}</h3>
                   <p className="text-sm text-muted-foreground mt-1">
-                    Alle {nationalData.population.toLocaleString('nl-NL')} inwoners
+                    {t.dataExport.allResidents(nationalData.population.toLocaleString(COUNTRY.locale))}
                   </p>
                   <p className="text-sm text-muted-foreground">
-                    Som van alle {nederlandStats.municipalityCount} gemeentes met boundary filtering
+                    {t.dataExport.sumOfMunicipalities(nationalStats.municipalityCount)}
                   </p>
-                  {nederlandStats.totalPoints > 0 && (
+                  {nationalStats.totalPoints > 0 && (
                     <p className="text-sm font-semibold text-foreground mt-2">
-                      📍 {nederlandStats.totalPoints.toLocaleString('nl-NL')} pakketpunten
+                      📍 {t.dataExport.pointsCount(nationalStats.totalPoints.toLocaleString(COUNTRY.locale))}
                     </p>
                   )}
                 </div>
                 <div className="flex gap-2">
                   <button
-                    onClick={() => handleDownload('nederland', 'json')}
+                    onClick={() => handleDownload(COUNTRY.nationalSlug, 'json')}
                     disabled={isDownloading}
                     className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 disabled:bg-muted-foreground disabled:cursor-not-allowed transition flex items-center gap-2"
                   >
@@ -119,7 +121,7 @@ export default function DownloadsPage() {
                     JSON
                   </button>
                   <button
-                    onClick={() => handleDownload('nederland', 'csv')}
+                    onClick={() => handleDownload(COUNTRY.nationalSlug, 'csv')}
                     disabled={isDownloading}
                     className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 disabled:bg-muted-foreground disabled:cursor-not-allowed transition flex items-center gap-2"
                   >
@@ -136,12 +138,12 @@ export default function DownloadsPage() {
 
         {/* City data */}
         <section>
-          <h2 className="text-xl font-bold text-foreground mb-4">Gemeente Data</h2>
+          <h2 className="text-xl font-bold text-foreground mb-4">{t.dataExport.municipalityTitle}</h2>
           <div className="bg-card rounded-lg shadow-md p-6">
             <div className="mb-4">
               <input
                 type="text"
-                placeholder="Zoek gemeente..."
+                placeholder={t.dataExport.searchPlaceholder}
                 className="w-full px-4 py-2 border border-input rounded-lg focus:ring-2 focus:ring-ring focus:border-transparent"
                 id="citySearch"
                 onChange={(e) => {
@@ -164,7 +166,7 @@ export default function DownloadsPage() {
                   <div className="flex-1">
                     <h3 className="text-sm font-semibold text-foreground">{municipality.name}</h3>
                     <p className="text-xs text-muted-foreground">
-                      {municipality.province} • {municipality.population.toLocaleString('nl-NL')} inwoners
+                      {municipality.province} • {t.dataExport.residents(municipality.population.toLocaleString(COUNTRY.locale))}
                     </p>
                   </div>
                   <div className="flex gap-2">
@@ -172,7 +174,7 @@ export default function DownloadsPage() {
                       onClick={() => handleDownload(municipality.slug, 'json')}
                       disabled={isDownloading}
                       className="px-3 py-1 text-sm bg-primary text-white rounded hover:bg-primary/90 disabled:bg-muted-foreground disabled:cursor-not-allowed transition"
-                      title="Download JSON"
+                      title={t.dataExport.downloadJson}
                     >
                       JSON
                     </button>
@@ -180,7 +182,7 @@ export default function DownloadsPage() {
                       onClick={() => handleDownload(municipality.slug, 'csv')}
                       disabled={isDownloading}
                       className="px-3 py-1 text-sm bg-green-600 text-white rounded hover:bg-green-700 disabled:bg-muted-foreground disabled:cursor-not-allowed transition"
-                      title="Download CSV"
+                      title={t.dataExport.downloadCsv}
                     >
                       CSV
                     </button>
@@ -197,11 +199,10 @@ export default function DownloadsPage() {
             <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
             </svg>
-            Download Limiet
+            {t.dataExport.limitTitle}
           </h3>
           <p className="text-sm text-primary">
-            Om misbruik te voorkomen is er een limiet van <strong>5 downloads per uur</strong> per IP-adres.
-            Downloads worden geteld over alle bestanden heen.
+            {t.dataExport.limitBefore}<strong>{t.dataExport.limitStrong}</strong>{t.dataExport.limitAfter}
           </p>
         </div>
     </>

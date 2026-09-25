@@ -3,6 +3,9 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 import "./marker-cluster.css";
+import { COUNTRY } from "@/config/country";
+import { CARRIER_LABELS, CARRIER_ORDER } from "@/lib/carriers";
+import { t } from "@/lib/strings";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,19 +18,19 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Pakketpuntenviewer - Alle pakketpunten in Nederland op de kaart",
-  description: "Bekijk en vergelijk alle 18.000+ pakketpunten en pakketautomaten in Nederland. DHL, PostNL, DPD, InPost, Budbee, GLS, Amazon, VintedGo, ViaTim en De Buren op een interactieve kaart per gemeente.",
+  title: t.meta.title,
+  description: t.meta.description(CARRIER_ORDER.map((c) => CARRIER_LABELS[c]).join(', ')),
   openGraph: {
-    title: "Pakketpuntenviewer - Alle pakketpunten in Nederland",
-    description: "Bekijk en vergelijk alle 18.000+ pakketpunten en pakketautomaten in Nederland van 10 vervoerders op een interactieve kaart per gemeente.",
+    title: t.meta.ogTitle,
+    description: t.meta.ogDescription(CARRIER_ORDER.length),
     type: "website",
-    locale: "nl_NL",
-    url: "https://pakketpuntenviewer.nl",
+    locale: COUNTRY.ogLocale,
+    url: COUNTRY.siteUrl,
   },
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
-    title: "Pakketpunten",
+    title: t.header.appTitle,
   },
 };
 
@@ -45,7 +48,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="nl">
+    <html lang={COUNTRY.htmlLang}>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

@@ -3,6 +3,8 @@
 import { useState, useMemo, useRef, useEffect } from 'react';
 import { Municipality } from '@/types/pakketpunten';
 
+import { COUNTRY } from '@/config/country';
+import { t } from '@/lib/strings';
 interface MunicipalitySelectorProps {
   municipalities: Municipality[];
   selected: string;
@@ -30,22 +32,25 @@ export default function MunicipalitySelector({
     ? `${selectedMunicipality.name} (${selectedMunicipality.province})`
     : '';
 
-  // Get Nederland separately (always shown as sticky footer)
-  const nederland = useMemo(() =>
-    municipalities.find(m => m.slug === 'nederland'),
+  // Get the national view separately (always shown as sticky footer)
+  const national = useMemo(() =>
+    municipalities.find(m => m.slug === COUNTRY.nationalSlug),
     [municipalities]
   );
 
-  // Sort and filter municipalities (excluding Nederland)
+  // Sort and filter municipalities (excluding the national view)
   const filteredMunicipalities = useMemo(() => {
-    // Exclude Nederland from regular list (it will be sticky at bottom)
-    let filtered = municipalities.filter(m => m.slug !== 'nederland');
+    // Exclude the national view from regular list (it will be sticky at bottom)
+    let filtered = municipalities.filter(m => m.slug !== COUNTRY.nationalSlug);
 
     // Filter by search term
     if (searchTerm) {
+      const term = searchTerm.toLowerCase();
       filtered = filtered.filter(m =>
-        m.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        m.province.toLowerCase().includes(searchTerm.toLowerCase())
+        m.name.toLowerCase().includes(term) ||
+        m.province.toLowerCase().includes(term) ||
+        // Other-language names, e.g. "Luik" finds Liège and "Anvers" Antwerpen
+        (m.aliases ?? []).some(alias => alias.toLowerCase().includes(term))
       );
     }
 
@@ -127,8 +132,8 @@ export default function MunicipalitySelector({
       return;
     }
 
-    // Total items including sticky Nederland
-    const totalItems = filteredMunicipalities.length + (nederland ? 1 : 0);
+    // Total items including the sticky national row
+    const totalItems = filteredMunicipalities.length + (national ? 1 : 0);
 
     switch (e.key) {
       case 'ArrowDown':
@@ -147,9 +152,9 @@ export default function MunicipalitySelector({
         e.preventDefault();
         if (highlightedIndex >= 0 && highlightedIndex < filteredMunicipalities.length) {
           handleSelect(filteredMunicipalities[highlightedIndex].slug);
-        } else if (highlightedIndex === filteredMunicipalities.length && nederland) {
-          // Nederland is selected (sticky footer)
-          handleSelect(nederland.slug);
+        } else if (highlightedIndex === filteredMunicipalities.length && national) {
+          // The national row is selected (sticky footer)
+          handleSelect(national.slug);
         } else if (filteredMunicipalities.length === 1) {
           // Auto-select if only one result
           handleSelect(filteredMunicipalities[0].slug);
@@ -187,7 +192,7 @@ export default function MunicipalitySelector({
           }}
           onFocus={() => setShowDropdown(true)}
           onKeyDown={handleKeyDown}
-          placeholder={selectedMunicipality ? displayValue : "Selecteer gemeente..."}
+          placeholder={selectedMunicipality ? displayValue : t.selector.placeholder}
           className="w-full px-3 md:px-4 py-2.5 md:py-2 pr-10 border border-input rounded-lg focus:ring-2 focus:ring-ring focus:border-transparent text-foreground text-sm"
           autoComplete="off"
           role="combobox"
@@ -213,7 +218,7 @@ export default function MunicipalitySelector({
           >
             {/* Header */}
             <div className="sticky top-0 bg-muted px-3 py-2 text-xs text-subtle-foreground border-b flex items-center justify-between z-10">
-              <span>{filteredMunicipalities.length} gemeentes</span>
+              <span>{t.selector.count(filteredMunicipalities.length)}</span>
               <div className="flex items-center gap-2">
                 <kbd className="hidden md:inline-block px-1.5 py-0.5 text-xs font-mono bg-card border border-input rounded">
                   ⌘K
@@ -221,7 +226,7 @@ export default function MunicipalitySelector({
                 <button
                   onClick={toggleSort}
                   className="text-primary hover:text-primary flex items-center gap-1 p-1 -m-1"
-                  title={sortOrder === 'asc' ? 'Sorteer Z-A' : 'Sorteer A-Z'}
+                  title={sortOrder === 'asc' ? t.selector.sortDesc : t.selector.sortAsc}
                   tabIndex={-1}
                 >
                   {sortOrder === 'asc' ? 'A-Z' : 'Z-A'}
@@ -267,24 +272,24 @@ export default function MunicipalitySelector({
               ))
             ) : (
               <div className="px-4 py-6 md:py-8 text-center text-sm text-subtle-foreground">
-                Geen gemeentes gevonden voor &quot;{searchTerm}&quot;
+                {t.selector.noMatches(searchTerm)}
               </div>
             )}
 
-            {/* Sticky Nederland footer */}
-            {nederland && (
+            {/* Sticky national footer */}
+            {national && (
               <div className="sticky bottom-0 border-t border-border bg-card shadow-[0_-2px_4px_rgba(0,0,0,0.05)]">
                 <button
-                  id={`municipality-option-nederland`}
+                  id={`municipality-option-national`}
                   role="option"
-                  aria-selected={nederland.slug === selected}
+                  aria-selected={national.slug === selected}
                   data-index={filteredMunicipalities.length}
-                  onClick={() => handleSelect(nederland.slug)}
+                  onClick={() => handleSelect(national.slug)}
                   onMouseEnter={() => setHighlightedIndex(filteredMunicipalities.length)}
                   className={`w-full text-left px-3 md:px-4 py-3 md:py-2 transition-colors ${
                     highlightedIndex === filteredMunicipalities.length
                       ? 'bg-accent'
-                      : nederland.slug === selected
+                      : national.slug === selected
                       ? 'bg-accent'
                       : 'hover:bg-muted active:bg-secondary'
                   }`}
@@ -292,10 +297,10 @@ export default function MunicipalitySelector({
                 >
                   <div className="flex items-center justify-between">
                     <div>
-                      <div className="text-sm font-medium text-foreground">{nederland.name}</div>
-                      <div className="text-xs text-subtle-foreground">Landelijk overzicht</div>
+                      <div className="text-sm font-medium text-foreground">{national.name}</div>
+                      <div className="text-xs text-subtle-foreground">{t.selector.nationalOverview}</div>
                     </div>
-                    {nederland.slug === selected && (
+                    {national.slug === selected && (
                       <svg className="w-4 h-4 text-primary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                       </svg>

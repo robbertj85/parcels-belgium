@@ -2,8 +2,7 @@
  * Per-carrier cache freshness, as written to the `bronnen` field of
  * statistics.json by scripts/compute_statistics.py.
  *
- * Null for carriers fetched live per municipality (PostNL, VintedGo, DeBuren):
- * they have no nationwide cache to date-stamp.
+ * Null for a carrier whose cache file is missing or unreadable.
  */
 export interface CarrierSource {
   fetched_at: string | null;

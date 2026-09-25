@@ -5,6 +5,8 @@ import { useState, useEffect } from 'react';
 import { CARRIER_ORDER, CARRIER_LABELS, carrierColor } from '@/lib/carriers';
 import { CarrierSources, STALE_AFTER_DAYS, cacheAgeInDays } from '@/types/sources';
 
+import { COUNTRY } from '@/config/country';
+import { t } from '@/lib/strings';
 interface CarrierStats {
   successful_municipalities: number;
   failed_municipalities: number;
@@ -65,15 +67,15 @@ function SourceFreshness({ bronnen }: { bronnen: CarrierSources }) {
                 }`}
                 title={
                   staleDays !== null
-                    ? `Niet bijgewerkt in ${staleDays} dagen — de laatste ophaalronde is geblokkeerd of mislukt.`
+                    ? t.updates.staleTooltip(staleDays)
                     : undefined
                 }
               >
-                {new Date(source.fetched_at).toLocaleDateString('nl-NL')}
-                {staleDays !== null ? ` · ${staleDays} dagen oud` : ''}
+                {new Date(source.fetched_at).toLocaleDateString(COUNTRY.locale)}
+                {staleDays !== null ? t.updates.daysOld(staleDays) : ''}
               </span>
             ) : (
-              <span className="text-xs text-subtle-foreground">per gemeente opgehaald</span>
+              <span className="text-xs text-subtle-foreground">{t.updates.fetchedPerMunicipality}</span>
             )}
           </li>
         );
@@ -102,7 +104,7 @@ export default function UpdatesPage() {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-12">
-        <div className="text-subtle-foreground">Laden van update status...</div>
+        <div className="text-subtle-foreground">{t.updates.loading}</div>
       </div>
     );
   }
@@ -110,9 +112,9 @@ export default function UpdatesPage() {
   if (!updateStatus) {
     return (
       <div className="bg-destructive-muted border border-red-200 rounded-lg p-6">
-        <h2 className="text-lg font-semibold text-destructive mb-2">Update status niet beschikbaar</h2>
+        <h2 className="text-lg font-semibold text-destructive mb-2">{t.updates.unavailableTitle}</h2>
         <p className="text-sm text-destructive">
-          Kon de update status niet ophalen. Probeer later opnieuw.
+          {t.updates.unavailableBody}
         </p>
       </div>
     );
@@ -122,9 +124,9 @@ export default function UpdatesPage() {
     <div className="space-y-6">
       {/* Header section */}
       <section className="bg-card rounded-lg shadow-md p-6">
-        <h2 className="text-xl font-bold text-foreground mb-2">Update Status</h2>
+        <h2 className="text-xl font-bold text-foreground mb-2">{t.updates.title}</h2>
         <p className="text-sm text-muted-foreground mb-4">
-          Data wordt wekelijks geüpdatet via geautomatiseerde GitHub Actions scripts.
+          {t.updates.intro}
         </p>
 
         {/* Last update timestamp */}
@@ -133,8 +135,8 @@ export default function UpdatesPage() {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
           <span className="text-sm font-medium text-foreground">
-            Laatste update:{' '}
-            {new Date(updateStatus.last_update).toLocaleString('nl-NL', {
+            {t.updates.lastUpdate}{' '}
+            {new Date(updateStatus.last_update).toLocaleString(COUNTRY.locale, {
               day: '2-digit',
               month: 'long',
               year: 'numeric',
@@ -147,29 +149,29 @@ export default function UpdatesPage() {
         {/* Overall status summary */}
         <div className="bg-muted rounded-lg p-4">
           <div className="flex items-center justify-between mb-3">
-            <span className="text-sm font-semibold text-foreground">Overzicht</span>
+            <span className="text-sm font-semibold text-foreground">{t.updates.overview}</span>
             <span className={`text-xs px-2 py-1 rounded-full ${
               updateStatus.failed_municipalities === 0
                 ? 'bg-success-muted text-success'
                 : 'bg-orange-100 text-warning'
             }`}>
               {updateStatus.failed_municipalities === 0
-                ? 'Alle gemeenten bijgewerkt'
-                : `${updateStatus.failed_municipalities} gemeente(n) mislukt`}
+                ? t.updates.allMunicipalitiesUpdated
+                : t.updates.municipalitiesFailed(updateStatus.failed_municipalities)}
             </span>
           </div>
           <div className="grid grid-cols-3 gap-4 text-center">
             <div>
               <p className="text-2xl font-bold text-primary">{updateStatus.total_municipalities}</p>
-              <p className="text-xs text-muted-foreground">Gemeenten</p>
+              <p className="text-xs text-muted-foreground">{t.updates.municipalities}</p>
             </div>
             <div>
               <p className="text-2xl font-bold text-success">{updateStatus.successful_municipalities}</p>
-              <p className="text-xs text-muted-foreground">Succesvol</p>
+              <p className="text-xs text-muted-foreground">{t.updates.successful}</p>
             </div>
             <div>
               <p className="text-2xl font-bold text-warning">{updateStatus.failed_municipalities}</p>
-              <p className="text-xs text-muted-foreground">Mislukt</p>
+              <p className="text-xs text-muted-foreground">{t.updates.failed}</p>
             </div>
           </div>
         </div>
@@ -178,12 +180,9 @@ export default function UpdatesPage() {
       {/* Nationwide cache freshness */}
       {updateStatus.bronnen && (
         <section className="bg-card rounded-lg shadow-md p-6">
-          <h3 className="text-lg font-semibold text-foreground mb-2">Databronnen</h3>
+          <h3 className="text-lg font-semibold text-foreground mb-2">{t.updates.sourcesTitle}</h3>
           <p className="text-sm text-muted-foreground mb-4">
-            Wanneer de landelijke dataset van elke vervoerder voor het laatst is opgehaald.
-            PostNL, VintedGo en De Buren worden per gemeente live opgehaald en hebben dus
-            geen eigen datum. Een datum ouder dan {STALE_AFTER_DAYS} dagen betekent dat de
-            wekelijkse ophaalronde voor die vervoerder niet doorkwam.
+            {t.updates.sourcesIntro(STALE_AFTER_DAYS)}
           </p>
           <SourceFreshness bronnen={updateStatus.bronnen} />
         </section>
@@ -191,7 +190,7 @@ export default function UpdatesPage() {
 
       {/* Carrier status list */}
       <section className="bg-card rounded-lg shadow-md p-6">
-        <h3 className="text-lg font-semibold text-foreground mb-4">Status per vervoerder</h3>
+        <h3 className="text-lg font-semibold text-foreground mb-4">{t.updates.perCarrierTitle}</h3>
         <div className="space-y-3">
           {Object.entries(updateStatus.carrier_stats).map(([carrier, stats]) => {
             const hasFailures = stats.failed_municipalities > 0;
@@ -229,11 +228,11 @@ export default function UpdatesPage() {
                       <p className="text-sm text-muted-foreground">
                         {hasFailures ? (
                           <span>
-                            {stats.successful_municipalities}/{updateStatus.total_municipalities} gemeenten bijgewerkt
-                            <span className="text-warning font-medium"> ({stats.failed_municipalities} mislukt)</span>
+                            {t.updates.partiallyUpdated(stats.successful_municipalities, updateStatus.total_municipalities)}
+                            <span className="text-warning font-medium">{t.updates.failedParen(stats.failed_municipalities)}</span>
                           </span>
                         ) : (
-                          <span>Alle {stats.successful_municipalities} gemeenten bijgewerkt</span>
+                          <span>{t.updates.allUpdated(stats.successful_municipalities)}</span>
                         )}
                       </p>
                     </div>
@@ -242,14 +241,14 @@ export default function UpdatesPage() {
                   {/* Points count */}
                   <div className="text-right">
                     <p className="text-lg font-bold text-foreground">{stats.total_points.toLocaleString()}</p>
-                    <p className="text-xs text-subtle-foreground">punten</p>
+                    <p className="text-xs text-subtle-foreground">{t.updates.points}</p>
                   </div>
                 </div>
 
                 {/* Progress bar */}
                 <div className="mt-3">
                   <div className="flex items-center justify-between text-xs text-muted-foreground mb-1">
-                    <span>Dekking</span>
+                    <span>{t.updates.coverage}</span>
                     <span>{successRate}%</span>
                   </div>
                   <div className="w-full bg-border rounded-full h-2">
@@ -269,9 +268,9 @@ export default function UpdatesPage() {
 
       {/* GitHub Actions link */}
       <section className="bg-card rounded-lg shadow-md p-6">
-        <h3 className="text-lg font-semibold text-foreground mb-2">Volledige Logs</h3>
+        <h3 className="text-lg font-semibold text-foreground mb-2">{t.updates.logsTitle}</h3>
         <p className="text-sm text-muted-foreground mb-4">
-          Bekijk de volledige output van de laatste GitHub Actions workflow voor gedetailleerde informatie over eventuele fouten.
+          {t.updates.logsBody}
         </p>
         <a
           href={updateStatus.github_actions_url}
@@ -282,7 +281,7 @@ export default function UpdatesPage() {
           <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
             <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" />
           </svg>
-          Bekijk GitHub Actions Logs
+          {t.updates.logsLink}
           <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
           </svg>

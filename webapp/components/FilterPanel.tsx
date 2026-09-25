@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { Filters, PointCategory, ServiceFilter, getCategoryLabel } from '@/types/pakketpunten';
 import { BoundaryLoadProgress } from '@/utils/boundaryLoader';
 import { CARRIER_LABELS, CARRIER_ORDER, CARRIER_SERIES_COLORS } from '@/lib/carriers';
+import { t } from '@/lib/strings';
 
 interface FilterPanelProps {
   filters: Filters;
@@ -34,13 +35,13 @@ const PROVIDER_INFO: Record<string, { name: string; color: string }> = Object.fr
 );
 
 const CATEGORY_INFO: Record<PointCategory, { name: string }> = {
-  locker: { name: 'Pakketautomaat' },
-  shop: { name: 'Pakketpunt' },
+  locker: { name: t.categories.locker },
+  shop: { name: t.categories.shop },
 };
 
 const SERVICE_INFO: Record<ServiceFilter, { name: string; description: string }> = {
-  pickup: { name: 'Ophalen', description: 'Pakket ophalen' },
-  dropoff: { name: 'Verzenden', description: 'Pakket versturen' },
+  pickup: { name: t.filters.pickup, description: t.filters.pickupDescription },
+  dropoff: { name: t.filters.dropoff, description: t.filters.dropoffDescription },
 };
 
 // Icon components for point categories
@@ -148,12 +149,12 @@ export default function FilterPanel({ filters, onChange, availableProviders, pro
   return (
     <div className="space-y-4 md:space-y-6 p-3 md:p-4 bg-card rounded-lg shadow-md">
       <div>
-        <h3 className="text-base md:text-lg font-semibold text-foreground mb-2 md:mb-3">Filters</h3>
+        <h3 className="text-base md:text-lg font-semibold text-foreground mb-2 md:mb-3">{t.filters.title}</h3>
       </div>
 
       {/* Provider filters */}
       <div>
-        <label className="block text-sm font-medium text-foreground mb-2">Vervoerders</label>
+        <label className="block text-sm font-medium text-foreground mb-2">{t.filters.carriers}</label>
         <div className="space-y-1 md:space-y-2">
           {providers.map((provider) => {
             const info = PROVIDER_INFO[provider as keyof typeof PROVIDER_INFO];
@@ -188,7 +189,7 @@ export default function FilterPanel({ filters, onChange, availableProviders, pro
 
       {/* Point category filters */}
       <div>
-        <label className="block text-sm font-medium text-foreground mb-2">Type locatie</label>
+        <label className="block text-sm font-medium text-foreground mb-2">{t.filters.locationType}</label>
         <div className="space-y-1 md:space-y-2">
           {categories.map((category) => {
             const info = CATEGORY_INFO[category];
@@ -222,7 +223,7 @@ export default function FilterPanel({ filters, onChange, availableProviders, pro
 
       {/* Service capability filters */}
       <div>
-        <label className="block text-sm font-medium text-foreground mb-2">Service</label>
+        <label className="block text-sm font-medium text-foreground mb-2">{t.filters.service}</label>
         <div className="space-y-1 md:space-y-2">
           {services.map((service) => {
             const info = SERVICE_INFO[service];
@@ -252,12 +253,12 @@ export default function FilterPanel({ filters, onChange, availableProviders, pro
             );
           })}
         </div>
-        <p className="text-xs text-subtle-foreground mt-1">Ophalen = pakket ontvangen, Verzenden = pakket versturen</p>
+        <p className="text-xs text-subtle-foreground mt-1">{t.filters.serviceHint}</p>
       </div>
 
       {/* Shared locations filter */}
       <div>
-        <label className="block text-sm font-medium text-foreground mb-2">Locaties</label>
+        <label className="block text-sm font-medium text-foreground mb-2">{t.filters.locations}</label>
         <div className="space-y-1 md:space-y-2">
           <label className="flex items-center space-x-2 cursor-pointer py-1.5 md:py-0.5 -mx-1 px-1 rounded hover:bg-muted active:bg-secondary transition">
             <input
@@ -267,7 +268,7 @@ export default function FilterPanel({ filters, onChange, availableProviders, pro
               onChange={() => onChange({ ...filters, showOnlySharedLocations: false })}
               className="w-5 h-5 md:w-4 md:h-4 text-primary focus:ring-2 focus:ring-ring"
             />
-            <span className="text-sm text-foreground">Alle locaties</span>
+            <span className="text-sm text-foreground">{t.filters.allLocations}</span>
           </label>
           <label className="flex items-center space-x-2 cursor-pointer py-1.5 md:py-0.5 -mx-1 px-1 rounded hover:bg-muted active:bg-secondary transition">
             <input
@@ -278,20 +279,20 @@ export default function FilterPanel({ filters, onChange, availableProviders, pro
               className="w-5 h-5 md:w-4 md:h-4 text-primary focus:ring-2 focus:ring-ring"
             />
             <SharedLocationIcon className="w-4 h-4 text-muted-foreground flex-shrink-0" />
-            <span className="text-sm text-foreground flex-1">Gedeelde adressen</span>
+            <span className="text-sm text-foreground flex-1">{t.filters.sharedAddresses}</span>
             {filters.showOnlySharedLocations && sharedLocationCount !== undefined && sharedLocationCount > 0 && (
               <span className="text-sm font-semibold text-foreground ml-auto tabular-nums">
                 {sharedLocationCount}
               </span>
             )}
           </label>
-          <p className="text-xs text-subtle-foreground ml-7">Adressen met meerdere vervoerders</p>
+          <p className="text-xs text-subtle-foreground ml-7">{t.filters.sharedAddressesHint}</p>
         </div>
       </div>
 
       {/* Marker Style */}
       <div>
-        <label className="block text-sm font-medium text-foreground mb-2">Markering weergave</label>
+        <label className="block text-sm font-medium text-foreground mb-2">{t.filters.markerStyle}</label>
         <div className="space-y-1 md:space-y-2">
           <label className="flex items-center space-x-2 cursor-pointer py-1.5 md:py-0.5 -mx-1 px-1 rounded hover:bg-muted active:bg-secondary transition">
             <input
@@ -301,7 +302,7 @@ export default function FilterPanel({ filters, onChange, availableProviders, pro
               onChange={() => onChange({ ...filters, useSimpleMarkers: false })}
               className="w-5 h-5 md:w-4 md:h-4 text-primary focus:ring-2 focus:ring-ring"
             />
-            <span className="text-sm text-foreground">Logo iconen</span>
+            <span className="text-sm text-foreground">{t.filters.logoIcons}</span>
           </label>
           <label className="flex items-center space-x-2 cursor-pointer py-1.5 md:py-0.5 -mx-1 px-1 rounded hover:bg-muted active:bg-secondary transition">
             <input
@@ -311,14 +312,14 @@ export default function FilterPanel({ filters, onChange, availableProviders, pro
               onChange={() => onChange({ ...filters, useSimpleMarkers: true })}
               className="w-5 h-5 md:w-4 md:h-4 text-primary focus:ring-2 focus:ring-ring"
             />
-            <span className="text-sm text-foreground">Gekleurde stippen</span>
+            <span className="text-sm text-foreground">{t.filters.coloredDots}</span>
           </label>
         </div>
       </div>
 
       {/* Buffer zones */}
       <div>
-        <label className="block text-sm font-medium text-foreground mb-2">Dekkingsgebieden</label>
+        <label className="block text-sm font-medium text-foreground mb-2">{t.filters.coverage}</label>
         <div className="space-y-1 md:space-y-2">
           <label className={`flex items-center space-x-2 py-1.5 md:py-0.5 -mx-1 px-1 rounded transition ${buffersDisabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:bg-muted active:bg-secondary'}`}>
             <input
@@ -328,7 +329,7 @@ export default function FilterPanel({ filters, onChange, availableProviders, pro
               disabled={buffersDisabled}
               className="w-5 h-5 md:w-4 md:h-4 text-primary rounded focus:ring-2 focus:ring-ring disabled:opacity-50"
             />
-            <span className="text-sm text-foreground">300m buffer lijn</span>
+            <span className="text-sm text-foreground">{t.filters.buffer300}</span>
           </label>
           <label className={`flex items-center space-x-2 py-1.5 md:py-0.5 -mx-1 px-1 rounded transition ${buffersDisabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:bg-muted active:bg-secondary'}`}>
             <input
@@ -338,7 +339,7 @@ export default function FilterPanel({ filters, onChange, availableProviders, pro
               disabled={buffersDisabled}
               className="w-5 h-5 md:w-4 md:h-4 text-primary rounded focus:ring-2 focus:ring-ring disabled:opacity-50"
             />
-            <span className="text-sm text-foreground">400m buffer lijn</span>
+            <span className="text-sm text-foreground">{t.filters.buffer400}</span>
           </label>
           <label className={`flex items-center space-x-2 py-1.5 md:py-0.5 -mx-1 px-1 rounded transition ${buffersDisabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:bg-muted active:bg-secondary'}`}>
             <input
@@ -348,7 +349,7 @@ export default function FilterPanel({ filters, onChange, availableProviders, pro
               disabled={buffersDisabled}
               className="w-5 h-5 md:w-4 md:h-4 text-primary rounded focus:ring-2 focus:ring-ring disabled:opacity-50"
             />
-            <span className="text-sm text-foreground">Buffer opvulling</span>
+            <span className="text-sm text-foreground">{t.filters.bufferFill}</span>
           </label>
           <label className={`flex items-center space-x-2 py-1.5 md:py-0.5 -mx-1 px-1 rounded transition ${buffersDisabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:bg-muted active:bg-secondary'}`}>
             <input
@@ -367,12 +368,12 @@ export default function FilterPanel({ filters, onChange, availableProviders, pro
               disabled={buffersDisabled}
               className="w-5 h-5 md:w-4 md:h-4 text-primary rounded focus:ring-2 focus:ring-ring disabled:opacity-50"
             />
-            <span className="text-sm text-foreground">Samengevoegde buffers</span>
+            <span className="text-sm text-foreground">{t.filters.mergedBuffers}</span>
             {mergeSpinner && <InlineSpinner />}
             <span className="relative group/tip">
               <span className="inline-flex items-center justify-center w-4 h-4 text-[10px] font-medium text-subtle-foreground bg-secondary rounded-full cursor-help">i</span>
               <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-1 hidden group-hover/tip:block w-48 px-2 py-1 text-xs text-background bg-foreground rounded shadow-lg text-center pointer-events-none z-50">
-                Als het laden van pakketpunten traag is, schakel deze instelling uit.
+                {t.filters.mergedBuffersTip}
               </span>
             </span>
           </label>
@@ -385,11 +386,11 @@ export default function FilterPanel({ filters, onChange, availableProviders, pro
               className="w-5 h-5 md:w-4 md:h-4 text-destructive rounded focus:ring-2 focus:ring-red-500 disabled:opacity-50"
             />
             <div className="flex-1">
-              <span className="text-sm text-foreground">Gemeentegrens</span>
+              <span className="text-sm text-foreground">{t.filters.boundary}</span>
               {boundariesLoading && boundaryLoadProgress && (
                 <div className="mt-1 text-xs text-primary">
                   <div className="flex items-center gap-2">
-                    <span>Laden: {boundaryLoadProgress.loaded}/{boundaryLoadProgress.total}</span>
+                    <span>{t.filters.loadingProgress(boundaryLoadProgress.loaded, boundaryLoadProgress.total)}</span>
                     <span>({boundaryLoadProgress.percentage}%)</span>
                   </div>
                   <div className="w-full bg-border rounded-full h-1.5 mt-1">
@@ -401,7 +402,7 @@ export default function FilterPanel({ filters, onChange, availableProviders, pro
                 </div>
               )}
               {boundariesLoading && !boundaryLoadProgress && (
-                <span className="ml-2 text-xs text-primary">(laden...)</span>
+                <span className="ml-2 text-xs text-primary">{t.filters.loadingParen}</span>
               )}
             </div>
           </label>
@@ -429,7 +430,7 @@ export default function FilterPanel({ filters, onChange, availableProviders, pro
         }
         className="w-full px-4 py-3 md:py-2 text-sm font-medium text-foreground bg-secondary rounded-lg hover:bg-border active:bg-input transition"
       >
-        Reset Filters
+        {t.filters.reset}
       </button>
     </div>
   );

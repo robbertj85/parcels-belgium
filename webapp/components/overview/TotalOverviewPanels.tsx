@@ -19,6 +19,8 @@ import { Card } from '@/components/ui/card';
 import { carrierColor, carrierLogo } from '@/lib/carriers';
 import { HistorySnapshot } from '@/types/history';
 
+import { COUNTRY } from '@/config/country';
+import { t } from '@/lib/strings';
 /**
  * The all-carriers history overview: market share, growth per carrier, the
  * development over time, weekly deltas and the weekly table.
@@ -111,9 +113,9 @@ export default function TotalOverviewPanels({
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
         <div className="bg-accent rounded-lg p-3 sm:p-4">
           <div className="text-xl sm:text-2xl font-bold text-accent-foreground">
-            {latestSnapshot?.totals.total.toLocaleString('nl-NL') || 0}
+            {latestSnapshot?.totals.total.toLocaleString(COUNTRY.locale) || 0}
           </div>
-          <div className="text-xs sm:text-sm text-primary">Totaal pakketpunten</div>
+          <div className="text-xs sm:text-sm text-primary">{t.overview.totalPoints}</div>
         </div>
         <div
           className={`rounded-lg p-3 sm:p-4 ${totalChange >= 0 ? 'bg-success-muted' : 'bg-destructive-muted'}`}
@@ -122,12 +124,12 @@ export default function TotalOverviewPanels({
             className={`text-xl sm:text-2xl font-bold ${totalChange >= 0 ? 'text-success' : 'text-destructive'}`}
           >
             {totalChange >= 0 ? '+' : ''}
-            {totalChange.toLocaleString('nl-NL')}
+            {totalChange.toLocaleString(COUNTRY.locale)}
           </div>
           <div
             className={`text-xs sm:text-sm ${totalChange >= 0 ? 'text-success' : 'text-destructive'}`}
           >
-            Sinds {firstSnapshot?.week_label}
+            {t.overview.since(firstSnapshot?.week_label ?? '')}
           </div>
         </div>
         <div
@@ -142,12 +144,12 @@ export default function TotalOverviewPanels({
           <div
             className={`text-xs sm:text-sm ${Number(totalPercentageChange) >= 0 ? 'text-success' : 'text-destructive'}`}
           >
-            Totale groei
+            {t.overview.totalGrowth}
           </div>
         </div>
         <div className="bg-muted rounded-lg p-3 sm:p-4">
           <div className="text-xl sm:text-2xl font-bold text-foreground">{providers.length}</div>
-          <div className="text-xs sm:text-sm text-muted-foreground">Vervoerders</div>
+          <div className="text-xs sm:text-sm text-muted-foreground">{t.overview.carriers}</div>
         </div>
       </div>
 
@@ -155,7 +157,7 @@ export default function TotalOverviewPanels({
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
         <Card>
           <h3 className="font-semibold text-foreground mb-3 sm:mb-4 text-sm sm:text-base">
-            Marktaandeel per vervoerder
+            {t.overview.marketShareTitle}
           </h3>
           <div className="h-48 sm:h-64">
             <ResponsiveContainer width="100%" height="100%">
@@ -175,7 +177,7 @@ export default function TotalOverviewPanels({
                   tickLine={false}
                 />
                 <Tooltip
-                  formatter={(value: number) => [value.toLocaleString('nl-NL'), 'Pakketpunten']}
+                  formatter={(value: number) => [value.toLocaleString(COUNTRY.locale), t.common.points]}
                 />
                 <Bar dataKey="value" radius={[0, 4, 4, 0]} barSize={14}>
                   {marketShareData.map((entry) => (
@@ -184,7 +186,7 @@ export default function TotalOverviewPanels({
                   <LabelList
                     dataKey="value"
                     position="right"
-                    formatter={(value: React.ReactNode) => Number(value).toLocaleString('nl-NL')}
+                    formatter={(value: React.ReactNode) => Number(value).toLocaleString(COUNTRY.locale)}
                     style={{ fontSize: 11, fill: '#4b5563' }}
                   />
                 </Bar>
@@ -195,7 +197,7 @@ export default function TotalOverviewPanels({
 
         <Card>
           <h3 className="font-semibold text-foreground mb-3 sm:mb-4 text-sm sm:text-base">
-            Groei per vervoerder
+            {t.overview.growthTitle}
           </h3>
           <div className="space-y-2 max-h-64 overflow-y-auto">
             {growthData.map((item) => {
@@ -226,7 +228,7 @@ export default function TotalOverviewPanels({
                   </div>
                   <div className="flex items-center gap-3 text-sm">
                     <span className="text-muted-foreground">
-                      {item.current.toLocaleString('nl-NL')}
+                      {item.current.toLocaleString(COUNTRY.locale)}
                     </span>
                     <span
                       className={`font-medium ${item.change >= 0 ? 'text-success' : 'text-destructive'}`}
@@ -255,7 +257,7 @@ export default function TotalOverviewPanels({
       {/* All Providers Line Chart */}
       <Card>
         <h3 className="font-semibold text-foreground mb-3 sm:mb-4 text-sm sm:text-base">
-          Ontwikkeling alle vervoerders over tijd
+          {t.overview.allCarriersOverTime}
         </h3>
         {lineChartData.length > 1 ? (
           <div className="h-64 sm:h-80">
@@ -275,8 +277,8 @@ export default function TotalOverviewPanels({
                     borderRadius: '8px',
                     fontSize: '12px',
                   }}
-                  labelFormatter={(label) => `Week ${label}`}
-                  formatter={(value: number, name: string) => [value.toLocaleString('nl-NL'), name]}
+                  labelFormatter={(label) => t.overview.weekLabel(label)}
+                  formatter={(value: number, name: string) => [value.toLocaleString(COUNTRY.locale), name]}
                 />
                 <Legend />
                 {providers.map((provider) => (
@@ -296,7 +298,7 @@ export default function TotalOverviewPanels({
           </div>
         ) : (
           <div className="h-32 flex items-center justify-center text-subtle-foreground text-sm">
-            Onvoldoende historische data beschikbaar om grafiek te tonen
+            {t.overview.insufficientData}
           </div>
         )}
       </Card>
@@ -304,7 +306,7 @@ export default function TotalOverviewPanels({
       {/* Weekly Changes Stacked Bar Chart */}
       <Card>
         <h3 className="font-semibold text-foreground mb-3 sm:mb-4 text-sm sm:text-base">
-          Wekelijkse verandering per vervoerder
+          {t.overview.weeklyChangeTitle}
         </h3>
         {weeklyChangeData.length > 0 ? (
           <div className="h-48 sm:h-64">
@@ -324,7 +326,7 @@ export default function TotalOverviewPanels({
                     borderRadius: '8px',
                     fontSize: '12px',
                   }}
-                  labelFormatter={(label) => `Week ${label}`}
+                  labelFormatter={(label) => t.overview.weekLabel(label)}
                   formatter={(value: number, name: string) => [
                     `${value >= 0 ? '+' : ''}${value}`,
                     name,
@@ -345,7 +347,7 @@ export default function TotalOverviewPanels({
           </div>
         ) : (
           <div className="h-32 flex items-center justify-center text-subtle-foreground text-sm">
-            Onvoldoende historische data beschikbaar om grafiek te tonen
+            {t.overview.insufficientData}
           </div>
         )}
       </Card>
@@ -353,14 +355,14 @@ export default function TotalOverviewPanels({
       {/* Detailed Table */}
       <div className="bg-card border border-border rounded-lg overflow-hidden">
         <div className="px-4 py-3 border-b border-border bg-muted">
-          <h3 className="font-semibold text-foreground">Wekelijkse data per vervoerder</h3>
+          <h3 className="font-semibold text-foreground">{t.overview.weeklyTableTitle}</h3>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead className="bg-muted border-b border-border">
               <tr>
                 <th className="px-4 py-3 text-left text-xs font-semibold text-muted-foreground uppercase sticky left-0 bg-muted">
-                  Week
+                  {t.overview.week}
                 </th>
                 {providers.map((provider) => (
                   <th
@@ -371,7 +373,7 @@ export default function TotalOverviewPanels({
                   </th>
                 ))}
                 <th className="px-4 py-3 text-center text-xs font-semibold text-foreground uppercase bg-secondary">
-                  Totaal
+                  {t.overview.total}
                 </th>
               </tr>
             </thead>
@@ -391,7 +393,7 @@ export default function TotalOverviewPanels({
 
                       return (
                         <td key={provider} className="px-3 py-3 text-center">
-                          <span className="text-foreground">{count.toLocaleString('nl-NL')}</span>
+                          <span className="text-foreground">{count.toLocaleString(COUNTRY.locale)}</span>
                           {diff !== null && diff !== 0 && (
                             <span
                               className={`ml-1 text-xs ${diff > 0 ? 'text-success' : 'text-destructive'}`}
@@ -404,7 +406,7 @@ export default function TotalOverviewPanels({
                       );
                     })}
                     <td className="px-4 py-3 text-center font-semibold text-foreground bg-muted">
-                      {snapshot.totals.total.toLocaleString('nl-NL')}
+                      {snapshot.totals.total.toLocaleString(COUNTRY.locale)}
                     </td>
                   </tr>
                 );

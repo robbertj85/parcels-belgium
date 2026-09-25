@@ -2,51 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { Municipality } from '@/types/pakketpunten';
-
-// Mapping table for PDOK municipality names to our database names
-// PDOK uses official CBS names, which differ from common/simplified names in our database
-//
-// Common issues with Dutch municipality names:
-// 1. Apostrophe 's-: PDOK uses official 's-Gravenhage, 's-Hertogenbosch
-// 2. Parenthetical disambiguation: PDOK omits periods: Bergen (NH) vs Bergen (NH.)
-// 3. Regional identifiers: PDOK uses (O), (L), (NH), (ZH) for disambiguation
-//
-// PDOK returns:                Our database has:
-// - 's-Gravenhage         ->   Den Haag (common name)
-// - 's-Hertogenbosch      ->   s-Hertogenbosch (no apostrophe)
-// - Bergen (NH)           ->   Bergen (NH.) (with period)
-// - Bergen (L)            ->   Bergen (L.) (with period)
-// - Hengelo (O)           ->   Hengelo (simplified, no region identifier)
-// - Beek (L)              ->   Beek (simplified, no region identifier)
-// - Laren (NH)            ->   Laren (simplified, no region identifier)
-// - Middelburg (Z)        ->   Middelburg (simplified, no region identifier)
-// - Rijswijk (ZH)         ->   Rijswijk (simplified, no region identifier)
-// - Stein (L)             ->   Stein (simplified, no region identifier)
-const MUNICIPALITY_NAME_MAPPING: Record<string, string> = {
-  // Apostrophe 's- cases
-  "'s-gravenhage": "den haag",
-  "'s-hertogenbosch": "s-hertogenbosch",
-
-  // Bergen disambiguation (keep period)
-  "bergen (nh)": "bergen (nh.)",
-  "bergen (l)": "bergen (l.)",
-
-  // Regional identifiers removed in our database (without periods)
-  "hengelo (o)": "hengelo",
-  "beek (l)": "beek",
-  "laren (nh)": "laren",
-  "middelburg (z)": "middelburg",
-  "rijswijk (zh)": "rijswijk",
-  "stein (l)": "stein",
-
-  // With periods (just in case PDOK returns these variants)
-  "hengelo (o.)": "hengelo",
-  "beek (l.)": "beek",
-  "laren (nh.)": "laren",
-  "middelburg (z.)": "middelburg",
-  "rijswijk (zh.)": "rijswijk",
-  "stein (l.)": "stein",
-};
+import { t } from '@/lib/strings';
 
 interface SearchResult {
   id: string;
@@ -59,7 +15,9 @@ interface SearchResult {
 interface AddressDetails {
   id: string;
   displayName: string;
-  municipality: string;
+  municipality: string | null;
+  /** Our municipality, found server side by point-in-polygon. */
+  municipalitySlug: string | null;
   street?: string;
   houseNumber?: string;
   postalCode?: string;
@@ -119,7 +77,7 @@ export default function AddressSearchInput({
       setSelectedIndex(-1);
     } catch (err) {
       console.error('Geocoding error:', err);
-      setError('Adres zoeken mislukt. Probeer het opnieuw.');
+      setError(t.search.searchFailed);
       setResults([]);
       setShowDropdown(false);
     } finally {
@@ -154,6 +112,10 @@ export default function AddressSearchInput({
       // Lookup full details for the selected address
       const response = await fetch(`/api/geocode?id=${encodeURIComponent(result.id)}`);
 
+      if (response.status === 404) {
+        setError(t.search.addressOutsideCountry);
+        return;
+      }
       if (!response.ok) {
         throw new Error('Address lookup failed');
       }
@@ -161,44 +123,16 @@ export default function AddressSearchInput({
       const details: AddressDetails = await response.json();
 
       if (!details.coordinates) {
-        setError('Geen coördinaten beschikbaar voor dit adres');
+        setError(t.search.noCoordinates);
         setIsLoading(false);
         return;
       }
 
-      if (!details.municipality) {
-        setError('Geen gemeente beschikbaar voor dit adres');
-        setIsLoading(false);
-        return;
-      }
-
-      // Find matching municipality in our data
-      // First normalize the PDOK municipality name
-      let normalizedMunicipality = details.municipality.toLowerCase();
-
-      // Check if we have a mapping for this PDOK name (e.g., 's-Gravenhage -> Den Haag)
-      if (MUNICIPALITY_NAME_MAPPING[normalizedMunicipality]) {
-        normalizedMunicipality = MUNICIPALITY_NAME_MAPPING[normalizedMunicipality];
-      }
-
-      // Try to find exact match
-      let municipality = municipalities.find(
-        (m) => m.name.toLowerCase() === normalizedMunicipality
-      );
-
-      // If no exact match, try to find by slug (some edge cases)
-      if (!municipality) {
-        const slugMatch = municipalities.find(
-          (m) => m.slug.toLowerCase() === normalizedMunicipality.replace(/\s+/g, '-').replace(/\./g, '')
-        );
-        if (slugMatch) {
-          municipality = slugMatch;
-        }
-      }
+      const municipality = municipalities.find((m) => m.slug === details.municipalitySlug);
 
       if (!municipality) {
         setError(
-          `Gemeente "${details.municipality}" niet beschikbaar in de database`
+          t.search.municipalityNotAvailable(details.municipality ?? t.common.unknownLower)
         );
         setIsLoading(false);
         return;
@@ -208,7 +142,7 @@ export default function AddressSearchInput({
       onAddressSelected(municipality.slug, details.coordinates, details.displayName);
     } catch (err) {
       console.error('Address lookup error:', err);
-      setError('Adres ophalen mislukt. Probeer het opnieuw.');
+      setError(t.search.lookupFailed);
     } finally {
       setIsLoading(false);
     }
@@ -279,7 +213,7 @@ export default function AddressSearchInput({
           value={query}
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
-          placeholder="Zoek adres..."
+          placeholder={t.search.placeholder}
           className="w-full px-3 md:px-4 py-2.5 md:py-2 pr-10 border border-input rounded-lg focus:ring-2 focus:ring-ring focus:border-transparent text-foreground text-sm"
         />
         {isLoading && (
@@ -360,10 +294,10 @@ export default function AddressSearchInput({
                 </div>
                 <div className="flex-shrink-0">
                   <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-secondary text-foreground">
-                    {result.type === 'adres' ? 'Adres' :
-                     result.type === 'weg' ? 'Straat' :
-                     result.type === 'postcode' ? 'PC' :
-                     result.type === 'woonplaats' ? 'Plaats' : result.type}
+                    {result.type === 'adres' ? t.search.typeAddress :
+                     result.type === 'weg' ? t.search.typeStreet :
+                     result.type === 'postcode' ? t.search.typePostcode :
+                     result.type === 'woonplaats' ? t.search.typePlace : result.type}
                   </span>
                 </div>
               </div>
@@ -379,7 +313,7 @@ export default function AddressSearchInput({
           className="absolute z-50 w-full mt-1 bg-card border border-input rounded-lg shadow-lg px-3 md:px-4 py-3"
         >
           <div className="text-sm text-subtle-foreground">
-            Geen resultaten voor &quot;{query}&quot;
+            {t.search.noResultsFor(query)}
           </div>
         </div>
       )}

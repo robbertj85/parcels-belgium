@@ -12,6 +12,9 @@ import NearestPointsFinder from '@/components/NearestPointsFinder';
 import { Municipality, PakketpuntData, Filters, PakketpuntProperties, PakketpuntFeature, PointCategory, ServiceFilter, getPointCategory } from '@/types/pakketpunten';
 import { loadProvincialBoundaries, BoundaryLoadProgress } from '@/utils/boundaryLoader';
 
+import { COUNTRY } from '@/config/country';
+import { CARRIER_ORDER } from '@/lib/carriers';
+import { t } from '@/lib/strings';
 // Mobile menu icon component
 function MenuIcon({ className }: { className?: string }) {
   return (
@@ -45,7 +48,7 @@ const MapView = dynamic(() => import('@/components/Map'), {
   ssr: false,
   loading: () => (
     <div className="w-full h-full flex items-center justify-center bg-secondary">
-      <p className="text-subtle-foreground">Kaart laden...</p>
+      <p className="text-subtle-foreground">{t.common.mapLoading}</p>
     </div>
   ),
 });
@@ -91,7 +94,7 @@ export default function Home() {
     return () => document.removeEventListener('keydown', handleEscape);
   }, []);
   const [filters, setFilters] = useState<Filters>({
-    providers: ['DHL', 'PostNL', 'VintedGo', 'DeBuren', 'DPD', 'Amazon', 'GLS', 'ViaTim', 'InPost', 'Budbee'],
+    providers: [...CARRIER_ORDER],
     showBuffer300: true,
     showBuffer400: true,
     showBufferFill: false,
@@ -116,20 +119,20 @@ export default function Home() {
         return res.json();
       })
       .then((data) => {
-        // Sort alphabetically, but put Nederland at the bottom
+        // Sort alphabetically, but put the national view at the bottom
         const sortedData = data.sort((a: Municipality, b: Municipality) => {
-          if (a.slug === 'nederland') return 1;
-          if (b.slug === 'nederland') return -1;
+          if (a.slug === COUNTRY.nationalSlug) return 1;
+          if (b.slug === COUNTRY.nationalSlug) return -1;
           return a.name.localeCompare(b.name);
         });
 
         setMunicipalities(sortedData);
 
-        // Priority: 1) URL ?gemeente= param, 2) localStorage, 3) default Zwolle
+        // Priority: 1) URL ?gemeente= param, 2) localStorage, 3) the default municipality
         const urlParams = new URLSearchParams(window.location.search);
         const rawParam = urlParams.get('gemeente');
         // Map URL alias to internal slug
-        const gemeenteParam = rawParam === 'alle-gemeenten' ? 'nederland' : rawParam;
+        const gemeenteParam = rawParam === COUNTRY.nationalUrlAlias ? COUNTRY.nationalSlug : rawParam;
         const lastSelected = localStorage.getItem('lastSelectedMunicipality');
 
         if (gemeenteParam && sortedData.find((m: Municipality) => m.slug === gemeenteParam)) {
@@ -138,10 +141,10 @@ export default function Home() {
           // Use last selected if it exists in the data
           setSelectedMunicipality(lastSelected);
         } else {
-          // Default to Zwolle on first visit
-          const zwolle = sortedData.find((m: Municipality) => m.slug === 'zwolle');
-          if (zwolle) {
-            setSelectedMunicipality('zwolle');
+          // Default municipality on first visit
+          const fallback = sortedData.find((m: Municipality) => m.slug === COUNTRY.defaultMunicipalitySlug);
+          if (fallback) {
+            setSelectedMunicipality(COUNTRY.defaultMunicipalitySlug);
           } else if (sortedData.length > 0) {
             setSelectedMunicipality(sortedData[0].slug);
           }
@@ -157,7 +160,7 @@ export default function Home() {
       localStorage.setItem('lastSelectedMunicipality', selectedMunicipality);
       const url = new URL(window.location.href);
       // Use URL-friendly alias for the national view
-      const urlSlug = selectedMunicipality === 'nederland' ? 'alle-gemeenten' : selectedMunicipality;
+      const urlSlug = selectedMunicipality === COUNTRY.nationalSlug ? COUNTRY.nationalUrlAlias : selectedMunicipality;
       url.searchParams.set('gemeente', urlSlug);
       window.history.replaceState({}, '', url.toString());
     }
@@ -215,17 +218,17 @@ export default function Home() {
         // 3. User closes the NearestPointsFinder panel
 
         // Reset filters when changing municipality
-        // Automatically use simple markers for Nederland view (better performance)
+        // Automatically use simple markers for the national view (better performance)
         // Don't automatically show boundaries - user must click checkbox to load them
-        const isNederland = selectedMunicipality === 'nederland';
+        const isNational = selectedMunicipality === COUNTRY.nationalSlug;
         setFilters({
-          providers: data.metadata.providers || ['DHL', 'PostNL', 'VintedGo', 'DeBuren', 'DPD', 'Amazon', 'GLS', 'ViaTim', 'InPost', 'Budbee'],
+          providers: data.metadata.providers || [...CARRIER_ORDER],
           showBuffer300: true,
           showBuffer400: true,
           showBufferFill: false,
           bufferMerged: true,
           showBoundary: false,
-          useSimpleMarkers: isNederland,
+          useSimpleMarkers: isNational,
           minOccupancy: 0,
           maxOccupancy: 100,
           showMockData: false,
@@ -241,11 +244,11 @@ export default function Home() {
       .finally(() => setLoading(false));
   }, [selectedMunicipality]);
 
-  // Load boundaries separately when user enables them for Nederland view
-  // Uses provincial chunks (12 files) for better performance and GitHub compatibility
+  // Load boundaries separately when user enables them for the national view
+  // Uses provincial chunks for better performance and GitHub compatibility
   useEffect(() => {
-    // Only load boundaries for Nederland view when user clicks checkbox
-    if (selectedMunicipality !== 'nederland' || !filters.showBoundary || boundariesLoaded || boundariesLoading) {
+    // Only load boundaries for the national view when user clicks checkbox
+    if (selectedMunicipality !== COUNTRY.nationalSlug || !filters.showBoundary || boundariesLoaded || boundariesLoading) {
       return;
     }
 
@@ -440,7 +443,7 @@ export default function Home() {
         <div className="px-3 py-2 md:px-4 md:py-3 flex items-center gap-2 md:gap-4">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <h1 className="text-lg md:text-xl font-bold text-foreground">📦 <span className="hidden sm:inline">Pakketpunten</span></h1>
+            <h1 className="text-lg md:text-xl font-bold text-foreground">📦 <span className="hidden sm:inline">{t.header.appTitle}</span></h1>
           </div>
 
           {/* Municipality Selector - always visible but responsive width */}
@@ -488,8 +491,8 @@ export default function Home() {
                   : 'bg-secondary text-muted-foreground hover:bg-border'
             }`}
             title={lastAddressSearch
-              ? `Dichtstbijzijnde pakketpunten bij "${lastAddressSearch.displayName}"`
-              : "Dichtstbijzijnde pakketpunten zoeken"
+              ? t.header.nearestTitleWithAddress(lastAddressSearch.displayName)
+              : t.header.nearestTitle
             }
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -515,7 +518,7 @@ export default function Home() {
                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
               </svg>
-              <span className="hidden sm:inline">Laden...</span>
+              <span className="hidden sm:inline">{t.common.loading}</span>
             </div>
           )}
 
@@ -528,7 +531,7 @@ export default function Home() {
               <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
               </svg>
-              Data
+              {t.header.data}
             </a>
             <a
               href="/api/v1/docs"
@@ -539,7 +542,7 @@ export default function Home() {
               <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
               </svg>
-              API
+              {t.header.api}
             </a>
             <button
               onClick={() => setShowShare(true)}
@@ -548,7 +551,7 @@ export default function Home() {
               <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
               </svg>
-              Delen
+              {t.header.share}
             </button>
             <button
               onClick={() => setShowAbout(true)}
@@ -557,7 +560,7 @@ export default function Home() {
               <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
-              Over
+              {t.header.about}
             </button>
           </div>
 
@@ -565,7 +568,7 @@ export default function Home() {
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="lg:hidden p-2 text-muted-foreground hover:text-foreground hover:bg-secondary rounded-lg transition ml-auto"
-            aria-label="Menu openen"
+            aria-label={t.header.openMenu}
           >
             {mobileMenuOpen ? <CloseIcon className="w-6 h-6" /> : <MenuIcon className="w-6 h-6" />}
           </button>
@@ -597,7 +600,7 @@ export default function Home() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
-                Dichtstbijzijnde zoeken
+                {t.header.findNearest}
               </button>
               <a
                 href="/data-export"
@@ -606,7 +609,7 @@ export default function Home() {
                 <svg className="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
-                Data
+                {t.header.data}
               </a>
               <a
                 href="/api/v1/docs"
@@ -617,7 +620,7 @@ export default function Home() {
                 <svg className="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
                 </svg>
-                API Documentatie
+                {t.header.apiDocs}
               </a>
               <button
                 onClick={() => {
@@ -629,7 +632,7 @@ export default function Home() {
                 <svg className="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
                 </svg>
-                Delen / Embed
+                {t.header.shareEmbed}
               </button>
               <button
                 onClick={() => {
@@ -641,7 +644,7 @@ export default function Home() {
                 <svg className="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-                Over dit project
+                {t.header.aboutProject}
               </button>
             </div>
           </div>
@@ -671,11 +674,11 @@ export default function Home() {
         >
           {/* Mobile sidebar header */}
           <div className="md:hidden flex items-center justify-between pb-2 border-b border-border mb-2">
-            <h2 className="text-lg font-semibold text-foreground">Filters & Stats</h2>
+            <h2 className="text-lg font-semibold text-foreground">{t.header.sidebarTitle}</h2>
             <button
               onClick={() => setMobileSidebarOpen(false)}
               className="p-2 text-subtle-foreground hover:text-muted-foreground hover:bg-border rounded-lg transition"
-              aria-label="Sluiten"
+              aria-label={t.common.close}
             >
               <CloseIcon className="w-5 h-5" />
             </button>
@@ -720,7 +723,7 @@ export default function Home() {
                   <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                   <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                 </svg>
-                <span className="text-sm font-medium text-subtle-foreground">Laden...</span>
+                <span className="text-sm font-medium text-subtle-foreground">{t.common.loading}</span>
               </div>
             </div>
           )}
@@ -729,7 +732,7 @@ export default function Home() {
           <button
             onClick={() => setMobileSidebarOpen(true)}
             className="md:hidden fixed bottom-20 left-4 z-20 bg-primary text-white p-4 rounded-full shadow-lg hover:bg-primary/90 active:bg-primary/80 transition"
-            aria-label="Filters openen"
+            aria-label={t.header.openFilters}
           >
             <FilterIcon className="w-6 h-6" />
             {data && (
@@ -766,11 +769,11 @@ export default function Home() {
             onClick={() => setShowAbout(true)}
             className="text-primary hover:text-primary hover:underline focus:outline-none py-1"
           >
-            Info over databronnen
+            {t.header.dataSourcesInfo}
           </button>
           {data && (
             <p className="text-center sm:text-right">
-              Update: {new Date(data.metadata.generated_at).toLocaleDateString('nl-NL')}
+              {t.common.updated(new Date(data.metadata.generated_at).toLocaleDateString(COUNTRY.locale))}
             </p>
           )}
         </div>

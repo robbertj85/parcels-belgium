@@ -2,6 +2,8 @@
 
 import { useState, useEffect, useRef } from 'react';
 
+import { COUNTRY } from '@/config/country';
+import { t } from '@/lib/strings';
 interface ShareModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -17,7 +19,7 @@ export default function ShareModal({ isOpen, onClose, municipality, municipality
   const modalRef = useRef<HTMLDivElement>(null);
 
   const baseUrl = typeof window !== 'undefined' ? window.location.origin : '';
-  const urlSlug = municipality === 'nederland' ? 'alle-gemeenten' : municipality;
+  const urlSlug = municipality === COUNTRY.nationalSlug ? COUNTRY.nationalUrlAlias : municipality;
   const shareUrl = `${baseUrl}/?gemeente=${urlSlug}`;
   const embedUrl = `${baseUrl}/embed?gemeente=${urlSlug}`;
   const embedCode = `<iframe src="${embedUrl}" width="${embedWidth}" height="${embedHeight}" style="border:none;border-radius:8px;" loading="lazy" allowfullscreen></iframe>`;
@@ -77,7 +79,7 @@ export default function ShareModal({ isOpen, onClose, municipality, municipality
       >
         {/* Header */}
         <div className="flex items-center justify-between px-5 py-4 border-b border-border">
-          <h2 className="text-lg font-semibold text-foreground">Delen</h2>
+          <h2 className="text-lg font-semibold text-foreground">{t.share.title}</h2>
           <button
             onClick={onClose}
             className="p-1.5 text-subtle-foreground hover:text-muted-foreground hover:bg-secondary rounded-lg transition"
@@ -92,7 +94,7 @@ export default function ShareModal({ isOpen, onClose, municipality, municipality
               {/* Share link */}
               <div>
                 <label className="block text-sm font-medium text-muted-foreground mb-1.5">
-                  Directe link naar {municipalityName}
+                  {t.share.directLink(municipalityName)}
                 </label>
                 <div className="flex gap-2">
                   <input
@@ -110,7 +112,7 @@ export default function ShareModal({ isOpen, onClose, municipality, municipality
                         : 'bg-primary text-white hover:bg-primary/90'
                     }`}
                   >
-                    {copiedLink ? 'Gekopieerd!' : 'Kopieer'}
+                    {copiedLink ? t.share.copied : t.share.copy}
                   </button>
                 </div>
               </div>
@@ -118,16 +120,16 @@ export default function ShareModal({ isOpen, onClose, municipality, municipality
               {/* Embed code */}
               <div>
                 <label className="block text-sm font-medium text-muted-foreground mb-1.5">
-                  Embed code
+                  {t.share.embedCode}
                 </label>
                 <p className="text-xs text-subtle-foreground mb-2">
-                  Plak deze code op je website om de kaart van {municipalityName} in te sluiten.
+                  {t.share.embedHint(municipalityName)}
                 </p>
 
                 {/* Size controls */}
                 <div className="flex gap-3 mb-2">
                   <div className="flex-1">
-                    <label className="block text-xs text-subtle-foreground mb-1">Breedte</label>
+                    <label className="block text-xs text-subtle-foreground mb-1">{t.share.width}</label>
                     <select
                       value={embedWidth}
                       onChange={(e) => setEmbedWidth(e.target.value)}
@@ -140,7 +142,7 @@ export default function ShareModal({ isOpen, onClose, municipality, municipality
                     </select>
                   </div>
                   <div className="flex-1">
-                    <label className="block text-xs text-subtle-foreground mb-1">Hoogte</label>
+                    <label className="block text-xs text-subtle-foreground mb-1">{t.share.height}</label>
                     <select
                       value={embedHeight}
                       onChange={(e) => setEmbedHeight(e.target.value)}
@@ -166,7 +168,7 @@ export default function ShareModal({ isOpen, onClose, municipality, municipality
                         : 'bg-card text-muted-foreground border border-input hover:bg-muted'
                     }`}
                   >
-                    {copiedEmbed ? 'Gekopieerd!' : 'Kopieer'}
+                    {copiedEmbed ? t.share.copied : t.share.copy}
                   </button>
                 </div>
               </div>
@@ -174,7 +176,7 @@ export default function ShareModal({ isOpen, onClose, municipality, municipality
               {/* Preview */}
               <div>
                 <label className="block text-sm font-medium text-muted-foreground mb-1.5">
-                  Voorbeeld
+                  {t.share.preview}
                 </label>
                 <div className="border border-border rounded-lg overflow-hidden bg-secondary" style={{ height: '250px' }}>
                   <iframe
@@ -183,7 +185,7 @@ export default function ShareModal({ isOpen, onClose, municipality, municipality
                     height="100%"
                     style={{ border: 'none' }}
                     loading="lazy"
-                    title={`Pakketpunten ${municipalityName}`}
+                    title={t.share.iframeTitle(municipalityName)}
                   />
                 </div>
               </div>

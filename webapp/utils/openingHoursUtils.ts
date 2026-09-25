@@ -1,18 +1,12 @@
 import { OpeningHours } from '@/types/pakketpunten';
+import { t } from '@/lib/strings';
 
 export type DayKey = 'ma' | 'di' | 'wo' | 'do' | 'vr' | 'za' | 'zo';
 
 export const DAY_KEYS: DayKey[] = ['ma', 'di', 'wo', 'do', 'vr', 'za', 'zo'];
 
-export const DAY_LABELS: Record<DayKey, string> = {
-  ma: 'Maandag',
-  di: 'Dinsdag',
-  wo: 'Woensdag',
-  do: 'Donderdag',
-  vr: 'Vrijdag',
-  za: 'Zaterdag',
-  zo: 'Zondag',
-};
+// Display labels come from the UI dictionary; the keys stay Dutch (data contract).
+export const DAY_LABELS: Record<DayKey, string> = t.days.long;
 
 // JS Date.getDay(): 0=Sun..6=Sat → Dutch index 'ma'..'zo'
 export function dayKeyForDate(d: Date): DayKey {

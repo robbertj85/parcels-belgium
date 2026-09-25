@@ -19,6 +19,8 @@ import { Card } from '@/components/ui/card';
 import { carrierColor, carrierLogo } from '@/lib/carriers';
 import { MunicipalityHistoryEntry } from '@/types/history';
 
+import { COUNTRY } from '@/config/country';
+import { t } from '@/lib/strings';
 /**
  * One municipality's history: market share and growth per carrier, the
  * development over time, weekly deltas and the weekly table.
@@ -106,7 +108,7 @@ export default function MunicipalityOverviewPanels({
           <div className="text-xl sm:text-2xl font-bold text-accent-foreground">
             {lastEntry?.total || 0}
           </div>
-          <div className="text-xs sm:text-sm text-primary">Totaal pakketpunten</div>
+          <div className="text-xs sm:text-sm text-primary">{t.overview.totalPoints}</div>
         </div>
         <div
           className={`rounded-lg p-3 sm:p-4 ${totalChange >= 0 ? 'bg-success-muted' : 'bg-destructive-muted'}`}
@@ -120,7 +122,7 @@ export default function MunicipalityOverviewPanels({
           <div
             className={`text-xs sm:text-sm ${totalChange >= 0 ? 'text-success' : 'text-destructive'}`}
           >
-            Sinds {firstEntry?.week_label}
+            {t.overview.since(firstEntry?.week_label ?? '')}
           </div>
         </div>
         <div
@@ -135,12 +137,12 @@ export default function MunicipalityOverviewPanels({
           <div
             className={`text-xs sm:text-sm ${Number(totalPercentageChange) >= 0 ? 'text-success' : 'text-destructive'}`}
           >
-            Totale groei
+            {t.overview.totalGrowth}
           </div>
         </div>
         <div className="bg-muted rounded-lg p-3 sm:p-4">
           <div className="text-xl sm:text-2xl font-bold text-foreground">{providers.length}</div>
-          <div className="text-xs sm:text-sm text-muted-foreground">Vervoerders</div>
+          <div className="text-xs sm:text-sm text-muted-foreground">{t.overview.carriers}</div>
         </div>
       </div>
 
@@ -148,7 +150,7 @@ export default function MunicipalityOverviewPanels({
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
         <Card>
           <h3 className="font-semibold text-foreground mb-3 sm:mb-4 text-sm sm:text-base">
-            Marktaandeel per vervoerder
+            {t.overview.marketShareTitle}
           </h3>
           <div className="h-48 sm:h-64">
             <ResponsiveContainer width="100%" height="100%">
@@ -168,7 +170,7 @@ export default function MunicipalityOverviewPanels({
                   tickLine={false}
                 />
                 <Tooltip
-                  formatter={(value: number) => [value.toLocaleString('nl-NL'), 'Pakketpunten']}
+                  formatter={(value: number) => [value.toLocaleString(COUNTRY.locale), t.common.points]}
                 />
                 <Bar dataKey="value" radius={[0, 4, 4, 0]} barSize={14}>
                   {marketShareData.map((entry) => (
@@ -177,7 +179,7 @@ export default function MunicipalityOverviewPanels({
                   <LabelList
                     dataKey="value"
                     position="right"
-                    formatter={(value: React.ReactNode) => Number(value).toLocaleString('nl-NL')}
+                    formatter={(value: React.ReactNode) => Number(value).toLocaleString(COUNTRY.locale)}
                     style={{ fontSize: 11, fill: '#4b5563' }}
                   />
                 </Bar>
@@ -188,7 +190,7 @@ export default function MunicipalityOverviewPanels({
 
         <Card>
           <h3 className="font-semibold text-foreground mb-3 sm:mb-4 text-sm sm:text-base">
-            Groei per vervoerder
+            {t.overview.growthTitle}
           </h3>
           <div className="space-y-2 max-h-64 overflow-y-auto">
             {growthData.map((item) => {
@@ -215,7 +217,7 @@ export default function MunicipalityOverviewPanels({
                   </div>
                   <div className="flex items-center gap-3 text-sm">
                     <span className="text-muted-foreground">
-                      {item.current.toLocaleString('nl-NL')}
+                      {item.current.toLocaleString(COUNTRY.locale)}
                     </span>
                     <span
                       className={`font-medium ${item.change >= 0 ? 'text-success' : 'text-destructive'}`}
@@ -244,7 +246,7 @@ export default function MunicipalityOverviewPanels({
       {/* All Providers Line Chart */}
       <Card>
         <h3 className="font-semibold text-foreground mb-3 sm:mb-4 text-sm sm:text-base">
-          Ontwikkeling alle vervoerders over tijd
+          {t.overview.allCarriersOverTime}
         </h3>
         <div className="h-48 sm:h-64">
           <ResponsiveContainer width="100%" height="100%">
@@ -263,13 +265,13 @@ export default function MunicipalityOverviewPanels({
                   borderRadius: '8px',
                   fontSize: '12px',
                 }}
-                labelFormatter={(label) => `Week ${label}`}
+                labelFormatter={(label) => t.overview.weekLabel(label)}
               />
               <Legend />
               <Line
                 type="monotone"
                 dataKey="total"
-                name="Totaal"
+                name={t.overview.total}
                 stroke="#3b82f6"
                 strokeWidth={2}
                 dot={{ fill: '#3b82f6', strokeWidth: 2 }}
@@ -293,7 +295,7 @@ export default function MunicipalityOverviewPanels({
       {/* Weekly Changes Stacked Bar Chart */}
       <Card>
         <h3 className="font-semibold text-foreground mb-3 sm:mb-4 text-sm sm:text-base">
-          Wekelijkse verandering per vervoerder
+          {t.overview.weeklyChangeTitle}
         </h3>
         {weeklyChangeData.length > 0 ? (
           <div className="h-48 sm:h-64">
@@ -313,7 +315,7 @@ export default function MunicipalityOverviewPanels({
                     borderRadius: '8px',
                     fontSize: '12px',
                   }}
-                  labelFormatter={(label) => `Week ${label}`}
+                  labelFormatter={(label) => t.overview.weekLabel(label)}
                   formatter={(value: number, name: string) => [
                     `${value >= 0 ? '+' : ''}${value}`,
                     name,
@@ -334,7 +336,7 @@ export default function MunicipalityOverviewPanels({
           </div>
         ) : (
           <div className="h-32 flex items-center justify-center text-subtle-foreground text-sm">
-            Onvoldoende historische data beschikbaar om grafiek te tonen
+            {t.overview.insufficientData}
           </div>
         )}
       </Card>
@@ -342,17 +344,17 @@ export default function MunicipalityOverviewPanels({
       {/* History table */}
       <div className="bg-card border border-border rounded-lg overflow-hidden">
         <div className="px-4 py-3 border-b border-border bg-muted">
-          <h3 className="font-semibold text-foreground">Wekelijkse data</h3>
+          <h3 className="font-semibold text-foreground">{t.overview.weeklyData}</h3>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead className="bg-muted border-b border-border">
               <tr>
                 <th className="px-4 py-3 text-left text-xs font-semibold text-muted-foreground uppercase">
-                  Week
+                  {t.overview.week}
                 </th>
                 <th className="px-4 py-3 text-left text-xs font-semibold text-muted-foreground uppercase">
-                  Periode
+                  {t.overview.period}
                 </th>
                 {providers.map((provider) => (
                   <th
@@ -363,10 +365,10 @@ export default function MunicipalityOverviewPanels({
                   </th>
                 ))}
                 <th className="px-4 py-3 text-center text-xs font-semibold text-foreground uppercase bg-secondary">
-                  Totaal
+                  {t.overview.total}
                 </th>
                 <th className="px-4 py-3 text-center text-xs font-semibold text-muted-foreground uppercase">
-                  Verschil
+                  {t.overview.difference}
                 </th>
               </tr>
             </thead>
@@ -429,8 +431,8 @@ function formatDateRange(from: string, to: string): string {
 
   const fromDay = fromDate.getDate();
   const toDay = toDate.getDate();
-  const fromMonth = fromDate.toLocaleString('nl-NL', { month: 'short' });
-  const toMonth = toDate.toLocaleString('nl-NL', { month: 'short' });
+  const fromMonth = fromDate.toLocaleString(COUNTRY.locale, { month: 'short' });
+  const toMonth = toDate.toLocaleString(COUNTRY.locale, { month: 'short' });
 
   if (fromMonth === toMonth) {
     return `${fromDay} - ${toDay} ${fromMonth}`;

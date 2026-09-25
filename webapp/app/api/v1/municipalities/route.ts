@@ -7,7 +7,7 @@ import { checkRateLimit, clientIp, rateLimitHeaders } from '@/lib/rateLimit';
 /**
  * GET /api/v1/municipalities
  *
- * Lists every municipality with its slug, CBS code, province, population and
+ * Lists every municipality with its slug, official code, province, population and
  * current pakketpunt count — the index you need before you can call the
  * per-municipality endpoint, which until now could only be used by guessing
  * slugs.

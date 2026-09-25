@@ -3,6 +3,7 @@ import fs from 'fs';
 import path from 'path';
 
 import { checkRateLimit, clientIp, rateLimitHeaders } from '@/lib/rateLimit';
+import { COUNTRY } from '@/config/country';
 
 const RATE_LIMIT = 60; // requests per window
 const RATE_LIMIT_WINDOW = 60 * 60 * 1000; // 1 hour in milliseconds
@@ -13,115 +14,9 @@ interface Municipality {
   province: string;
   population: number;
   code: string | null;
+  /** Other-language and alternative names, from scripts/build_municipalities.py. */
+  aliases?: string[];
 }
-
-// Mapping table for common Dutch municipality name variations
-// Maps alternative names/spellings to canonical slugs in our database
-//
-// Common variations:
-// 1. Apostrophe 's-: Official CBS names vs common names
-// 2. Spaces/hyphens: Different formatting styles
-// 3. Parenthetical disambiguation: With/without regional identifiers
-// 4. Historical names: Old spellings still in use
-const MUNICIPALITY_ALIAS_MAPPING: Record<string, string> = {
-  // Den Haag / 's-Gravenhage variations
-  "'s-gravenhage": "den-haag",
-  "s-gravenhage": "den-haag",
-  "sgravenhage": "den-haag",
-  "'s gravenhage": "den-haag",
-  "s gravenhage": "den-haag",
-  "the hague": "den-haag",
-  "haag": "den-haag",
-
-  // Den Bosch / 's-Hertogenbosch variations
-  "'s-hertogenbosch": "s-hertogenbosch",
-  "shertogenbosch": "s-hertogenbosch",
-  "'s hertogenbosch": "s-hertogenbosch",
-  "s hertogenbosch": "s-hertogenbosch",
-  "den bosch": "s-hertogenbosch",
-  "den-bosch": "s-hertogenbosch",  // Slug-style variation
-  "denbosch": "s-hertogenbosch",   // Without spaces/hyphens
-  "bosch": "s-hertogenbosch",
-
-  // Bergen variations (with/without regional identifiers)
-  "bergen (nh)": "bergen-(nh.)",
-  "bergen nh": "bergen-(nh.)",
-  "bergen noord-holland": "bergen-(nh.)",
-  "bergen noord holland": "bergen-(nh.)",
-  "bergen (noord-holland)": "bergen-(nh.)",
-  "bergen n.h.": "bergen-(nh.)",
-  "bergen n-h": "bergen-(nh.)",
-
-  "bergen (l)": "bergen-(l.)",
-  "bergen l": "bergen-(l.)",
-  "bergen limburg": "bergen-(l.)",
-  "bergen (limburg)": "bergen-(l.)",
-  "bergen l.": "bergen-(l.)",
-
-  // Hengelo variations
-  "hengelo (o)": "hengelo",
-  "hengelo o": "hengelo",
-  "hengelo (overijssel)": "hengelo",
-  "hengelo overijssel": "hengelo",
-  "hengelo o.": "hengelo",
-
-  "hengelo (gld)": "hengelo",
-  "hengelo gld": "hengelo",
-  "hengelo (gelderland)": "hengelo",
-  "hengelo gelderland": "hengelo",
-
-  // Beek variations
-  "beek (l)": "beek",
-  "beek l": "beek",
-  "beek (limburg)": "beek",
-  "beek limburg": "beek",
-  "beek l.": "beek",
-
-  // Laren variations
-  "laren (nh)": "laren",
-  "laren nh": "laren",
-  "laren (noord-holland)": "laren",
-  "laren noord-holland": "laren",
-  "laren noord holland": "laren",
-  "laren n.h.": "laren",
-
-  // Middelburg variations
-  "middelburg (z)": "middelburg",
-  "middelburg z": "middelburg",
-  "middelburg (zeeland)": "middelburg",
-  "middelburg zeeland": "middelburg",
-  "middelburg z.": "middelburg",
-
-  // Rijswijk variations
-  "rijswijk (zh)": "rijswijk",
-  "rijswijk zh": "rijswijk",
-  "rijswijk (zuid-holland)": "rijswijk",
-  "rijswijk zuid-holland": "rijswijk",
-  "rijswijk zuid holland": "rijswijk",
-  "rijswijk z.h.": "rijswijk",
-
-  // Stein variations
-  "stein (l)": "stein",
-  "stein l": "stein",
-  "stein (limburg)": "stein",
-  "stein limburg": "stein",
-  "stein l.": "stein",
-
-  // Groningen variations
-  "groningen (gemeente)": "groningen",
-
-  // Utrecht variations
-  "utrecht (gemeente)": "utrecht",
-
-  // Valkenburg variations
-  "valkenburg (zh)": "valkenburg-aan-de-geul",
-  "valkenburg (l)": "valkenburg-aan-de-geul",
-  "valkenburg": "valkenburg-aan-de-geul",
-
-  // Nuenen variations
-  "nuenen gerwen en nederwetten": "nuenen",
-  "nuenen, gerwen en nederwetten": "nuenen",
-};
 
 function normalizeIdentifier(identifier: string): string {
   return identifier.toLowerCase().trim();
@@ -137,17 +32,15 @@ function findMunicipalityByIdentifier(
   let match = municipalities.find((m) => m.slug === normalized);
   if (match) return match;
 
-  // Try alias mapping (e.g., "Den Bosch" -> "s-hertogenbosch")
-  if (MUNICIPALITY_ALIAS_MAPPING[normalized]) {
-    const aliasSlug = MUNICIPALITY_ALIAS_MAPPING[normalized];
-    match = municipalities.find((m) => m.slug === aliasSlug);
-    if (match) return match;
-  }
+  // Try alias match (e.g., "Luik" or "Lüttich" -> Liège)
+  match = municipalities.find((m) =>
+    (m.aliases ?? []).some((alias) => normalizeIdentifier(alias) === normalized)
+  );
+  if (match) return match;
 
-  // Try CBS code match (e.g., GM0363 for Amsterdam)
+  // Try official code match (NIS in Belgium, ISTAT in Italy)
   match = municipalities.find((m) => {
     if (!m.code) return false;
-    // Remove whitespace from CBS codes (they have trailing spaces in CBS data)
     const cleanCode = m.code.trim();
     return cleanCode.toLowerCase() === normalized;
   });
@@ -210,7 +103,7 @@ export async function GET(
       return new NextResponse(
         JSON.stringify({
           error: 'Missing identifier',
-          message: 'Please provide a municipality identifier (name, slug, or CBS code)',
+          message: `Please provide a municipality identifier (name, slug, or ${COUNTRY.municipalityCodeLabel} code)`,
         }),
         {
           status: 400,
@@ -256,7 +149,7 @@ export async function GET(
         JSON.stringify({
           error: 'Municipality not found',
           message: `No municipality found for identifier: "${identifier}"`,
-          hint: 'Try using a municipality name (e.g., "Amsterdam"), slug (e.g., "amsterdam"), or CBS code (e.g., "GM0363")',
+          hint: `Try using a municipality name, slug (e.g., "${COUNTRY.defaultMunicipalitySlug}"), or ${COUNTRY.municipalityCodeLabel} code (e.g., "${COUNTRY.municipalityCodeExample}")`,
         }),
         {
           status: 404,
@@ -268,8 +161,8 @@ export async function GET(
       );
     }
 
-    // Skip "Nederland (totaal)" - it's not a real municipality
-    if (municipality.slug === 'nederland') {
+    // Skip the national row - it's not a real municipality
+    if (municipality.slug === COUNTRY.nationalSlug) {
       return new NextResponse(
         JSON.stringify({
           error: 'Invalid municipality',

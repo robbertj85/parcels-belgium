@@ -32,14 +32,16 @@ import { featureCollection, point } from '@turf/helpers';
 import { PakketpuntData, PakketpuntFeature, Filters, PakketpuntProperties, getPointCategory, OpeningHours } from '@/types/pakketpunten';
 import { CARRIER_BRAND, CARRIER_ORDER, CARRIER_SERIES_COLORS } from '@/lib/carriers';
 
+import { COUNTRY } from '@/config/country';
+import { t } from '@/lib/strings';
 const WEEK_DAYS: { key: keyof Exclude<OpeningHours, string>; label: string }[] = [
-  { key: 'ma', label: 'Ma' },
-  { key: 'di', label: 'Di' },
-  { key: 'wo', label: 'Wo' },
-  { key: 'do', label: 'Do' },
-  { key: 'vr', label: 'Vr' },
-  { key: 'za', label: 'Za' },
-  { key: 'zo', label: 'Zo' },
+  { key: 'ma', label: t.days.short.ma },
+  { key: 'di', label: t.days.short.di },
+  { key: 'wo', label: t.days.short.wo },
+  { key: 'do', label: t.days.short.do },
+  { key: 'vr', label: t.days.short.vr },
+  { key: 'za', label: t.days.short.za },
+  { key: 'zo', label: t.days.short.zo },
 ];
 
 function OpeningTimes({ value }: { value?: OpeningHours | null }) {
@@ -47,14 +49,14 @@ function OpeningTimes({ value }: { value?: OpeningHours | null }) {
   if (typeof value === 'string') {
     return (
       <div className="mt-2">
-        <p className="font-semibold text-foreground">Openingstijden:</p>
+        <p className="font-semibold text-foreground">{t.popup.openingHours}</p>
         <p className="text-muted-foreground">{value}</p>
       </div>
     );
   }
   return (
     <div className="mt-2">
-      <p className="font-semibold text-foreground">Openingstijden:</p>
+      <p className="font-semibold text-foreground">{t.popup.openingHours}</p>
       <table className="text-xs text-muted-foreground mt-0.5">
         <tbody>
           {WEEK_DAYS.map(({ key, label }) => {
@@ -63,7 +65,7 @@ function OpeningTimes({ value }: { value?: OpeningHours | null }) {
             return (
               <tr key={key}>
                 <td className="pr-2 font-medium text-muted-foreground align-top">{label}</td>
-                <td className={closed ? 'text-subtle-foreground' : ''}>{v || 'gesloten'}</td>
+                <td className={closed ? 'text-subtle-foreground' : ''}>{v || t.popup.closed}</td>
               </tr>
             );
           })}
@@ -502,14 +504,14 @@ function seededRandom(seed: number): number {
 // Helper function to get provider render priority (higher = renders on top)
 // Randomizes order hourly to give all providers fair visibility
 function getProviderPriority(vervoerder: string): number {
-  const providers = ['Budbee', 'ViaTim', 'InPost', 'GLS', 'DPD', 'Amazon', 'VintedGo', 'DeBuren', 'PostNL', 'DHL'];
+  const providers: readonly string[] = CARRIER_ORDER;
 
   // Get hourly seed for stable randomization
   const seed = getHourlySeed();
 
   // Create shuffled priorities based on hourly seed
   const shuffledPriorities: Record<string, number> = {};
-  const availablePositions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  const availablePositions = providers.map((_, index) => index + 1);
 
   providers.forEach((provider, index) => {
     // Use provider name + seed to create unique seed per provider
@@ -868,19 +870,19 @@ function MapComponent(props?: MapProps) {
                   {props.straatNaam} {props.straatNr}
                 </p>
                 <p className="mt-1">
-                  <span className="font-semibold">Vervoerder:</span> {props.vervoerder}
+                  <span className="font-semibold">{t.popup.carrier}</span> {props.vervoerder}
                 </p>
                 {props.puntType && (
                   <p>
-                    <span className="font-semibold">Type:</span> {props.puntType}
+                    <span className="font-semibold">{t.popup.type}</span> {props.puntType}
                   </p>
                 )}
                 <p className="mt-1">
-                  <span className="font-semibold">Services:</span>{' '}
-                  {props.canPickup && <span>↓ Ophalen</span>}
+                  <span className="font-semibold">{t.popup.services}</span>{' '}
+                  {props.canPickup && <span>{t.popup.pickup}</span>}
                   {props.canPickup && props.canDropoff && ' / '}
-                  {props.canDropoff && <span>↑ Verzenden</span>}
-                  {!props.canPickup && !props.canDropoff && <span className="text-subtle-foreground">Onbekend</span>}
+                  {props.canDropoff && <span>{t.popup.dropoff}</span>}
+                  {!props.canPickup && !props.canDropoff && <span className="text-subtle-foreground">{t.common.unknown}</span>}
                 </p>
                 <p className="text-xs text-subtle-foreground mt-1">
                   {props.latitude.toFixed(6)}, {props.longitude.toFixed(6)}
@@ -892,7 +894,7 @@ function MapComponent(props?: MapProps) {
                   <details>
                     <summary className="flex justify-between items-baseline gap-3 cursor-pointer select-none">
                       <span className="text-xs font-semibold text-primary hover:text-primary">
-                        Toon Ruwe Data
+                        {t.popup.showRawData}
                       </span>
                       <a
                         href={`https://www.google.com/maps?q=&layer=c&cbll=${props.latitude},${props.longitude}`}
@@ -901,7 +903,7 @@ function MapComponent(props?: MapProps) {
                         className="text-xs text-primary hover:text-primary underline whitespace-nowrap"
                         onClick={(e) => e.stopPropagation()}
                       >
-                        Bekijk in Street View
+                        {t.popup.streetView}
                       </a>
                     </summary>
                     <div className="mt-2">
@@ -945,19 +947,19 @@ function MapComponent(props?: MapProps) {
                   {props.straatNaam} {props.straatNr}
                 </p>
                 <p className="mt-1">
-                  <span className="font-semibold">Vervoerder:</span> {props.vervoerder}
+                  <span className="font-semibold">{t.popup.carrier}</span> {props.vervoerder}
                 </p>
                 {props.puntType && (
                   <p>
-                    <span className="font-semibold">Type:</span> {props.puntType}
+                    <span className="font-semibold">{t.popup.type}</span> {props.puntType}
                   </p>
                 )}
                 <p className="mt-1">
-                  <span className="font-semibold">Services:</span>{' '}
-                  {props.canPickup && <span>↓ Ophalen</span>}
+                  <span className="font-semibold">{t.popup.services}</span>{' '}
+                  {props.canPickup && <span>{t.popup.pickup}</span>}
                   {props.canPickup && props.canDropoff && ' / '}
-                  {props.canDropoff && <span>↑ Verzenden</span>}
-                  {!props.canPickup && !props.canDropoff && <span className="text-subtle-foreground">Onbekend</span>}
+                  {props.canDropoff && <span>{t.popup.dropoff}</span>}
+                  {!props.canPickup && !props.canDropoff && <span className="text-subtle-foreground">{t.common.unknown}</span>}
                 </p>
                 <p className="text-xs text-subtle-foreground mt-1">
                   {props.latitude.toFixed(6)}, {props.longitude.toFixed(6)}
@@ -969,7 +971,7 @@ function MapComponent(props?: MapProps) {
                   <details>
                     <summary className="flex justify-between items-baseline gap-3 cursor-pointer select-none">
                       <span className="text-xs font-semibold text-primary hover:text-primary">
-                        Toon Ruwe Data
+                        {t.popup.showRawData}
                       </span>
                       <a
                         href={`https://www.google.com/maps?q=&layer=c&cbll=${props.latitude},${props.longitude}`}
@@ -978,7 +980,7 @@ function MapComponent(props?: MapProps) {
                         className="text-xs text-primary hover:text-primary underline whitespace-nowrap"
                         onClick={(e) => e.stopPropagation()}
                       >
-                        Bekijk in Street View
+                        {t.popup.streetView}
                       </a>
                     </summary>
                     <div className="mt-2">
@@ -1028,7 +1030,7 @@ function MapComponent(props?: MapProps) {
   if (!mounted) {
     return (
       <div className="w-full h-full flex items-center justify-center bg-secondary">
-        <p className="text-subtle-foreground">Kaart laden...</p>
+        <p className="text-subtle-foreground">{t.common.mapLoading}</p>
       </div>
     );
   }
@@ -1041,7 +1043,7 @@ function MapComponent(props?: MapProps) {
             <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
             <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
           </svg>
-          <p className="text-sm font-medium text-subtle-foreground">Gemeente laden...</p>
+          <p className="text-sm font-medium text-subtle-foreground">{t.common.municipalityLoading}</p>
         </div>
       </div>
     );
@@ -1054,8 +1056,8 @@ function MapComponent(props?: MapProps) {
     <div className="relative w-full h-full">
       <MapContainer
         key={`map-${useSimpleMarkers ? 'simple' : 'detailed'}`} // Force remount when rendering mode changes
-        center={[52.3676, 4.9041]} // Amsterdam as default
-        zoom={12}
+        center={COUNTRY.defaultCenter}
+        zoom={COUNTRY.defaultZoom}
         style={{ width: '100%', height: '100%' }}
         className="z-0"
         preferCanvas={useSimpleMarkers} // Use Canvas renderer for better performance
@@ -1182,7 +1184,7 @@ function MapComponent(props?: MapProps) {
         >
           <Popup>
             <div className="text-sm">
-              <h3 className="font-bold text-foreground">Uw zoeklocatie</h3>
+              <h3 className="font-bold text-foreground">{t.popup.searchLocation}</h3>
               <p className="text-xs text-subtle-foreground mt-1">
                 {searchLocationMarker.latitude.toFixed(6)}, {searchLocationMarker.longitude.toFixed(6)}
               </p>
@@ -1202,11 +1204,10 @@ function MapComponent(props?: MapProps) {
               </svg>
               <div>
                 <h3 className="font-semibold text-yellow-900 mb-1">
-                  Geen pakketpunten gevonden
+                  {t.map.noPointsTitle}
                 </h3>
                 <p className="text-sm text-yellow-800">
-                  Deze gemeente heeft momenteel geen pakketpunten in onze database.
-                  De kaart toont wel de gemeentegrens.
+                  {t.map.noPointsBody}
                 </p>
               </div>
             </div>

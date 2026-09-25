@@ -20,7 +20,8 @@ const nextConfig: NextConfig = {
       },
       {
         key: 'Permissions-Policy',
-        value: 'camera=(), microphone=(), geolocation=()',
+        // geolocation=(self): the "use my location" button in NearestPointsFinder needs it
+        value: 'camera=(), microphone=(), geolocation=(self)',
       },
     ];
 

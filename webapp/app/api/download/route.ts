@@ -4,6 +4,7 @@ import path from 'path';
 
 import { checkRateLimit, clientIp, rateLimitHeaders } from '@/lib/rateLimit';
 
+import { t } from '@/lib/strings';
 // Was 5/hour, which a single person comparing a handful of gemeenten could hit
 // legitimately. 60 still stops bulk scraping; the whole dataset is a single
 // GitHub clone away anyway.
@@ -16,7 +17,7 @@ function convertGeoJSONToCSV(geojson: any): string {
   );
 
   if (features.length === 0) {
-    return 'Geen pakketpunten gevonden';
+    return t.map.noPointsTitle;
   }
 
   // CSV header

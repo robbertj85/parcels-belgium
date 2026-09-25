@@ -1,8 +1,15 @@
+import type { Carrier } from '@/lib/carriers';
+import { t } from '@/lib/strings';
+
 export interface Municipality {
   name: string;
   slug: string;
   province: string;
   population: number;
+  /** Official code (NIS in Belgium); null for the national row. */
+  code?: string | null;
+  /** Names in the other national languages, e.g. "Luik" for Liège. */
+  aliases?: string[];
 }
 
 export interface PakketpuntProperties {
@@ -10,7 +17,7 @@ export interface PakketpuntProperties {
   locatieNaam: string;
   straatNaam: string;
   straatNr: string;
-  vervoerder: 'DHL' | 'PostNL' | 'VintedGo' | 'DeBuren' | 'DPD' | 'Amazon' | 'GLS' | 'ViaTim' | 'InPost' | 'Budbee';
+  vervoerder: Carrier;
   puntType: string;
   bezettingsgraad: number;
   latitude: number;
@@ -101,10 +108,10 @@ export type PointCategory = 'locker' | 'shop';
 //   - GLS: parcel_shop, locker
 //   - ViaTim: servicepunt (all are staffed shops)
 //   - InPost: servicepunt (PUDO shops), automaat (parcel lockers)
-//   - Budbee: automaat (all are parcel lockers)
+//   - bpost: postkantoor, servicepunt (shops), automaat (pakjesautomaten)
 const LOCKER_TYPES = new Set([
   'packStation',      // DHL
-  'automaat',         // PostNL, InPost, Budbee
+  'automaat',         // PostNL, InPost, bpost
   'dpd_box',          // DPD
   'locker',           // Amazon, VintedGo
   'Buitenkluis',      // DeBuren
@@ -115,5 +122,5 @@ export function getPointCategory(puntType: string): PointCategory {
 }
 
 export function getCategoryLabel(category: PointCategory): string {
-  return category === 'locker' ? 'Pakketautomaat' : 'Pakketpunt';
+  return category === 'locker' ? t.categories.locker : t.categories.shop;
 }

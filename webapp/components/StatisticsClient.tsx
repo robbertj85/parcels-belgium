@@ -26,11 +26,13 @@ import {
 import { HistorySnapshot, MunicipalityHistoryEntry } from '@/types/history';
 import { CarrierSources } from '@/types/sources';
 
+import { COUNTRY } from '@/config/country';
+import { t } from '@/lib/strings';
 const RADII = ['300', '400', '500'] as const;
 
 const CATEGORY_LABELS: Record<string, string> = {
-  locker: 'Pakketautomaat',
-  shop: 'Pakketpunt',
+  locker: t.categories.locker,
+  shop: t.categories.shop,
 };
 
 export interface MunicipalityStats {
@@ -64,7 +66,7 @@ export interface StatisticsPayload {
 }
 
 function formatNumber(value: number): string {
-  return value.toLocaleString('nl-NL');
+  return value.toLocaleString(COUNTRY.locale);
 }
 
 function ChartTooltip({
@@ -100,7 +102,7 @@ function RankedBars({
   suffix?: string;
 }) {
   if (data.length === 0) {
-    return <p className="py-6 text-center text-sm text-muted-foreground">Geen data.</p>;
+    return <p className="py-6 text-center text-sm text-muted-foreground">{t.statistics.noData}</p>;
   }
 
   return (
@@ -142,7 +144,7 @@ function CoverageMeter({ radius, ratio }: { radius: string; ratio: number }) {
   return (
     <div>
       <div className="mb-1 flex items-baseline justify-between">
-        <span className="text-sm text-muted-foreground">binnen {radius} m</span>
+        <span className="text-sm text-muted-foreground">{t.statistics.withinRadius(radius)}</span>
         <span className="text-sm font-semibold tabular-nums text-foreground">
           {percentage.toFixed(1)}%
         </span>
@@ -281,7 +283,7 @@ export default function StatisticsClient({
     );
   }, [ranked, query]);
 
-  const generated = new Date(statistics.generated_at).toLocaleDateString('nl-NL');
+  const generated = new Date(statistics.generated_at).toLocaleDateString(COUNTRY.locale);
 
   return (
     <div className="space-y-6">
@@ -293,12 +295,12 @@ export default function StatisticsClient({
         <div className="flex flex-wrap items-end justify-between gap-3">
           <div>
             <h2 className="text-lg font-semibold text-foreground">
-              {carrier || 'Alle vervoerders'}
+              {carrier || t.statistics.allCarriers}
             </h2>
             <p className="text-sm text-muted-foreground">
               {carrier
-                ? 'Historische ontwikkeling pakketpunten'
-                : 'Marktaandeel en groei per vervoerder'}
+                ? t.overview.providerSubtitle
+                : t.overview.subtitle}
             </p>
           </div>
 
@@ -306,9 +308,9 @@ export default function StatisticsClient({
             value={carrier}
             onChange={(event) => setCarrier(event.target.value)}
             className="h-9 rounded-lg border border-input bg-card px-3 text-sm text-foreground"
-            aria-label="Kies een vervoerder"
+            aria-label={t.statistics.chooseCarrier}
           >
-            <option value="">Alle vervoerders</option>
+            <option value="">{t.statistics.allCarriers}</option>
             {providers.map((provider) => (
               <option key={provider} value={provider}>
                 {provider}
@@ -320,7 +322,7 @@ export default function StatisticsClient({
         {snapshots.length === 0 ? (
           <Card>
             <p className="py-6 text-center text-sm text-muted-foreground">
-              Nog geen historische snapshots. Draai{' '}
+              {t.statistics.noSnapshots}{' '}
               <code className="rounded bg-muted px-1 py-0.5 text-xs">
                 python scripts/update_totals_history.py
               </code>
@@ -339,12 +341,12 @@ export default function StatisticsClient({
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
           <h2 className="text-lg font-semibold text-foreground">
-            Dekking en dichtheid — {selected ? selected.gemeente : 'Nederland'}
+            {t.statistics.coverageDensityTitle(selected ? selected.gemeente : COUNTRY.nationalShortLabel)}
           </h2>
           <p className="text-sm text-muted-foreground">
             {selected
-              ? `${selected.provincie ?? 'Onbekend'} · ${formatNumber(selected.population)} inwoners · ${formatNumber(selected.area_km2)} km²`
-              : `${formatNumber(statistics.municipalities.length)} gemeenten · bijgewerkt ${generated}`}
+              ? t.statistics.municipalityMeta(selected.provincie ?? t.common.unknown, formatNumber(selected.population), formatNumber(selected.area_km2))
+              : t.statistics.nationalMeta(formatNumber(statistics.municipalities.length), generated)}
           </p>
         </div>
 
@@ -352,9 +354,9 @@ export default function StatisticsClient({
           value={slug}
           onChange={(event) => setSlug(event.target.value)}
           className="h-9 rounded-lg border border-input bg-card px-3 text-sm text-foreground"
-          aria-label="Kies een gemeente"
+          aria-label={t.statistics.chooseMunicipality}
         >
-          <option value="">Heel Nederland</option>
+          <option value="">{t.statistics.wholeCountry}</option>
           {[...statistics.municipalities]
             .sort((a, b) => a.gemeente.localeCompare(b.gemeente))
             .map((m) => (
@@ -366,9 +368,9 @@ export default function StatisticsClient({
       </div>
 
       <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
-        <StatTile label="Pakketpunten" value={formatNumber(scope.total)} />
+        <StatTile label={t.common.points} value={formatNumber(scope.total)} />
         <StatTile
-          label="Per 10.000 inwoners"
+          label={t.statistics.per10kResidents}
           value={
             selected
               ? formatNumber(selected.per_10k_inwoners)
@@ -376,7 +378,7 @@ export default function StatisticsClient({
           }
         />
         <StatTile
-          label="Per km²"
+          label={t.statistics.perKm2}
           value={
             selected
               ? formatNumber(selected.per_km2)
@@ -384,16 +386,16 @@ export default function StatisticsClient({
           }
         />
         <StatTile
-          label="Dekking binnen 500 m"
+          label={t.statistics.coverageWithin500}
           value={`${((scope.dekking['500'] ?? 0) * 100).toFixed(1)}%`}
-          hint="van het landoppervlak"
+          hint={t.statistics.ofLandArea}
         />
       </div>
 
       <div className="grid gap-4 lg:grid-cols-2">
         <Card>
           <CardHeader>
-            <CardTitle>Per vervoerder</CardTitle>
+            <CardTitle>{t.statistics.perCarrier}</CardTitle>
           </CardHeader>
           <CardContent>
             <RankedBars data={carrierBars} />
@@ -402,7 +404,7 @@ export default function StatisticsClient({
 
         <Card>
           <CardHeader>
-            <CardTitle>Per type locatie</CardTitle>
+            <CardTitle>{t.statistics.perLocationType}</CardTitle>
           </CardHeader>
           <CardContent>
             <RankedBars data={categoryBars} />
@@ -412,12 +414,11 @@ export default function StatisticsClient({
 
       <Card>
         <CardHeader>
-          <CardTitle>Dekkingsgraad</CardTitle>
+          <CardTitle>{t.statistics.coverageRate}</CardTitle>
         </CardHeader>
         <CardContent className="space-y-3">
           <p className="text-sm text-muted-foreground">
-            Aandeel van het landoppervlak binnen loopafstand van een pakketpunt. Berekend
-            in RD New (EPSG:28992), dus in echte meters.
+            {t.statistics.coverageExplanation}
           </p>
           {RADII.map((radius) => (
             <CoverageMeter key={radius} radius={radius} ratio={scope.dekking[radius] ?? 0} />
@@ -433,17 +434,17 @@ export default function StatisticsClient({
         <section className="space-y-4">
           <div>
             <h3 className="text-base font-semibold text-foreground">
-              Ontwikkeling {selected.gemeente}
+              {t.statistics.developmentOf(selected.gemeente)}
             </h3>
             <p className="text-sm text-muted-foreground">
-              Marktaandeel en groei per vervoerder, week op week
+              {t.statistics.developmentSubtitle}
             </p>
           </div>
 
           {historyLoading && (
             <Card>
               <p className="py-6 text-center text-sm text-muted-foreground">
-                Historie laden...
+                {t.statistics.historyLoading}
               </p>
             </Card>
           )}
@@ -451,7 +452,7 @@ export default function StatisticsClient({
           {historyUnavailable && (
             <Card>
               <p className="py-6 text-center text-sm text-muted-foreground">
-                Nog geen wekelijkse historie voor {selected.gemeente}.
+                {t.statistics.noWeeklyHistory(selected.gemeente)}
               </p>
             </Card>
           )}
@@ -462,11 +463,11 @@ export default function StatisticsClient({
 
       <Card padded={false}>
         <div className="flex flex-wrap items-center justify-between gap-2 border-b border-border p-3 sm:p-4">
-          <CardTitle>Gemeenten op dichtheid</CardTitle>
+          <CardTitle>{t.statistics.densityTitle}</CardTitle>
           <input
             value={query}
             onChange={(event) => setQuery(event.target.value)}
-            placeholder="Zoek gemeente of provincie..."
+            placeholder={t.statistics.searchPlaceholder}
             className="h-9 w-56 rounded-lg border border-input bg-card px-3 text-sm text-foreground placeholder:text-subtle-foreground"
           />
         </div>
@@ -475,11 +476,11 @@ export default function StatisticsClient({
             <thead className="sticky top-0 bg-muted text-left text-xs text-muted-foreground">
               <tr>
                 <th className="px-3 py-2 font-medium">#</th>
-                <th className="px-3 py-2 font-medium">Gemeente</th>
-                <th className="px-3 py-2 font-medium">Provincie</th>
-                <th className="px-3 py-2 text-right font-medium">Punten</th>
-                <th className="px-3 py-2 text-right font-medium">Per 10.000</th>
-                <th className="px-3 py-2 text-right font-medium">Dekking 500 m</th>
+                <th className="px-3 py-2 font-medium">{t.statistics.colMunicipality}</th>
+                <th className="px-3 py-2 font-medium capitalize">{COUNTRY.regionLabel}</th>
+                <th className="px-3 py-2 text-right font-medium">{t.statistics.colPoints}</th>
+                <th className="px-3 py-2 text-right font-medium">{t.statistics.colPer10k}</th>
+                <th className="px-3 py-2 text-right font-medium">{t.statistics.colCoverage500}</th>
               </tr>
             </thead>
             <tbody>
@@ -511,7 +512,7 @@ export default function StatisticsClient({
           </table>
           {filtered.length === 0 && (
             <p className="p-6 text-center text-sm text-muted-foreground">
-              Geen gemeente gevonden.
+              {t.statistics.noMatch}
             </p>
           )}
         </div>

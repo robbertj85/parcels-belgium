@@ -5,32 +5,35 @@ import { useSearchParams } from 'next/navigation';
 import dynamic from 'next/dynamic';
 import { PakketpuntData, Filters } from '@/types/pakketpunten';
 
+import { COUNTRY } from '@/config/country';
+import { CARRIER_ORDER } from '@/lib/carriers';
+import { t } from '@/lib/strings';
 const MapView = dynamic(() => import('@/components/Map'), {
   ssr: false,
   loading: () => (
     <div className="w-full h-full flex items-center justify-center bg-secondary">
-      <p className="text-subtle-foreground">Kaart laden...</p>
+      <p className="text-subtle-foreground">{t.common.mapLoading}</p>
     </div>
   ),
 });
 
 function EmbedContent() {
   const searchParams = useSearchParams();
-  const rawParam = searchParams.get('gemeente') || 'zwolle';
+  const rawParam = searchParams.get('gemeente') || COUNTRY.defaultMunicipalitySlug;
   // Map URL alias to internal slug
-  const gemeente = rawParam === 'alle-gemeenten' ? 'nederland' : rawParam;
+  const gemeente = rawParam === COUNTRY.nationalUrlAlias ? COUNTRY.nationalSlug : rawParam;
 
   const [data, setData] = useState<PakketpuntData | null>(null);
   const [loading, setLoading] = useState(true);
 
   const filters = useMemo<Filters>(() => ({
-    providers: ['DHL', 'PostNL', 'VintedGo', 'DeBuren', 'DPD', 'Amazon', 'GLS', 'ViaTim', 'InPost', 'Budbee'],
+    providers: [...CARRIER_ORDER],
     showBuffer300: false,
     showBuffer400: false,
     showBufferFill: false,
     bufferMerged: false,
     showBoundary: false,
-    useSimpleMarkers: gemeente === 'nederland',
+    useSimpleMarkers: gemeente === COUNTRY.nationalSlug,
     minOccupancy: 0,
     maxOccupancy: 100,
     showMockData: false,
@@ -62,15 +65,15 @@ function EmbedContent() {
       {/* Attribution bar */}
       <div className="absolute bottom-0 left-0 right-0 bg-card/90 backdrop-blur-sm border-t border-border px-3 py-1.5 flex items-center justify-between z-[1000]">
         <span className="text-xs text-muted-foreground">
-          {loading ? 'Laden...' : `${municipalityName} — Pakketpunten`}
+          {loading ? t.common.loading : t.embed.attribution(municipalityName)}
         </span>
         <a
-          href={`${typeof window !== 'undefined' ? window.location.origin : ''}/?gemeente=${gemeente === 'nederland' ? 'alle-gemeenten' : gemeente}`}
+          href={`${typeof window !== 'undefined' ? window.location.origin : ''}/?gemeente=${gemeente === COUNTRY.nationalSlug ? COUNTRY.nationalUrlAlias : gemeente}`}
           target="_blank"
           rel="noopener noreferrer"
           className="text-xs text-primary hover:text-primary hover:underline font-medium"
         >
-          Open op Pakketpuntenviewer
+          {t.embed.openInViewer}
         </a>
       </div>
     </div>
@@ -81,7 +84,7 @@ export default function EmbedPage() {
   return (
     <Suspense fallback={
       <div className="w-full h-screen flex items-center justify-center bg-secondary">
-        <p className="text-subtle-foreground">Laden...</p>
+        <p className="text-subtle-foreground">{t.common.loading}</p>
       </div>
     }>
       <EmbedContent />

@@ -4,10 +4,10 @@ import path from 'path';
 import StatisticsClient, { StatisticsPayload } from '@/components/StatisticsClient';
 import { HistoryData } from '@/types/history';
 
+import { t } from '@/lib/strings';
 export const metadata = {
-  title: 'Statistieken — Pakketpuntenviewer',
-  description:
-    'Marktaandeel en groei per vervoerder over tijd, per vervoerder te bekijken, plus pakketpunten per gemeente: dichtheid per inwoner en km² en de dekkingsgraad binnen 300, 400 en 500 meter.',
+  title: t.statistics.metaTitle,
+  description: t.statistics.metaDescription,
 };
 
 async function loadJson<T>(filename: string): Promise<T | null> {
@@ -45,7 +45,7 @@ export default async function StatisticsPage() {
     return (
       <div className="rounded-lg border border-border bg-card p-8 text-center">
         <p className="text-sm text-muted-foreground">
-          Nog geen statistieken beschikbaar. Draai{' '}
+          {t.statistics.noStatistics}{' '}
           <code className="rounded bg-muted px-1 py-0.5 text-xs">
             python scripts/compute_statistics.py
           </code>

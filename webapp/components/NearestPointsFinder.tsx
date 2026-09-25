@@ -22,6 +22,7 @@ import {
   parseHHMM,
 } from '@/utils/openingHoursUtils';
 
+import { t } from '@/lib/strings';
 type TimeMode = 'all' | 'now' | 'custom';
 
 function pad2(n: number): string {
@@ -31,26 +32,6 @@ function pad2(n: number): string {
 function currentHHMM(d: Date): string {
   return `${pad2(d.getHours())}:${pad2(d.getMinutes())}`;
 }
-
-// Mapping table for PDOK municipality names to our database names (same as AddressSearchInput)
-const MUNICIPALITY_NAME_MAPPING: Record<string, string> = {
-  "'s-gravenhage": "den haag",
-  "'s-hertogenbosch": "s-hertogenbosch",
-  "bergen (nh)": "bergen (nh.)",
-  "bergen (l)": "bergen (l.)",
-  "hengelo (o)": "hengelo",
-  "beek (l)": "beek",
-  "laren (nh)": "laren",
-  "middelburg (z)": "middelburg",
-  "rijswijk (zh)": "rijswijk",
-  "stein (l)": "stein",
-  "hengelo (o.)": "hengelo",
-  "beek (l.)": "beek",
-  "laren (nh.)": "laren",
-  "middelburg (z.)": "middelburg",
-  "rijswijk (zh.)": "rijswijk",
-  "stein (l.)": "stein",
-};
 
 /**
  * Per-carrier drawing info, from the shared source in lib/carriers.
@@ -135,10 +116,10 @@ export default function NearestPointsFinder({
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const initialSearchUsedRef = useRef(false);
 
-  // Handle initial search from main PDOK search bar when panel opens
+  // Handle initial search from the main address search bar when panel opens
   useEffect(() => {
     if (isOpen && initialSearch && !initialSearchUsedRef.current) {
-      console.log('NearestPointsFinder: Using initial search from PDOK bar', initialSearch);
+      console.log('NearestPointsFinder: Using initial search from address bar', initialSearch);
       // Set the query display
       setQuery(initialSearch.displayName);
       // Set the search location
@@ -274,28 +255,10 @@ export default function NearestPointsFinder({
     }
   }, [currentMunicipalityData, pendingMunicipalitySlug]);
 
-  // Find municipality by PDOK name
+  // The geocode API resolves the municipality server side (point-in-polygon)
   const findMunicipality = useCallback(
-    (pdokName: string): Municipality | null => {
-      let normalizedName = pdokName.toLowerCase();
-      if (MUNICIPALITY_NAME_MAPPING[normalizedName]) {
-        normalizedName = MUNICIPALITY_NAME_MAPPING[normalizedName];
-      }
-
-      // Try exact match
-      let municipality = municipalities.find(
-        (m) => m.name.toLowerCase() === normalizedName
-      );
-
-      // Try slug match
-      if (!municipality) {
-        municipality = municipalities.find(
-          (m) => m.slug.toLowerCase() === normalizedName.replace(/\s+/g, '-').replace(/\./g, '')
-        );
-      }
-
-      return municipality || null;
-    },
+    (slug: string | null | undefined): Municipality | null =>
+      municipalities.find((m) => m.slug === slug) ?? null,
     [municipalities]
   );
 
@@ -320,7 +283,7 @@ export default function NearestPointsFinder({
       setSelectedIndex(-1);
     } catch (err) {
       console.error('Geocoding error:', err);
-      setError('Adres zoeken mislukt');
+      setError(t.nearest.searchFailed);
       setSearchResults([]);
       setShowDropdown(false);
     } finally {
@@ -351,26 +314,24 @@ export default function NearestPointsFinder({
 
     try {
       const response = await fetch(`/api/geocode?id=${encodeURIComponent(result.id)}`);
+      if (response.status === 404) {
+        setError(t.nearest.addressOutsideCountry);
+        return;
+      }
       if (!response.ok) throw new Error('Address lookup failed');
 
       const details = await response.json();
 
       if (!details.coordinates) {
-        setError('Geen coordinaten beschikbaar');
-        setIsLoading(false);
-        return;
-      }
-
-      if (!details.municipality) {
-        setError('Geen gemeente gevonden');
+        setError(t.nearest.noCoordinates);
         setIsLoading(false);
         return;
       }
 
       // Find and switch to the municipality
-      const municipality = findMunicipality(details.municipality);
+      const municipality = findMunicipality(details.municipalitySlug);
       if (!municipality) {
-        setError(`Gemeente "${details.municipality}" niet in database`);
+        setError(t.nearest.municipalityNotInDb(details.municipality ?? t.common.unknownLower));
         setIsLoading(false);
         return;
       }
@@ -386,7 +347,7 @@ export default function NearestPointsFinder({
       }
     } catch (err) {
       console.error('Address lookup error:', err);
-      setError('Adres ophalen mislukt');
+      setError(t.nearest.lookupFailed);
     } finally {
       setIsLoading(false);
     }
@@ -395,7 +356,7 @@ export default function NearestPointsFinder({
   // Use the device's current location (geolocation API + reverse geocode).
   const handleUseMyLocation = () => {
     if (typeof window === 'undefined' || !('geolocation' in navigator)) {
-      setError('Locatie wordt niet ondersteund door deze browser');
+      setError(t.nearest.geolocationUnsupported);
       return;
     }
 
@@ -409,26 +370,25 @@ export default function NearestPointsFinder({
           const response = await fetch(
             `/api/geocode?lat=${latitude}&lon=${longitude}`
           );
+          if (response.status === 404) {
+            setError(t.nearest.noMunicipalityAtLocation);
+            setIsLocating(false);
+            return;
+          }
           if (!response.ok) {
             throw new Error(`Reverse geocode failed: ${response.status}`);
           }
           const details = await response.json();
 
-          if (!details.municipality) {
-            setError('Geen Nederlandse gemeente bij deze locatie gevonden');
-            setIsLocating(false);
-            return;
-          }
-
-          const municipality = findMunicipality(details.municipality);
+          const municipality = findMunicipality(details.municipalitySlug);
           if (!municipality) {
-            setError(`Gemeente "${details.municipality}" niet in database`);
+            setError(t.nearest.municipalityNotInDb(details.municipality ?? t.common.unknownLower));
             setIsLocating(false);
             return;
           }
 
           const coords = details.coordinates || { latitude, longitude };
-          setQuery(details.displayName || 'Mijn locatie');
+          setQuery(details.displayName || t.nearest.myLocation);
           setShowDropdown(false);
           setSearchLocation(coords);
           onSearchLocationChange(coords);
@@ -439,7 +399,7 @@ export default function NearestPointsFinder({
           }
         } catch (err) {
           console.error('Reverse geocode error:', err);
-          setError('Locatie kon niet worden omgezet naar een adres');
+          setError(t.nearest.reverseGeocodeFailed);
         } finally {
           setIsLocating(false);
         }
@@ -447,13 +407,13 @@ export default function NearestPointsFinder({
       (err) => {
         setIsLocating(false);
         if (err.code === err.PERMISSION_DENIED) {
-          setError('Locatie geweigerd. Schakel locatietoegang in voor deze site.');
+          setError(t.nearest.permissionDenied);
         } else if (err.code === err.POSITION_UNAVAILABLE) {
-          setError('Locatie is op dit moment niet beschikbaar');
+          setError(t.nearest.positionUnavailable);
         } else if (err.code === err.TIMEOUT) {
-          setError('Locatie ophalen duurde te lang');
+          setError(t.nearest.timeout);
         } else {
-          setError('Locatie ophalen mislukt');
+          setError(t.nearest.locateFailed);
         }
       },
       { enableHighAccuracy: true, timeout: 10000, maximumAge: 60000 }
@@ -476,7 +436,7 @@ export default function NearestPointsFinder({
       const results = suggestData.results || [];
 
       if (results.length === 0) {
-        setError('Geen resultaten gevonden');
+        setError(t.nearest.noResults);
         setIsLoading(false);
         return;
       }
@@ -485,7 +445,7 @@ export default function NearestPointsFinder({
       await processSearchResult(results[0]);
     } catch (err) {
       console.error('Direct search error:', err);
-      setError('Adres zoeken mislukt');
+      setError(t.nearest.searchFailed);
       setIsLoading(false);
     }
   };
@@ -584,7 +544,7 @@ export default function NearestPointsFinder({
               d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
             />
           </svg>
-          <span className="font-medium text-foreground text-sm">Dichtstbijzijnde pakketpunten</span>
+          <span className="font-medium text-foreground text-sm">{t.nearest.title}</span>
         </div>
         <button
           onClick={onClose}
@@ -607,7 +567,7 @@ export default function NearestPointsFinder({
               value={query}
               onChange={handleInputChange}
               onKeyDown={handleKeyDown}
-              placeholder="Adres of postcode..."
+              placeholder={t.nearest.placeholder}
               className="w-full px-3 py-2.5 pr-10 border border-input rounded-lg focus:ring-2 focus:ring-ring focus:border-transparent text-foreground text-sm"
             />
             {isLoading && (
@@ -648,7 +608,7 @@ export default function NearestPointsFinder({
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 22s8-6.5 8-13a8 8 0 10-16 0c0 6.5 8 13 8 13z" />
               </svg>
             )}
-            {isLocating ? 'Locatie ophalen…' : 'Gebruik mijn locatie'}
+            {isLocating ? t.nearest.locating : t.nearest.useMyLocation}
           </button>
 
           {/* Error message */}
@@ -680,12 +640,12 @@ export default function NearestPointsFinder({
 
         {/* Time filter */}
         <div className="mt-3 pt-3 border-t border-border">
-          <div className="text-xs font-medium text-muted-foreground mb-1.5">Openingstijden</div>
+          <div className="text-xs font-medium text-muted-foreground mb-1.5">{t.nearest.openingHours}</div>
           <div className="flex gap-1">
             {([
-              { mode: 'all', label: 'Alle' },
-              { mode: 'now', label: 'Nu open' },
-              { mode: 'custom', label: 'Op tijdstip' },
+              { mode: 'all', label: t.nearest.modeAll },
+              { mode: 'now', label: t.nearest.modeNow },
+              { mode: 'custom', label: t.nearest.modeCustom },
             ] as { mode: TimeMode; label: string }[]).map(({ mode, label }) => (
               <button
                 key={mode}
@@ -731,7 +691,7 @@ export default function NearestPointsFinder({
                 onChange={(e) => setIncludeUnknownHours(e.target.checked)}
                 className="rounded text-primary focus:ring-ring"
               />
-              Toon ook punten zonder bekende openingstijden
+              {t.nearest.includeUnknownHours}
             </label>
           )}
         </div>
@@ -743,13 +703,13 @@ export default function NearestPointsFinder({
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
             {timeMode === 'all'
-              ? 'Geen pakketpunten binnen 500m gevonden'
-              : 'Geen pakketpunten binnen 500m op dit tijdstip open'}
+              ? t.nearest.noneWithinRadius
+              : t.nearest.noneOpenWithinRadius}
             {(excludedClosed > 0 || excludedUnknown > 0) && (
               <div className="mt-1 text-xs text-subtle-foreground">
-                {excludedClosed > 0 && <>{excludedClosed} gesloten</>}
+                {excludedClosed > 0 && <>{t.nearest.closedCount(excludedClosed)}</>}
                 {excludedClosed > 0 && excludedUnknown > 0 && ' · '}
-                {excludedUnknown > 0 && <>{excludedUnknown} zonder openingstijden</>}
+                {excludedUnknown > 0 && <>{t.nearest.withoutHoursCount(excludedUnknown)}</>}
               </div>
             )}
           </div>
@@ -762,15 +722,15 @@ export default function NearestPointsFinder({
               <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
-              {nearestPoints.length} pakketpunt{nearestPoints.length !== 1 ? 'en' : ''} binnen 500m
-              {timeMode === 'now' && ' · nu open'}
-              {timeMode === 'custom' && ` · open op ${DAY_LABELS[customDay].toLowerCase()} ${customTime}`}
+              {t.nearest.resultsWithinRadius(nearestPoints.length)}
+              {timeMode === 'now' && t.nearest.nowOpenSuffix}
+              {timeMode === 'custom' && t.nearest.openAtSuffix(DAY_LABELS[customDay].toLowerCase(), customTime)}
             </div>
             {timeMode !== 'all' && (excludedClosed > 0 || excludedUnknown > 0) && (
               <div className="text-[11px] text-subtle-foreground mb-2 -mt-1">
-                {excludedClosed > 0 && <>{excludedClosed} gesloten</>}
+                {excludedClosed > 0 && <>{t.nearest.closedCount(excludedClosed)}</>}
                 {excludedClosed > 0 && excludedUnknown > 0 && ' · '}
-                {excludedUnknown > 0 && <>{excludedUnknown} zonder openingstijden uitgesloten</>}
+                {excludedUnknown > 0 && <>{t.nearest.withoutHoursExcluded(excludedUnknown)}</>}
               </div>
             )}
             {nearestPoints.map((point, index) => {
@@ -842,14 +802,14 @@ export default function NearestPointsFinder({
               <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
               <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
             </svg>
-            Gemeente laden...
+            {t.common.municipalityLoading}
           </div>
         )}
 
         {/* Helper text */}
         {!searchLocation && !query && (
           <div className="mt-3 text-xs text-subtle-foreground">
-            Voer een adres of postcode in. De kaart schakelt automatisch naar de juiste gemeente en toont de 10 dichtstbijzijnde pakketpunten.
+            {t.nearest.helpText}
           </div>
         )}
       </div>

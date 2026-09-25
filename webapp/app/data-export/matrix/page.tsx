@@ -3,6 +3,7 @@ import path from 'path';
 import DataMatrixClient from '@/components/DataMatrixClient';
 import { HistoryData } from '@/types/history';
 
+import { COUNTRY } from '@/config/country';
 interface ProviderCounts {
   [provider: string]: number;
 }
@@ -50,10 +51,10 @@ async function getMunicipalityData(): Promise<MunicipalityData[]> {
     }
   }
 
-  // Sort by municipality name, but put Nederland at the top
+  // Sort by municipality name, but put the national row at the top
   return municipalityData.sort((a, b) => {
-    if (a.slug === 'nederland') return -1;
-    if (b.slug === 'nederland') return 1;
+    if (a.slug === COUNTRY.nationalSlug) return -1;
+    if (b.slug === COUNTRY.nationalSlug) return 1;
     return a.name.localeCompare(b.name);
   });
 }
@@ -82,8 +83,8 @@ export default async function DataMatrixPage() {
   });
   const providers = Array.from(allProviders).sort();
 
-  // Calculate totals per provider (excluding Nederland to avoid double-counting)
-  const municipalitiesOnly = data.filter(m => m.slug !== 'nederland');
+  // Calculate totals per provider (excluding the national row to avoid double-counting)
+  const municipalitiesOnly = data.filter(m => m.slug !== COUNTRY.nationalSlug);
   const providerTotals: ProviderCounts = {};
   providers.forEach(provider => {
     providerTotals[provider] = municipalitiesOnly.reduce((sum, m) => sum + (m.providers[provider] || 0), 0);
