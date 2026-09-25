@@ -35,7 +35,7 @@ public/
 
 # Temporary fix scripts (these should be one-time use)
 fix_*.py
-update_*.py
+/update_*.py
 remove_*.py
 fetch_municipalities.py
 fetch_all_municipalities.py
@@ -60,5 +60,8 @@ test_data/
 *~
 
 # Large data files (>100MB, exceeds GitHub limit)
-webapp/public/data/nederland-boundaries.geojson
+webapp/public/data/*-boundaries.geojson
+
+# Raw boundary downloads (Statbel/ISTAT)
+data/raw/
 /temp-dhl/
