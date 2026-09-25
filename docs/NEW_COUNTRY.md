@@ -28,12 +28,15 @@ is dat de repository-variabele `PAKKETPUNTEN_COUNTRY`.
 
 Zelfde land, zelfde `nationalSlug` en dezelfde `carriers` in dezelfde volgorde.
 Verder: locale, sitenaam en -URL, standaardgemeente en kaartcentrum, naam van
-de regio-laag (provincie/regione), label van de gemeentecode, `bbox` en
+de regio-laag (provincie/regione), label van de gemeentecode, de metrische
+projectie (`metricCrsLabel`, gelijk aan `metric_crs` in de pipeline), `bbox` en
 `geocoderCountryCodes` voor adreszoeken, de Amazon-winkel, de lijst
 **moeilijk te verkrijgen netwerken** (`missingCarriers`, getoond in Over → Bronnen)
 en links voor Over → Links.
 
 Het profiel kies je met `NEXT_PUBLIC_COUNTRY` (Vercel env var; standaard `BE`).
+De taal van de interface volgt uit `language`; een nieuwe taal is een extra
+woordenboek in `webapp/lib/strings.ts` met dezelfde vorm als `nl`.
 
 ## 3. Vervoerders
 
@@ -84,7 +87,8 @@ cd webapp && NEXT_PUBLIC_COUNTRY=IT npm run dev
 
 - `scripts/posteitaliane_fetch_all.py` (Poste Italiane: `mapcollection.poste.it/v2/map/geoListByComune`,
   20 resultaten per pagina, per comune).
-- De UI-teksten zijn Nederlands. Voor Italië moeten de componenten naar een
-  tekstbestand per taal (`language` in het profiel staat al klaar).
+- UI-teksten staan in `webapp/lib/strings.ts` (Nederlands en Italiaans; het
+  profielveld `language` kiest). De Italiaanse vertaling is nog niet nagelezen
+  door een moedertaalspreker.
 - ~7.900 comuni: `batch_generate.py` parallel maken en letten op het aantal
   bestanden en de repo-grootte.

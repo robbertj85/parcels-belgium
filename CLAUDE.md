@@ -87,12 +87,14 @@ update_totals_history.py ──> totals_history.json
 | VintedGo | `vintedgo_fetch_all.py` | vintedgo.com RSC payload, bbox tiles (cap 500) | 1,300 |
 | PostNL | `postnl_fetch_all.py` | location widget `country=bel`, bbox tiles | 1,100 |
 | DPD | `dpd_fetch_all.py` | pickup.dpd.cz `getAll?country=56` | 1,000 |
-| Amazon | `amazon_fetch_all.py` | Playwright on amazon.com.be/ulp | see cache |
+| Amazon | `amazon_fetch_all.py` | Playwright on amazon.com.be/ulp (all bpost points) | 3,500 (capped) |
 | ViaTim | `viatim_fetch_all.py` | ViaTim API, filtered to BE | 140 |
 
-**DHL = bpost network in Belgium**: every DHL point (id prefix `8026-`) is a bpost
-location. Both are shown (a DHL parcel can be collected there); `compute_statistics`
-reports `unieke_locaties` (points within 25 m count once) so density is not doubled.
+**DHL and Amazon ride on the bpost network in Belgium**: every DHL point (id prefix
+`8026-`) is a bpost location, and every Amazon pickup point found is a bpost shop or
+locker (named "bpost - ..."). All three are shown (a DHL or Amazon parcel can be
+collected there); `compute_statistics` reports `unieke_locaties` (points within 25 m
+count once): ~19,000 points but ~7,900 physical locations.
 
 PostNL's widget returns Dutch `BBN_` records without a country code at Belgian
 coordinates; the fetcher keeps only `countryCode == 'BE'`.
@@ -152,7 +154,7 @@ Keep the data contract stable: GeoJSON property names are Dutch (`locatieNaam`,
 - **Population**: Statbel blocks automated downloads, so population comes from Wikidata
   (mostly 2018–2025 figures; 6 merged municipalities missing). Put a manually downloaded
   `TF_SOC_POP_STRUCT_<year>` file in `data/raw/` and rerun `build_municipalities.py` to use Statbel.
-- **Amazon**: ~20 results per search, so dense cities may be undercounted.
+- **Amazon**: 20 results per search, and 482 of 565 municipality searches hit that cap, so Amazon is undercounted (it serves a subset of the bpost network).
 - **bpost**: no opening hours (one info call per point would be ~4,400 calls).
 - **GLS**: the bulk API only returns today's and tomorrow's hours.
 - **Bezettingsgraad** is a fixed placeholder (50), not real occupancy.

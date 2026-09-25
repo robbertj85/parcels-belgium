@@ -1,0 +1,5868 @@
+{
+  "type": "FeatureCollection",
+  "metadata": {
+    "gemeente": "Kruisem",
+    "slug": "kruisem",
+    "generated_at": "2026-09-25T22:11:40.086360Z",
+    "total_points": 30,
+    "providers": [
+      "bpost",
+      "DHL",
+      "GLS",
+      "InPost",
+      "VintedGo",
+      "PostNL",
+      "Amazon"
+    ],
+    "bounds": [
+      3.52747,
+      50.9029178,
+      3.65625,
+      50.91149
+    ]
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.64647,
+          50.90788
+        ]
+      },
+      "properties": {
+        "type": "pakketpunt",
+        "locatieNaam": "Pakjesautomaat 24/7 Station Zingem",
+        "straatNaam": "Stationsstraat",
+        "straatNr": "3",
+        "vervoerder": "bpost",
+        "puntType": "automaat",
+        "bezettingsgraad": 50,
+        "latitude": 50.90788,
+        "longitude": 3.64647,
+        "canPickup": true,
+        "canDropoff": true,
+        "openingstijden": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.64728,
+          50.90747
+        ]
+      },
+      "properties": {
+        "type": "pakketpunt",
+        "locatieNaam": "Zingem",
+        "straatNaam": "Kruishoutemsesteenweg",
+        "straatNr": "61",
+        "vervoerder": "bpost",
+        "puntType": "postkantoor",
+        "bezettingsgraad": 50,
+        "latitude": 50.90747,
+        "longitude": 3.64728,
+        "canPickup": true,
+        "canDropoff": true,
+        "openingstijden": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.64767,
+          50.90728
+        ]
+      },
+      "properties": {
+        "type": "pakketpunt",
+        "locatieNaam": "Lektuurshop Vik",
+        "straatNaam": "Kruishoutemsesteenweg",
+        "straatNr": "52",
+        "vervoerder": "bpost",
+        "puntType": "servicepunt",
+        "bezettingsgraad": 50,
+        "latitude": 50.90728,
+        "longitude": 3.64767,
+        "canPickup": true,
+        "canDropoff": true,
+        "openingstijden": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.65625,
+          50.9032
+        ]
+      },
+      "properties": {
+        "type": "pakketpunt",
+        "locatieNaam": "Bbox 24/7 Proxy Delhaize Zingem",
+        "straatNaam": "Kruiskensstraat",
+        "straatNr": "8A",
+        "vervoerder": "bpost",
+        "puntType": "automaat",
+        "bezettingsgraad": 50,
+        "latitude": 50.9032,
+        "longitude": 3.65625,
+        "canPickup": true,
+        "canDropoff": true,
+        "openingstijden": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.61767,
+          50.91149
+        ]
+      },
+      "properties": {
+        "type": "pakketpunt",
+        "locatieNaam": "Total Energies Zingem",
+        "straatNaam": "Gentsesteenweg",
+        "straatNr": "68",
+        "vervoerder": "bpost",
+        "puntType": "servicepunt",
+        "bezettingsgraad": 50,
+        "latitude": 50.91149,
+        "longitude": 3.61767,
+        "canPickup": true,
+        "canDropoff": true,
+        "openingstijden": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.60785,
+          50.91084
+        ]
+      },
+      "properties": {
+        "type": "pakketpunt",
+        "locatieNaam": "Bbox 24/7 Spar Zingem",
+        "straatNaam": "Ouwegemsesteenweg",
+        "straatNr": "30",
+        "vervoerder": "bpost",
+        "puntType": "automaat",
+        "bezettingsgraad": 50,
+        "latitude": 50.91084,
+        "longitude": 3.60785,
+        "canPickup": true,
+        "canDropoff": true,
+        "openingstijden": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.52747,
+          50.90432
+        ]
+      },
+      "properties": {
+        "type": "pakketpunt",
+        "locatieNaam": "Kruishoutem",
+        "straatNaam": "Waregemsesteenweg",
+        "straatNr": "8",
+        "vervoerder": "bpost",
+        "puntType": "postkantoor",
+        "bezettingsgraad": 50,
+        "latitude": 50.90432,
+        "longitude": 3.52747,
+        "canPickup": true,
+        "canDropoff": true,
+        "openingstijden": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.52881,
+          50.9075
+        ]
+      },
+      "properties": {
+        "type": "pakketpunt",
+        "locatieNaam": "Bbox 24/7 Carrefour Kruisem",
+        "straatNaam": "Tramstatie",
+        "straatNr": "3",
+        "vervoerder": "bpost",
+        "puntType": "automaat",
+        "bezettingsgraad": 50,
+        "latitude": 50.9075,
+        "longitude": 3.52881,
+        "canPickup": true,
+        "canDropoff": true,
+        "openingstijden": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.527471,
+          50.90432
+        ]
+      },
+      "properties": {
+        "type": "pakketpunt",
+        "locatieNaam": "KRUISHOUTEM",
+        "straatNaam": "WAREGEMSESTEENWEG",
+        "straatNr": "8",
+        "vervoerder": "DHL",
+        "puntType": "postOffice",
+        "bezettingsgraad": 50,
+        "latitude": 50.90432,
+        "longitude": 3.527471,
+        "canPickup": true,
+        "canDropoff": true,
+        "openingstijden": {
+          "ma": "14:45 - 18:00",
+          "di": "09:30 - 12:30",
+          "wo": "14:45 - 18:00",
+          "do": "09:30 - 12:30",
+          "vr": "13:45 - 17:00",
+          "za": "09:30 - 13:00",
+          "zo": "gesloten"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.528805,
+          50.9075
+        ]
+      },
+      "properties": {
+        "type": "pakketpunt",
+        "locatieNaam": "BBOX 24/7 CARREFOUR KRUISEM",
+        "straatNaam": "TRAMSTATIE",
+        "straatNr": "3",
+        "vervoerder": "DHL",
+        "puntType": "packStation",
+        "bezettingsgraad": 50,
+        "latitude": 50.9075,
+        "longitude": 3.528805,
+        "canPickup": true,
+        "canDropoff": true,
+        "openingstijden": {
+          "ma": "00:00 - 23:59",
+          "di": "00:00 - 23:59",
+          "wo": "00:00 - 23:59",
+          "do": "00:00 - 23:59",
+          "vr": "00:00 - 23:59",
+          "za": "00:00 - 23:59",
+          "zo": "00:00 - 23:59"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.607854,
+          50.910844
+        ]
+      },
+      "properties": {
+        "type": "pakketpunt",
+        "locatieNaam": "BBOX 24/7 SPAR ZINGEM",
+        "straatNaam": "OUWEGEMSESTEENWEG",
+        "straatNr": "30",
+        "vervoerder": "DHL",
+        "puntType": "packStation",
+        "bezettingsgraad": 50,
+        "latitude": 50.910844,
+        "longitude": 3.607854,
+        "canPickup": true,
+        "canDropoff": true,
+        "openingstijden": {
+          "ma": "00:00 - 23:59",
+          "di": "00:00 - 23:59",
+          "wo": "00:00 - 23:59",
+          "do": "00:00 - 23:59",
+          "vr": "00:00 - 23:59",
+          "za": "00:00 - 23:59",
+          "zo": "00:00 - 23:59"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.617673,
+          50.911489
+        ]
+      },
+      "properties": {
+        "type": "pakketpunt",
+        "locatieNaam": "TOTAL ENERGIES ZINGEM",
+        "straatNaam": "GENTSESTEENWEG",
+        "straatNr": "68",
+        "vervoerder": "DHL",
+        "puntType": "parcelShop",
+        "bezettingsgraad": 50,
+        "latitude": 50.911489,
+        "longitude": 3.617673,
+        "canPickup": true,
+        "canDropoff": true,
+        "openingstijden": {
+          "ma": "05:30 - 19:30",
+          "di": "05:00 - 19:30",
+          "wo": "05:00 - 19:30",
+          "do": "05:00 - 19:30",
+          "vr": "05:00 - 19:30",
+          "za": "07:00 - 17:30",
+          "zo": "07:00 - 17:30"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.646465,
+          50.90788
+        ]
+      },
+      "properties": {
+        "type": "pakketpunt",
+        "locatieNaam": "PARCEL LOCKER 24/7 STATION ZINGEM",
+        "straatNaam": "STATIONSSTRAAT",
+        "straatNr": "3",
+        "vervoerder": "DHL",
+        "puntType": "packStation",
+        "bezettingsgraad": 50,
+        "latitude": 50.90788,
+        "longitude": 3.646465,
+        "canPickup": true,
+        "canDropoff": true,
+        "openingstijden": {
+          "ma": "00:00 - 23:59",
+          "di": "00:00 - 23:59",
+          "wo": "00:00 - 23:59",
+          "do": "00:00 - 23:59",
+          "vr": "00:00 - 23:59",
+          "za": "00:00 - 23:59",
+          "zo": "00:00 - 23:59"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.64728,
+          50.907466
+        ]
+      },
+      "properties": {
+        "type": "pakketpunt",
+        "locatieNaam": "ZINGEM",
+        "straatNaam": "KRUISHOUTEMSESTEENWEG",
+        "straatNr": "61",
+        "vervoerder": "DHL",
+        "puntType": "postOffice",
+        "bezettingsgraad": 50,
+        "latitude": 50.907466,
+        "longitude": 3.64728,
+        "canPickup": true,
+        "canDropoff": true,
+        "openingstijden": {
+          "ma": "09:30 - 12:15",
+          "di": "09:30 - 12:15",
+          "wo": "14:15 - 18:00",
+          "do": "14:15 - 18:00",
+          "vr": "14:15 - 17:00",
+          "za": "09:30 - 13:00",
+          "zo": "gesloten"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.647673,
+          50.907284
+        ]
+      },
+      "properties": {
+        "type": "pakketpunt",
+        "locatieNaam": "LEKTUURSHOP VIK",
+        "straatNaam": "KRUISHOUTEMSESTEENWEG",
+        "straatNr": "52",
+        "vervoerder": "DHL",
+        "puntType": "parcelShop",
+        "bezettingsgraad": 50,
+        "latitude": 50.907284,
+        "longitude": 3.647673,
+        "canPickup": true,
+        "canDropoff": true,
+        "openingstijden": {
+          "ma": "06:00 - 12:15",
+          "di": "06:00 - 12:15, 15:00 - 18:00",
+          "wo": "06:00 - 12:15",
+          "do": "06:00 - 12:15, 15:00 - 18:00",
+          "vr": "06:00 - 12:15, 15:00 - 18:00",
+          "za": "07:00 - 12:15",
+          "zo": "gesloten"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.656249,
+          50.903199
+        ]
+      },
+      "properties": {
+        "type": "pakketpunt",
+        "locatieNaam": "BBOX 24/7 PROXY DELHAIZE ZINGEM",
+        "straatNaam": "KRUISKENSSTRAAT",
+        "straatNr": "8A",
+        "vervoerder": "DHL",
+        "puntType": "packStation",
+        "bezettingsgraad": 50,
+        "latitude": 50.903199,
+        "longitude": 3.656249,
+        "canPickup": true,
+        "canDropoff": true,
+        "openingstijden": {
+          "ma": "00:00 - 23:59",
+          "di": "00:00 - 23:59",
+          "wo": "00:00 - 23:59",
+          "do": "00:00 - 23:59",
+          "vr": "00:00 - 23:59",
+          "za": "00:00 - 23:59",
+          "zo": "00:00 - 23:59"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.6560801,
+          50.9029178
+        ]
+      },
+      "properties": {
+        "type": "pakketpunt",
+        "locatieNaam": "GLS Parcel Locker powered by bbox",
+        "straatNaam": "Kruiskensstraat",
+        "straatNr": "8 A",
+        "vervoerder": "GLS",
+        "puntType": "locker",
+        "bezettingsgraad": 50,
+        "latitude": 50.9029178,
+        "longitude": 3.6560801,
+        "canPickup": true,
+        "canDropoff": true,
+        "openingstijden": "vr: 00:00 - 24:00; za: 00:00 - 24:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.52925,
+          50.90774
+        ]
+      },
+      "properties": {
+        "type": "pakketpunt",
+        "locatieNaam": "GLS Parcel Locker powered by bbox",
+        "straatNaam": "Tramstatie",
+        "straatNr": "3",
+        "vervoerder": "GLS",
+        "puntType": "locker",
+        "bezettingsgraad": 50,
+        "latitude": 50.90774,
+        "longitude": 3.52925,
+        "canPickup": true,
+        "canDropoff": true,
+        "openingstijden": "vr: 00:23 - 24:00; za: 00:23 - 24:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.61982,
+          50.9096199
+        ]
+      },
+      "properties": {
+        "type": "pakketpunt",
+        "locatieNaam": "Elektro Van Assche",
+        "straatNaam": "Kruishoutemsesteenweg",
+        "straatNr": "242 244",
+        "vervoerder": "GLS",
+        "puntType": "parcel_shop",
+        "bezettingsgraad": 50,
+        "latitude": 50.9096199,
+        "longitude": 3.61982,
+        "canPickup": true,
+        "canDropoff": true,
+        "openingstijden": "vr: 09:00 - 12:30, 13:00 - 18:00; za: 09:30 - 17:30"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.64738,
+          50.90739
+        ]
+      },
+      "properties": {
+        "type": "pakketpunt",
+        "locatieNaam": "LEKTUURSHOP VIK",
+        "straatNaam": "KRUISHOUTEMSESTEENWEG 52A",
+        "straatNr": "",
+        "vervoerder": "InPost",
+        "puntType": "servicepunt",
+        "bezettingsgraad": 50,
+        "latitude": 50.90739,
+        "longitude": 3.64738,
+        "canPickup": true,
+        "canDropoff": true,
+        "openingstijden": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.6523958,
+          50.9038735
+        ]
+      },
+      "properties": {
+        "type": "pakketpunt",
+        "locatieNaam": "Fantastisch",
+        "straatNaam": "Alfred Amelotstraat",
+        "straatNr": "23",
+        "vervoerder": "VintedGo",
+        "puntType": "locker",
+        "bezettingsgraad": 50,
+        "latitude": 50.9038735,
+        "longitude": 3.6523958,
+        "canPickup": true,
+        "canDropoff": true,
+        "openingstijden": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.529265,
+          50.907775
+        ]
+      },
+      "properties": {
+        "type": "pakketpunt",
+        "locatieNaam": "Carrefour Market Kruisem 1773",
+        "straatNaam": "Tramstatie",
+        "straatNr": "3",
+        "vervoerder": "PostNL",
+        "puntType": "servicepunt",
+        "bezettingsgraad": 50,
+        "latitude": 50.907775,
+        "longitude": 3.529265,
+        "canPickup": true,
+        "canDropoff": true,
+        "openingstijden": "07:45 - 19:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.647571,
+          50.907395
+        ]
+      },
+      "properties": {
+        "type": "pakketpunt",
+        "locatieNaam": "Lektuurshop Vik",
+        "straatNaam": "Kruishoutemsesteenweg",
+        "straatNr": "52A",
+        "vervoerder": "PostNL",
+        "puntType": "servicepunt",
+        "bezettingsgraad": 50,
+        "latitude": 50.907395,
+        "longitude": 3.647571,
+        "canPickup": true,
+        "canDropoff": true,
+        "openingstijden": "08:00 - 12:15, 15:00 - 18:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.528805,
+          50.9075
+        ]
+      },
+      "properties": {
+        "type": "pakketpunt",
+        "locatieNaam": "bpost - BBOX 24/7 CARREFOUR KRUISEM",
+        "straatNaam": "TRAMSTATIE,3",
+        "straatNr": "",
+        "vervoerder": "Amazon",
+        "puntType": "3p",
+        "bezettingsgraad": 50,
+        "latitude": 50.9075,
+        "longitude": 3.528805,
+        "canPickup": true,
+        "canDropoff": false,
+        "openingstijden": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.64728,
+          50.907466
+        ]
+      },
+      "properties": {
+        "type": "pakketpunt",
+        "locatieNaam": "bpost - ZINGEM",
+        "straatNaam": "KRUISHOUTEMSESTEENWEG,61",
+        "straatNr": "",
+        "vervoerder": "Amazon",
+        "puntType": "3p",
+        "bezettingsgraad": 50,
+        "latitude": 50.907466,
+        "longitude": 3.64728,
+        "canPickup": true,
+        "canDropoff": false,
+        "openingstijden": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.647673,
+          50.907284
+        ]
+      },
+      "properties": {
+        "type": "pakketpunt",
+        "locatieNaam": "bpost - LEKTUURSHOP VIK",
+        "straatNaam": "KRUISHOUTEMSESTEENWEG,52",
+        "straatNr": "",
+        "vervoerder": "Amazon",
+        "puntType": "3p",
+        "bezettingsgraad": 50,
+        "latitude": 50.907284,
+        "longitude": 3.647673,
+        "canPickup": true,
+        "canDropoff": false,
+        "openingstijden": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.656249,
+          50.903199
+        ]
+      },
+      "properties": {
+        "type": "pakketpunt",
+        "locatieNaam": "bpost - BBOX 24/7 PROXY DELHAIZE ZINGEM",
+        "straatNaam": "KRUISKENSSTRAAT,8A",
+        "straatNr": "",
+        "vervoerder": "Amazon",
+        "puntType": "3p",
+        "bezettingsgraad": 50,
+        "latitude": 50.903199,
+        "longitude": 3.656249,
+        "canPickup": true,
+        "canDropoff": false,
+        "openingstijden": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.617673,
+          50.911489
+        ]
+      },
+      "properties": {
+        "type": "pakketpunt",
+        "locatieNaam": "bpost - TOTAL ENERGIES ZINGEM",
+        "straatNaam": "GENTSESTEENWEG,68",
+        "straatNr": "",
+        "vervoerder": "Amazon",
+        "puntType": "3p",
+        "bezettingsgraad": 50,
+        "latitude": 50.911489,
+        "longitude": 3.617673,
+        "canPickup": true,
+        "canDropoff": false,
+        "openingstijden": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.607854,
+          50.910844
+        ]
+      },
+      "properties": {
+        "type": "pakketpunt",
+        "locatieNaam": "bpost - BBOX 24/7 SPAR ZINGEM",
+        "straatNaam": "OUWEGEMSESTEENWEG,30",
+        "straatNr": "",
+        "vervoerder": "Amazon",
+        "puntType": "3p",
+        "bezettingsgraad": 50,
+        "latitude": 50.910844,
+        "longitude": 3.607854,
+        "canPickup": true,
+        "canDropoff": false,
+        "openingstijden": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.527471,
+          50.90432
+        ]
+      },
+      "properties": {
+        "type": "pakketpunt",
+        "locatieNaam": "bpost - KRUISHOUTEM",
+        "straatNaam": "WAREGEMSESTEENWEG,8",
+        "straatNr": "",
+        "vervoerder": "Amazon",
+        "puntType": "3p",
+        "bezettingsgraad": 50,
+        "latitude": 50.90432,
+        "longitude": 3.527471,
+        "canPickup": true,
+        "canDropoff": false,
+        "openingstijden": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [
+                3.531429354853956,
+                50.903315874345516
+              ],
+              [
+                3.5312546340647493,
+                50.90307538276647
+              ],
+              [
+                3.531043477699724,
+                50.90284687778493
+              ],
+              [
+                3.5307979196495753,
+                50.90263255984096
+              ],
+              [
+                3.5305203249879824,
+                50.90243449272866
+              ],
+              [
+                3.530213367186379,
+                50.90225458372857
+              ],
+              [
+                3.529880002363781,
+                50.90209456524774
+              ],
+              [
+                3.5295234408197573,
+                50.901955978143945
+              ],
+              [
+                3.529147116124635,
+                50.901840156894416
+              ],
+              [
+                3.528754652064344,
+                50.901748216751415
+              ],
+              [
+                3.528349827757763,
+                50.901681043008324
+              ],
+              [
+                3.5279365412819104,
+                50.901639282479174
+              ],
+              [
+                3.527518772154457,
+                50.90162333727348
+              ],
+              [
+                3.5275181579162727,
+                50.90162335199595
+              ],
+              [
+                3.527517772211891,
+                50.901623337273875
+              ],
+              [
+                3.5270995430912753,
+                50.901633360923185
+              ],
+              [
+                3.5266848810627582,
+                50.901669256914175
+              ],
+              [
+                3.526277778882347,
+                50.901730679606736
+              ],
+              [
+                3.525882156549626,
+                50.90181703756415
+              ],
+              [
+                3.525501823579715,
+                50.90192749924504
+              ],
+              [
+                3.5251404423364785,
+                50.90206100100658
+              ],
+              [
+                3.5248014927792637,
+                50.90221625734163
+              ],
+              [
+                3.5244882389620438,
+                50.90239177325167
+              ],
+              [
+                3.524203697607078,
+                50.90258585863657
+              ],
+              [
+                3.5239506090554262,
+                50.90279664456294
+              ],
+              [
+                3.5237314108739652,
+                50.90302210125475
+              ],
+              [
+                3.523548214373154,
+                50.903260057633176
+              ],
+              [
+                3.523402784261965,
+                50.90350822221792
+              ],
+              [
+                3.523296521636389,
+                50.90376420518886
+              ],
+              [
+                3.523230450465961,
+                50.90402554139592
+              ],
+              [
+                3.5232052077092253,
+                50.904289714095775
+              ],
+              [
+                3.5232210371542405,
+                50.90455417918688
+              ],
+              [
+                3.523277787044369,
+                50.904816389709524
+              ],
+              [
+                3.5233749115132906,
+                50.90507382037511
+              ],
+              [
+                3.523511475816384,
+                50.90532399188827
+              ],
+              [
+                3.5236861653091123,
+                50.90556449482757
+              ],
+              [
+                3.5238972980868453,
+                50.905793012854666
+              ],
+              [
+                3.5241428411651943,
+                50.90600734502823
+              ],
+              [
+                3.524420430045707,
+                50.90620542700738
+              ],
+              [
+                3.524727391478992,
+                50.90638535094033
+              ],
+              [
+                3.5248738141029063,
+                50.90645563914506
+              ],
+              [
+                3.5247374856833487,
+                50.90668826921416
+              ],
+              [
+                3.524631223137464,
+                50.90694425315236
+              ],
+              [
+                3.5245651549213575,
+                50.907205589864795
+              ],
+              [
+                3.5245399179652206,
+                50.90746976260323
+              ],
+              [
+                3.524555756001343,
+                50.90773422726573
+              ],
+              [
+                3.524612517190443,
+                50.90799643689673
+              ],
+              [
+                3.524709655557468,
+                50.90825386621621
+              ],
+              [
+                3.524846236224023,
+                50.90850403594171
+              ],
+              [
+                3.5250209443880403,
+                50.90874453666906
+              ],
+              [
+                3.525232097965117,
+                50.908973052081194
+              ],
+              [
+                3.5254776637705794,
+                50.90918738126195
+              ],
+              [
+                3.5257552770871072,
+                50.90938545989926
+              ],
+              [
+                3.526062264429963,
+                50.909565380173525
+              ],
+              [
+                3.5261225713394833,
+                50.90959432667069
+              ],
+              [
+                3.526215277696817,
+                50.90966047169095
+              ],
+              [
+                3.526522268601084,
+                50.909840390748116
+              ],
+              [
+                3.526855676983296,
+                50.910000418394766
+              ],
+              [
+                3.527212291752581,
+                50.9101390132695
+              ],
+              [
+                3.5275886782014507,
+                50.91025484043552
+              ],
+              [
+                3.5279812110959075,
+                50.91034678424418
+              ],
+              [
+                3.528386109604839,
+                50.910413959085865
+              ],
+              [
+                3.5287994737316457,
+                50.91045571792424
+              ],
+              [
+                3.5292173218965135,
+                50.910471658531684
+              ],
+              [
+                3.529635629306461,
+                50.910461627365486
+              ],
+              [
+                3.5300503667426906,
+                50.910425721047616
+              ],
+              [
+                3.530457539390691,
+                50.91036428543349
+              ],
+              [
+                3.5308532253380776,
+                50.91027791227906
+              ],
+              [
+                3.531233613368493,
+                50.91016743353802
+              ],
+              [
+                3.5315950396866143,
+                50.91003391334465
+              ],
+              [
+                3.531934023219829,
+                50.90987863775926
+              ],
+              [
+                3.532247299155917,
+                50.90970310237551
+              ],
+              [
+                3.5325318503932546,
+                50.90950899790914
+              ],
+              [
+                3.5327849366003523,
+                50.90929819390731
+              ],
+              [
+                3.5330041206047107,
+                50.909072720735445
+              ],
+              [
+                3.5331872918569784,
+                50.90883475001586
+              ],
+              [
+                3.533332686744685,
+                50.908586573706316
+              ],
+              [
+                3.533438905560383,
+                50.908330582020824
+              ],
+              [
+                3.5335049259614255,
+                50.908069240405105
+              ],
+              [
+                3.5335301127925227,
+                50.90780506578895
+              ],
+              [
+                3.533514224177371,
+                50.90754060234422
+              ],
+              [
+                3.5334574138216728,
+                50.90727839698212
+              ],
+              [
+                3.533360229506355,
+                50.90702097482564
+              ],
+              [
+                3.5333544330520494,
+                50.90701036133954
+              ],
+              [
+                3.5333452266942267,
+                50.906985975340945
+              ],
+              [
+                3.533208605156214,
+                50.90673581538876
+              ],
+              [
+                3.533033862525125,
+                50.90649532669999
+              ],
+              [
+                3.532822682118537,
+                50.90626682514862
+              ],
+              [
+                3.5325770980586992,
+                50.90605251114167
+              ],
+              [
+                3.5322994756697783,
+                50.905854448435264
+              ],
+              [
+                3.531992488690216,
+                50.90567454426756
+              ],
+              [
+                3.5318240929213855,
+                50.90559372284431
+              ],
+              [
+                3.531552494028264,
+                50.905434554396244
+              ],
+              [
+                3.531402942715274,
+                50.9053627761262
+              ],
+              [
+                3.5315383563921836,
+                50.905131636678924
+              ],
+              [
+                3.5316445771749634,
+                50.90487564635472
+              ],
+              [
+                3.5317106027056715,
+                50.90461430548072
+              ],
+              [
+                3.5317357977795107,
+                50.90435013097957
+              ],
+              [
+                3.5317199204406893,
+                50.90408566702206
+              ],
+              [
+                3.5316631242862138,
+                50.903823460524315
+              ],
+              [
+                3.531565956960156,
+                50.90356603662029
+              ],
+              [
+                3.531429354853956,
+                50.903315874345516
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                3.6236016098353163,
+                50.90837231015689
+              ],
+              [
+                3.6233899803200837,
+                50.90814397176758
+              ],
+              [
+                3.623143973175116,
+                50.90792984743677
+              ],
+              [
+                3.6228659577975337,
+                50.90773199909378
+              ],
+              [
+                3.6225586117088073,
+                50.90755233191219
+              ],
+              [
+                3.6222248947656417,
+                50.90739257597027
+              ],
+              [
+                3.621868020657022,
+                50.90725426959752
+              ],
+              [
+                3.6214914259618385,
+                50.90713874456783
+              ],
+              [
+                3.6210987370648198,
+                50.90704711328102
+              ],
+              [
+                3.62069373524891,
+                50.90698025805641
+              ],
+              [
+                3.620280320299657,
+                50.90693882264099
+              ],
+              [
+                3.619862472971322,
+                50.90692320601375
+              ],
+              [
+                3.6194442166753116,
+                50.906933558545994
+              ],
+              [
+                3.6190295787589193,
+                50.90696978055399
+              ],
+              [
+                3.6186225517462507,
+                50.907031523258475
+              ],
+              [
+                3.6182270549136244,
+                50.90711819214126
+              ],
+              [
+                3.6178468965684663,
+                50.90722895266709
+              ],
+              [
+                3.617485737394113,
+                50.90736273831541
+              ],
+              [
+                3.61714705521269,
+                50.90751826084537
+              ],
+              [
+                3.616834111504781,
+                50.90769402269502
+              ],
+              [
+                3.616549920007813,
+                50.90788833139576
+              ],
+              [
+                3.6162972176952493,
+                50.90809931586354
+              ],
+              [
+                3.616078438415971,
+                50.9083249444101
+              ],
+              [
+                3.615895689447786,
+                50.908563044301346
+              ],
+              [
+                3.615750731191131,
+                50.90881132267455
+              ],
+              [
+                3.6156449601990177,
+                50.90906738861331
+              ],
+              [
+                3.615630891366163,
+                50.90912347742169
+              ],
+              [
+                3.615335747782583,
+                50.90923279683507
+              ],
+              [
+                3.6149970449871756,
+                50.90938831307834
+              ],
+              [
+                3.614684080763529,
+                50.90956406910122
+              ],
+              [
+                3.614399869046602,
+                50.90975837249125
+              ],
+              [
+                3.61414714700455,
+                50.90996935221549
+              ],
+              [
+                3.613928348676239,
+                50.910194976631416
+              ],
+              [
+                3.6137455815229154,
+                50.9104330730447
+              ],
+              [
+                3.613600606120154,
+                50.91068134862611
+              ],
+              [
+                3.6134948191861076,
+                50.91093741248618
+              ],
+              [
+                3.6134292401101495,
+                50.91119879869536
+              ],
+              [
+                3.6134045011124103,
+                50.91146299002831
+              ],
+              [
+                3.613420841129881,
+                50.91172744220351
+              ],
+              [
+                3.6134781034889167,
+                50.9119896083851
+              ],
+              [
+                3.6135757373875905,
+                50.91224696371101
+              ],
+              [
+                3.613712803174622,
+                50.912497029610975
+              ],
+              [
+                3.6138879813750386,
+                50.91273739768022
+              ],
+              [
+                3.6140995853765485,
+                50.912965752878975
+              ],
+              [
+                3.614345577655261,
+                50.91317989583373
+              ],
+              [
+                3.6146235893851437,
+                50.91337776402573
+              ],
+              [
+                3.6149309432428947,
+                50.913557451662
+              ],
+              [
+                3.6152646791888667,
+                50.913717228037406
+              ],
+              [
+                3.6156215829759546,
+                50.91385555421053
+              ],
+              [
+                3.615998217111751,
+                50.91397109783257
+              ],
+              [
+                3.6163909539755363,
+                50.91406274598587
+              ],
+              [
+                3.616796010770708,
+                50.91412961590854
+              ],
+              [
+                3.617209485975377,
+                50.91417106350119
+              ],
+              [
+                3.6176273969393766,
+                50.914186689534176
+              ],
+              [
+                3.618045718264628,
+                50.91417634349483
+              ],
+              [
+                3.6184604205983417,
+                50.914140125038
+              ],
+              [
+                3.6188675094644,
+                50.9140783830257
+              ],
+              [
+                3.619263063757933,
+                50.91399171216511
+              ],
+              [
+                3.619643273531415,
+                50.91388094727742
+              ],
+              [
+                3.6196448673573935,
+                50.91388035691795
+              ],
+              [
+                3.619646273642182,
+                50.91387994722773
+              ],
+              [
+                3.6200074768019337,
+                50.91374615519401
+              ],
+              [
+                3.6203461944410424,
+                50.91359062470257
+              ],
+              [
+                3.620659164309526,
+                50.91341485380211
+              ],
+              [
+                3.6209433722549824,
+                50.91322053547659
+              ],
+              [
+                3.62119608125366,
+                50.9130095413327
+              ],
+              [
+                3.6214148577674,
+                50.912783903566954
+              ],
+              [
+                3.6215975951727257,
+                50.91254579538651
+              ],
+              [
+                3.6217425340367138,
+                50.912297510072676
+              ],
+              [
+                3.6218482790448276,
+                50.91204143888883
+              ],
+              [
+                3.621862372058213,
+                50.911985226793604
+              ],
+              [
+                3.622154487083686,
+                50.91187701377333
+              ],
+              [
+                3.622493184122138,
+                50.91172147700378
+              ],
+              [
+                3.622806133489572,
+                50.91154570028468
+              ],
+              [
+                3.6230903212310697,
+                50.911351376656015
+              ],
+              [
+                3.623343010517489,
+                50.91114037777555
+              ],
+              [
+                3.623561768000534,
+                50.91091473588537
+              ],
+              [
+                3.6237444872400153,
+                50.91067662423238
+              ],
+              [
+                3.6238894089779543,
+                50.91042833613133
+              ],
+              [
+                3.6239951380647315,
+                50.91017226287241
+              ],
+              [
+                3.6240606568749314,
+                50.90991087068647
+              ],
+              [
+                3.624085335084434,
+                50.90964667698986
+              ],
+              [
+                3.624068935715493,
+                50.909382226137645
+              ],
+              [
+                3.624011617392574,
+                50.909120064919236
+              ],
+              [
+                3.6239139327882004,
+                50.908862718032
+              ],
+              [
+                3.623776823274847,
+                50.90861266376929
+              ],
+              [
+                3.6236016098353163,
+                50.90837231015689
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                3.610255525157461,
+                50.90861292191525
+              ],
+              [
+                3.6098986770395793,
+                50.908474579221306
+              ],
+              [
+                3.609522102014578,
+                50.908359015851886
+              ],
+              [
+                3.6091294262779052,
+                50.908267344576025
+              ],
+              [
+                3.6087244309858795,
+                50.90820044809811
+              ],
+              [
+                3.6083110158612994,
+                50.90815897056234
+              ],
+              [
+                3.607893161660148,
+                50.908143311353314
+              ],
+              [
+                3.607474891860013,
+                50.9081536212523
+              ],
+              [
+                3.6070602339381863,
+                50.90818980098612
+              ],
+              [
+                3.6066531806113407,
+                50.90825150218256
+              ],
+              [
+                3.606257651409083,
+                50.90833813072313
+              ],
+              [
+                3.6058774549504093,
+                50.908448852461014
+              ],
+              [
+                3.605516252285517,
+                50.908582601249144
+              ],
+              [
+                3.6051775216551576,
+                50.908738089201655
+              ],
+              [
+                3.604864525006283,
+                50.90891381908958
+              ],
+              [
+                3.604580276585943,
+                50.90910809875213
+              ],
+              [
+                3.6043275139155844,
+                50.90931905738486
+              ],
+              [
+                3.604108671425163,
+                50.909544663548395
+              ],
+              [
+                3.603925857001062,
+                50.909782744724204
+              ],
+              [
+                3.60378083167394,
+                50.91003100822985
+              ],
+              [
+                3.6036749926426186,
+                50.910287063292174
+              ],
+              [
+                3.6036093597980887,
+                50.91054844406646
+              ],
+              [
+                3.6035845658782266,
+                50.91081263337969
+              ],
+              [
+                3.603600850348913,
+                50.911077086969904
+              ],
+              [
+                3.6036580570714443,
+                50.91133925798767
+              ],
+              [
+                3.6037556357797347,
+                50.91159662152437
+              ],
+              [
+                3.603892647354083,
+                50.91184669893071
+              ],
+              [
+                3.6040677728417108,
+                50.912087081691205
+              ],
+              [
+                3.604279326138109,
+                50.91231545462459
+              ],
+              [
+                3.604280848249895,
+                50.91231678005911
+              ],
+              [
+                3.604283325959566,
+                50.91231945474444
+              ],
+              [
+                3.6045292700685163,
+                50.91253361829783
+              ],
+              [
+                3.6048072365905712,
+                50.912731509761564
+              ],
+              [
+                3.6051145486379808,
+                50.91291122311857
+              ],
+              [
+                3.605448246573942,
+                50.913071027416
+              ],
+              [
+                3.605805116517586,
+                50.91320938344355
+              ],
+              [
+                3.6061817213026095,
+                50.913324958564814
+              ],
+              [
+                3.6065744335911103,
+                50.913416639558825
+              ],
+              [
+                3.6069794708232927,
+                50.91348354334729
+              ],
+              [
+                3.6073929316657787,
+                50.91352502550471
+              ],
+              [
+                3.607810833606789,
+                50.91354068646843
+              ],
+              [
+                3.608229151335183,
+                50.9135303753894
+              ],
+              [
+                3.6086438555328155,
+                50.91349419158567
+              ],
+              [
+                3.6090509517055875,
+                50.91343248358549
+              ],
+              [
+                3.6094465186781948,
+                50.91334584576841
+              ],
+              [
+                3.6098267463809064,
+                50.913235112637395
+              ],
+              [
+                3.6101879725634958,
+                50.91310135077687
+              ],
+              [
+                3.6105267180819967,
+                50.91294584857481
+              ],
+              [
+                3.6108397204177662,
+                50.91277010380742
+              ],
+              [
+                3.6111239651055436,
+                50.91257580920701
+              ],
+              [
+                3.611376714767547,
+                50.91236483615179
+              ],
+              [
+                3.6115955354738243,
+                50.912139216635175
+              ],
+              [
+                3.6117783201751292,
+                50.91190112368859
+              ],
+              [
+                3.611923308982896,
+                50.91165285044669
+              ],
+              [
+                3.6120291061014718,
+                50.91139678805663
+              ],
+              [
+                3.6120946932501763,
+                50.91113540264467
+              ],
+              [
+                3.6121194394467206,
+                50.910871211561926
+              ],
+              [
+                3.612103107058615,
+                50.91060675913841
+              ],
+              [
+                3.612045854065315,
+                50.91034459217874
+              ],
+              [
+                3.611948232510282,
+                50.9100872354356
+              ],
+              [
+                3.6118111831589212,
+                50.90983716729736
+              ],
+              [
+                3.611636026414811,
+                50.90959679592346
+              ],
+              [
+                3.6114244495826116,
+                50.90936843605779
+              ],
+              [
+                3.6114229273647336,
+                50.90936711071469
+              ],
+              [
+                3.6114204494041195,
+                50.90936443617763
+              ],
+              [
+                3.6111744904618472,
+                50.909150286853816
+              ],
+              [
+                3.610896518305141,
+                50.90895241024938
+              ],
+              [
+                3.610589210039455,
+                50.908772711810116
+              ],
+              [
+                3.610255525157461,
+                50.90861292191525
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                3.659402293109213,
+                50.901226718033406
+              ],
+              [
+                3.6591241646714834,
+                50.901028955157734
+              ],
+              [
+                3.658816723753506,
+                50.90084938253312
+              ],
+              [
+                3.6584829311245897,
+                50.900689729327155
+              ],
+              [
+                3.658126001202015,
+                50.900551532880094
+              ],
+              [
+                3.657749371101681,
+                50.90043612390719
+              ],
+              [
+                3.6573566675488793,
+                50.900344613690784
+              ],
+              [
+                3.656951671967408,
+                50.90027788338439
+              ],
+              [
+                3.656538284082617,
+                50.90023657553209
+              ],
+              [
+                3.6561204843880994,
+                50.900221087884645
+              ],
+              [
+                3.6557022958366416,
+                50.900231569571375
+              ],
+              [
+                3.6552877451233683,
+                50.90026791966496
+              ],
+              [
+                3.654880823932946,
+                50.9003297881528
+              ],
+              [
+                3.6544854505230493,
+                50.90041657930553
+              ],
+              [
+                3.6541054320130493,
+                50.90052745741047
+              ],
+              [
+                3.653744427740233,
+                50.900661354814915
+              ],
+              [
+                3.6534059140356274,
+                50.90081698220182
+              ],
+              [
+                3.653093150757996,
+                50.90099284099943
+              ],
+              [
+                3.6528091499078172,
+                50.90118723780552
+              ],
+              [
+                3.6528052765089876,
+                50.901190475527386
+              ],
+              [
+                3.652436396814685,
+                50.90117678991388
+              ],
+              [
+                3.6520181989294023,
+                50.90118725847678
+              ],
+              [
+                3.6516036369267284,
+                50.901223595553354
+              ],
+              [
+                3.651196702600007,
+                50.90128545125631
+              ],
+              [
+                3.650801314333368,
+                50.90137222997943
+              ],
+              [
+                3.6504212793891946,
+                50.901483096129716
+              ],
+              [
+                3.650060257262975,
+                50.901616982169536
+              ],
+              [
+                3.649721724457599,
+                50.901772598891334
+              ],
+              [
+                3.6494089410157082,
+                50.90194844782604
+              ],
+              [
+                3.6491249191319017,
+                50.90214283566645
+              ],
+              [
+                3.6488723941467653,
+                50.90235389056625
+              ],
+              [
+                3.6486537982019605,
+                50.90257958015889
+              ],
+              [
+                3.6484712368101464,
+                50.90281773112227
+              ],
+              [
+                3.648326468565669,
+                50.90306605010165
+              ],
+              [
+                3.6482208881918843,
+                50.90332214578945
+              ],
+              [
+                3.648155513088998,
+                50.903583551949446
+              ],
+              [
+                3.6481309735127536,
+                50.90384775116396
+              ],
+              [
+                3.648147506479459,
+                50.90411219907536
+              ],
+              [
+                3.648204953456986,
+                50.90437434888865
+              ],
+              [
+                3.6482966533124905,
+                50.90461560481461
+              ],
+              [
+                3.648128706938628,
+                50.90459881181425
+              ],
+              [
+                3.6477108712020354,
+                50.904583294263965
+              ],
+              [
+                3.647292641921029,
+                50.90459374598635
+              ],
+              [
+                3.6468780461828425,
+                50.90463006634258
+              ],
+              [
+                3.6464710761055885,
+                50.904691905606406
+              ],
+              [
+                3.646075650417565,
+                50.90477866832988
+              ],
+              [
+                3.6456955767414096,
+                50.90488951907408
+              ],
+              [
+                3.6453345149454903,
+                50.90502339044975
+              ],
+              [
+                3.6453066479118044,
+                50.90503619778452
+              ],
+              [
+                3.645044523412553,
+                50.90513338475584
+              ],
+              [
+                3.644705948627335,
+                50.90528898685543
+              ],
+              [
+                3.6443931229724194,
+                50.905464822246735
+              ],
+              [
+                3.644199123548238,
+                50.905597569857804
+              ],
+              [
+                3.6441295430180047,
+                50.90562336688627
+              ],
+              [
+                3.6437909616667183,
+                50.90577896632529
+              ],
+              [
+                3.6434781293201035,
+                50.90595479925369
+              ],
+              [
+                3.643194058643619,
+                50.90614917251837
+              ],
+              [
+                3.642941485447647,
+                50.90636021441347
+              ],
+              [
+                3.642722842338072,
+                50.90658589269761
+              ],
+              [
+                3.642540235281732,
+                50.906824034157665
+              ],
+              [
+                3.642395423312733,
+                50.90707234553045
+              ],
+              [
+                3.6422898015755396,
+                50.907328435581654
+              ],
+              [
+                3.6422243878687586,
+                50.90758983812938
+              ],
+              [
+                3.642199812819989,
+                50.90785403579078
+              ],
+              [
+                3.642216313787263,
+                50.90811848422317
+              ],
+              [
+                3.6422737325467507,
+                50.90838063662661
+              ],
+              [
+                3.6423715167900577,
+                50.90863796827156
+              ],
+              [
+                3.6425087254176627,
+                50.908888000815665
+              ],
+              [
+                3.6426840375785448,
+                50.90912832617526
+              ],
+              [
+                3.642895765369823,
+                50.90935662972177
+              ],
+              [
+                3.6431418700749227,
+                50.90957071257907
+              ],
+              [
+                3.6434199817845436,
+                50.90976851280711
+              ],
+              [
+                3.6437274222119744,
+                50.90994812526744
+              ],
+              [
+                3.644061230483331,
+                50.910107819978926
+              ],
+              [
+                3.6444181916544864,
+                50.910246058786704
+              ],
+              [
+                3.6447948676799653,
+                50.91036151018336
+              ],
+              [
+                3.64518763053527,
+                50.910453062139574
+              ],
+              [
+                3.6455926971732167,
+                50.91051983282001
+              ],
+              [
+                3.646006165976959,
+                50.910561179081185
+              ],
+              [
+                3.646424054357909,
+                50.910576702669466
+              ],
+              [
+                3.646427044162839,
+                50.91057662799012
+              ],
+              [
+                3.646429054645137,
+                50.91057670267122
+              ],
+              [
+                3.6468473374216313,
+                50.91056625404294
+              ],
+              [
+                3.6472619856106214,
+                50.91052993385886
+              ],
+              [
+                3.6476690052576806,
+                50.910468091960865
+              ],
+              [
+                3.6480644759248944,
+                50.91038132401822
+              ],
+              [
+                3.6484445884705208,
+                50.910270465787185
+              ],
+              [
+                3.6488056817539616,
+                50.910136585057195
+              ],
+              [
+                3.6491442779118133,
+                50.90998097136103
+              ],
+              [
+                3.6494344179970533,
+                50.90981788220878
+              ],
+              [
+                3.649545624133974,
+                50.909785447618894
+              ],
+              [
+                3.6499067105466074,
+                50.909651563484445
+              ],
+              [
+                3.650245299556388,
+                50.9094959465916
+              ],
+              [
+                3.650558130152671,
+                50.90932009582123
+              ],
+              [
+                3.6508421895248895,
+                50.90912570492653
+              ],
+              [
+                3.651094742080679,
+                50.908914646213056
+              ],
+              [
+                3.651313355789015,
+                50.908688952499055
+              ],
+              [
+                3.6513343260289073,
+                50.90866159780264
+              ],
+              [
+                3.6514153497517206,
+                50.90857794929133
+              ],
+              [
+                3.651597918608375,
+                50.90833979415632
+              ],
+              [
+                3.6517426858112607,
+                50.908091471530994
+              ],
+              [
+                3.6518482576993025,
+                50.907835373037926
+              ],
+              [
+                3.6519136181611858,
+                50.90757396515084
+              ],
+              [
+                3.651938138397868,
+                50.90730976543712
+              ],
+              [
+                3.651921582952959,
+                50.90704531830963
+              ],
+              [
+                3.6518641119539113,
+                50.906783170521756
+              ],
+              [
+                3.651770927260516,
+                50.9065380713741
+              ],
+              [
+                3.65193734384305,
+                50.90655470542414
+              ],
+              [
+                3.6523551985214926,
+                50.90657020792689
+              ],
+              [
+                3.652773444281535,
+                50.9065597381803
+              ],
+              [
+                3.653188052498395,
+                50.90652339703081
+              ],
+              [
+                3.6535950296027457,
+                50.90646153452223
+              ],
+              [
+                3.6539904555665363,
+                50.906374746522296
+              ],
+              [
+                3.6543705216787044,
+                50.90626386898054
+              ],
+              [
+                3.6547315672459906,
+                50.90612996987232
+              ],
+              [
+                3.655070114864679,
+                50.90597433890745
+              ],
+              [
+                3.6553248760508055,
+                50.90583110109468
+              ],
+              [
+                3.655378334330106,
+                50.90583990913334
+              ],
+              [
+                3.6557917705325025,
+                50.905881221001046
+              ],
+              [
+                3.656209620488847,
+                50.905896709792174
+              ],
+              [
+                3.6566278593887547,
+                50.90588622631603
+              ],
+              [
+                3.657042458673539,
+                50.905849871551275
+              ],
+              [
+                3.657449424859929,
+                50.90578799567285
+              ],
+              [
+                3.6578448380250728,
+                50.90570119467733
+              ],
+              [
+                3.658224889581224,
+                50.905590304639325
+              ],
+              [
+                3.6585859189753744,
+                50.905456393654646
+              ],
+              [
+                3.6589244489596373,
+                50.905300751547415
+              ],
+              [
+                3.6592372190920077,
+                50.90512487744138
+              ],
+              [
+                3.659521217144394,
+                50.90493046531445
+              ],
+              [
+                3.6597737081151265,
+                50.904719387676614
+              ],
+              [
+                3.659992260566399,
+                50.90449367752838
+              ],
+              [
+                3.6601747700331115,
+                50.90425550877392
+              ],
+              [
+                3.6603194792779234,
+                50.90400717527775
+              ],
+              [
+                3.660424995197939,
+                50.903751068767086
+              ],
+              [
+                3.6604903022208215,
+                50.903489655792825
+              ],
+              [
+                3.660514772062108,
+                50.903225453971295
+              ],
+              [
+                3.6604981697506433,
+                50.90296100773562
+              ],
+              [
+                3.6604406558650986,
+                50.90269886383054
+              ],
+              [
+                3.6603427849610064,
+                50.90244154678646
+              ],
+              [
+                3.6602055002045315,
+                50.90219153460916
+              ],
+              [
+                3.6601450611732753,
+                50.90210872150299
+              ],
+              [
+                3.660035580080025,
+                50.90190934024878
+              ],
+              [
+                3.6598602060647707,
+                50.90166904028484
+              ],
+              [
+                3.6596484304570898,
+                50.90144076680966
+              ],
+              [
+                3.659402293109213,
+                50.901226718033406
+              ]
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "type": "buffer_union_300m",
+        "buffer_m": 300
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [
+                3.532748768845869,
+                50.90298113607721
+              ],
+              [
+                3.5325158008413315,
+                50.902660483162876
+              ],
+              [
+                3.532234253782187,
+                50.90235581275293
+              ],
+              [
+                3.5319068397239626,
+                50.902070058656044
+              ],
+              [
+                3.5315367122259316,
+                50.90180597247618
+              ],
+              [
+                3.531127435965908,
+                50.90156609712716
+              ],
+              [
+                3.530682952404787,
+                50.90135274235754
+              ],
+              [
+                3.530207541831716,
+                50.901167962521214
+              ],
+              [
+                3.529705782155266,
+                50.90101353680708
+              ],
+              [
+                3.5291825048370167,
+                50.90089095211754
+              ],
+              [
+                3.5286427483910736,
+                50.9008013887605
+              ],
+              [
+                3.5280917098962563,
+                50.90074570909183
+              ],
+              [
+                3.5275346949865303,
+                50.90072444921775
+              ],
+              [
+                3.5275340807601103,
+                50.90072446394031
+              ],
+              [
+                3.527533695063108,
+                50.90072444921829
+              ],
+              [
+                3.5269760668760193,
+                50.90073781383218
+              ],
+              [
+                3.5264231944497446,
+                50.90078567425926
+              ],
+              [
+                3.52588040106403,
+                50.90086756968042
+              ],
+              [
+                3.5253529130191317,
+                50.90098271157106
+              ],
+              [
+                3.5248458093458255,
+                50.90112999128825
+              ],
+              [
+                3.5243639729287386,
+                50.90130799073854
+              ],
+              [
+                3.523912043512273,
+                50.90151499602375
+              ],
+              [
+                3.5234943730405384,
+                50.901749013933994
+              ],
+              [
+                3.523114983760476,
+                50.90200779112938
+              ],
+              [
+                3.522777529491116,
+                50.90228883582622
+              ],
+              [
+                3.5224852604317496,
+                50.9025894417796
+              ],
+              [
+                3.5222409918480504,
+                50.90290671433188
+              ],
+              [
+                3.5220470769382155,
+                50.90323759827661
+              ],
+              [
+                3.5219053841412524,
+                50.903578907270294
+              ],
+              [
+                3.521817279107076,
+                50.90392735450899
+              ],
+              [
+                3.5217836115034062,
+                50.904279584374784
+              ],
+              [
+                3.521804706788113,
+                50.9046322047477
+              ],
+              [
+                3.5218803630279942,
+                50.90498181967179
+              ],
+              [
+                3.522009852796379,
+                50.90532506206124
+              ],
+              [
+                3.5221919301331304,
+                50.9056586261312
+              ],
+              [
+                3.5224248425017604,
+                50.90597929924084
+              ],
+              [
+                3.5227063476301037,
+                50.90628399284209
+              ],
+              [
+                3.523033735073825,
+                50.9065697722351
+              ],
+              [
+                3.52325344363113,
+                50.90672655495792
+              ],
+              [
+                3.523239986143869,
+                50.90675897121912
+              ],
+              [
+                3.523151885047296,
+                50.90710741913173
+              ],
+              [
+                3.5231182251762756,
+                50.90745964904906
+              ],
+              [
+                3.5231393319143796,
+                50.90781226885065
+              ],
+              [
+                3.5232150032182665,
+                50.908161882586015
+              ],
+              [
+                3.523344511516339,
+                50.90850512318077
+              ],
+              [
+                3.523526610670137,
+                50.908838684867334
+              ],
+              [
+                3.523759547933168,
+                50.90915935502785
+              ],
+              [
+                3.5240410807935936,
+                50.9094640451426
+              ],
+              [
+                3.5243684985400465,
+                50.90974982054531
+              ],
+              [
+                3.524738648344036,
+                50.910013928698376
+              ],
+              [
+                3.5251479656086717,
+                50.91025382571536
+              ],
+              [
+                3.5251524363512408,
+                50.910255971636296
+              ],
+              [
+                3.5251986491563296,
+                50.910288944420664
+              ],
+              [
+                3.525607971169655,
+                50.91052883981486
+              ],
+              [
+                3.5260525185481475,
+                50.91074221321549
+              ],
+              [
+                3.5265280097270875,
+                50.91092700935085
+              ],
+              [
+                3.5270298649112695,
+                50.91108144819107
+              ],
+              [
+                3.5275532502022666,
+                50.911204042104
+              ],
+              [
+                3.5280931241806757,
+                50.91129361019347
+              ],
+              [
+                3.528644286493598,
+                50.91134928968159
+              ],
+              [
+                3.5292014279780637,
+                50.91137054422495
+              ],
+              [
+                3.5297591818360874,
+                50.911357169084624
+              ],
+              [
+                3.5303121753668054,
+                50.911309293099556
+              ],
+              [
+                3.530855081755652,
+                50.91122737744471
+              ],
+              [
+                3.5313826714200354,
+                50.91111221118574
+              ],
+              [
+                3.5318898624152495,
+                50.91096490367319
+              ],
+              [
+                3.5323717694135826,
+                50.91078687384978
+              ],
+              [
+                3.532823750783484,
+                50.91057983657401
+              ],
+              [
+                3.533241453314213,
+                50.91034578609224
+              ],
+              [
+                3.5336208541543552,
+                50.91008697681919
+              ],
+              [
+                3.5339582995597545,
+                50.90980590161182
+              ],
+              [
+                3.5342505400774646,
+                50.90950526774726
+              ],
+              [
+                3.5344947618270357,
+                50.90918797083599
+              ],
+              [
+                3.5346886135783673,
+                50.90885706692235
+              ],
+              [
+                3.5348302293661624,
+                50.908515743041654
+              ],
+              [
+                3.534918246424324,
+                50.90816728651759
+              ],
+              [
+                3.5349518182689588,
+                50.9078150532964
+              ],
+              [
+                3.534930622805576,
+                50.90746243562259
+              ],
+              [
+                3.534854865384111,
+                50.90711282936804
+              ],
+              [
+                3.5347252767741844,
+                50.906769601329
+              ],
+              [
+                3.534719480042318,
+                50.90675898790949
+              ],
+              [
+                3.534710273024743,
+                50.90673460201609
+              ],
+              [
+                3.5345281025748454,
+                50.90640105746638
+              ],
+              [
+                3.534295105447173,
+                50.90608040840594
+              ],
+              [
+                3.534013526332294,
+                50.905775742569695
+              ],
+              [
+                3.5336860775944854,
+                50.90548999372226
+              ],
+              [
+                3.533315913127004,
+                50.90522591341707
+              ],
+              [
+                3.533035482206904,
+                50.905061574316
+              ],
+              [
+                3.5330357915181136,
+                50.90506082882297
+              ],
+              [
+                3.5331238154174835,
+                50.904712373287744
+              ],
+              [
+                3.533157398254062,
+                50.90436014021975
+              ],
+              [
+                3.533136217827314,
+                50.90400752186204
+              ],
+              [
+                3.5330604793421867,
+                50.903657914093124
+              ],
+              [
+                3.5329309133857754,
+                50.90331468372386
+              ],
+              [
+                3.532748768845869,
+                50.90298113607721
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                3.6248621017810865,
+                50.90795641971449
+              ],
+              [
+                3.6245799238769636,
+                50.907651971431655
+              ],
+              [
+                3.6242519110501354,
+                50.907366475488324
+              ],
+              [
+                3.6238812226235244,
+                50.90710268100198
+              ],
+              [
+                3.6234714286739895,
+                50.906863128077106
+              ],
+              [
+                3.623026475644989,
+                50.906650123357245
+              ],
+              [
+                3.6225506483438834,
+                50.90646571782535
+              ],
+              [
+                3.622048528689711,
+                50.906311687065966
+              ],
+              [
+                3.6215249516082584,
+                50.90618951417848
+              ],
+              [
+                3.6209849584983136,
+                50.90610037550556
+              ],
+              [
+                3.620433748716161,
+                50.90604512931406
+              ],
+              [
+                3.6198766295441445,
+                50.90602430753642
+              ],
+              [
+                3.6193189651235573,
+                50.90603811065261
+              ],
+              [
+                3.6187661248419354,
+                50.90608640576103
+              ],
+              [
+                3.6182234316700135,
+                50.90616872785732
+              ],
+              [
+                3.617696110944069,
+                50.906284284308576
+              ],
+              [
+                3.6171892400851773,
+                50.90643196248019
+              ],
+              [
+                3.6167076997379746,
+                50.90661034044199
+              ],
+              [
+                3.6162561267980786,
+                50.906817700651075
+              ],
+              [
+                3.6158388697793553,
+                50.9070520464797
+              ],
+              [
+                3.6154599469499695,
+                50.90731112143006
+              ],
+              [
+                3.615123007639847,
+                50.907592430850876
+              ],
+              [
+                3.6148312970919605,
+                50.90789326594758
+              ],
+              [
+                3.614587625196064,
+                50.908210729855305
+              ],
+              [
+                3.6143943394065015,
+                50.908541765524184
+              ],
+              [
+                3.61438738956995,
+                50.908558589638474
+              ],
+              [
+                3.6141061131676198,
+                50.90868773696158
+              ],
+              [
+                3.6136888287952935,
+                50.90892207502116
+              ],
+              [
+                3.6133098790065126,
+                50.9091811428905
+              ],
+              [
+                3.6130530045261695,
+                50.90939558530356
+              ],
+              [
+                3.6128966572281245,
+                50.9091810340646
+              ],
+              [
+                3.6126145495647717,
+                50.90887655714612
+              ],
+              [
+                3.6126130273292447,
+                50.90887523181825
+              ],
+              [
+                3.612610549326793,
+                50.90887255730592
+              ],
+              [
+                3.6122826007667808,
+                50.90858702803829
+              ],
+              [
+                3.6119119699645212,
+                50.908323195869926
+              ],
+              [
+                3.6115022264423207,
+                50.90808360126825
+              ],
+              [
+                3.6110573161583863,
+                50.90787055127811
+              ],
+              [
+                3.6105815235087824,
+                50.90768609731846
+              ],
+              [
+                3.6100794300791605,
+                50.907532015440125
+              ],
+              [
+                3.6095558705430206,
+                50.90740978923473
+              ],
+              [
+                3.60901588613039,
+                50.90732059555836
+              ],
+              [
+                3.6084646761139307,
+                50.907265293207416
+              ],
+              [
+                3.6079075477783045,
+                50.90724441465512
+              ],
+              [
+                3.607349865353039,
+                50.90725816092805
+              ],
+              [
+                3.6067969983989707,
+                50.907306399671924
+              ],
+              [
+                3.606254270143535,
+                50.90738866642511
+              ],
+              [
+                3.6057269062606467,
+                50.907504169087545
+              ],
+              [
+                3.605219984586709,
+                50.90765179554257
+              ],
+              [
+                3.6047383862553954,
+                50.90783012435798
+              ],
+              [
+                3.6042867487203627,
+                50.90803743846411
+              ],
+              [
+                3.6038694211171673,
+                50.908271741677204
+              ],
+              [
+                3.6034904223933397,
+                50.908530777909846
+              ],
+              [
+                3.6031534026093195,
+                50.90881205288363
+              ],
+              [
+                3.6028616077827245,
+                50.90911285813577
+              ],
+              [
+                3.602617848614633,
+                50.909430297088896
+              ],
+              [
+                3.602424473399597,
+                50.909761312933526
+              ],
+              [
+                3.6022833453810605,
+                50.91010271805528
+              ],
+              [
+                3.602195824771416,
+                50.91045122472374
+              ],
+              [
+                3.6021627556112064,
+                50.91080347674785
+              ],
+              [
+                3.602184457595623,
+                50.91115608179342
+              ],
+              [
+                3.60226072294875,
+                50.9115056440513
+              ],
+              [
+                3.6023908183774345,
+                50.91184879694207
+              ],
+              [
+                3.6025734920878008,
+                50.912182235542026
+              ],
+              [
+                3.6028069857985816,
+                50.91250274841807
+              ],
+              [
+                3.603089051637169,
+                50.91280724856469
+              ],
+              [
+                3.603090573731292,
+                50.912808574014434
+              ],
+              [
+                3.6030930513991004,
+                50.91281124872449
+              ],
+              [
+                3.603420973571336,
+                50.91309680329298
+              ],
+              [
+                3.603791594338417,
+                50.913360661882194
+              ],
+              [
+                3.60420134456524,
+                50.913600283009046
+              ],
+              [
+                3.6046462780375372,
+                50.913813358608884
+              ],
+              [
+                3.6051221094697428,
+                50.91399783627819
+              ],
+              [
+                3.6056242557874314,
+                50.914151939054456
+              ],
+              [
+                3.6061478802862554,
+                50.91427418254255
+              ],
+              [
+                3.6066879392412923,
+                50.914363389221606
+              ],
+              [
+                3.6072392305168015,
+                50.91441869979509
+              ],
+              [
+                3.60779644370687,
+                50.91443958147321
+              ],
+              [
+                3.60835421132248,
+                50.91442583310871
+              ],
+              [
+                3.608907160530313,
+                50.91437758713571
+              ],
+              [
+                3.6094499649432046,
+                50.91429530829315
+              ],
+              [
+                3.6099773959616828,
+                50.91417978914508
+              ],
+              [
+                3.610484373170371,
+                50.914032142441236
+              ],
+              [
+                3.61096601330231,
+                50.91385379039146
+              ],
+              [
+                3.6114176772982107,
+                50.91364645095784
+              ],
+              [
+                3.6118350150062413,
+                50.913412121297014
+              ],
+              [
+                3.612214007090997,
+                50.91315305851237
+              ],
+              [
+                3.612470905965999,
+                50.91293861817387
+              ],
+              [
+                3.6126272638335375,
+                50.91315316974
+              ],
+              [
+                3.61290939728126,
+                50.91345764624089
+              ],
+              [
+                3.613237383682437,
+                50.913743173344834
+              ],
+              [
+                3.613608064729391,
+                50.91400700090518
+              ],
+              [
+                3.614017870706172,
+                50.91424658773765
+              ],
+              [
+                3.6144628548612814,
+                50.91445962610789
+              ],
+              [
+                3.6149387314207275,
+                50.91464406397094
+              ],
+              [
+                3.615440916875181,
+                50.9147981247477
+              ],
+              [
+                3.6159645741431086,
+                50.91492032444753
+              ],
+              [
+                3.616504659183768,
+                50.91500948597141
+              ],
+              [
+                3.6170559696100084,
+                50.915064750457724
+              ],
+              [
+                3.6176131948313532,
+                50.91508558556063
+              ],
+              [
+                3.618170967242846,
+                50.915071790581514
+              ],
+              [
+                3.6187239139649714,
+                50.915023498403535
+              ],
+              [
+                3.6192667086345596,
+                50.91494117421069
+              ],
+              [
+                3.6197941227460895,
+                50.9148256110039
+              ],
+              [
+                3.6203010760471823,
+                50.91467792195725
+              ],
+              [
+                3.620302669891949,
+                50.914677331589
+              ],
+              [
+                3.6203040761948735,
+                50.91467692189101
+              ],
+              [
+                3.620785685627376,
+                50.91449852960984
+              ],
+              [
+                3.621237312448159,
+                50.91429115245678
+              ],
+              [
+                3.621654606863706,
+                50.91405678795173
+              ],
+              [
+                3.6220335499558614,
+                50.913797693533645
+              ],
+              [
+                3.622370492391767,
+                50.91351636480561
+              ],
+              [
+                3.622662189565219,
+                50.913215511486044
+              ],
+              [
+                3.6229058328311723,
+                50.912898031298454
+              ],
+              [
+                3.6230990765330593,
+                50.91256698205172
+              ],
+              [
+                3.623106216200498,
+                50.912549691595444
+              ],
+              [
+                3.62338429868606,
+                50.912421988858526
+              ],
+              [
+                3.623801565766161,
+                50.912187616595304
+              ],
+              [
+                3.6241804819191543,
+                50.91192851510644
+              ],
+              [
+                3.6245173980716854,
+                50.91164718006304
+              ],
+              [
+                3.6248090698707136,
+                50.91134632124436
+              ],
+              [
+                3.6250526889155825,
+                50.91102883642688
+              ],
+              [
+                3.6252459097829832,
+                50.91069778346401
+              ],
+              [
+                3.625386872585401,
+                50.910356350825786
+              ],
+              [
+                3.6254742208468964,
+                50.910007826882484
+              ],
+              [
+                3.625507114525478,
+                50.90965556822873
+              ],
+              [
+                3.6254852380582157,
+                50.90930296735304
+              ],
+              [
+                3.6254088033533494,
+                50.90895341996456
+              ],
+              [
+                3.6252785477023903,
+                50.90861029229179
+              ],
+              [
+                3.625095726634126,
+                50.90827688866779
+              ],
+              [
+                3.6248621017810865,
+                50.90795641971449
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                3.660509637632736,
+                50.90066300297096
+              ],
+              [
+                3.6601387984699696,
+                50.90039932244128
+              ],
+              [
+                3.6597288780915855,
+                50.900159895591926
+              ],
+              [
+                3.659283824157452,
+                50.899947027852335
+              ],
+              [
+                3.658807922445641,
+                50.899762768886376
+              ],
+              [
+                3.6583057555908973,
+                50.89960889286728
+              ],
+              [
+                3.657782158972849,
+                50.89948688140443
+              ],
+              [
+                3.6572421741779206,
+                50.899397909286215
+              ],
+              [
+                3.656691000482038,
+                50.899342833175744
+              ],
+              [
+                3.6561339448199757,
+                50.8993221833679
+              ],
+              [
+                3.6555763707216014,
+                50.89933615868686
+              ],
+              [
+                3.6550236467050423,
+                50.899384624572996
+              ],
+              [
+                3.6544810946220005,
+                50.899467114377565
+              ],
+              [
+                3.65395393845085,
+                50.89958283385293
+              ],
+              [
+                3.6534472540289293,
+                50.89973066879473
+              ],
+              [
+                3.652965920206528,
+                50.89990919576326
+              ],
+              [
+                3.652514571891535,
+                50.90011669578071
+              ],
+              [
+                3.6522175476257104,
+                50.900283703473704
+              ],
+              [
+                3.6518923415070232,
+                50.90029184389388
+              ],
+              [
+                3.651339602438636,
+                50.90034029242429
+              ],
+              [
+                3.6507970328413974,
+                50.90042276518268
+              ],
+              [
+                3.650269856862253,
+                50.90053846808547
+              ],
+              [
+                3.649763150529189,
+                50.90068628708792
+              ],
+              [
+                3.6492817929033854,
+                50.90086479890376
+              ],
+              [
+                3.648830419121841,
+                50.90107228470115
+              ],
+              [
+                3.6484133757815354,
+                50.901306746642994
+              ],
+              [
+                3.648034679093901,
+                50.901565927113246
+              ],
+              [
+                3.647697976212046,
+                50.901847330444376
+              ],
+              [
+                3.647406510102965,
+                50.90214824693729
+              ],
+              [
+                3.64716308830316,
+                50.90246577894309
+              ],
+              [
+                3.646970055859071,
+                50.90279686875584
+              ],
+              [
+                3.646829272713754,
+                50.90313832804844
+              ],
+              [
+                3.6467420957586865,
+                50.90348686856838
+              ],
+              [
+                3.646718801470013,
+                50.903737579762826
+              ],
+              [
+                3.6466140814432193,
+                50.903746753475694
+              ],
+              [
+                3.6460714641806002,
+                50.90382920431558
+              ],
+              [
+                3.6455442383083336,
+                50.9039448858858
+              ],
+              [
+                3.6450374803346666,
+                50.90409268434701
+              ],
+              [
+                3.644556069817872,
+                50.90427117661077
+              ],
+              [
+                3.64452820301831,
+                50.90428398376366
+              ],
+              [
+                3.644266081107351,
+                50.90438116901896
+              ],
+              [
+                3.643814651354549,
+                50.90458863532015
+              ],
+              [
+                3.6433975517318293,
+                50.904823079204085
+              ],
+              [
+                3.643278628166234,
+                50.904904453868916
+              ],
+              [
+                3.642899668741216,
+                50.905078607946756
+              ],
+              [
+                3.642482560196519,
+                50.90531304854681
+              ],
+              [
+                3.642103798453536,
+                50.90557220958266
+              ],
+              [
+                3.6417670312917116,
+                50.9058535955739
+              ],
+              [
+                3.641475502296963,
+                50.90615449698851
+              ],
+              [
+                3.6412320196113326,
+                50.90647201632282
+              ],
+              [
+                3.641038928867603,
+                50.906803095992984
+              ],
+              [
+                3.640898090570318,
+                50.907144547769626
+              ],
+              [
+                3.6408108621421844,
+                50.90749308347267
+              ],
+              [
+                3.6407780848101265,
+                50.90784534663108
+              ],
+              [
+                3.6408000754588694,
+                50.908197944803014
+              ],
+              [
+                3.640876623532246,
+                50.908547482245126
+              ],
+              [
+                3.6410069930138573,
+                50.90889059261661
+              ],
+              [
+                3.641189929469829,
+                50.9092239714029
+              ],
+              [
+                3.6414236720875963,
+                50.909544407746615
+              ],
+              [
+                3.6417059705963695,
+                50.90984881537904
+              ],
+              [
+                3.6420341069077806,
+                50.91013426235376
+              ],
+              [
+                3.642404921269467,
+                50.91039799929571
+              ],
+              [
+                3.6428148426806146,
+                50.910637485893325
+              ],
+              [
+                3.643259923277095,
+                50.910850415377574
+              ],
+              [
+                3.6437358763552643,
+                50.91103473675221
+              ],
+              [
+                3.644238117668114,
+                50.91118867456014
+              ],
+              [
+                3.6447618095955305,
+                50.91131074599519
+              ],
+              [
+                3.645301907762504,
+                50.9113997751938
+              ],
+              [
+                3.6458532096551735,
+                50.911454904568984
+              ],
+              [
+                3.6464104047651276,
+                50.911475603076404
+              ],
+              [
+                3.6464133946273303,
+                50.9114755283974
+              ],
+              [
+                3.646415405148105,
+                50.91147560307873
+              ],
+              [
+                3.6469731261589677,
+                50.9114616713118
+              ],
+              [
+                3.647526000684298,
+                50.91141324349503
+              ],
+              [
+                3.6480687030566643,
+                50.91133078611898
+              ],
+              [
+                3.6485960056600177,
+                50.91121509346747
+              ],
+              [
+                3.6491028293166057,
+                50.911067279961436
+              ],
+              [
+                3.649584292239332,
+                50.910888769417376
+              ],
+              [
+                3.6500357570767217,
+                50.91068128132396
+              ],
+              [
+                3.6502275218401317,
+                50.910573488650684
+              ],
+              [
+                3.650685330629141,
+                50.910403740653514
+              ],
+              [
+                3.6511367859354,
+                50.91019624829785
+              ],
+              [
+                3.6515538946459234,
+                50.90996177729939
+              ],
+              [
+                3.6519326396320024,
+                50.9097025861227
+              ],
+              [
+                3.652269373469623,
+                50.909421171302675
+              ],
+              [
+                3.6525608535623895,
+                50.90912024338672
+              ],
+              [
+                3.6525818232680214,
+                50.90909288847107
+              ],
+              [
+                3.652581823268023,
+                50.90909288847107
+              ],
+              [
+                3.6526628455123666,
+                50.90900923910981
+              ],
+              [
+                3.6529062640411682,
+                50.90869169631789
+              ],
+              [
+                3.653099278857441,
+                50.908360597324595
+              ],
+              [
+                3.653240032058559,
+                50.908019131043055
+              ],
+              [
+                3.6533271691875044,
+                50.90767058616725
+              ],
+              [
+                3.6533508288831213,
+                50.907415576144935
+              ],
+              [
+                3.653452156539364,
+                50.90740669439197
+              ],
+              [
+                3.653994802185721,
+                50.9073242095347
+              ],
+              [
+                3.654522045182024,
+                50.907208490139816
+              ],
+              [
+                3.6550288069248538,
+                50.90706065088585
+              ],
+              [
+                3.655510206223665,
+                50.90688211583731
+              ],
+              [
+                3.6557355208921622,
+                50.90677853789163
+              ],
+              [
+                3.6561961596209334,
+                50.90679561257572
+              ],
+              [
+                3.6567538221273366,
+                50.90678163434412
+              ],
+              [
+                3.657306631444246,
+                50.90673316041896
+              ],
+              [
+                3.657849262532547,
+                50.90665065773494
+              ],
+              [
+                3.6583764884630607,
+                50.90653492101231
+              ],
+              [
+                3.6588832307968273,
+                50.906387065096496
+              ],
+              [
+                3.6593646085303404,
+                50.906208514212494
+              ],
+              [
+                3.6598159851329477,
+                50.90600098823753
+              ],
+              [
+                3.6602330132222183,
+                50.90576648612482
+              ],
+              [
+                3.660611676446185,
+                50.90550726663864
+              ],
+              [
+                3.660948328168513,
+                50.905225826586445
+              ],
+              [
+                3.6612397265838417,
+                50.90492487675864
+              ],
+              [
+                3.6614830659252684,
+                50.904607315808
+              ],
+              [
+                3.6616760034639224,
+                50.90427620232091
+              ],
+              [
+                3.661816682041424,
+                50.90393472534994
+              ],
+              [
+                3.6619037479193746,
+                50.90358617369202
+              ],
+              [
+                3.6619363637753395,
+                50.90323390420832
+              ],
+              [
+                3.661914216721782,
+                50.90288130949124
+              ],
+              [
+                3.6618375212724046,
+                50.9025317851903
+              ],
+              [
+                3.6617070172291784,
+                50.90218869731124
+              ],
+              [
+                3.6615239625121982,
+                50.90185534980359
+              ],
+              [
+                3.6614635215882387,
+                50.901772537367876
+              ],
+              [
+                3.6613540356801564,
+                50.90157315732323
+              ],
+              [
+                3.661120196736059,
+                50.90125275990319
+              ],
+              [
+                3.6608378240525887,
+                50.900948398174
+              ],
+              [
+                3.660509637632736,
+                50.90066300297096
+              ]
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "type": "buffer_union_400m",
+        "buffer_m": 400
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              3.4667296,
+              50.9020682
+            ],
+            [
+              3.467919,
+              50.901149
+            ],
+            [
+              3.468803,
+              50.900558
+            ],
+            [
+              3.4696321,
+              50.9001198
+            ],
+            [
+              3.471052,
+              50.899925
+            ],
+            [
+              3.470809,
+              50.89978
+            ],
+            [
+              3.47084,
+              50.899147
+            ],
+            [
+              3.470712,
+              50.898929
+            ],
+            [
+              3.470961,
+              50.898799
+            ],
+            [
+              3.471123,
+              50.898284
+            ],
+            [
+              3.471093,
+              50.897899
+            ],
+            [
+              3.471669,
+              50.89751
+            ],
+            [
+              3.472493,
+              50.89706
+            ],
+            [
+              3.4735041,
+              50.8967079
+            ],
+            [
+              3.4739424,
+              50.8964395
+            ],
+            [
+              3.474491,
+              50.8963384
+            ],
+            [
+              3.4746452,
+              50.8962141
+            ],
+            [
+              3.4753342,
+              50.8960574
+            ],
+            [
+              3.4754229,
+              50.8959607
+            ],
+            [
+              3.4761192,
+              50.8957188
+            ],
+            [
+              3.476477,
+              50.8956858
+            ],
+            [
+              3.4739573,
+              50.8945332
+            ],
+            [
+              3.4750662,
+              50.8939356
+            ],
+            [
+              3.4734546,
+              50.8924253
+            ],
+            [
+              3.4705338,
+              50.8893939
+            ],
+            [
+              3.4729725,
+              50.8868187
+            ],
+            [
+              3.4740224,
+              50.8855317
+            ],
+            [
+              3.4746952,
+              50.8828444
+            ],
+            [
+              3.4735071,
+              50.8821559
+            ],
+            [
+              3.4724143,
+              50.8807279
+            ],
+            [
+              3.4713796,
+              50.8788454
+            ],
+            [
+              3.470935,
+              50.878279
+            ],
+            [
+              3.4719442,
+              50.8783666
+            ],
+            [
+              3.4719701,
+              50.8771383
+            ],
+            [
+              3.4729242,
+              50.8773693
+            ],
+            [
+              3.4741634,
+              50.877464
+            ],
+            [
+              3.4750317,
+              50.8774702
+            ],
+            [
+              3.4749906,
+              50.8773165
+            ],
+            [
+              3.4777478,
+              50.8772446
+            ],
+            [
+              3.4777773,
+              50.8778035
+            ],
+            [
+              3.4835538,
+              50.877429
+            ],
+            [
+              3.484948,
+              50.877422
+            ],
+            [
+              3.485731,
+              50.878074
+            ],
+            [
+              3.4862414,
+              50.8789296
+            ],
+            [
+              3.4863025,
+              50.8794502
+            ],
+            [
+              3.4867805,
+              50.8797961
+            ],
+            [
+              3.4873277,
+              50.879989
+            ],
+            [
+              3.4878666,
+              50.8799375
+            ],
+            [
+              3.48825,
+              50.880088
+            ],
+            [
+              3.488733,
+              50.880092
+            ],
+            [
+              3.489551,
+              50.878967
+            ],
+            [
+              3.489782,
+              50.878788
+            ],
+            [
+              3.490518,
+              50.878974
+            ],
+            [
+              3.491061,
+              50.878818
+            ],
+            [
+              3.491814,
+              50.878139
+            ],
+            [
+              3.491308,
+              50.877864
+            ],
+            [
+              3.491171,
+              50.877578
+            ],
+            [
+              3.490863,
+              50.877376
+            ],
+            [
+              3.490958,
+              50.876873
+            ],
+            [
+              3.491251,
+              50.876407
+            ],
+            [
+              3.4915736,
+              50.8761269
+            ],
+            [
+              3.4920002,
+              50.8759055
+            ],
+            [
+              3.4927468,
+              50.8752053
+            ],
+            [
+              3.49349,
+              50.875366
+            ],
+            [
+              3.494626,
+              50.8754719
+            ],
+            [
+              3.4966023,
+              50.8739058
+            ],
+            [
+              3.4971122,
+              50.8743277
+            ],
+            [
+              3.4982283,
+              50.8740492
+            ],
+            [
+              3.4975489,
+              50.8735413
+            ],
+            [
+              3.4980239,
+              50.8732399
+            ],
+            [
+              3.49757,
+              50.8729108
+            ],
+            [
+              3.4983966,
+              50.8725291
+            ],
+            [
+              3.498623,
+              50.8726363
+            ],
+            [
+              3.4988422,
+              50.872453
+            ],
+            [
+              3.4997107,
+              50.872891
+            ],
+            [
+              3.5001152,
+              50.8727385
+            ],
+            [
+              3.5001913,
+              50.8725428
+            ],
+            [
+              3.5000534,
+              50.872229
+            ],
+            [
+              3.5000913,
+              50.8719579
+            ],
+            [
+              3.5007298,
+              50.8713001
+            ],
+            [
+              3.500812,
+              50.8704318
+            ],
+            [
+              3.5013453,
+              50.8700653
+            ],
+            [
+              3.5015365,
+              50.8698154
+            ],
+            [
+              3.50278,
+              50.869968
+            ],
+            [
+              3.5036221,
+              50.8703806
+            ],
+            [
+              3.504732,
+              50.870468
+            ],
+            [
+              3.505125,
+              50.870689
+            ],
+            [
+              3.5053152,
+              50.8710526
+            ],
+            [
+              3.5044321,
+              50.8717517
+            ],
+            [
+              3.5047486,
+              50.8717669
+            ],
+            [
+              3.505092,
+              50.8722392
+            ],
+            [
+              3.5055092,
+              50.8725641
+            ],
+            [
+              3.5074594,
+              50.8729428
+            ],
+            [
+              3.5071335,
+              50.8731356
+            ],
+            [
+              3.5083769,
+              50.8736742
+            ],
+            [
+              3.5086513,
+              50.8735543
+            ],
+            [
+              3.509311,
+              50.873676
+            ],
+            [
+              3.511422,
+              50.8736135
+            ],
+            [
+              3.5120696,
+              50.8736497
+            ],
+            [
+              3.5135704,
+              50.8739504
+            ],
+            [
+              3.5142861,
+              50.8739011
+            ],
+            [
+              3.5158577,
+              50.8739837
+            ],
+            [
+              3.5173497,
+              50.8738962
+            ],
+            [
+              3.5188926,
+              50.8736701
+            ],
+            [
+              3.5201895,
+              50.8738374
+            ],
+            [
+              3.5204664,
+              50.8737456
+            ],
+            [
+              3.5221365,
+              50.8738562
+            ],
+            [
+              3.5246632,
+              50.8755447
+            ],
+            [
+              3.5259393,
+              50.8757919
+            ],
+            [
+              3.5267105,
+              50.8761202
+            ],
+            [
+              3.5271505,
+              50.8761802
+            ],
+            [
+              3.5270901,
+              50.8762505
+            ],
+            [
+              3.527673,
+              50.876387
+            ],
+            [
+              3.5289019,
+              50.8757478
+            ],
+            [
+              3.5304961,
+              50.8751649
+            ],
+            [
+              3.5307379,
+              50.8753035
+            ],
+            [
+              3.530864,
+              50.8760184
+            ],
+            [
+              3.5312086,
+              50.8767701
+            ],
+            [
+              3.531804,
+              50.877334
+            ],
+            [
+              3.5323841,
+              50.8774708
+            ],
+            [
+              3.5287374,
+              50.8813025
+            ],
+            [
+              3.5283709,
+              50.881459
+            ],
+            [
+              3.5295076,
+              50.8853141
+            ],
+            [
+              3.5296395,
+              50.8854921
+            ],
+            [
+              3.5301495,
+              50.8859616
+            ],
+            [
+              3.5309786,
+              50.8865051
+            ],
+            [
+              3.5311764,
+              50.8865446
+            ],
+            [
+              3.5318468,
+              50.8863978
+            ],
+            [
+              3.532521,
+              50.8867158
+            ],
+            [
+              3.5335843,
+              50.886451
+            ],
+            [
+              3.5343138,
+              50.8861067
+            ],
+            [
+              3.535329,
+              50.8858528
+            ],
+            [
+              3.5354438,
+              50.885663
+            ],
+            [
+              3.5367823,
+              50.8846697
+            ],
+            [
+              3.5377264,
+              50.8837221
+            ],
+            [
+              3.5391855,
+              50.8830689
+            ],
+            [
+              3.5397863,
+              50.8824868
+            ],
+            [
+              3.5423351,
+              50.8813598
+            ],
+            [
+              3.5426965,
+              50.8809993
+            ],
+            [
+              3.5426912,
+              50.8808318
+            ],
+            [
+              3.5428977,
+              50.8805424
+            ],
+            [
+              3.5428588,
+              50.8803401
+            ],
+            [
+              3.5431525,
+              50.8800161
+            ],
+            [
+              3.5432598,
+              50.8796607
+            ],
+            [
+              3.5432292,
+              50.8794825
+            ],
+            [
+              3.5455732,
+              50.8796426
+            ],
+            [
+              3.547334,
+              50.879943
+            ],
+            [
+              3.548641,
+              50.879951
+            ],
+            [
+              3.553724,
+              50.880844
+            ],
+            [
+              3.554894,
+              50.881114
+            ],
+            [
+              3.556059,
+              50.881698
+            ],
+            [
+              3.555901,
+              50.882083
+            ],
+            [
+              3.556354,
+              50.882205
+            ],
+            [
+              3.5569442,
+              50.882495
+            ],
+            [
+              3.557563,
+              50.882427
+            ],
+            [
+              3.557751,
+              50.88248
+            ],
+            [
+              3.558504,
+              50.88277
+            ],
+            [
+              3.558649,
+              50.883155
+            ],
+            [
+              3.5600107,
+              50.8837245
+            ],
+            [
+              3.5603686,
+              50.8836285
+            ],
+            [
+              3.5609289,
+              50.8839918
+            ],
+            [
+              3.5610507,
+              50.8838289
+            ],
+            [
+              3.5614991,
+              50.8836939
+            ],
+            [
+              3.5617103,
+              50.8837929
+            ],
+            [
+              3.5624352,
+              50.883629
+            ],
+            [
+              3.5636741,
+              50.8837153
+            ],
+            [
+              3.563905,
+              50.8838121
+            ],
+            [
+              3.5648495,
+              50.8823817
+            ],
+            [
+              3.5662727,
+              50.8827872
+            ],
+            [
+              3.5666776,
+              50.8818357
+            ],
+            [
+              3.5696136,
+              50.8783072
+            ],
+            [
+              3.5703771,
+              50.8784291
+            ],
+            [
+              3.5712295,
+              50.8784426
+            ],
+            [
+              3.5739337,
+              50.8794015
+            ],
+            [
+              3.5757508,
+              50.8802248
+            ],
+            [
+              3.5776933,
+              50.8807345
+            ],
+            [
+              3.5785897,
+              50.8810869
+            ],
+            [
+              3.5795732,
+              50.8815475
+            ],
+            [
+              3.5807793,
+              50.8823584
+            ],
+            [
+              3.5817161,
+              50.8827558
+            ],
+            [
+              3.5832944,
+              50.8832694
+            ],
+            [
+              3.5859203,
+              50.8843431
+            ],
+            [
+              3.5921677,
+              50.8862965
+            ],
+            [
+              3.592137,
+              50.886773
+            ],
+            [
+              3.5922801,
+              50.8871267
+            ],
+            [
+              3.5931717,
+              50.8882536
+            ],
+            [
+              3.5940395,
+              50.8889023
+            ],
+            [
+              3.5952231,
+              50.8894519
+            ],
+            [
+              3.5965822,
+              50.8897714
+            ],
+            [
+              3.5973196,
+              50.8896618
+            ],
+            [
+              3.5979551,
+              50.8898653
+            ],
+            [
+              3.597786,
+              50.890197
+            ],
+            [
+              3.5966922,
+              50.8914959
+            ],
+            [
+              3.596784,
+              50.8917538
+            ],
+            [
+              3.5948496,
+              50.8938635
+            ],
+            [
+              3.5964737,
+              50.8944472
+            ],
+            [
+              3.5950652,
+              50.8955851
+            ],
+            [
+              3.5955441,
+              50.8957893
+            ],
+            [
+              3.5976403,
+              50.8965139
+            ],
+            [
+              3.5989344,
+              50.8967299
+            ],
+            [
+              3.6002736,
+              50.8968456
+            ],
+            [
+              3.6015915,
+              50.8970854
+            ],
+            [
+              3.601791,
+              50.8972103
+            ],
+            [
+              3.602668,
+              50.8970446
+            ],
+            [
+              3.6038455,
+              50.8973575
+            ],
+            [
+              3.6039153,
+              50.8973237
+            ],
+            [
+              3.6038321,
+              50.8972053
+            ],
+            [
+              3.6038321,
+              50.896859
+            ],
+            [
+              3.6058089,
+              50.8967553
+            ],
+            [
+              3.6060691,
+              50.8966385
+            ],
+            [
+              3.6066779,
+              50.8966487
+            ],
+            [
+              3.6069072,
+              50.8965327
+            ],
+            [
+              3.6076784,
+              50.8966284
+            ],
+            [
+              3.6077481,
+              50.8965641
+            ],
+            [
+              3.607893,
+              50.8966284
+            ],
+            [
+              3.6080968,
+              50.8965912
+            ],
+            [
+              3.6091773,
+              50.8967621
+            ],
+            [
+              3.6093146,
+              50.8968517
+            ],
+            [
+              3.6092877,
+              50.8969701
+            ],
+            [
+              3.6096793,
+              50.8970141
+            ],
+            [
+              3.6100441,
+              50.8968957
+            ],
+            [
+              3.6103177,
+              50.8970885
+            ],
+            [
+              3.6105376,
+              50.8970006
+            ],
+            [
+              3.6117768,
+              50.8971021
+            ],
+            [
+              3.6133861,
+              50.8975284
+            ],
+            [
+              3.6147836,
+              50.8981475
+            ],
+            [
+              3.6155587,
+              50.8982473
+            ],
+            [
+              3.6155452,
+              50.8983155
+            ],
+            [
+              3.6157408,
+              50.8984245
+            ],
+            [
+              3.6159369,
+              50.8983353
+            ],
+            [
+              3.6169662,
+              50.8985345
+            ],
+            [
+              3.616983,
+              50.8987684
+            ],
+            [
+              3.6175007,
+              50.8992495
+            ],
+            [
+              3.6179191,
+              50.8994958
+            ],
+            [
+              3.6188284,
+              50.8999052
+            ],
+            [
+              3.6196344,
+              50.9000972
+            ],
+            [
+              3.6204699,
+              50.9007171
+            ],
+            [
+              3.6210325,
+              50.9009014
+            ],
+            [
+              3.6212906,
+              50.9008863
+            ],
+            [
+              3.6224569,
+              50.9004337
+            ],
+            [
+              3.6242745,
+              50.9003435
+            ],
+            [
+              3.6272022,
+              50.9007763
+            ],
+            [
+              3.6277992,
+              50.9010014
+            ],
+            [
+              3.6279291,
+              50.9013988
+            ],
+            [
+              3.6284387,
+              50.9020112
+            ],
+            [
+              3.6287976,
+              50.9022999
+            ],
+            [
+              3.6294754,
+              50.9026378
+            ],
+            [
+              3.6293077,
+              50.902884
+            ],
+            [
+              3.6285245,
+              50.90352
+            ],
+            [
+              3.6297476,
+              50.9037179
+            ],
+            [
+              3.6308742,
+              50.9037906
+            ],
+            [
+              3.6311102,
+              50.9038921
+            ],
+            [
+              3.6316818,
+              50.9032376
+            ],
+            [
+              3.6309439,
+              50.9029178
+            ],
+            [
+              3.6313699,
+              50.9024454
+            ],
+            [
+              3.6314267,
+              50.9022818
+            ],
+            [
+              3.6312998,
+              50.9011371
+            ],
+            [
+              3.6302586,
+              50.9003563
+            ],
+            [
+              3.6306736,
+              50.9003248
+            ],
+            [
+              3.63258,
+              50.8997766
+            ],
+            [
+              3.632682,
+              50.899873
+            ],
+            [
+              3.6349984,
+              50.8994771
+            ],
+            [
+              3.6365689,
+              50.8982739
+            ],
+            [
+              3.6381215,
+              50.8983708
+            ],
+            [
+              3.6384075,
+              50.8984743
+            ],
+            [
+              3.6387277,
+              50.8983505
+            ],
+            [
+              3.639012,
+              50.8983539
+            ],
+            [
+              3.6400849,
+              50.8979784
+            ],
+            [
+              3.6400419,
+              50.8979141
+            ],
+            [
+              3.6403185,
+              50.8978089
+            ],
+            [
+              3.6396328,
+              50.8969009
+            ],
+            [
+              3.6407715,
+              50.8965235
+            ],
+            [
+              3.6412221,
+              50.8962901
+            ],
+            [
+              3.6426527,
+              50.8960234
+            ],
+            [
+              3.6429673,
+              50.896275
+            ],
+            [
+              3.6433579,
+              50.8962266
+            ],
+            [
+              3.6432525,
+              50.895956
+            ],
+            [
+              3.6456937,
+              50.8951895
+            ],
+            [
+              3.6445017,
+              50.8938182
+            ],
+            [
+              3.6446384,
+              50.893561
+            ],
+            [
+              3.6446178,
+              50.8933802
+            ],
+            [
+              3.6444139,
+              50.8931636
+            ],
+            [
+              3.6434054,
+              50.8926087
+            ],
+            [
+              3.6421448,
+              50.8917441
+            ],
+            [
+              3.6420965,
+              50.8915732
+            ],
+            [
+              3.6422273,
+              50.891365
+            ],
+            [
+              3.6436269,
+              50.890035
+            ],
+            [
+              3.64271,
+              50.8887329
+            ],
+            [
+              3.6448856,
+              50.8882764
+            ],
+            [
+              3.6457363,
+              50.8884346
+            ],
+            [
+              3.6461765,
+              50.8884287
+            ],
+            [
+              3.6486651,
+              50.8878737
+            ],
+            [
+              3.6486411,
+              50.8872883
+            ],
+            [
+              3.6509939,
+              50.886266
+            ],
+            [
+              3.6529005,
+              50.8864871
+            ],
+            [
+              3.6599475,
+              50.8864249
+            ],
+            [
+              3.6624616,
+              50.8871812
+            ],
+            [
+              3.6641014,
+              50.8874008
+            ],
+            [
+              3.6663086,
+              50.8880723
+            ],
+            [
+              3.6672583,
+              50.8890539
+            ],
+            [
+              3.6677504,
+              50.8893676
+            ],
+            [
+              3.6681932,
+              50.8895363
+            ],
+            [
+              3.672284,
+              50.890537
+            ],
+            [
+              3.674468,
+              50.890857
+            ],
+            [
+              3.678145,
+              50.892082
+            ],
+            [
+              3.679105,
+              50.8925865
+            ],
+            [
+              3.680482,
+              50.893642
+            ],
+            [
+              3.681548,
+              50.894599
+            ],
+            [
+              3.6844207,
+              50.8981436
+            ],
+            [
+              3.6855393,
+              50.8998239
+            ],
+            [
+              3.6862658,
+              50.9013173
+            ],
+            [
+              3.6866178,
+              50.9028058
+            ],
+            [
+              3.6866619,
+              50.904078
+            ],
+            [
+              3.6866041,
+              50.905168
+            ],
+            [
+              3.68602,
+              50.9069634
+            ],
+            [
+              3.685566,
+              50.907844
+            ],
+            [
+              3.684146,
+              50.909797
+            ],
+            [
+              3.682902,
+              50.910976
+            ],
+            [
+              3.681436,
+              50.911956
+            ],
+            [
+              3.679659,
+              50.912826
+            ],
+            [
+              3.677658,
+              50.913406
+            ],
+            [
+              3.6730855,
+              50.9145041
+            ],
+            [
+              3.6717639,
+              50.9137685
+            ],
+            [
+              3.6724001,
+              50.9133491
+            ],
+            [
+              3.6705831,
+              50.9126547
+            ],
+            [
+              3.6703187,
+              50.9130116
+            ],
+            [
+              3.669858,
+              50.9133805
+            ],
+            [
+              3.6677384,
+              50.9127613
+            ],
+            [
+              3.6678189,
+              50.912697
+            ],
+            [
+              3.6651279,
+              50.9118067
+            ],
+            [
+              3.6652762,
+              50.9116248
+            ],
+            [
+              3.6630412,
+              50.9108269
+            ],
+            [
+              3.663425,
+              50.9104851
+            ],
+            [
+              3.6620146,
+              50.9104613
+            ],
+            [
+              3.662028,
+              50.9098305
+            ],
+            [
+              3.6613092,
+              50.9098493
+            ],
+            [
+              3.6612526,
+              50.9093387
+            ],
+            [
+              3.6586975,
+              50.9091045
+            ],
+            [
+              3.6560118,
+              50.9090542
+            ],
+            [
+              3.6553259,
+              50.9091406
+            ],
+            [
+              3.6551361,
+              50.9088106
+            ],
+            [
+              3.6543164,
+              50.9089196
+            ],
+            [
+              3.6542275,
+              50.9085339
+            ],
+            [
+              3.6525629,
+              50.9088304
+            ],
+            [
+              3.6521012,
+              50.9085772
+            ],
+            [
+              3.6517033,
+              50.9089053
+            ],
+            [
+              3.6500313,
+              50.9080101
+            ],
+            [
+              3.6499527,
+              50.9081578
+            ],
+            [
+              3.6489243,
+              50.9089963
+            ],
+            [
+              3.6483899,
+              50.9085179
+            ],
+            [
+              3.6475226,
+              50.9088326
+            ],
+            [
+              3.6476217,
+              50.9089263
+            ],
+            [
+              3.6465381,
+              50.9092517
+            ],
+            [
+              3.6465009,
+              50.9090493
+            ],
+            [
+              3.6459857,
+              50.9092013
+            ],
+            [
+              3.6459904,
+              50.9092908
+            ],
+            [
+              3.6451171,
+              50.9091201
+            ],
+            [
+              3.6441967,
+              50.9096174
+            ],
+            [
+              3.6415054,
+              50.9118394
+            ],
+            [
+              3.6414401,
+              50.9121717
+            ],
+            [
+              3.6409551,
+              50.9129904
+            ],
+            [
+              3.6409547,
+              50.9131817
+            ],
+            [
+              3.6414836,
+              50.9137751
+            ],
+            [
+              3.6415322,
+              50.9139922
+            ],
+            [
+              3.6413442,
+              50.9152222
+            ],
+            [
+              3.6418233,
+              50.9161831
+            ],
+            [
+              3.6392641,
+              50.9168294
+            ],
+            [
+              3.6367688,
+              50.9172004
+            ],
+            [
+              3.6316328,
+              50.9183225
+            ],
+            [
+              3.6275181,
+              50.9193916
+            ],
+            [
+              3.6248591,
+              50.9198543
+            ],
+            [
+              3.6239806,
+              50.9201215
+            ],
+            [
+              3.6247593,
+              50.9214216
+            ],
+            [
+              3.6248085,
+              50.9218384
+            ],
+            [
+              3.6251834,
+              50.9230961
+            ],
+            [
+              3.6260428,
+              50.923983
+            ],
+            [
+              3.6260354,
+              50.9241311
+            ],
+            [
+              3.6262897,
+              50.9242379
+            ],
+            [
+              3.6284901,
+              50.9240555
+            ],
+            [
+              3.631505,
+              50.9235695
+            ],
+            [
+              3.6323118,
+              50.924877
+            ],
+            [
+              3.6316885,
+              50.9253987
+            ],
+            [
+              3.6311377,
+              50.925733
+            ],
+            [
+              3.628676,
+              50.9268784
+            ],
+            [
+              3.6272604,
+              50.9279688
+            ],
+            [
+              3.6265562,
+              50.9283956
+            ],
+            [
+              3.6263017,
+              50.9286546
+            ],
+            [
+              3.6250708,
+              50.9292929
+            ],
+            [
+              3.6233538,
+              50.929877
+            ],
+            [
+              3.6223191,
+              50.9304048
+            ],
+            [
+              3.6205691,
+              50.9309747
+            ],
+            [
+              3.6197281,
+              50.9314645
+            ],
+            [
+              3.6152422,
+              50.9333751
+            ],
+            [
+              3.6136651,
+              50.9341933
+            ],
+            [
+              3.6106428,
+              50.9352468
+            ],
+            [
+              3.6065248,
+              50.9365227
+            ],
+            [
+              3.5978196,
+              50.9401776
+            ],
+            [
+              3.5945232,
+              50.9387243
+            ],
+            [
+              3.59277,
+              50.937248
+            ],
+            [
+              3.589972,
+              50.934543
+            ],
+            [
+              3.5894534,
+              50.9337801
+            ],
+            [
+              3.5884491,
+              50.9325606
+            ],
+            [
+              3.5881393,
+              50.9317676
+            ],
+            [
+              3.585654,
+              50.9320156
+            ],
+            [
+              3.584635,
+              50.9318544
+            ],
+            [
+              3.5829336,
+              50.9348498
+            ],
+            [
+              3.581725,
+              50.9344124
+            ],
+            [
+              3.5812122,
+              50.9351323
+            ],
+            [
+              3.5797476,
+              50.9347701
+            ],
+            [
+              3.5796586,
+              50.9347285
+            ],
+            [
+              3.5793684,
+              50.9338974
+            ],
+            [
+              3.5788694,
+              50.9336283
+            ],
+            [
+              3.5749523,
+              50.9335068
+            ],
+            [
+              3.574899,
+              50.9337062
+            ],
+            [
+              3.5734793,
+              50.9336427
+            ],
+            [
+              3.5718131,
+              50.9347018
+            ],
+            [
+              3.5703161,
+              50.9358754
+            ],
+            [
+              3.5686295,
+              50.9352481
+            ],
+            [
+              3.5682122,
+              50.9351603
+            ],
+            [
+              3.5634861,
+              50.9356024
+            ],
+            [
+              3.5627255,
+              50.9357762
+            ],
+            [
+              3.5618207,
+              50.9362704
+            ],
+            [
+              3.5601663,
+              50.9365379
+            ],
+            [
+              3.5583194,
+              50.9371312
+            ],
+            [
+              3.5560594,
+              50.9376162
+            ],
+            [
+              3.5548908,
+              50.9379683
+            ],
+            [
+              3.5537249,
+              50.9384394
+            ],
+            [
+              3.5522811,
+              50.9380781
+            ],
+            [
+              3.5515773,
+              50.9391539
+            ],
+            [
+              3.5492178,
+              50.940884
+            ],
+            [
+              3.5469241,
+              50.9405283
+            ],
+            [
+              3.5460056,
+              50.9416137
+            ],
+            [
+              3.5459318,
+              50.9415809
+            ],
+            [
+              3.5426085,
+              50.9452386
+            ],
+            [
+              3.5385494,
+              50.9458282
+            ],
+            [
+              3.5389178,
+              50.946668
+            ],
+            [
+              3.541399,
+              50.950462
+            ],
+            [
+              3.5417152,
+              50.9527473
+            ],
+            [
+              3.5418331,
+              50.9528001
+            ],
+            [
+              3.5416998,
+              50.9529907
+            ],
+            [
+              3.5414263,
+              50.9530743
+            ],
+            [
+              3.540348,
+              50.951419
+            ],
+            [
+              3.539519,
+              50.951648
+            ],
+            [
+              3.537561,
+              50.949729
+            ],
+            [
+              3.537631,
+              50.948955
+            ],
+            [
+              3.537149,
+              50.948879
+            ],
+            [
+              3.5368183,
+              50.9482889
+            ],
+            [
+              3.534433,
+              50.948001
+            ],
+            [
+              3.531504,
+              50.947925
+            ],
+            [
+              3.528966,
+              50.948268
+            ],
+            [
+              3.526636,
+              50.9477208
+            ],
+            [
+              3.51969,
+              50.9463248
+            ],
+            [
+              3.519459,
+              50.9465378
+            ],
+            [
+              3.517378,
+              50.9451038
+            ],
+            [
+              3.517664,
+              50.9450158
+            ],
+            [
+              3.515655,
+              50.9427728
+            ],
+            [
+              3.512369,
+              50.9396528
+            ],
+            [
+              3.511416,
+              50.9388748
+            ],
+            [
+              3.511903,
+              50.9387328
+            ],
+            [
+              3.509118,
+              50.9355668
+            ],
+            [
+              3.506583,
+              50.9342508
+            ],
+            [
+              3.506322,
+              50.9345218
+            ],
+            [
+              3.504571,
+              50.9338238
+            ],
+            [
+              3.503305,
+              50.9315848
+            ],
+            [
+              3.501134,
+              50.9290708
+            ],
+            [
+              3.499979,
+              50.9284297
+            ],
+            [
+              3.4970027,
+              50.9269854
+            ],
+            [
+              3.494942,
+              50.9255188
+            ],
+            [
+              3.492767,
+              50.9231998
+            ],
+            [
+              3.489526,
+              50.9186258
+            ],
+            [
+              3.489048,
+              50.9183548
+            ],
+            [
+              3.485925,
+              50.9150058
+            ],
+            [
+              3.484248,
+              50.9134458
+            ],
+            [
+              3.481939,
+              50.9121868
+            ],
+            [
+              3.4807695,
+              50.9113807
+            ],
+            [
+              3.479499,
+              50.9103368
+            ],
+            [
+              3.479529,
+              50.9102298
+            ],
+            [
+              3.478801,
+              50.9096458
+            ],
+            [
+              3.478144,
+              50.9097678
+            ],
+            [
+              3.477718,
+              50.9097488
+            ],
+            [
+              3.4764623,
+              50.9078378
+            ],
+            [
+              3.4760737,
+              50.9075691
+            ],
+            [
+              3.4758386,
+              50.907277
+            ],
+            [
+              3.475367,
+              50.9070488
+            ],
+            [
+              3.4739936,
+              50.9060809
+            ],
+            [
+              3.4735541,
+              50.9057108
+            ],
+            [
+              3.4733501,
+              50.9053538
+            ],
+            [
+              3.4698408,
+              50.9053503
+            ],
+            [
+              3.4692535,
+              50.9052571
+            ],
+            [
+              3.4688392,
+              50.9050738
+            ],
+            [
+              3.4686715,
+              50.9049098
+            ],
+            [
+              3.4682418,
+              50.9039021
+            ],
+            [
+              3.4667296,
+              50.9020682
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "type": "boundary",
+        "gemeente": "Kruisem"
+      }
+    }
+  ]
+}

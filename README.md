@@ -16,7 +16,7 @@ bronnen en kan onnauwkeurigheden bevatten. Dit project is niet gelieerd aan de d
 ## Dekking
 
 Alle **565 Belgische gemeenten** (na de fusies van 1 januari 2025), 10 provincies plus het
-Brussels Hoofdstedelijk Gewest.
+Brussels Hoofdstedelijk Gewest. Stand 26 september 2026: **19.030 punten op 7.906 unieke locaties**.
 
 | Vervoerder | Bron | Locaties |
 |------------|------|----------|
@@ -27,12 +27,15 @@ Brussels Hoofdstedelijk Gewest.
 | Vinted Go | Web scraping | ~1.300 |
 | PostNL | Publieke widget-API | ~1.100 |
 | DPD | Publieke REST API | ~1.000 |
-| Amazon | Browser-automatisering | zie `data/amazon_all_locations.json` |
+| Amazon | Browser-automatisering | ~3.500 (allemaal bpost-locaties; onvolledig, zie onder) |
 | ViaTim | Publieke REST API | ~140 |
 
-**DHL en bpost**: in België levert DHL Parcel aan het bpost-netwerk. Elk DHL-punt is een
-bpost-locatie; beide staan op de kaart, maar de statistieken tellen ook het aantal
-**unieke locaties** zodat de dichtheid niet dubbel telt.
+**DHL, Amazon en bpost**: in België gebruiken DHL Parcel en Amazon het bpost-netwerk. Elk
+DHL-punt en elk gevonden Amazon-punt is een bpost-locatie. Ze staan alle drie op de kaart,
+maar de statistieken tellen ook de **unieke locaties**: ~19.000 punten op ~7.900 fysieke adressen.
+
+Amazon geeft maximaal 20 resultaten per zoekopdracht en in 482 van de 565 gemeenten zat de
+zoekopdracht aan dat maximum; het echte aantal Amazon-punten ligt dus hoger.
 
 ### Moeilijk te verkrijgen
 

@@ -15,7 +15,7 @@ import geopandas as gpd
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from country_config import CONFIG, MUNICIPALITIES_FILE, NATIONAL_SLUG, WEBAPP_DATA_DIR  # noqa: E402
+from country_config import CARRIERS, CONFIG, MUNICIPALITIES_FILE, NATIONAL_SLUG, WEBAPP_DATA_DIR  # noqa: E402
 
 
 def create_national_overview():
@@ -70,7 +70,10 @@ def create_national_overview():
             "slug": NATIONAL_SLUG,
             "generated_at": pd.Timestamp.now().isoformat() + "Z",
             "total_points": total_points,
-            "providers": sorted(provider_stats.keys()),
+            # Configured carrier order, like the municipality files: the filter
+            # panel lists carriers in this order
+            "providers": [c for c in CARRIERS if c in provider_stats]
+                         + sorted(set(provider_stats) - set(CARRIERS)),
             "bounds": bounds.tolist(),
             "municipalities_included": len(geojson_files),
             "provider_stats": provider_stats

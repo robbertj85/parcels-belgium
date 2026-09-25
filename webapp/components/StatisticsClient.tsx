@@ -43,6 +43,8 @@ export interface MunicipalityStats {
   population: number;
   area_km2: number;
   total: number;
+  /** Physical locations: points of different carriers within 25 m count once. */
+  unieke_locaties?: number;
   per_10k_inwoners: number;
   per_km2: number;
   vervoerders: Record<string, number>;
@@ -54,6 +56,7 @@ export interface StatisticsPayload {
   generated_at: string;
   national: {
     total: number;
+    unieke_locaties?: number;
     population: number;
     area_km2: number;
     vervoerders: Record<string, number>;
@@ -368,7 +371,15 @@ export default function StatisticsClient({
       </div>
 
       <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
-        <StatTile label={t.common.points} value={formatNumber(scope.total)} />
+        <StatTile
+          label={t.common.points}
+          value={formatNumber(scope.total)}
+          hint={
+            scope.unieke_locaties !== undefined && scope.unieke_locaties < scope.total
+              ? t.statistics.uniqueLocations(formatNumber(scope.unieke_locaties))
+              : undefined
+          }
+        />
         <StatTile
           label={t.statistics.per10kResidents}
           value={
