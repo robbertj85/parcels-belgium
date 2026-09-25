@@ -3,13 +3,16 @@ name: Fetch Amazon Data
 on:
   # Run on schedule (before main update job)
   schedule:
-    - cron: '30 0 * * 1'  # Monday 00:30 UTC (after GLS at 00:00)
+    - cron: '0 0 * * 2'  # Tuesday 00:00 UTC, before the main update at 02:00
   workflow_dispatch:
     inputs:
       force_save:
         description: 'Accept the fetched count as the new baseline even if it dropped sharply'
         type: boolean
         default: false
+
+env:
+  PAKKETPUNTEN_COUNTRY: ${{ vars.PAKKETPUNTEN_COUNTRY || 'BE' }}
 
 jobs:
   fetch-amazon:

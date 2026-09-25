@@ -4,198 +4,101 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a dual-component system for collecting, analyzing, and visualizing parcel point (pakketpunten) locations across Dutch municipalities:
-- **Python backend**: Data collection via APIs and web scraping (DHL, PostNL, DPD, Amazon, VintedGo, De Buren) with geospatial analysis using GeoPandas
-- **Next.js webapp**: Interactive map visualization with Leaflet, featuring filters, statistics, and performance optimizations for large datasets
+Parcel point (pakketpunt) viewer for **Belgium**, forked from the Dutch viewer
+(`upstream-nl` remote, github.com/robbertj85/pakketpunten) and made
+**country-configurable** so the same core serves other countries (Italy next):
 
-## Common Development Commands
+- **Python pipeline**: nationwide fetch per carrier → per-municipality GeoJSON with 300/400 m coverage buffers → statistics and history
+- **Next.js webapp**: Leaflet map, filters, statistics, data export, address search
 
-### Python Backend
+One repository = one country = one Vercel project. The data files are those of one country.
+
+## Country configuration (read this first)
+
+Everything that differs per country lives in two mirrored profiles:
+
+- `country_config.py` (`COUNTRIES`, selected by env `PAKKETPUNTEN_COUNTRY`, default `BE`):
+  ISO codes, metric CRS, bbox, national slug, OSM boundary settings, carrier list, per-carrier fetch parameters.
+- `webapp/config/countries.ts` (selected by `NEXT_PUBLIC_COUNTRY`, default `BE`):
+  locale, site name/URL, national slug and labels, default municipality, region label,
+  geocoder bbox, carrier list, `missingCarriers` (hard-to-get networks shown in About), About links.
+
+The carrier list and order must match in both: the order picks each carrier's chart colour.
+Never hardcode a country, slug (`belgie`), region name or locale in code — read the profile.
+How to add a country: `docs/NEW_COUNTRY.md`.
+
+## Common Commands
 
 ```bash
-# Setup virtual environment
-python3 -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-pip install -r requirements.txt
+python3 -m venv venv && source venv/bin/activate && pip install -r requirements.txt
 
-# Generate data for a single municipality
-python main.py --gemeente Amsterdam --filename test --format geojson
-
-# Batch generate all municipalities (for webapp)
-cd scripts
-python batch_generate.py
-
-# Fetch complete DHL grid data (nationwide) - Run once, then cached
-python scripts/dhl_grid_fetch.py
-
-# Fetch complete DPD data (nationwide) - Run once, then cached
-python scripts/dpd_fetch_all.py
-
-# Batch generate all municipalities (automatically uses cached DHL/DPD data if available)
-cd scripts
-python batch_generate.py
-
-# Create national overview
+python scripts/build_municipalities.py      # municipality list + boundaries (OSM), rerun after mergers
+python scripts/fetch_all.py                 # every carrier's nationwide cache (Amazon ~50 min)
+python scripts/<carrier>_fetch_all.py       # one carrier, e.g. bpost_fetch_all.py
+python scripts/batch_generate.py            # per-municipality GeoJSON (geometry only, no network)
 python scripts/create_national_overview.py
-
-# Generate provincial boundary chunks (for Nederland view)
 python scripts/create_provincial_boundaries.py
+python scripts/compute_statistics.py
+python scripts/update_totals_history.py
+python scripts/check_cache_freshness.py --max-age-days 21
 
-# Statistical Analysis - Fetch CBS data and run correlation analysis
-python scripts/fetch_cbs_municipality_data.py  # Fetch area data from CBS
-python scripts/municipality_statistics_analysis.py  # Run statistical analysis
-```
+python main.py --gemeente Gent --filename test --format geojson   # one municipality to output/
 
-### Statistical Analysis
-
-The project includes a comprehensive statistical analysis system that correlates municipality data with parcel point coverage. This is a **backend-only** analysis tool that generates reports - not integrated into the webapp.
-
-```bash
-# 1. Fetch municipality area data from CBS (Statistics Netherlands)
-source venv/bin/activate
-python scripts/fetch_cbs_municipality_data.py
-
-# 2. Run statistical analysis (correlation + linear regression)
-python scripts/municipality_statistics_analysis.py
-
-# 3. Generate professional PDF report with charts
-python scripts/generate_pdf_report.py
-
-# Output files (in output/ directory):
-# - municipality_statistics_analysis.txt (text report)
-# - municipality_statistics_data.json (detailed data)
-# - municipality_statistics_data.csv (CSV export)
-# - municipality_statistics_report.pdf (professional PDF with charts)
-```
-
-**Analysis Features**:
-- **Correlation Analysis**: Calculates Pearson correlation coefficients between parcel points and:
-  - Population (strong positive: ~0.92)
-  - Area in km² (weak positive: ~0.40)
-  - Population density
-- **Linear Regression Model**: Predicts expected parcel points based on population and area
-  - Formula: `Parcel Points = α + β₁(Population) + β₂(Area km²)`
-  - R² score: ~87% variance explained
-  - Interpretation: For every 1,000 inhabitants → ~0.3 additional parcel points expected
-- **Performance Rankings**: Identifies overperforming and underperforming municipalities
-  - Top overperformers: Municipalities with more parcel points than predicted
-  - Top underperformers: Municipalities with fewer parcel points than predicted
-
-### Next.js Webapp
-
-```bash
-cd webapp
-
-# Install dependencies
-npm install
-
-# Development server (http://localhost:3000)
-npm run dev
-
-# Production build
-npm run build
-npm start
-
-# Lint
-npm run lint
+cd webapp && npm install && npm run dev     # NEXT_PUBLIC_COUNTRY=IT npm run dev for another profile
+npm run build && npm run lint
 ```
 
 ## Architecture
 
-### Python Backend Architecture
+### Pipeline
 
-**Core Pipeline** (`main.py`):
-1. `api_client.py` → Fetch raw data from multiple carrier APIs
-2. `geo_analysis.py` → Generate buffer zones (300m/400m) in RD projection (EPSG:28992)
-3. `visualize.py` → Legacy Folium map generation (static HTML)
-4. `utils.py` → Coordinate transformation, geocoding, data normalization
-
-**Key Patterns**:
-- **CRS transformations**: Always WGS84 (EPSG:4326) for API/web → RD New (EPSG:28992) for metric calculations → back to WGS84 for output
-- **API-specific search geometries**: DHL uses circle (lat/lon/radius), PostNL uses bbox, VintedGo uses bounds
-- **Mock data**: `bezettingsgraad` (occupancy) is randomly generated for demonstration only
-- **Grid-based fetching**: For nationwide coverage (DHL/DPD), use grid-based scripts instead of per-municipality calls to avoid API limits
-
-**Data Flow**:
 ```
-API calls (per municipality) → GeoDataFrame → CRS transform → Buffer analysis →
-GeoJSON export → webapp/public/data/{slug}.geojson
+scripts/<carrier>_fetch_all.py ──> data/<carrier>_all_locations.json (via cache_guard.safe_save)
+scripts/build_municipalities.py ──> data/municipalities_all.json, data/municipality_polygons.geojson,
+                                    webapp/public/municipalities.json, webapp/public/data/geo/
+api_client.get_data_pakketpunten(gemeente)
+    loads every cache once per process (lru_cache), clips to the municipal polygon
+batch_generate.py ──> webapp/public/data/<slug>.geojson + summary.json
+create_national_overview.py ──> <national_slug>.geojson
+create_provincial_boundaries.py ──> boundaries/index.json + provincie-<slug>.geojson
+compute_statistics.py ──> statistics.json (incl. `unieke_locaties`)
+update_totals_history.py ──> totals_history.json
 ```
 
-### Next.js Webapp Architecture
+- **All carriers are nationwide caches.** Unlike the Dutch viewer, PostNL and VintedGo
+  are tiled nationwide fetches too, so `batch_generate.py` makes no network calls.
+- **Record schema**: bpost, PostNL, GLS and VintedGo fetchers write normalised records
+  (`locatieNaam, straatNaam, straatNr, latitude, longitude, puntType, canPickup,
+  canDropoff, openingstijden`). DHL and DPD keep raw API objects, mapped in
+  `api_client.ROW_MAPPERS` (as upstream does, to keep those fetchers close to NL).
+- **Boundaries** come from a local file built from one Overpass query
+  (`utils.get_gemeente_polygon` looks up by name, slug, code or alias).
+  Belgium: 565 municipalities (2025 mergers), NIS codes in `ref:INS`, province from the NIS prefix.
+- **CRS**: WGS84 for all I/O; `country_config.METRIC_CRS` (BE: EPSG:3812) for buffers and areas.
 
-**Component Hierarchy** (`app/page.tsx`):
-```
-Home (page.tsx)
-├── MunicipalitySelector → Dropdown with autocomplete
-├── FilterPanel → Provider filters, buffer toggles, occupancy slider
-├── StatsPanel → Dynamic counts per provider
-└── Map → Leaflet with adaptive rendering
-```
+### Carriers in Belgium
 
-**Map Component Performance Strategy** (`components/Map.tsx`):
+| Carrier | Fetcher | Method | ~Locations |
+|---|---|---|---|
+| bpost | `bpost_fetch_all.py` | pudo.bpost.be locator (XML), postcode crawl, 20 km per call | 4,400 |
+| DHL | `dhl_fetch_all.py` | api-gw.dhlparcel.nl `/BE/by-geo`, adaptive grid | 4,400 |
+| GLS | `gls_fetch_all.py` | api.gls-group.net parcel-shop API, public widget key, 20 km grid | 1,900 |
+| InPost | `inpost_fetch_all.py` | easypack24 `?country=BE` (incl. ex-Mondial Relay) | 1,300 |
+| VintedGo | `vintedgo_fetch_all.py` | vintedgo.com RSC payload, bbox tiles (cap 500) | 1,300 |
+| PostNL | `postnl_fetch_all.py` | location widget `country=bel`, bbox tiles | 1,100 |
+| DPD | `dpd_fetch_all.py` | pickup.dpd.cz `getAll?country=56` | 1,000 |
+| Amazon | `amazon_fetch_all.py` | Playwright on amazon.com.be/ulp | see cache |
+| ViaTim | `viatim_fetch_all.py` | ViaTim API, filtered to BE | 140 |
 
-The Map component implements **adaptive rendering** for handling 1,000-50,000+ markers:
+**DHL = bpost network in Belgium**: every DHL point (id prefix `8026-`) is a bpost
+location. Both are shown (a DHL parcel can be collected there); `compute_statistics`
+reports `unieke_locaties` (points within 25 m count once) so density is not doubled.
 
-1. **Canvas Rendering**: Uses Leaflet's `preferCanvas` when `useSimpleMarkers` is enabled (10x faster for large datasets)
-2. **Simple vs Detailed Markers**:
-   - Simple mode: Colored `CircleMarker` elements (4-6px radius based on zoom)
-   - Detailed mode: Custom `divIcon` with carrier logos (local SVGs in `/public/logos/`)
-3. **Automatic Spiderfy**: At zoom ≥15, markers with identical coordinates are spread in a circular pattern with blue connecting lines
-4. **Provider Render Priority**: Randomized hourly using seeded RNG to ensure fair visibility (prevents one carrier from always being on top)
-5. **Dynamic Icon Sizing**: Marker size scales with zoom level (34px → 42px → 48px) for better clickability
+PostNL's widget returns Dutch `BBN_` records without a country code at Belgian
+coordinates; the fetcher keeps only `countryCode == 'BE'`.
 
-**State Management**: React hooks with `useMemo` for expensive computations (filtering, grouping, spreading overlapping markers)
-
-**Data Loading**:
-- `/municipalities.json` → List of available municipalities
-- `/data/{slug}.geojson` → Complete municipality data (pakketpunten + buffer unions)
-- `/data/boundaries/index.json` → Provincial boundary index (for Nederland view)
-- `/data/boundaries/provincie-{slug}.geojson` → Individual province boundaries (12 files)
-
-**Provincial Boundary Loading** (Nederland view only):
-When viewing the national map with boundaries enabled, the system loads boundaries using a chunked approach:
-1. **Split Strategy**: The full Netherlands boundary (originally 187MB, too large for GitHub) is split into 12 provincial files (0.3-7.8 MB each)
-2. **Parallel Loading**: All 12 provincial files are loaded simultaneously using `loadProvincialBoundaries()` from `utils/boundaryLoader.ts`
-3. **Progress Tracking**: Real-time progress indicator shows "Loading: X/12 provinces (Y%)" with a progress bar
-4. **Automatic Merging**: Provincial boundaries are merged into a single GeoJSON FeatureCollection transparently
-5. **On-Demand**: Boundaries only load when user clicks the "Gemeentegrens" checkbox in the Nederland view
-
-### TypeScript Types (`webapp/types/pakketpunten.ts`)
-
-All GeoJSON features follow this structure:
-- **Pakketpunt features**: `type: 'pakketpunt'` with properties: `locatieNaam`, `straatNaam`, `straatNr`, `vervoerder`, `puntType`, `bezettingsgraad`, `latitude`, `longitude`
-- **Buffer features**: `type: 'buffer_union_300m' | 'buffer_union_400m'` with `buffer_m` property
-
-## Coordinate Reference Systems (CRS)
-
-**Critical**: This project uses two CRS throughout:
-- **WGS84 (EPSG:4326)**: All API inputs/outputs, GeoJSON files, web maps (lat/lon in degrees)
-- **RD New (EPSG:28992)**: Dutch grid system for metric calculations (buffer zones in meters)
-
-Always transform to RD New before distance/buffer operations, then back to WGS84 for output.
-
-## Cache-Based Data Loading
-
-The system automatically uses cached data when available:
-
-### DHL Grid Data (`data/dhl_all_locations.json`)
-- Generated once using `scripts/dhl_grid_fetch.py` (grid-based approach, ~3,800+ locations)
-- `api_client.get_data_dhl()` automatically loads from cache if file exists
-- Falls back to 50-result API call if cache not found
-- Cache filtered by municipality bounding box (fast pre-filter)
-- Final polygon filtering in `get_data_pakketpunten()` ensures accurate boundaries
-
-### DPD Complete Data (`data/dpd_all_locations.json`)
-- Generated once using `scripts/dpd_fetch_all.py` (~1,900 locations)
-- `api_client.get_data_dpd()` automatically loads from cache if file exists
-- Falls back to 100-result API call if cache not found
-- Same bbox + polygon filtering approach as DHL
-
-### Workflow
-1. **First time**: Run `dhl_grid_fetch.py` and `dpd_fetch_all.py` to create caches
-2. **Regular updates**: Run `batch_generate.py` - automatically uses cached data
-3. **Regenerate caches**: Re-run grid fetch scripts when you want updated data
+Hard-to-get networks (UPS, Budbee, Mondial Relay own API, Cubee, DHL Express, FedEx)
+are listed in `missingCarriers` in the webapp profile.
 
 ### Cache Guard (`scripts/cache_guard.py`)
 
@@ -203,132 +106,54 @@ Every nationwide fetch saves through `safe_save()`, which refuses to overwrite a
 cache when the count drops more than 20%, and exits 2 so the workflow can flag it.
 
 The guard is **self-healing**, because a permanent block freezes the cache whenever
-a carrier genuinely shrinks (Amazon sat eight weeks behind a stale 2180 baseline):
+a carrier genuinely shrinks:
 
 - Each run's count is appended to `data/fetch_history.json`, committed to the repo.
-- A large drop that **repeats** on the next run, within 5%, is accepted as the new
-  baseline. One-off blips stay blocked; sustained change gets through after two runs.
+- A large drop that **repeats** on the next run, within 5%, is accepted as the new baseline.
 - A fetch of 0 locations is never saved, and never confirmable.
-- `CACHE_GUARD_FORCE=1` accepts the new count immediately. Both fetch workflows
-  expose this as a `force_save` input on `workflow_dispatch`.
+- `CACHE_GUARD_FORCE=1` accepts the new count immediately (`force_save` on `workflow_dispatch`).
 
-Because a blocked run's history entry is what the next run confirms against, the
-workflows commit `data/fetch_history.json` **whatever the fetch outcome**. Do not
-re-add an `if: steps.fetch.outcome == 'success'` gate to those commit steps.
+The workflows commit `data/fetch_history.json` **whatever the fetch outcome**. Do not
+add an outcome gate to those commit steps.
 
 ### Freshness Gate (`scripts/check_cache_freshness.py`)
 
-A guarded run still reports green, which is how Amazon went eight weeks unnoticed.
-This script reads `metadata.fetched_at` from every `data/*_all_locations.json` and
-exits 1 if any carrier is older than `--max-age-days` (21 in CI). It runs **last**
-in `update-data.yml`, after the push, so a stale carrier never blocks publishing
-fresh data for the others.
+Exits 1 if any `data/*_all_locations.json` is older than `--max-age-days` (21 in CI).
+Runs **last** in `update-data.yml`, after the push. The threshold is mirrored as
+`STALE_AFTER_DAYS` in `webapp/types/sources.ts`.
 
-The same threshold is mirrored as `STALE_AFTER_DAYS` in `webapp/types/sources.ts`.
-The per-carrier dates render as the "Databronnen" section on
-/data-export/updates, fed by the `bronnen` field of `statistics.json` via
-`/api/update-status` — the API lifts it out server-side so the ~150 KB
-statistics file is not shipped to a page that needs ten dates from it.
+### Workflows
 
-## API Integration Notes
+- `fetch-amazon-data.yml` — Tuesday 00:00 UTC, Playwright, commits the Amazon cache
+- `update-data.yml` — Tuesday 02:00 UTC: `fetch_all.py --skip Amazon` → batch → national
+  overview → province chunks → statistics → history → commit → freshness gate
 
-### Rate Limiting
-- **Nominatim (geocoding)**: 1 request/second enforced in `utils.py`
-- **Batch processing**: `batch_generate.py` uses 2-second delays between municipalities
-- **DHL API**: Limit 50 results per call (use grid approach for nationwide coverage)
-- **PostNL API**: Requires bounding box (not center/radius)
+Both read the repository variable `PAKKETPUNTEN_COUNTRY` (default `BE`). Tuesday on
+purpose: the Dutch viewer runs Monday against the same DHL/DPD/InPost APIs.
 
-### Data Sources
-- **DHL**: `api-gw.dhlparcel.nl` - Circle search (lat/lon/radius)
-- **PostNL**: `productprijslokatie.postnl.nl` - Bounding box search
-- **DPD**: `pickup.dpd.cz` - Address-based search (cached nationwide, ~1900 locations)
-- **Amazon**: OpenStreetMap Overpass API - Community-maintained data
-- **VintedGo**: `vintedgo.com` - Web scraping with bounds parameter
-- **De Buren**: `mijnburen.deburen.nl` - Web scraping with JS array extraction
+### Webapp
 
-All API calls use `requests.Session()` with proxy bypass for specific domains (handled in `utils.make_session()`).
+- `config/country.ts` → `COUNTRY` (active profile); `isNationalSlug()`
+- `lib/carriers.ts` → `CARRIER_CATALOG` (every known carrier: label, livery, logo, data source)
+  and, derived from the profile, `CARRIER_ORDER`, `CARRIER_SERIES_COLORS(_DARK)`, `CARRIER_BRAND`.
+  Series colours are ten validated hue slots assigned by position (see the comment there).
+- `app/api/geocode/route.ts` → Photon (komoot) for search/reverse, bbox + country filter;
+  the municipality comes from `lib/municipalityLocator.ts` (point-in-polygon on
+  `public/data/geo/municipality_polygons.geojson`), not from geocoder names.
+- `components/Map.tsx` → adaptive rendering (canvas + simple markers for the national view),
+  spiderfy at zoom ≥15, hourly-rotated carrier render priority.
+- Municipality search also matches `aliases` (other-language names: Luik → Liège).
 
-## Output Formats
-
-### GeoJSON Structure
-```json
-{
-  "type": "FeatureCollection",
-  "metadata": {
-    "gemeente": "Amsterdam",
-    "slug": "amsterdam",
-    "generated_at": "2025-01-15T10:30:00Z",
-    "total_points": 156,
-    "providers": ["DHL", "PostNL", "VintedGo", "DeBuren"],
-    "bounds": [4.72, 52.28, 5.07, 52.43]
-  },
-  "features": [
-    // Pakketpunt features (type: "pakketpunt")
-    // Buffer union features (type: "buffer_union_300m", "buffer_union_400m")
-  ]
-}
-```
-
-### File Organization
-- **Python outputs**: `output/` directory (legacy)
-- **Webapp data**: `webapp/public/data/` directory
-  - `{slug}.geojson` → Per-municipality data
-  - `municipalities.json` → Municipality index
-  - `summary.json` → Batch processing results
-  - `totals_history.json` → Historical weekly snapshots (append-only, updated via `scripts/update_totals_history.py`)
-  - `boundaries/` → Provincial boundary chunks (12 files, ~46MB total)
-    - `index.json` → Metadata about all provincial files
-    - `provincie-{slug}.geojson` → Individual province boundaries
-
-## Performance Considerations
-
-### Python
-- **Geocoding cache**: `utils.py` caches Nominatim results to disk
-- **Grid-based fetching**: For DHL/DPD, fetch once nationwide instead of per-municipality
-- **Batch processing**: Rate-limited to respect API usage policies
-
-### Next.js
-- **Dynamic imports**: Map component uses `next/dynamic` with `ssr: false` to avoid Leaflet SSR issues
-- **Memoization**: Expensive operations (filtering, spreading markers) are memoized
-- **Canvas rendering**: Enabled for 3000+ markers (50ms vs 2000ms render time)
-- **Simple markers**: Automatically enabled for "Nederland" national view
-- **GeoJSON size**: Amsterdam ≈100 KB, national overview ≈5 MB
-
-## Data Attribution Requirements
-
-When using generated data, include:
-```
-Data bronnen:
-- DHL Parcel Netherlands (https://www.dhl.nl)
-- PostNL (https://www.postnl.nl)
-- VintedGo / Mondial Relay (https://vintedgo.com)
-- De Buren (https://deburen.nl)
-- Gemeente grenzen © OpenStreetMap contributors
-- Bedrijfslogo's © respectieve merkhouders
-
-Bezettingsgraad data is willekeurig gegenereerd voor demonstratie (niet echt)
-```
+Keep the data contract stable: GeoJSON property names are Dutch (`locatieNaam`,
+`vervoerder`, `puntType`, `openingstijden` with keys `ma..zo`) in every country.
 
 ## Known Limitations
 
-- **Bezettingsgraad (occupancy)**: Mock data only - not real capacity information
-- **DPD via `api_client.get_data_dpd()`**: Limited to 100 results (use `dpd_fetch_all.py` + integration script for complete coverage)
-- **Amazon via OSM**: OpenStreetMap data is community-maintained and may have gaps
-- **De Buren**: Web scraping - may break if website structure changes
-- **Logo loading**: Uses local SVG files in `webapp/public/logos/` (falls back to initials if missing)
-- **Nederland view**: Very large dataset (50,000+ markers) - simple markers recommended
-
-## Provider Coverage Summary
-
-| Provider | Method | Auth Required | Coverage | Cache-Based | Grid Fetch |
-|----------|--------|---------------|----------|-------------|------------|
-| DHL | Public REST API | No | ~2000+ | Optional | Yes |
-| PostNL | Public Widget API | No | High | No | No |
-| DPD | Public REST API | No | ~1900 | Yes (recommended) | No |
-| Amazon | OSM Overpass API | No | Low (community data) | Optional | No |
-| VintedGo | Web Scraping | No | Medium | No | No |
-| De Buren | Web Scraping | No | Low | No | No |
-
-**Notes**:
-- **Grid Fetch**: Providers using grid-based approach for complete nationwide coverage
-- **Cache-Based**: Recommended to run fetch once and cache results for faster municipality generation
+- **Population**: Statbel blocks automated downloads, so population comes from Wikidata
+  (mostly 2018–2025 figures; 6 merged municipalities missing). Put a manually downloaded
+  `TF_SOC_POP_STRUCT_<year>` file in `data/raw/` and rerun `build_municipalities.py` to use Statbel.
+- **Amazon**: ~20 results per search, so dense cities may be undercounted.
+- **bpost**: no opening hours (one info call per point would be ~4,400 calls).
+- **GLS**: the bulk API only returns today's and tomorrow's hours.
+- **Bezettingsgraad** is a fixed placeholder (50), not real occupancy.
+- `webapp/tests/test-all-municipalities.spec.ts` is inherited and broken (no Playwright setup).

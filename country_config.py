@@ -3,8 +3,11 @@ Landconfiguratie voor de pakketpunten-pipeline.
 
 Alles wat per land verschilt (landcodes, projectie, bounding box, welke
 vervoerders, parameters per vervoerder) staat hier, zodat de fetch-scripts en
-de batch-pipeline landonafhankelijk blijven. De Italiaanse viewer krijgt een
-eigen blok in COUNTRIES en zet COUNTRY (of de env var PAKKETPUNTEN_COUNTRY).
+de batch-pipeline landonafhankelijk blijven.
+
+Land kiezen: env var PAKKETPUNTEN_COUNTRY (BE, IT). De webapp leest hetzelfde
+land uit NEXT_PUBLIC_COUNTRY en het profiel in webapp/config/countries.ts;
+houd de twee profielen gelijk. Een land toevoegen: zie docs/NEW_COUNTRY.md.
 """
 
 import os
@@ -30,9 +33,18 @@ COUNTRIES = {
         # (south, west, north, east) in WGS84
         "bbox": (49.49, 2.54, 51.51, 6.41),
         "municipality_code_label": "NIS",
-        # Volgorde = volgorde in batch-output. Alle vervoerders zijn landelijke
-        # caches in data/<carrier>_all_locations.json.
-        "carriers": ["bpost", "PostNL", "DHL", "DPD", "GLS", "InPost", "VintedGo", "ViaTim", "Amazon"],
+        # Gemeentegrenzen uit OSM (scripts/build_municipalities.py)
+        "boundaries": {
+            "admin_level": "8",
+            "code_tag": "ref:INS",
+            # België: één query voor het hele land; provincie volgt uit de NIS-code
+            "fetch": "national",
+            "region_resolver": "be_nis",
+        },
+        # Alle vervoerders zijn landelijke caches in data/<carrier>_all_locations.json.
+        # Zelfde volgorde als `carriers` in webapp/config/countries.ts (bepaalt
+        # de grafiekkleuren daar).
+        "carriers": ["bpost", "DHL", "GLS", "InPost", "VintedGo", "PostNL", "DPD", "Amazon", "ViaTim"],
         "dhl": {"country_path": "BE"},
         "dpd": {"country_code": 56},
         "inpost": {"country": "BE"},
@@ -41,6 +53,36 @@ COUNTRIES = {
         "vintedgo": {"country": "be"},
         "gls": {"country": "BE", "partner_prefixes": ("GLS_BE",)},
         "amazon": {"domain": "www.amazon.com.be", "locale": "nl-BE"},
+    },
+    # Italië: profiel klaar, PosteItaliane-fetcher nog te bouwen (zie plan).
+    "IT": {
+        "iso2": "IT",
+        "iso3": "ITA",
+        "iso_numeric": 380,
+        "name": "Italia",
+        "national_slug": "italia",
+        "national_label": "Italia (totale)",
+        "all_regions_label": "Tutte le regioni",
+        # RDN2008 / Italy zone: één metrische projectie voor heel Italië
+        # (het land valt in twee UTM-zones)
+        "metric_crs": 6875,
+        "bbox": (35.49, 6.62, 47.09, 18.52),
+        "municipality_code_label": "ISTAT",
+        "boundaries": {
+            "admin_level": "8",
+            "code_tag": "ref:ISTAT",
+            # ~7.900 comuni: per regio ophalen, anders time-out Overpass
+            "fetch": "per_region",
+            "region_admin_level": "4",
+            "region_resolver": "spatial",
+        },
+        "carriers": ["PosteItaliane", "DPD", "InPost", "GLS", "DHL", "Amazon"],
+        "dhl": {"country_path": "IT"},
+        # DPD Italia = BRT: BRT-fermopoint en BRT-lockers zitten in deze feed
+        "dpd": {"country_code": 380},
+        "inpost": {"country": "IT"},
+        "gls": {"country": "IT", "partner_prefixes": ("GLS_IT", "PRP_IT", "QDT_IT")},
+        "amazon": {"domain": "www.amazon.it", "locale": "it-IT"},
     },
 }
 

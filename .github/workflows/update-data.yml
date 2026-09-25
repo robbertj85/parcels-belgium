@@ -2,8 +2,9 @@ name: Update Pakketpunten Data
 
 on:
   schedule:
-    # Run weekly on Monday at 02:00 UTC (after GLS/Amazon workflows complete)
-    - cron: '0 2 * * 1'
+    # Weekly on Tuesday 02:00 UTC: after the Amazon workflow, and a day after
+    # the Dutch viewer so the two don't hit the shared carrier APIs together
+    - cron: '0 2 * * 2'
   # Allow manual trigger
   workflow_dispatch:
     inputs:
@@ -11,6 +12,11 @@ on:
         description: 'Accept the fetched counts as the new baselines even if they dropped sharply'
         type: boolean
         default: false
+
+# The country this repository publishes (country_config.py). Set the repository
+# variable PAKKETPUNTEN_COUNTRY to reuse these workflows for another country.
+env:
+  PAKKETPUNTEN_COUNTRY: ${{ vars.PAKKETPUNTEN_COUNTRY || 'BE' }}
 
 jobs:
   update-data:
@@ -33,90 +39,34 @@ jobs:
         run: |
           pip install -r requirements.txt
 
-      - name: Fetch DHL grid data (nationwide cache)
-        id: fetch_dhl
-        run: python scripts/dhl_grid_fetch.py
+      # Every carrier of the country except Amazon (own workflow, needs a
+      # browser). Never fails: a carrier whose fetch fails or is blocked by the
+      # cache guard keeps its previous cache, and is listed in the anomalies file.
+      - name: Fetch carrier data (nationwide caches)
+        run: python scripts/fetch_all.py --skip Amazon --anomalies /tmp/anomaly_carriers.txt
         working-directory: ${{ github.workspace }}
-        timeout-minutes: 30
-        continue-on-error: true
+        timeout-minutes: 90
         env:
           CACHE_GUARD_FORCE: ${{ inputs.force_save && '1' || '' }}
-
-      - name: Fetch DPD data (nationwide cache)
-        id: fetch_dpd
-        run: python scripts/dpd_fetch_all.py
-        working-directory: ${{ github.workspace }}
-        timeout-minutes: 15
-        continue-on-error: true
-        env:
-          CACHE_GUARD_FORCE: ${{ inputs.force_save && '1' || '' }}
-
-      - name: Fetch ViaTim data (nationwide cache)
-        id: fetch_viatim
-        run: python scripts/viatim_fetch_all.py
-        working-directory: ${{ github.workspace }}
-        timeout-minutes: 5
-        continue-on-error: true
-        env:
-          CACHE_GUARD_FORCE: ${{ inputs.force_save && '1' || '' }}
-
-      - name: Fetch InPost data (nationwide cache)
-        id: fetch_inpost
-        run: python scripts/inpost_fetch_all.py
-        working-directory: ${{ github.workspace }}
-        timeout-minutes: 10
-        continue-on-error: true
-        env:
-          CACHE_GUARD_FORCE: ${{ inputs.force_save && '1' || '' }}
-
-      - name: Fetch Budbee data (DPD cache + OSM)
-        id: fetch_budbee
-        run: python scripts/budbee_fetch_all.py
-        working-directory: ${{ github.workspace }}
-        timeout-minutes: 10
-        continue-on-error: true
-        env:
-          CACHE_GUARD_FORCE: ${{ inputs.force_save && '1' || '' }}
-
-      # GLS data is fetched by separate workflow (fetch-gls-data.yml)
-      # That workflow runs earlier and commits the cache file to the repo
-      # This workflow uses the already-committed cache file
 
       - name: Report anomalies
         run: |
-          anomalies=""
-          if [ "${{ steps.fetch_dhl.outcome }}" = "failure" ]; then anomalies="${anomalies}DHL "; fi
-          if [ "${{ steps.fetch_dpd.outcome }}" = "failure" ]; then anomalies="${anomalies}DPD "; fi
-          if [ "${{ steps.fetch_viatim.outcome }}" = "failure" ]; then anomalies="${anomalies}ViaTim "; fi
-          if [ "${{ steps.fetch_inpost.outcome }}" = "failure" ]; then anomalies="${anomalies}InPost "; fi
-          if [ "${{ steps.fetch_budbee.outcome }}" = "failure" ]; then anomalies="${anomalies}Budbee "; fi
-
-          if [ -n "$anomalies" ]; then
+          if [ -f /tmp/anomaly_carriers.txt ]; then
+            anomalies=$(cat /tmp/anomaly_carriers.txt)
             echo "::warning::Data anomalies for: ${anomalies}— caches preserved, will retry next week"
             echo "## ⚠️ Data anomalies detected" >> "$GITHUB_STEP_SUMMARY"
-            echo "The following carriers had >20% drop or 0 results: **${anomalies}**" >> "$GITHUB_STEP_SUMMARY"
-            echo "Existing caches preserved. Will retry automatically next Monday." >> "$GITHUB_STEP_SUMMARY"
-            # Write marker for commit message
-            echo "$anomalies" > /tmp/anomaly_carriers.txt
-          fi
-
-      - name: Check GLS cache status
-        run: |
-          echo "=== Cache file status ==="
-          ls -la data/gls_all_locations.json 2>/dev/null || echo "GLS cache not found"
-          if [ -f data/gls_all_locations.json ]; then
-            echo "GLS: $(python -c "import json; d=json.load(open('data/gls_all_locations.json')); print(len(d.get('locations', [])))" 2>/dev/null || echo '0') locations"
+            echo "The following carriers failed, had a >20% drop or 0 results: **${anomalies}**" >> "$GITHUB_STEP_SUMMARY"
+            echo "Existing caches preserved. Will retry automatically next week." >> "$GITHUB_STEP_SUMMARY"
           fi
 
       - name: Generate pakketpunten data
         run: |
           python scripts/batch_generate.py
           python scripts/create_national_overview.py
+          python scripts/create_provincial_boundaries.py
         working-directory: ${{ github.workspace }}
-        # Headroom for the semi-annual polygon cache refresh (last week of
-        # June/December), when all ~342 municipality boundaries are re-fetched
-        # from the rate-limited Overpass API. Normal runs finish in ~30 min.
-        timeout-minutes: 120
+        # Pure geometry on the local caches and boundary file; no network calls
+        timeout-minutes: 60
 
       # Reads the GeoJSON just written, so it has to follow batch_generate.
       # The coverage pass buffers every point and intersects with the municipal
@@ -137,17 +87,18 @@ jobs:
 
       - name: Commit and push if changed
         run: |
-          # Add cache files (DHL, DPD, ViaTim, InPost, Budbee - GLS committed by separate workflow)
-          git add data/dhl_all_locations.json data/dpd_all_locations.json data/viatim_all_locations.json data/inpost_all_locations.json data/budbee_all_locations.json 2>/dev/null || true
+          # Carrier caches (Amazon's is committed by its own workflow, and
+          # re-adding the unchanged file here is a no-op)
+          git add data/*_all_locations.json 2>/dev/null || true
           # The guard's count history changes on every run, including one where it
           # blocked the save -- and that blocked record is what next week's run
           # confirms the new baseline against, so it has to be committed too.
           git add data/fetch_history.json 2>/dev/null || true
-          # Add the municipality boundary cache so the semi-annual Overpass refresh persists
-          # (otherwise every refresh-week run re-fetches all ~342 boundaries from scratch)
-          git add data/municipality_polygon_cache.json 2>/dev/null || true
-          # Add municipality GeoJSON files (excluding gitignored nederland-boundaries.geojson)
-          find webapp/public/data -name "*.geojson" -not -name "nederland-boundaries.geojson" -exec git add {} +
+          # Municipality GeoJSON, province boundary chunks and the derived JSON.
+          # The <national>-boundaries file is gitignored; naming it explicitly
+          # would make `git add` refuse, hence find.
+          find webapp/public/data -maxdepth 1 -name "*.geojson" -not -name "*-boundaries.geojson" -exec git add {} +
+          git add webapp/public/data/boundaries 2>/dev/null || true
           git add webapp/public/data/summary.json webapp/public/data/totals_history.json webapp/public/data/statistics.json webapp/public/municipalities.json 2>/dev/null || true
           # Build commit message with anomaly note if applicable
           msg="🤖 Update pakketpunten data - $(date +'%Y-%m-%d %H:%M UTC')"
