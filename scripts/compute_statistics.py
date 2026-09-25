@@ -7,7 +7,7 @@ For every municipality this records:
   - the share of the municipality's land area within 300/400/500 m of a point
 
 Coverage is the expensive part: it buffers every point and intersects the union
-with the municipal outline, in RD New so the metres are real metres. Buffering
+with the municipal outline, in a metric projection so the metres are real metres. Buffering
 in degrees is wrong across the country, not merely imprecise.
 
 Input is the generated GeoJSON in webapp/public/data rather than the fetch
@@ -26,6 +26,8 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
+from country_config import CARRIERS as COUNTRY_CARRIERS, METRIC_CRS, NATIONAL_SLUG, carrier_cache_file  # noqa: E402
+
 import geopandas as gpd  # noqa: E402
 from shapely import make_valid  # noqa: E402
 from shapely.geometry import shape  # noqa: E402
@@ -35,24 +37,12 @@ PROJECT_ROOT = Path(__file__).parent.parent
 WEBAPP_DATA_DIR = PROJECT_ROOT / "webapp" / "public" / "data"
 MUNICIPALITIES_FILE = PROJECT_ROOT / "webapp" / "public" / "municipalities.json"
 OUTPUT_PATH = WEBAPP_DATA_DIR / "statistics.json"
-DATA_DIR = PROJECT_ROOT / "data"
 
 BUFFER_RADII = (300, 400, 500)
 
 # Must mirror CARRIER_ORDER in webapp/lib/carriers.ts. A carrier present here
 # but missing there (or the reverse) silently drops out of the charts.
-CARRIERS = (
-    "PostNL",
-    "DHL",
-    "DPD",
-    "VintedGo",
-    "Amazon",
-    "GLS",
-    "InPost",
-    "Budbee",
-    "ViaTim",
-    "DeBuren",
-)
+CARRIERS = tuple(COUNTRY_CARRIERS)
 
 # Must mirror LOCKER_TYPES in webapp/types/pakketpunten.ts.
 LOCKER_TYPES = {
@@ -63,21 +53,11 @@ LOCKER_TYPES = {
     "Buitenkluis",  # DeBuren
 }
 
+# Two points of different carriers closer than this share one physical location
+# (in Belgium every DHL point is a bpost point). Used for the unique count.
+SAME_LOCATION_M = 25
+
 CATEGORIES = ("locker", "shop")
-
-# Carrier -> nationwide cache file. The carriers missing here (PostNL, VintedGo,
-# DeBuren) are fetched live per municipality, so there is no cache to date-stamp
-# and they report null.
-CARRIER_CACHES = {
-    "DHL": "dhl_all_locations.json",
-    "DPD": "dpd_all_locations.json",
-    "Amazon": "amazon_all_locations.json",
-    "GLS": "gls_all_locations.json",
-    "InPost": "inpost_all_locations.json",
-    "Budbee": "budbee_all_locations.json",
-    "ViaTim": "viatim_all_locations.json",
-}
-
 
 def carrier_sources() -> dict:
     """
@@ -88,13 +68,8 @@ def carrier_sources() -> dict:
     sources = {}
 
     for carrier in CARRIERS:
-        filename = CARRIER_CACHES.get(carrier)
-        if filename is None:
-            sources[carrier] = None
-            continue
-
         try:
-            with open(DATA_DIR / filename, "r", encoding="utf-8") as handle:
+            with open(carrier_cache_file(carrier), "r", encoding="utf-8") as handle:
                 cache = json.load(handle)
         except (json.JSONDecodeError, OSError):
             sources[carrier] = None
@@ -115,7 +90,7 @@ def point_category(punt_type: str) -> str:
 def repaired(geom):
     """An OSM boundary GEOS can actually intersect.
 
-    Nine of the 342 outlines self-intersect once projected to RD. GEOS then
+    Nine of the 342 Dutch outlines self-intersected once projected to RD. GEOS then
     refuses the intersection outright -- Arnhem's, at 194050.93 440187.60,
     raised "TopologyException: side location conflict" and took the whole
     weekly statistics step down with it. utils.get_gemeente_polygon repairs
@@ -136,6 +111,14 @@ def repaired(geom):
             fixed = unary_union(polygons)
 
     return fixed
+
+
+def count_unique_locations(points_rd) -> int:
+    """Physical locations: points within SAME_LOCATION_M of each other count once."""
+    if not len(points_rd):
+        return 0
+    clusters = unary_union(points_rd.buffer(SAME_LOCATION_M / 2))
+    return len(getattr(clusters, "geoms", [clusters]))
 
 
 def coverage_ratio(points_rd, boundary_geom, radius: int) -> float:
@@ -167,7 +150,7 @@ def municipality_stats(slug: str, meta: dict, payload: dict) -> dict | None:
 
     boundary_geom_wgs = unary_union([shape(f["geometry"]) for f in boundaries])
     boundary_rd = repaired(
-        gpd.GeoSeries([boundary_geom_wgs], crs="EPSG:4326").to_crs(28992).iloc[0]
+        gpd.GeoSeries([boundary_geom_wgs], crs="EPSG:4326").to_crs(METRIC_CRS).iloc[0]
     )
 
     area_km2 = round(boundary_rd.area / 1_000_000, 2)
@@ -185,10 +168,12 @@ def municipality_stats(slug: str, meta: dict, payload: dict) -> dict | None:
         per_category[point_category(properties.get("puntType") or "")] += 1
 
     coverage = {str(radius): 0.0 for radius in BUFFER_RADII}
+    unique_locations = 0
     if total:
         points_rd = gpd.GeoSeries(
             [shape(f["geometry"]) for f in points], crs="EPSG:4326"
-        ).to_crs(28992)
+        ).to_crs(METRIC_CRS)
+        unique_locations = count_unique_locations(points_rd)
         for radius in BUFFER_RADII:
             coverage[str(radius)] = round(
                 coverage_ratio(points_rd, boundary_rd, radius), 4
@@ -202,6 +187,7 @@ def municipality_stats(slug: str, meta: dict, payload: dict) -> dict | None:
         "population": population,
         "area_km2": area_km2,
         "total": total,
+        "unieke_locaties": unique_locations,
         "per_10k_inwoners": round(total / population * 10_000, 2) if population else 0.0,
         "per_km2": round(total / area_km2, 2) if area_km2 else 0.0,
         "vervoerders": per_carrier,
@@ -220,7 +206,7 @@ def main() -> int:
     with open(MUNICIPALITIES_FILE, "r", encoding="utf-8") as handle:
         municipalities = json.load(handle)
 
-    by_slug = {m["slug"]: m for m in municipalities if m["slug"] != "nederland"}
+    by_slug = {m["slug"]: m for m in municipalities if m["slug"] != NATIONAL_SLUG}
 
     records = []
     skipped = []
@@ -260,6 +246,7 @@ def main() -> int:
     total_area = sum(record["area_km2"] for record in records) or 1
     national = {
         "total": sum(record["total"] for record in records),
+        "unieke_locaties": sum(record["unieke_locaties"] for record in records),
         "population": sum(record["population"] for record in records),
         "area_km2": round(total_area, 2),
         "vervoerders": {

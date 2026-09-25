@@ -14,6 +14,10 @@ from datetime import datetime, timedelta, timezone
 from collections import defaultdict
 from pathlib import Path
 
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from country_config import NATIONAL_SLUG  # noqa: E402
+
 
 def get_week_info(date=None):
     """Get ISO week number and date range for a given date."""
@@ -47,14 +51,13 @@ def get_current_totals(data_dir):
         'municipalities': {}
     }
 
-    # Get all GeoJSON files except nederland.geojson
+    # All municipality GeoJSON files (the national file would double-count)
     geojson_files = list(data_dir.glob('*.geojson'))
 
     for file_path in geojson_files:
         slug = file_path.stem
 
-        # Skip nederland to avoid double-counting
-        if slug == 'nederland':
+        if slug == NATIONAL_SLUG or slug.endswith('-boundaries'):
             continue
 
         try:
@@ -200,10 +203,10 @@ def main():
     for slug in history['municipalities']:
         history['municipalities'][slug]['history'].sort(key=lambda x: x['date'])
 
-    # Sync nederland municipality entry from snapshots (since we skip nederland.geojson to avoid double-counting)
-    nederland_history = []
+    # Sync the national entry from snapshots (the national file itself is skipped above)
+    national_history = []
     for snapshot in history['snapshots']:
-        nederland_history.append({
+        national_history.append({
             'date': snapshot['date'],
             'week': snapshot['week'],
             'year': snapshot['year'],
@@ -213,7 +216,7 @@ def main():
             'total': snapshot['totals']['total'],
             'providers': snapshot['totals']['providers']
         })
-    history['municipalities']['nederland'] = {'history': nederland_history}
+    history['municipalities'][NATIONAL_SLUG] = {'history': national_history}
 
     # Update metadata
     history['updated_at'] = now.isoformat().replace('+00:00', 'Z')

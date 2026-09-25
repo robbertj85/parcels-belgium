@@ -1,5 +1,5 @@
 """
-Fetch all ViaTim service point locations in the Netherlands.
+Fetch all ViaTim service point locations in the configured country.
 
 ViaTim operates a network of neighbourhood service points ("buurtpunten")
 that handle parcels for multiple carriers (DHL, UPS, GLS, DPD).
@@ -11,6 +11,12 @@ Usage:
     python scripts/viatim_fetch_all.py
 """
 
+import sys as _sys
+from pathlib import Path as _Path
+_sys.path.insert(0, str(_Path(__file__).resolve().parent.parent))
+from country_config import CONFIG  # noqa: E402
+
+
 import json
 import requests
 from pathlib import Path
@@ -21,12 +27,12 @@ from collections import defaultdict
 
 def fetch_all_viatim_locations() -> List[Dict]:
     """
-    Fetch all ViaTim service points and filter to NL parcel locations.
+    Fetch all ViaTim service points and filter to the configured country.
 
     Returns
     -------
     list of dict
-        ViaTim locations in the Netherlands with standardized fields
+        ViaTim locations in the configured country with standardized fields
     """
     print("=" * 80)
     print("VIATIM COMPLETE LOCATION FETCH")
@@ -59,9 +65,10 @@ def fetch_all_viatim_locations() -> List[Dict]:
 
         print(f"✅ Fetched {len(all_servicepoints)} service points (NL + BE)")
 
-        # Filter to NL only
-        nl_locations = [sp for sp in all_servicepoints if sp.get('location', {}).get('country') == 'NL']
-        print(f"   🇳🇱 Netherlands: {len(nl_locations)}")
+        # Alleen het ingestelde land
+        country = CONFIG['viatim']['country']
+        nl_locations = [sp for sp in all_servicepoints if sp.get('location', {}).get('country') == country]
+        print(f"   {CONFIG['name']}: {len(nl_locations)}")
 
         # Convert to standardized format
         locations = []
@@ -84,7 +91,7 @@ def fetch_all_viatim_locations() -> List[Dict]:
                 'hours': sp.get('hours', {}),
             })
 
-        print(f"   📦 Converted {len(locations)} NL locations")
+        print(f"   📦 Converted {len(locations)} {country} locations")
         return locations
 
     except requests.exceptions.Timeout:
@@ -162,7 +169,7 @@ def save_results(locations: List[Dict]):
         metadata={
             "method": "api-public-servicepoints",
             "source": "https://production.viapunt-api.viatim.nl/public/servicepoints",
-            "country": "Netherlands",
+            "country": CONFIG["name"],
         },
     )
 

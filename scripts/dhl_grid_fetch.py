@@ -2,7 +2,7 @@
 Grid-based DHL location fetching to overcome 50-result API limit.
 
 Strategy:
-1. Create a grid of search circles covering the Netherlands
+1. Create a grid of search circles covering the configured country
 2. Fetch data for each grid cell
 3. Deduplicate results across overlapping cells
 4. Adaptively subdivide cells that hit the 50-limit
@@ -16,12 +16,17 @@ from collections import defaultdict
 from typing import List, Tuple, Set, Dict
 import math
 
-# Netherlands bounding box (approximate)
-NL_BOUNDS = {
-    'min_lat': 50.75,   # Southern tip (Limburg)
-    'max_lat': 53.55,   # Northern tip (Groningen)
-    'min_lon': 3.31,    # Western tip (Zeeland)
-    'max_lon': 7.23,    # Eastern tip (Groningen)
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from country_config import CONFIG  # noqa: E402
+
+# Bounding box van het land uit country_config
+_south, _west, _north, _east = CONFIG['bbox']
+COUNTRY_BOUNDS = {
+    'min_lat': _south,
+    'max_lat': _north,
+    'min_lon': _west,
+    'max_lon': _east,
 }
 
 # Grid configuration
@@ -29,7 +34,7 @@ SEARCH_RADIUS = 10000  # 10km radius per search circle
 GRID_SPACING_KM = 12   # 12km between grid points (ensures better coverage with overlap)
 
 # API configuration
-DHL_API_URL = "https://api-gw.dhlparcel.nl/parcel-shop-locations/NL/by-geo"
+DHL_API_URL = f"https://api-gw.dhlparcel.nl/parcel-shop-locations/{CONFIG['dhl']['country_path']}/by-geo"
 API_LIMIT = 50
 RATE_LIMIT_DELAY = 0.5  # seconds between requests
 
@@ -63,16 +68,16 @@ def km_to_lat_lon_offset(km: float, lat: float) -> Tuple[float, float]:
 
 
 def generate_grid_points() -> List[Tuple[float, float]]:
-    """Generate grid of lat/lon points covering the Netherlands."""
+    """Generate grid of lat/lon points covering the country bounding box."""
     grid_points = []
 
     # Start from southwest corner
-    current_lat = NL_BOUNDS['min_lat']
+    current_lat = COUNTRY_BOUNDS['min_lat']
 
-    while current_lat <= NL_BOUNDS['max_lat']:
-        current_lon = NL_BOUNDS['min_lon']
+    while current_lat <= COUNTRY_BOUNDS['max_lat']:
+        current_lon = COUNTRY_BOUNDS['min_lon']
 
-        while current_lon <= NL_BOUNDS['max_lon']:
+        while current_lon <= COUNTRY_BOUNDS['max_lon']:
             grid_points.append((current_lat, current_lon))
 
             # Move east
@@ -143,7 +148,7 @@ def subdivide_grid_cell(lat: float, lon: float, radius: int) -> List[Tuple[float
 
 def fetch_all_dhl_locations_grid() -> Dict[Tuple, Dict]:
     """
-    Fetch all DHL locations in Netherlands using grid approach.
+    Fetch all DHL locations in the configured country using grid approach.
     Returns dict mapping location keys to location data.
     """
     all_locations = {}  # key -> location data
@@ -163,8 +168,8 @@ def fetch_all_dhl_locations_grid() -> Dict[Tuple, Dict]:
     print(f"📍 Generated {len(cells_to_process)} initial grid cells")
     print(f"   Grid spacing: {GRID_SPACING_KM} km")
     print(f"   Search radius: {SEARCH_RADIUS/1000} km")
-    print(f"   Coverage area: {NL_BOUNDS['min_lat']:.2f}°N to {NL_BOUNDS['max_lat']:.2f}°N")
-    print(f"                  {NL_BOUNDS['min_lon']:.2f}°E to {NL_BOUNDS['max_lon']:.2f}°E")
+    print(f"   Coverage area: {COUNTRY_BOUNDS['min_lat']:.2f}°N to {COUNTRY_BOUNDS['max_lat']:.2f}°N")
+    print(f"                  {COUNTRY_BOUNDS['min_lon']:.2f}°E to {COUNTRY_BOUNDS['max_lon']:.2f}°E")
     print()
 
     total_api_calls = 0
@@ -226,7 +231,13 @@ def save_results(locations: Dict[Tuple, Dict], output_file: str = None):
         output_file = project_root / "data" / "dhl_all_locations.json"
 
     output_path = Path(output_file)
-    location_list = list(locations.values())
+    # De grid-cirkels steken over de landsgrens; houd alleen punten van het land zelf
+    country = CONFIG['iso2']
+    location_list = [
+        loc for loc in locations.values()
+        if (loc.get('address') or {}).get('countryCode', country) == country
+    ]
+    print(f"🌍 {len(location_list)} of {len(locations)} locations are in {country}")
 
     safe_save(
         carrier="DHL",
@@ -236,7 +247,7 @@ def save_results(locations: Dict[Tuple, Dict], output_file: str = None):
             "method": "grid-based-fetch",
             "grid_spacing_km": GRID_SPACING_KM,
             "search_radius_m": SEARCH_RADIUS,
-            "coverage_area": NL_BOUNDS,
+            "coverage_area": COUNTRY_BOUNDS,
         },
     )
 

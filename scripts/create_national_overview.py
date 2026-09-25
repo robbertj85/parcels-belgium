@@ -1,67 +1,73 @@
 """
-Create a national overview by aggregating all municipality data
+Create a national overview by aggregating all municipality data.
+
+Writes webapp/public/data/<national_slug>.geojson (pakketpunten only) and
+<national_slug>-boundaries.geojson (all municipal outlines; gitignored, the
+webapp loads the per-province chunks from create_provincial_boundaries.py).
+The national row in municipalities.json is written by build_municipalities.py.
 """
 
 import json
+import sys
 from pathlib import Path
+
 import geopandas as gpd
-from shapely.geometry import shape
 import pandas as pd
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from country_config import CONFIG, MUNICIPALITIES_FILE, NATIONAL_SLUG, WEBAPP_DATA_DIR  # noqa: E402
+
 
 def create_national_overview():
     """Combine all municipality GeoJSON files into a national overview"""
 
-    print("🇳🇱 Creating National Overview...")
+    print(f"Creating national overview for {CONFIG['name']}...")
 
-    data_dir = Path("webapp/public/data")
-    # Exclude nederland.geojson to avoid processing it during aggregation
-    geojson_files = [f for f in data_dir.glob("*.geojson") if f.name != "nederland.geojson"]
+    with open(MUNICIPALITIES_FILE, 'r', encoding='utf-8') as f:
+        slugs = [m['slug'] for m in json.load(f)]
+
+    geojson_files = [WEBAPP_DATA_DIR / f"{slug}.geojson" for slug in slugs]
+    missing = [f.name for f in geojson_files if not f.exists()]
+    geojson_files = [f for f in geojson_files if f.exists()]
 
     if not geojson_files:
         print("❌ No GeoJSON files found!")
         return
-
-    print(f"Found {len(geojson_files)} municipality files (excluding nederland.geojson)")
+    if missing:
+        print(f"⚠️  {len(missing)} municipality files missing: {', '.join(missing[:10])}")
 
     all_features = []
     boundary_features = []
     provider_stats = {}
 
-    # Read all GeoJSON files
     for geojson_file in geojson_files:
         with open(geojson_file, 'r', encoding='utf-8') as f:
             data = json.load(f)
 
-        # Extract pakketpunt features and boundary features (not buffers)
+        # Pakketpunten and boundaries (not buffers)
         for feature in data['features']:
-            if feature['properties'].get('type') == 'pakketpunt':
+            kind = feature['properties'].get('type')
+            if kind == 'pakketpunt':
                 all_features.append(feature)
-
-                # Count by provider
                 provider = feature['properties'].get('vervoerder', 'Unknown')
                 provider_stats[provider] = provider_stats.get(provider, 0) + 1
-            elif feature['properties'].get('type') == 'boundary':
+            elif kind == 'boundary':
                 boundary_features.append(feature)
 
     total_points = len(all_features)
     print(f"\n📊 Processed {len(geojson_files)} municipality files")
-
-    print(f"\n📊 National Statistics:")
     print(f"  Total points: {total_points}")
-    print(f"  Providers:")
     for provider, count in sorted(provider_stats.items(), key=lambda x: x[1], reverse=True):
         print(f"    {provider}: {count} points ({count/total_points*100:.1f}%)")
 
-    # Create GeoDataFrame to calculate national bounds
     gdf = gpd.GeoDataFrame.from_features(all_features, crs="EPSG:4326")
     bounds = gdf.total_bounds  # [minx, miny, maxx, maxy]
 
-    # Create national GeoJSON (pakketpunten only - no boundaries)
     national_data = {
         "type": "FeatureCollection",
         "metadata": {
-            "gemeente": "Nederland",
-            "slug": "nederland",
+            "gemeente": CONFIG["name"],
+            "slug": NATIONAL_SLUG,
             "generated_at": pd.Timestamp.now().isoformat() + "Z",
             "total_points": total_points,
             "providers": sorted(provider_stats.keys()),
@@ -72,25 +78,18 @@ def create_national_overview():
         "features": all_features
     }
 
-    # Save national overview (pakketpunten only)
-    output_file = data_dir / "nederland.geojson"
+    output_file = WEBAPP_DATA_DIR / f"{NATIONAL_SLUG}.geojson"
     with open(output_file, 'w', encoding='utf-8') as f:
-        json.dump(national_data, f, ensure_ascii=False, indent=2)
+        # Compact: this file holds every point in the country
+        json.dump(national_data, f, ensure_ascii=False, separators=(',', ':'))
 
-    file_size_mb = output_file.stat().st_size / (1024 * 1024)
+    print(f"\n✅ National overview: {output_file} ({output_file.stat().st_size / 1024 / 1024:.1f} MB)")
 
-    print(f"\n✅ National overview created:")
-    print(f"   File: {output_file}")
-    print(f"   Size: {file_size_mb:.1f} MB")
-    print(f"   Points: {total_points}")
-    print(f"   Municipalities: {len(geojson_files)}")
-
-    # Create separate boundaries file
     boundaries_data = {
         "type": "FeatureCollection",
         "metadata": {
-            "gemeente": "Nederland",
-            "slug": "nederland-boundaries",
+            "gemeente": CONFIG["name"],
+            "slug": f"{NATIONAL_SLUG}-boundaries",
             "generated_at": pd.Timestamp.now().isoformat() + "Z",
             "municipalities_included": len(geojson_files),
             "boundaries_count": len(boundary_features)
@@ -98,53 +97,14 @@ def create_national_overview():
         "features": boundary_features
     }
 
-    # Save boundaries separately
-    boundaries_file = data_dir / "nederland-boundaries.geojson"
+    boundaries_file = WEBAPP_DATA_DIR / f"{NATIONAL_SLUG}-boundaries.geojson"
     with open(boundaries_file, 'w', encoding='utf-8') as f:
-        json.dump(boundaries_data, f, ensure_ascii=False, indent=2)
+        json.dump(boundaries_data, f, ensure_ascii=False, separators=(',', ':'))
 
-    boundaries_size_mb = boundaries_file.stat().st_size / (1024 * 1024)
-
-    print(f"\n✅ Boundaries file created:")
-    print(f"   File: {boundaries_file}")
-    print(f"   Size: {boundaries_size_mb:.1f} MB")
-    print(f"   Boundaries: {len(boundary_features)}")
+    print(f"✅ Boundaries file: {boundaries_file} ({boundaries_file.stat().st_size / 1024 / 1024:.1f} MB)")
 
     return provider_stats
 
-def update_municipalities_json():
-    """Add Nederland entry to municipalities.json"""
-
-    municipalities_file = Path("webapp/public/municipalities.json")
-
-    with open(municipalities_file, 'r', encoding='utf-8') as f:
-        municipalities = json.load(f)
-
-    # Check if Nederland already exists
-    if any(m['slug'] == 'nederland' for m in municipalities):
-        print("\n'Nederland' already in municipalities.json")
-        return
-
-    # Add Nederland as first entry
-    nederland = {
-        "name": "🇳🇱 Nederland (Landelijk)",
-        "slug": "nederland",
-        "province": "Alle provincies",
-        "population": sum(m['population'] for m in municipalities)
-    }
-
-    municipalities.insert(0, nederland)
-
-    with open(municipalities_file, 'w', encoding='utf-8') as f:
-        json.dump(municipalities, f, ensure_ascii=False, indent=2)
-
-    print(f"\n✅ Added 'Nederland' to municipalities.json")
-    print(f"   Total population: {nederland['population']:,}")
 
 if __name__ == "__main__":
-    provider_stats = create_national_overview()
-    update_municipalities_json()
-
-    print("\n" + "="*60)
-    print("✅ National Overview Complete!")
-    print("="*60)
+    create_national_overview()

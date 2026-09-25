@@ -37,17 +37,12 @@ DATA_DIR = Path(__file__).parent.parent / "data"
 # it breaks, loose enough that one skipped Monday is not an incident.
 DEFAULT_MAX_AGE_DAYS = 21
 
-# Cache filename stem -> the carrier name used everywhere else (CARRIERS in
-# compute_statistics.py, CARRIER_ORDER in webapp/lib/carriers.ts).
-CARRIER_NAMES = {
-    "amazon": "Amazon",
-    "budbee": "Budbee",
-    "dhl": "DHL",
-    "dpd": "DPD",
-    "gls": "GLS",
-    "inpost": "InPost",
-    "viatim": "ViaTim",
-}
+# Cache filename stem -> the carrier name used everywhere else, derived from the
+# one carrier list in country_config.py.
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from country_config import CARRIERS  # noqa: E402
+
+CARRIER_NAMES = {carrier.lower(): carrier for carrier in CARRIERS}
 
 
 def carrier_name(path: Path) -> str:

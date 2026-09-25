@@ -1,7 +1,9 @@
 """
-Fetch all Amazon Hub Locker and Counter locations in the Netherlands.
+Fetch all Amazon Hub Locker and Counter locations in the configured country.
 
-Uses Playwright to interact with amazon.nl/ulp and capture the fetch_locations API.
+Uses Playwright to interact with the Amazon ULP page (amazon.com.be/ulp for
+Belgium) and capture the fetch_locations API.
+Each search returns at most ~20 locations, so dense cities can be undercounted.
 Searches by municipality name and clicks on autocomplete suggestions to trigger searches.
 
 Prerequisites:
@@ -13,6 +15,8 @@ Usage:
 """
 
 import json
+import re
+import sys
 import time
 from pathlib import Path
 from datetime import datetime
@@ -26,11 +30,29 @@ except ImportError:
     print("   playwright install chromium")
     exit(1)
 
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from country_config import CONFIG, in_bbox  # noqa: E402
+
+ULP_URL = f"https://{CONFIG['amazon']['domain']}/ulp"
+
+
+def dismiss_overlays(page):
+    """Remove the 'go to amazon.nl?' redirect modal and accept cookies.
+
+    amazon.com.be shows a geo-redirect modal that intercepts every click.
+    """
+    page.evaluate("document.querySelectorAll('[id^=redir], .redir-modal-bg').forEach(e => e.remove())")
+    accept_btn = page.query_selector('#sp-cc-accept')
+    if accept_btn:
+        accept_btn.click(force=True)
+        time.sleep(2)
+
 
 def load_municipalities() -> List[str]:
     """
     Load municipality names from municipalities.json.
-    Returns a list of 342 municipality names (excluding "Nederland (totaal)").
+    Returns the municipality names (excluding the national row). A bilingual
+    Brussels name like "Elsene (Ixelles)" is searched as "Elsene".
     """
     municipalities_file = Path(__file__).parent.parent / "webapp" / "public" / "municipalities.json"
 
@@ -39,7 +61,7 @@ def load_municipalities() -> List[str]:
 
     # Filter out "Nederland (totaal)" and extract just the names
     names = [
-        m['name'] for m in municipalities
+        re.sub(r"\s*\(.*\)$", "", m['name']) for m in municipalities
         if m.get('code') is not None
     ]
 
@@ -49,7 +71,7 @@ def load_municipalities() -> List[str]:
 
 def fetch_all_amazon_locations() -> List[Dict]:
     """
-    Fetch all Amazon Hub locations in the Netherlands using municipality-based search.
+    Fetch all Amazon Hub locations using municipality-based search.
     Uses autocomplete selection to properly trigger location searches.
     """
     print("=" * 80)
@@ -67,7 +89,7 @@ def fetch_all_amazon_locations() -> List[Dict]:
         print("Launching browser...")
         browser = p.chromium.launch(headless=True)
         context = browser.new_context(
-            locale="nl-NL",
+            locale=CONFIG["amazon"]["locale"],
             viewport={"width": 1280, "height": 800},
         )
         page = context.new_page()
@@ -87,19 +109,14 @@ def fetch_all_amazon_locations() -> List[Dict]:
         page.on("response", handle_response)
 
         # Navigate to ULP page
-        print("Loading amazon.nl/ulp...")
+        print(f"Loading {ULP_URL}...")
         try:
-            page.goto("https://www.amazon.nl/ulp", wait_until="networkidle", timeout=60000)
+            page.goto(ULP_URL, wait_until="networkidle", timeout=60000)
         except PlaywrightTimeout:
             print("Page load timeout, continuing anyway...")
 
         time.sleep(5)
-
-        # Accept cookies if present
-        accept_btn = page.query_selector('#sp-cc-accept')
-        if accept_btn:
-            accept_btn.click()
-            time.sleep(2)
+        dismiss_overlays(page)
 
         print()
 
@@ -138,7 +155,7 @@ def fetch_all_amazon_locations() -> List[Dict]:
 
             try:
                 # Clear and type the municipality name
-                search_input.click()
+                search_input.click(force=True)
                 time.sleep(0.2)
                 search_input.fill('')
                 time.sleep(0.2)
@@ -154,7 +171,7 @@ def fetch_all_amazon_locations() -> List[Dict]:
                     try:
                         text = suggestion.inner_text().lower()
                         if text.startswith(municipality.lower()):
-                            suggestion.click()
+                            suggestion.click(force=True)
                             clicked = True
                             time.sleep(2.5)  # Wait for API response
                             break
@@ -164,7 +181,7 @@ def fetch_all_amazon_locations() -> List[Dict]:
                 # If no exact match, click first suggestion
                 if not clicked and suggestions:
                     try:
-                        suggestions[0].click()
+                        suggestions[0].click(force=True)
                         time.sleep(2.5)
                     except:
                         pass
@@ -173,13 +190,9 @@ def fetch_all_amazon_locations() -> List[Dict]:
                 failed_searches.append(municipality)
                 # Try to recover by refreshing
                 try:
-                    page.goto("https://www.amazon.nl/ulp", wait_until="networkidle", timeout=30000)
+                    page.goto(ULP_URL, wait_until="networkidle", timeout=30000)
                     time.sleep(3)
-                    # Re-accept cookies if needed
-                    accept_btn = page.query_selector('#sp-cc-accept')
-                    if accept_btn:
-                        accept_btn.click()
-                        time.sleep(2)
+                    dismiss_overlays(page)
                 except:
                     pass
                 continue
@@ -202,8 +215,8 @@ def fetch_all_amazon_locations() -> List[Dict]:
                         latitude = coords.get('latitude', 0)
                         longitude = coords.get('longitude', 0)
 
-                        # Skip if no valid coordinates
-                        if not latitude or latitude == 0:
+                        # Skip if no valid coordinates or outside the country
+                        if not latitude or not in_bbox(latitude, longitude):
                             continue
 
                         # Store location with standardized format
@@ -345,8 +358,8 @@ def save_results(locations: List[Dict]):
         output_path=output_path,
         metadata={
             "method": "playwright-scraping-municipality-autocomplete",
-            "source": "https://www.amazon.nl/ulp",
-            "country": "Netherlands",
+            "source": ULP_URL,
+            "country": CONFIG["name"],
         },
     )
 

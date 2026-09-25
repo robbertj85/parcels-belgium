@@ -13,212 +13,55 @@ from datetime import datetime
 
 # ---------- loading data ----------
 
-# In-memory cache for gemeente polygons (session-level)
+from country_config import CONFIG, MUNICIPALITY_POLYGONS_FILE
+
+# Gemeentegrenzen komen uit een lokaal bestand dat scripts/build_municipalities.py
+# eenmalig (en na elke gemeentefusie opnieuw) opbouwt. Geen Overpass-call per
+# gemeente meer: sneller, reproduceerbaar, en nodig om later ook ~7.900 Italiaanse
+# comuni aan te kunnen.
 _gemeente_polygon_cache = {}
-
-# Persistent cache configuration
-POLYGON_CACHE_FILE = Path(__file__).parent / "data" / "municipality_polygon_cache.json"
-
-# Persistent cache data (loaded on first use)
-_persistent_polygon_cache = None
-_persistent_cache_modified = False
+_polygon_index = None
 
 
-def _is_cache_refresh_week() -> bool:
-    """
-    Check if current date is in a cache refresh week.
-    Cache refreshes in the last week of June and last week of December.
-    This aligns with Dutch municipal reorganizations (typically Jan 1).
-    """
-    today = datetime.now()
-    month = today.month
-    day = today.day
+def _load_polygon_index() -> dict:
+    """Naam, slug, NIS-code en aliassen -> shapely geometry."""
+    global _polygon_index
+    if _polygon_index is not None:
+        return _polygon_index
 
-    # Last week of June (days 24-30)
-    if month == 6 and day >= 24:
-        return True
-
-    # Last week of December (days 25-31)
-    if month == 12 and day >= 25:
-        return True
-
-    return False
-
-
-def _load_persistent_cache() -> dict:
-    """Load the persistent polygon cache from disk."""
-    global _persistent_polygon_cache
-
-    if _persistent_polygon_cache is not None:
-        return _persistent_polygon_cache
-
-    if POLYGON_CACHE_FILE.exists():
-        try:
-            with open(POLYGON_CACHE_FILE, 'r', encoding='utf-8') as f:
-                _persistent_polygon_cache = json.load(f)
-            print(f"  📦 Loaded polygon cache: {len(_persistent_polygon_cache)} municipalities")
-        except (json.JSONDecodeError, IOError) as e:
-            print(f"  ⚠️  Could not load polygon cache: {e}")
-            _persistent_polygon_cache = {}
-    else:
-        _persistent_polygon_cache = {}
-
-    return _persistent_polygon_cache
-
-
-def _save_persistent_cache() -> None:
-    """Save the persistent polygon cache to disk."""
-    global _persistent_polygon_cache, _persistent_cache_modified
-
-    if _persistent_polygon_cache is None or not _persistent_cache_modified:
-        return
-
-    try:
-        POLYGON_CACHE_FILE.parent.mkdir(parents=True, exist_ok=True)
-        with open(POLYGON_CACHE_FILE, 'w', encoding='utf-8') as f:
-            json.dump(_persistent_polygon_cache, f, indent=2, ensure_ascii=False)
-        _persistent_cache_modified = False
-    except IOError as e:
-        print(f"  ⚠️  Could not save polygon cache: {e}")
-
-
-def check_polygon_cache_expiry() -> None:
-    """
-    Check if polygon cache should be refreshed.
-    Cache is cleared in the last week of June and December to pick up
-    any Dutch municipal boundary changes (which typically happen Jan 1).
-    """
-    global _persistent_cache_modified
-
-    if not _is_cache_refresh_week():
-        return
-
-    cache = _load_persistent_cache()
-
-    if not cache:
-        return
-
-    # Check if cache was already refreshed this period
-    # by looking at the cached_at dates
-    today = datetime.now()
-    refresh_month = today.month  # 6 or 12
-    refresh_year = today.year
-
-    # Check if any entry was cached in the current refresh period
-    for data in cache.values():
-        cached_at = data.get('cached_at', '')
-        if cached_at:
-            try:
-                cached_date = datetime.fromisoformat(cached_at)
-                # If cached in same month/year during refresh week, already refreshed
-                if cached_date.year == refresh_year and cached_date.month == refresh_month and cached_date.day >= 24:
-                    print(f"  📦 Cache already refreshed this period (last update: {cached_at[:10]})")
-                    return
-            except ValueError:
-                continue
-
-    # Clear the cache for refresh
-    print(f"  🔄 Cache refresh period (last week of {'June' if refresh_month == 6 else 'December'})")
-    print(f"  🗑️  Clearing {len(cache)} cached polygons for refresh...")
-    cache.clear()
-    _persistent_cache_modified = True
-    _save_persistent_cache()
-
-
-def get_polygon_cache_stats() -> dict:
-    """Get statistics about the polygon cache."""
-    cache = _load_persistent_cache()
-
-    if not cache:
-        return {"total": 0, "next_refresh": _get_next_refresh_date()}
-
-    # Find oldest and newest cache dates
-    cached_dates = []
-    for data in cache.values():
-        cached_at = data.get('cached_at', '')
-        if cached_at:
-            try:
-                cached_dates.append(datetime.fromisoformat(cached_at))
-            except ValueError:
-                continue
-
-    return {
-        "total": len(cache),
-        "oldest_cached": min(cached_dates).strftime('%Y-%m-%d') if cached_dates else None,
-        "newest_cached": max(cached_dates).strftime('%Y-%m-%d') if cached_dates else None,
-        "next_refresh": _get_next_refresh_date(),
-        "is_refresh_week": _is_cache_refresh_week(),
-    }
-
-
-def _get_next_refresh_date() -> str:
-    """Get the next cache refresh date."""
-    today = datetime.now()
-
-    # Check if we're before or after June 24
-    june_refresh = datetime(today.year, 6, 24)
-    dec_refresh = datetime(today.year, 12, 25)
-
-    if today < june_refresh:
-        return june_refresh.strftime('%Y-%m-%d')
-    elif today < dec_refresh:
-        return dec_refresh.strftime('%Y-%m-%d')
-    else:
-        return datetime(today.year + 1, 6, 24).strftime('%Y-%m-%d')
-
-
-def _get_cached_polygon(gemeente_naam: str, country_hint: str = "Nederland"):
-    """
-    Get a municipality polygon from persistent cache if available.
-    Returns GeoDataFrame or None if not cached.
-    """
-    from shapely import wkt
-
-    cache = _load_persistent_cache()
-    cache_key = f"{gemeente_naam}:{country_hint}"
-
-    if cache_key not in cache:
-        return None
-
-    entry = cache[cache_key]
-
-    try:
-        geom = wkt.loads(entry['geometry_wkt'])
-        gdf = gpd.GeoDataFrame(
-            {'gemeente': [gemeente_naam]},
-            geometry=[geom],
-            crs="EPSG:4326"
+    if not MUNICIPALITY_POLYGONS_FILE.exists():
+        raise FileNotFoundError(
+            f"{MUNICIPALITY_POLYGONS_FILE} ontbreekt. Draai eerst: python scripts/build_municipalities.py"
         )
-        return gdf
-    except Exception as e:
-        print(f"  ⚠️  Could not load cached polygon for '{gemeente_naam}': {e}")
-        return None
 
+    from shapely.geometry import shape
 
-def _cache_polygon(gemeente_naam: str, gdf: gpd.GeoDataFrame, country_hint: str = "Nederland"):
-    """Store a municipality polygon in the persistent cache."""
-    global _persistent_cache_modified
+    with open(MUNICIPALITY_POLYGONS_FILE, 'r', encoding='utf-8') as f:
+        collection = json.load(f)
 
-    from shapely import wkt
+    municipalities_file = MUNICIPALITY_POLYGONS_FILE.parent / "municipalities_all.json"
+    aliases = {}
+    if municipalities_file.exists():
+        with open(municipalities_file, 'r', encoding='utf-8') as f:
+            for m in json.load(f):
+                aliases[m['slug']] = m.get('aliases', [])
 
-    cache = _load_persistent_cache()
-    cache_key = f"{gemeente_naam}:{country_hint}"
+    index = {}
+    for feature in collection['features']:
+        props = feature['properties']
+        geom = shape(feature['geometry'])
+        if not geom.is_valid:
+            geom = geom.buffer(0)
+        keys = [props['gemeente'], props['slug'], props.get('code')] + aliases.get(props['slug'], [])
+        for key in keys:
+            if key:
+                index.setdefault(key.lower(), (props['gemeente'], geom))
+    _polygon_index = index
+    return index
 
-    # Convert geometry to WKT for storage
-    geom = gdf.geometry.iloc[0]
-    geometry_wkt = wkt.dumps(geom, rounding_precision=6)
-
-    cache[cache_key] = {
-        'geometry_wkt': geometry_wkt,
-        'cached_at': datetime.now().isoformat(),
-        'gemeente': gemeente_naam
-    }
-
-    _persistent_cache_modified = True
-    _save_persistent_cache()
 
 # Initialize Nominatim geolocator (with user agent)
-_nominatim_geolocator = Nominatim(user_agent="pakketpunten_app")
+_nominatim_geolocator = Nominatim(user_agent="pakketpunten_belgie")
 
 
 def get_lat_lon(gemeente_naam: str) -> tuple:
@@ -236,8 +79,8 @@ def get_lat_lon(gemeente_naam: str) -> tuple:
     """
     import time
 
-    # Add Netherlands to improve geocoding accuracy
-    query = f"{gemeente_naam}, Netherlands"
+    # Land toevoegen voor een eenduidig resultaat
+    query = f"{gemeente_naam}, {CONFIG['name']}"
 
     try:
         location = _nominatim_geolocator.geocode(query, timeout=10)
@@ -250,31 +93,6 @@ def get_lat_lon(gemeente_naam: str) -> tuple:
     except Exception as e:
         raise ValueError(f"Geocoding failed for '{gemeente_naam}': {e}")
 
-# Municipality name mappings for special cases in Overpass API
-# Maps user-provided names to official OSM names
-GEMEENTE_NAME_MAPPING = {
-    # Names with special characters (OSM actually uses the apostrophe)
-    "s-Hertogenbosch": "'s-Hertogenbosch",  # Our data has no apostrophe, OSM has it
-    # "Den Haag": "'s-Gravenhage",  # Commented out - "Den Haag" works with ISO filter
-
-    # Names with parentheses (disambiguation) - OSM uses just "Bergen" as official name
-    # but uses nat_name to distinguish. We map to nat_name for accurate filtering.
-    "Bergen (L.)": "Bergen",  # Limburg - nat_name: "Bergen (L)", gemeentecode: 0893
-    "Bergen (NH.)": "Bergen",  # Noord-Holland - nat_name: "Bergen (NH)", gemeentecode: 0373
-
-    # Abbreviated names (c.a. = cum annexis = with additions)
-    "Nuenen": "Nuenen c.a.",
-
-    # Add more mappings as needed
-}
-
-# Municipality codes for disambiguation when multiple municipalities share the same name
-# Maps user-provided names to CBS gemeentecode for precise OSM filtering
-GEMEENTE_CODE_MAPPING = {
-    "Bergen (L.)": "0893",   # Bergen in Limburg
-    "Bergen (NH.)": "0373",  # Bergen in Noord-Holland
-}
-
 # Overpass mirrors, tried in order. overpass-api.de answers HTTP 406 to a
 # request without a User-Agent, and every mirror rate-limits with 429, so the
 # name and the backoff below are load-bearing rather than politeness: the
@@ -283,7 +101,7 @@ OVERPASS_SERVERS = (
     "https://overpass-api.de/api/interpreter",
     "https://overpass.kumi.systems/api/interpreter",
 )
-OVERPASS_USER_AGENT = "pakketpunten_boundary_fetcher/1.0"
+OVERPASS_USER_AGENT = "pakketpunten_belgie/1.0"
 
 
 def overpass_post(
@@ -345,174 +163,29 @@ def overpass_post(
     raise ValueError("Overpass API onbereikbaar - " + "; ".join(errors))
 
 
-def get_gemeente_polygon(gemeente_naam: str, country_hint: str = "Nederland"):
+def get_gemeente_polygon(gemeente_naam: str, country_hint: str = None):
     """
-    Haalt de exacte gemeentegrens (polygon) op uit OpenStreetMap via Overpass API.
+    Geef de gemeentegrens als GeoDataFrame (EPSG:4326).
 
-    Deze functie gebruikt admin_level=8 om volledige gemeentegrenzen op te halen,
-    inclusief samengevoegde gebieden (bijv. Rotterdam met Hoek van Holland en Rozenburg).
+    Zoekt op naam, slug, NIS-code of alias in data/municipality_polygons.geojson.
 
-    Uses a two-level caching strategy:
-    1. In-memory cache (session-level, instant)
-    2. Persistent file cache (survives restarts, expires after 25 batch runs)
-
-    Parameters
-    ----------
-    gemeente_naam : str
-        Naam van de gemeente, bv. "Utrecht".
-    country_hint : str
-        Optioneel land als zoekfilter (default: "Nederland").
-
-    Returns
-    -------
-    geopandas.GeoDataFrame
-        GeoDataFrame met de gemeentegrens als polygon geometry (EPSG:4326).
+    Raises
+    ------
+    ValueError
+        Wanneer de gemeente niet in het grenzenbestand staat.
     """
-    import time
-    from shapely.geometry import shape
+    key = gemeente_naam.lower()
+    if key in _gemeente_polygon_cache:
+        return _gemeente_polygon_cache[key]
 
-    # Apply name mapping for special cases
-    original_name = gemeente_naam
-    gemeente_naam = GEMEENTE_NAME_MAPPING.get(gemeente_naam, gemeente_naam)
+    entry = _load_polygon_index().get(key)
+    if entry is None:
+        raise ValueError(f"Gemeente '{gemeente_naam}' niet gevonden in {MUNICIPALITY_POLYGONS_FILE.name}.")
 
-    # Check if we need to use gemeentecode for disambiguation
-    gemeentecode = GEMEENTE_CODE_MAPPING.get(original_name)
-
-    # Level 1: Check in-memory cache first (fastest)
-    cache_key = f"{original_name}:{country_hint}"
-    if cache_key in _gemeente_polygon_cache:
-        return _gemeente_polygon_cache[cache_key]
-
-    # Level 2: Check persistent file cache (avoids API call)
-    cached_gdf = _get_cached_polygon(original_name, country_hint)
-    if cached_gdf is not None:
-        # Store in in-memory cache for subsequent calls in same session
-        _gemeente_polygon_cache[cache_key] = cached_gdf
-        return cached_gdf
-
-    # Add rate limiting for Overpass API (be nice to the server)
-    time.sleep(1)
-
-    # Retry logic with exponential backoff for timeouts
-    max_retries = 5  # Increased from 3 to handle transient Overpass API issues
-    retry_delay = 3  # seconds
-    last_exception = None
-
-    for attempt in range(max_retries):
-        try:
-            # Use Overpass API to get admin_level=8 boundary (municipality level)
-            # This ensures we get the full municipality, not just the city center
-            overpass_url = "https://overpass-api.de/api/interpreter"
-
-            # Overpass QL query to find municipality boundary with admin_level=8
-            # Increased timeout to 45s to reduce likelihood of 504 errors
-            # Search within Netherlands (ISO3166-1=NL) to avoid getting wrong country (e.g., Breda, Iowa instead of Breda, NL)
-            # For ambiguous names (like Bergen), add ref:gemeentecode filter for precise matching
-            if gemeentecode:
-                # Use gemeentecode for disambiguation (e.g., Bergen L. vs Bergen NH.)
-                query = f"""
-                [out:json][timeout:45];
-                area["ISO3166-1"="NL"]["admin_level"="2"]->.searchArea;
-                (
-                  relation(area.searchArea)["admin_level"="8"]["boundary"="administrative"]["name"="{gemeente_naam}"]["ref:gemeentecode"="{gemeentecode}"];
-                );
-                out geom;
-                """
-            else:
-                # Standard query by name only
-                query = f"""
-                [out:json][timeout:45];
-                area["ISO3166-1"="NL"]["admin_level"="2"]->.searchArea;
-                (
-                  relation(area.searchArea)["admin_level"="8"]["boundary"="administrative"]["name"="{gemeente_naam}"];
-                );
-                out geom;
-                """
-
-            response = requests.post(
-                overpass_url,
-                data={'data': query},
-                headers={'User-Agent': 'pakketpunten_boundary_fetcher/1.0'},
-                timeout=90  # Increased from 60s to handle slower API responses
-            )
-            response.raise_for_status()
-            data = response.json()
-
-            if not data.get('elements') or len(data['elements']) == 0:
-                if gemeentecode:
-                    raise ValueError(f"Gemeente '{original_name}' niet gevonden via Overpass API (admin_level=8, gemeentecode={gemeentecode}).")
-                else:
-                    raise ValueError(f"Gemeente '{original_name}' niet gevonden via Overpass API (admin_level=8).")
-
-            # Get the first relation (should be the municipality boundary)
-            relation = data['elements'][0]
-
-            if relation['type'] != 'relation':
-                raise ValueError(f"Verwachtte een relation, kreeg {relation['type']}.")
-
-            # Extract geometry from Overpass format
-            # Overpass returns geometry in "members" array with "geometry" field
-            geojson_feature = {
-                "type": "Feature",
-                "properties": relation.get('tags', {}),
-                "geometry": _extract_geometry_from_overpass(relation)
-            }
-
-            # Convert to Shapely geometry
-            geom = shape(geojson_feature['geometry'])
-
-            # Validate and fix geometry (common OSM issue: self-intersections)
-            if not geom.is_valid:
-                print(f"  ⚠️  Invalid geometry detected for '{original_name}', attempting to fix...")
-                geom = geom.buffer(0)  # Fix self-intersections and topology errors
-
-            if not geom.is_valid:
-                raise ValueError(f"Kon geometry voor '{original_name}' niet repareren.")
-
-            # Create GeoDataFrame
-            gdf = gpd.GeoDataFrame(
-                {'gemeente': [original_name]},
-                geometry=[geom],
-                crs="EPSG:4326"
-            )
-
-            # Cache the result at both levels
-            _gemeente_polygon_cache[cache_key] = gdf  # In-memory (session)
-            _cache_polygon(original_name, gdf, country_hint)  # Persistent (file)
-
-            return gdf
-
-        except requests.exceptions.HTTPError as e:
-            # Check if it's a timeout or rate limit error that we should retry
-            if e.response is not None and e.response.status_code in [429, 504, 503]:
-                last_exception = e
-                error_type = "Gateway Timeout" if e.response.status_code == 504 else "Rate Limit/Service Unavailable"
-                if attempt < max_retries - 1:
-                    wait_time = retry_delay * (2 ** attempt)  # Exponential backoff
-                    print(f"  ⏳ Overpass API {error_type} for '{original_name}' (HTTP {e.response.status_code})")
-                    print(f"     Attempt {attempt + 1}/{max_retries}, retrying in {wait_time}s...")
-                    time.sleep(wait_time)
-                    continue
-                else:
-                    # All retries exhausted
-                    raise ValueError(f"Overpass API fout voor '{original_name}': {e.response.status_code} {error_type} after {max_retries} attempts")
-            else:
-                # Other HTTP errors should not be retried
-                raise ValueError(f"Overpass API fout voor '{original_name}': {e}")
-        except requests.RequestException as e:
-            # Network errors, timeouts, etc.
-            last_exception = e
-            if attempt < max_retries - 1:
-                wait_time = retry_delay * (2 ** attempt)
-                print(f"  ⏳ Network error for '{original_name}' (attempt {attempt + 1}/{max_retries}), retrying in {wait_time}s...")
-                time.sleep(wait_time)
-                continue
-            else:
-                raise ValueError(f"Overpass API fout voor '{original_name}': Network error after {max_retries} attempts - {e}")
-
-    # If we get here, all retries failed
-    if last_exception:
-        raise ValueError(f"Overpass API fout voor '{original_name}': {last_exception}")
+    name, geom = entry
+    gdf = gpd.GeoDataFrame({'gemeente': [name]}, geometry=[geom], crs="EPSG:4326")
+    _gemeente_polygon_cache[key] = gdf
+    return gdf
 
 
 def _extract_geometry_from_overpass(relation):
@@ -598,7 +271,7 @@ def _extract_geometry_from_overpass(relation):
     return mapping(geom)
 
 
-def get_gemeente_geometry(gemeente_naam: str, mode: str = "bbox", country_hint: str = "Nederland"):
+def get_gemeente_geometry(gemeente_naam: str, mode: str = "bbox", country_hint: str = None):
     """
     Haalt geometrische info van een gemeente uit OpenStreetMap via admin_level=8 boundary.
 
@@ -615,7 +288,7 @@ def get_gemeente_geometry(gemeente_naam: str, mode: str = "bbox", country_hint: 
         "bbox"   -> retourneert (lat_min, lon_min, lat_max, lon_max)
         "circle" -> retourneert (center_lat, center_lon, radius_meters)
     country_hint : str
-        Optioneel land als zoekfilter (default: "Nederland").
+        Niet meer gebruikt (grenzen komen uit het lokale bestand).
 
     Returns
     -------

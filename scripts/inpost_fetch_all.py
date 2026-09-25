@@ -1,16 +1,22 @@
 """
-Fetch all InPost parcel locker and PUDO locations in the Netherlands.
+Fetch all InPost parcel locker and PUDO locations in the configured country.
 
 InPost (owner of Mondial Relay) operates parcel lockers and pickup/drop-off
-points across the Netherlands. The public EasyPack API provides paginated
+points across Europe; in Belgium this includes the former Mondial Relay points. The public EasyPack API provides paginated
 access to all locations without authentication.
 
-API: https://api-global-points.easypack24.net/v1/points?country=NL
+API: https://api-global-points.easypack24.net/v1/points?country=<ISO2>
      No authentication required. Paginated (max 100 per page).
 
 Usage:
     python scripts/inpost_fetch_all.py
 """
+
+import sys as _sys
+from pathlib import Path as _Path
+_sys.path.insert(0, str(_Path(__file__).resolve().parent.parent))
+from country_config import CONFIG  # noqa: E402
+
 
 import json
 import time
@@ -23,7 +29,7 @@ from collections import defaultdict
 
 def fetch_all_inpost_locations() -> List[Dict]:
     """
-    Fetch all InPost points in the Netherlands via paginated API.
+    Fetch all InPost points in the configured country via paginated API.
 
     Returns
     -------
@@ -37,7 +43,7 @@ def fetch_all_inpost_locations() -> List[Dict]:
 
     print("📡 Fetching all InPost locations from EasyPack API...")
     print("   Endpoint: https://api-global-points.easypack24.net/v1/points")
-    print("   Country: NL")
+    print(f"   Country: {CONFIG['inpost']['country']}")
     print()
 
     all_items = []
@@ -50,7 +56,7 @@ def fetch_all_inpost_locations() -> List[Dict]:
             response = requests.get(
                 "https://api-global-points.easypack24.net/v1/points",
                 params={
-                    "country": "NL",
+                    "country": CONFIG["inpost"]["country"],
                     "per_page": per_page,
                     "page": page,
                 },
@@ -104,7 +110,7 @@ def fetch_all_inpost_locations() -> List[Dict]:
         # Skip non-operating and test items
         if status != "Operating":
             continue
-        if item.get("name", "").startswith("TESTNL"):
+        if item.get("name", "").upper().startswith("TEST"):
             continue
 
         loc = item.get("location", {})
@@ -206,7 +212,7 @@ def save_results(locations: List[Dict]):
         metadata={
             "method": "api-easypack-paginated",
             "source": "https://api-global-points.easypack24.net/v1/points",
-            "country": "Netherlands",
+            "country": CONFIG["name"],
         },
     )
 

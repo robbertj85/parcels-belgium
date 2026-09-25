@@ -5,7 +5,6 @@ This script is designed to be run weekly via GitHub Actions.
 
 import json
 import sys
-import time
 from pathlib import Path
 from datetime import datetime
 
@@ -14,7 +13,8 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from api_client import get_data_pakketpunten
 from geo_analysis import get_bufferzones
-from utils import get_gemeente_polygon, check_polygon_cache_expiry, get_polygon_cache_stats
+from utils import get_gemeente_polygon
+from country_config import MUNICIPALITIES_FILE, CONFIG
 import geopandas as gpd
 import pandas as pd
 
@@ -41,10 +41,7 @@ def _clean_openingstijden(value):
 
 def load_municipalities():
     """Load the list of municipalities to process."""
-    # Use path relative to script location, not current working directory
-    script_dir = Path(__file__).parent
-    municipalities_file = script_dir.parent / "data" / "municipalities_all.json"
-    with open(municipalities_file, "r", encoding="utf-8") as f:
+    with open(MUNICIPALITIES_FILE, "r", encoding="utf-8") as f:
         return json.load(f)
 
 def process_municipality(gemeente_data):
@@ -245,16 +242,7 @@ def main():
     print("🚀 Starting batch data generation")
     print(f"⏰ Started at: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
 
-    # Check if polygon cache should be refreshed (last week of June/December)
-    print("\n📦 Checking polygon cache...")
-    check_polygon_cache_expiry()
-    cache_stats = get_polygon_cache_stats()
-    if cache_stats['total'] > 0:
-        print(f"   Cached polygons: {cache_stats['total']}")
-        print(f"   Cache dates: {cache_stats.get('oldest_cached', 'N/A')} to {cache_stats.get('newest_cached', 'N/A')}")
-        print(f"   Next refresh: {cache_stats['next_refresh']}")
-    else:
-        print("   No cached polygons (will fetch from Overpass API)")
+    print(f"🌍 Land: {CONFIG['name']}, vervoerders: {', '.join(CONFIG['carriers'])}")
 
     # Load municipalities
     municipalities = load_municipalities()
@@ -272,12 +260,6 @@ def main():
             "slug": gemeente_data["slug"],
             **result
         })
-
-        # Rate limiting: Wait 2 seconds between requests to respect Nominatim usage policy
-        # (1 request per second, but we're being extra cautious)
-        if idx < total:
-            print(f"⏳ Rate limiting: waiting 2 seconds before next municipality...")
-            time.sleep(2)
 
     # Summary
     print("\n" + "="*60)
@@ -360,32 +342,14 @@ def main():
 
     print(f"\n💾 Summary saved to: {summary_file}")
 
-    # Print final cache statistics
-    final_cache_stats = get_polygon_cache_stats()
-    print(f"\n📦 Polygon cache: {final_cache_stats['total']} municipalities cached")
-
     print(f"⏰ Completed at: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
 
-    # Exit with error code only if any had real errors
-    # Exclude non-fatal errors: "No data found" and "Overpass API" timeouts
-    real_failures = [
-        r for r in failed
-        if "No data found" not in r.get('error', '')
-        and "Overpass API" not in r.get('error', '')
-    ]
-
-    # Count Overpass API failures separately
-    overpass_failures = [r for r in failed if "Overpass API" in r.get('error', '')]
+    # Exit with error code only if any had real errors ("No data found" is not one)
+    real_failures = [r for r in failed if "No data found" not in r.get('error', '')]
 
     if real_failures:
-        print(f"\n⚠️  {len(real_failures)} municipalities had real errors (not just no data or API timeouts)")
+        print(f"\n⚠️  {len(real_failures)} municipalities had real errors (not just no data)")
         sys.exit(1)
-    elif overpass_failures:
-        print(f"\n⚠️  {len(overpass_failures)} municipalities had Overpass API timeouts (non-fatal):")
-        for r in overpass_failures:
-            print(f"   - {r['gemeente']}")
-        print(f"\n✅ All municipalities processed (some had transient API issues)")
-        sys.exit(0)
     else:
         print(f"\n✅ All municipalities processed successfully (some may have no data)")
         sys.exit(0)

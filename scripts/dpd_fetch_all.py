@@ -1,15 +1,21 @@
 """
-Fetch all DPD parcel shop and locker locations in the Netherlands.
+Fetch all DPD parcel shop and locker locations in the configured country.
 
 Unlike DHL which requires a grid-based approach due to API limits,
 DPD's public API provides a simple 'getAll' endpoint that returns
 all locations in one request.
 
-API: https://pickup.dpd.cz/api/getAll?country=528
-     (528 = ISO 3166-1 numeric code for Netherlands)
+API: https://pickup.dpd.cz/api/getAll?country=<ISO numeric>
+     (56 = Belgium, 528 = Netherlands, 380 = Italy)
 
 No authentication required.
 """
+
+import sys as _sys
+from pathlib import Path as _Path
+_sys.path.insert(0, str(_Path(__file__).resolve().parent.parent))
+from country_config import CONFIG  # noqa: E402
+
 
 import json
 import requests
@@ -21,7 +27,7 @@ from collections import defaultdict
 
 def fetch_all_dpd_locations() -> List[Dict]:
     """
-    Fetch all DPD parcel shops and lockers in the Netherlands.
+    Fetch all DPD parcel shops and lockers in the configured country.
 
     Returns
     -------
@@ -35,13 +41,13 @@ def fetch_all_dpd_locations() -> List[Dict]:
 
     print("📡 Fetching all DPD locations from public API...")
     print("   Endpoint: https://pickup.dpd.cz/api/getAll")
-    print("   Country: Netherlands (ISO 3166-1: 528)")
+    print(f"   Country: {CONFIG['name']} (ISO 3166-1: {CONFIG['dpd']['country_code']})")
     print()
 
     try:
         response = requests.get(
             "https://pickup.dpd.cz/api/getAll",
-            params={"country": 528},  # Netherlands
+            params={"country": CONFIG["dpd"]["country_code"]},
             timeout=60  # Longer timeout for complete dataset
         )
         response.raise_for_status()
@@ -175,8 +181,8 @@ def save_results(locations: List[Dict], output_file: str = None):
         metadata={
             "method": "api-getAll",
             "source": "https://pickup.dpd.cz/api/getAll",
-            "country": "Netherlands",
-            "country_code_iso": 528,
+            "country": CONFIG["name"],
+            "country_code_iso": CONFIG["dpd"]["country_code"],
         },
     )
 

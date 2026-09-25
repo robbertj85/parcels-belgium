@@ -3,6 +3,8 @@ from shapely.geometry import Point, Polygon, MultiPolygon, GeometryCollection
 from shapely.ops import unary_union
 import geopandas as gpd
 
+from country_config import METRIC_CRS
+
 # ---------- helper functions ----------
 
 def union_geom_to_gdf(geom, crs, buffer_m):
@@ -24,8 +26,8 @@ def get_bufferzones(gdf, radius):
     if gdf.crs is None:
         gdf = gdf.set_crs(4326)
     
-    # 2) Naar RD (meters) en buffers maken
-    gdf_rd = gdf.to_crs(28992)
+    # 2) Naar een metrische projectie (per land ingesteld) en buffers maken
+    gdf_rd = gdf.to_crs(METRIC_CRS)
     gdf_rd["geometry"] = gdf_rd.geometry.buffer(radius)
 
     # Dissolve alle buffers naar één geometrie

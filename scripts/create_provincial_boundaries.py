@@ -1,9 +1,9 @@
 """
-Split national boundary file into 12 provincial chunks for GitHub compatibility.
+Split the national boundary set into per-province chunks for GitHub compatibility.
 
-This solves the problem of nederland-boundaries.geojson being >100MB (too large for GitHub).
-Instead, we create 12 smaller files (one per province) that can be loaded in parallel
-in the browser and reconstructed into the full national boundary.
+The full national boundary file is too large to commit and to load in one go,
+so the outlines are grouped per province (Belgium: 10 provinces plus the
+Brussels-Capital Region) into files the browser loads in parallel.
 """
 
 import json
@@ -11,11 +11,18 @@ from pathlib import Path
 from collections import defaultdict
 import geopandas as gpd
 import pandas as pd
+import re
+import sys
+import unicodedata
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from country_config import NATIONAL_SLUG, WEBAPP_DATA_DIR  # noqa: E402
 
 
 def slugify(text: str) -> str:
     """Convert province name to URL-safe slug"""
-    return text.lower().replace(' ', '-').replace('ë', 'e')
+    text = unicodedata.normalize("NFKD", text).encode("ascii", "ignore").decode()
+    return re.sub(r"[^a-z0-9]+", "-", text.lower()).strip("-")
 
 
 def create_provincial_boundaries():
@@ -24,7 +31,7 @@ def create_provincial_boundaries():
     print("🗺️  Creating Provincial Boundary Chunks...")
     print("="*60)
 
-    data_dir = Path("webapp/public/data")
+    data_dir = WEBAPP_DATA_DIR
     boundaries_dir = data_dir / "boundaries"
     boundaries_dir.mkdir(exist_ok=True)
 
@@ -33,11 +40,11 @@ def create_provincial_boundaries():
     with open(municipalities_file, 'r', encoding='utf-8') as f:
         municipalities = json.load(f)
 
-    # Create slug -> province mapping (exclude Nederland itself)
+    # Create slug -> province mapping (exclude the national row)
     slug_to_province = {
         m['slug']: m['province']
         for m in municipalities
-        if m['slug'] != 'nederland'
+        if m['slug'] != NATIONAL_SLUG
     }
 
     print(f"📊 Found {len(slug_to_province)} municipalities")
@@ -56,7 +63,7 @@ def create_provincial_boundaries():
 
     # Process each municipality file
     geojson_files = [f for f in data_dir.glob("*.geojson")
-                     if f.name not in ['nederland.geojson', 'nederland-boundaries.geojson']]
+                     if f.stem not in (NATIONAL_SLUG, f'{NATIONAL_SLUG}-boundaries')]
 
     print(f"\n🔍 Processing {len(geojson_files)} municipality files...")
 
