@@ -21,6 +21,10 @@ env:
 jobs:
   update-data:
     runs-on: ubuntu-latest
+    # The job commits and pushes the refreshed data; new repositories give
+    # the workflow token read-only access by default
+    permissions:
+      contents: write
     timeout-minutes: 180
 
     steps:
@@ -110,6 +114,23 @@ jobs:
           git commit -m "$msg"
           git pull --rebase origin main
           git push
+
+      # Every weekly run adds a data commit. GitHub recommends repositories stay
+      # under ~1 GB and gets strict around 5 GB; past WARN_KB it is time to move
+      # the data out of git (e.g. a release asset, object storage or LFS).
+      - name: Check repository size
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WARN_KB: 2000000
+        run: |
+          size_kb=$(gh api "repos/${{ github.repository }}" --jq .size)
+          size_mb=$((size_kb / 1024))
+          echo "Repository size: ${size_mb} MB" >> "$GITHUB_STEP_SUMMARY"
+          if [ "$size_kb" -gt "$WARN_KB" ]; then
+            echo "::warning::Repository is ${size_mb} MB (warn above $((WARN_KB / 1024)) MB): plan to move the data out of git"
+            echo "## ⚠️ Repository size ${size_mb} MB" >> "$GITHUB_STEP_SUMMARY"
+            echo "Time to move the weekly data out of git. See CLAUDE.md, Repository size." >> "$GITHUB_STEP_SUMMARY"
+          fi
 
       # Last on purpose. A stale carrier must never stop the fresh data for the
       # other carriers from being published, so this gate runs after the push.

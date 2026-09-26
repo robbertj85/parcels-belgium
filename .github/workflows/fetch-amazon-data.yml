@@ -17,6 +17,9 @@ env:
 jobs:
   fetch-amazon:
     runs-on: ubuntu-latest
+    # Commits the refreshed cache; the default workflow token is read-only
+    permissions:
+      contents: write
     timeout-minutes: 120
 
     steps:

@@ -133,6 +133,15 @@ Runs **last** in `update-data.yml`, after the push. The threshold is mirrored as
 Both read the repository variable `PAKKETPUNTEN_COUNTRY` (default `BE`). Tuesday on
 purpose: the Dutch viewer runs Monday against the same DHL/DPD/InPost APIs.
 
+### Repository size
+
+The repo carries the Dutch viewer's history (~580 MB on GitHub) plus a weekly data
+commit (~250 MB of data files, stored as deltas). `update-data.yml` reports the size
+every run and warns above 2 GB (GitHub recommends < 1 GB, is strict around 5 GB).
+When it warns, the data has to leave git: e.g. publish the weekly output as a release
+asset or to object storage (Vercel Blob, S3) and have the webapp read from there,
+or squash old data commits.
+
 ### Webapp
 
 - `config/country.ts` → `COUNTRY` (active profile); `isNationalSlug()`
