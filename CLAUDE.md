@@ -151,9 +151,10 @@ Keep the data contract stable: GeoJSON property names are Dutch (`locatieNaam`,
 
 ## Known Limitations
 
-- **Population**: Statbel blocks automated downloads, so population comes from Wikidata
-  (mostly 2018–2025 figures; 6 merged municipalities missing). Put a manually downloaded
-  `TF_SOC_POP_STRUCT_<year>` file in `data/raw/` and rerun `build_municipalities.py` to use Statbel.
+- **Population**: Statbel 2023 (`data/raw/TF_SOC_POP_STRUCT_2023.txt`, gitignored, downloaded by hand
+  because Statbel blocks automated downloads). `build_municipalities.py` sums the pre-merger
+  municipalities into the 2025 NIS codes (`BE_MERGERS_2025`). Without the file it falls back to
+  Wikidata (older, gaps). Replace with a newer `TF_SOC_POP_STRUCT_<year>` file when available.
 - **Amazon**: 20 results per search, and 482 of 565 municipality searches hit that cap, so Amazon is undercounted (it serves a subset of the bpost network).
 - **bpost**: no opening hours (one info call per point would be ~4,400 calls).
 - **GLS**: the bulk API only returns today's and tomorrow's hours.

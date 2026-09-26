@@ -94,6 +94,25 @@ BE_REGIONS = {
     "Luik": "Waals Gewest", "Luxemburg": "Waals Gewest", "Namen": "Waals Gewest",
 }
 
+# België: fusies van 1 januari 2025, nieuwe (of behouden) NIS-code -> NIS-codes
+# van voor de fusie. Zo is een Statbel-bestand van vóór 2025 nog bruikbaar.
+BE_MERGERS_2025 = {
+    "11002": ["11002", "11007"],           # Antwerpen + Borsbeek
+    "23106": ["23023", "23024", "23032"],  # Pajottegem: Galmaarden, Gooik, Herne
+    "37021": ["37018", "37012"],           # Wingene + Ruiselede
+    "37022": ["37015", "37007"],           # Tielt + Meulebeke
+    "44086": ["44048", "44012"],           # Nazareth-De Pinte
+    "44087": ["44034", "44073"],           # Lochristi + Wachtebeke
+    "44088": ["44043", "44040"],           # Merelbeke-Melle
+    "46029": ["46014", "44045"],           # Lokeren + Moerbeke
+    "46030": ["46003", "46013", "11056"],  # Beveren-Kruibeke-Zwijndrecht
+    "71071": ["71057", "71069"],           # Tessenderlo-Ham
+    "71072": ["71022", "73040"],           # Hasselt + Kortessem
+    "73110": ["73006", "73032"],           # Bilzen-Hoeselt
+    "73111": ["73083", "73009"],           # Tongeren-Borgloon
+    "82039": ["82003", "82005"],           # Bastogne + Bertogne
+}
+
 ALIAS_TAGS = ("name", "name:nl", "name:fr", "name:de", "name:it", "name:en", "alt_name")
 
 
@@ -247,6 +266,13 @@ def load_statbel_population():
         if nis and count:
             population[nis] = population.get(nis, 0) + int(count)
     print(f"👥 Statbel {year}: inwoners voor {len(population)} NIS-codes ({path.name})")
+
+    if int(year) < 2025:
+        # Oudere bestanden kennen de fusiegemeenten nog niet: tel de delen op
+        for new_code, old_codes in BE_MERGERS_2025.items():
+            if all(code in population for code in old_codes):
+                population[new_code] = sum(population[code] for code in old_codes)
+        print(f"   {len(BE_MERGERS_2025)} fusies van 2025 omgerekend naar de nieuwe NIS-codes")
     return population, f"Statbel {year}"
 
 

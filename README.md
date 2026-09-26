@@ -111,5 +111,5 @@ Data bronnen:
 - Amazon Hub (https://www.amazon.com.be/ulp)
 - ViaTim (https://viatim.be)
 - Gemeentegrenzen en adreszoeken © OpenStreetMap contributors
-- Inwonertallen: Wikidata / Statbel
+- Inwonertallen: Statbel (1 januari 2023, omgerekend naar de gemeenten van 2025)
 ```
