@@ -8,7 +8,7 @@ interface Municipality {
   name: string;
   slug: string;
   province: string;
-  population: number;
+  population: number | null;
 }
 
 export default function DownloadsPage() {
@@ -98,7 +98,7 @@ export default function DownloadsPage() {
                 <div className="flex-1">
                   <h3 className="text-lg font-semibold text-foreground">{nationalData.name}</h3>
                   <p className="text-sm text-muted-foreground mt-1">
-                    {t.dataExport.allResidents(nationalData.population.toLocaleString(COUNTRY.locale))}
+                    {t.dataExport.allResidents((nationalData.population ?? 0).toLocaleString(COUNTRY.locale))}
                   </p>
                   <p className="text-sm text-muted-foreground">
                     {t.dataExport.sumOfMunicipalities(nationalStats.municipalityCount)}
@@ -166,7 +166,9 @@ export default function DownloadsPage() {
                   <div className="flex-1">
                     <h3 className="text-sm font-semibold text-foreground">{municipality.name}</h3>
                     <p className="text-xs text-muted-foreground">
-                      {municipality.province} • {t.dataExport.residents(municipality.population.toLocaleString(COUNTRY.locale))}
+                      {municipality.province} • {municipality.population != null
+                        ? t.dataExport.residents(municipality.population.toLocaleString(COUNTRY.locale))
+                        : t.dataExport.populationUnknown}
                     </p>
                   </div>
                   <div className="flex gap-2">

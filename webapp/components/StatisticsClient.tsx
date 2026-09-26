@@ -40,6 +40,7 @@ export interface MunicipalityStats {
   gemeente: string;
   provincie: string | null;
   code: string | null;
+  /** 0 when unknown (compute_statistics writes 0, and per_10k_inwoners 0). */
   population: number;
   area_km2: number;
   total: number;
@@ -348,7 +349,7 @@ export default function StatisticsClient({
           </h2>
           <p className="text-sm text-muted-foreground">
             {selected
-              ? t.statistics.municipalityMeta(selected.provincie ?? t.common.unknown, formatNumber(selected.population), formatNumber(selected.area_km2))
+              ? t.statistics.municipalityMeta(selected.provincie ?? t.common.unknown, selected.population ? formatNumber(selected.population) : t.common.unknown, formatNumber(selected.area_km2))
               : t.statistics.nationalMeta(formatNumber(statistics.municipalities.length), generated)}
           </p>
         </div>
@@ -384,7 +385,7 @@ export default function StatisticsClient({
           label={t.statistics.per10kResidents}
           value={
             selected
-              ? formatNumber(selected.per_10k_inwoners)
+              ? (selected.population ? formatNumber(selected.per_10k_inwoners) : '–')
               : (statistics.national.total / statistics.national.population * 10_000).toFixed(1)
           }
         />
@@ -512,7 +513,7 @@ export default function StatisticsClient({
                     {formatNumber(municipality.total)}
                   </td>
                   <td className="px-3 py-2 text-right tabular-nums text-foreground">
-                    {formatNumber(municipality.per_10k_inwoners)}
+                    {municipality.population ? formatNumber(municipality.per_10k_inwoners) : '–'}
                   </td>
                   <td className="px-3 py-2 text-right tabular-nums text-muted-foreground">
                     {((municipality.dekking['500'] ?? 0) * 100).toFixed(1)}%

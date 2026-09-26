@@ -12,7 +12,7 @@ interface Municipality {
   name: string;
   slug: string;
   province: string;
-  population: number;
+  population: number | null;
   code: string | null;
   /** Other-language and alternative names, from scripts/build_municipalities.py. */
   aliases?: string[];

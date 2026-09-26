@@ -5,7 +5,8 @@ export interface Municipality {
   name: string;
   slug: string;
   province: string;
-  population: number;
+  /** Null when no source had a figure (e.g. some municipalities merged on 1 Jan 2025). */
+  population: number | null;
   /** Official code (NIS in Belgium); null for the national row. */
   code?: string | null;
   /** Names in the other national languages, e.g. "Luik" for Liège. */

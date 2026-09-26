@@ -30,7 +30,7 @@ interface Municipality {
   name: string;
   slug: string;
   province: string;
-  population: number;
+  population: number | null;
   code: string | null;
 }
 
