@@ -95,7 +95,7 @@ Beide lezen de repository-variabele `PAKKETPUNTEN_COUNTRY` (standaard `BE`).
 
 ## Licentie
 
-MIT-licentie voor de **broncode**, niet voor de **data**.
+[MIT-licentie](LICENSE) voor de **broncode**, niet voor de **data**.
 
 ### Data-attributie
 
