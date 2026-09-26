@@ -76,7 +76,7 @@ export const COUNTRIES: Record<string, CountryProfile> = {
     language: 'nl',
 
     siteName: 'Pakketpunten België',
-    siteUrl: 'https://pakketpunten-belgie.vercel.app',
+    siteUrl: 'https://parcels-belgium.vercel.app',
     githubUrl: 'https://github.com/robbertj85/parcels-belgium',
     sisterSites: [{ label: 'Pakketpunten Nederland', url: 'https://pakketpuntenviewer.nl' }],
 
@@ -138,7 +138,7 @@ export const COUNTRIES: Record<string, CountryProfile> = {
     githubUrl: 'https://github.com/robbertj85/pakketpunten-italia',
     sisterSites: [
       { label: 'Pakketpunten Nederland', url: 'https://pakketpuntenviewer.nl' },
-      { label: 'Pakketpunten België', url: 'https://pakketpunten-belgie.vercel.app' },
+      { label: 'Pakketpunten België', url: 'https://parcels-belgium.vercel.app' },
     ],
 
     nationalSlug: 'italia',
