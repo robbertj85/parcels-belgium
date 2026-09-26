@@ -33,8 +33,11 @@ RADIUS_KM = 100
 SPACING_KM = 140
 PAGE_SIZE = 50
 QUERY_CAP = 10_000
-WORKERS = 3
-MAX_ATTEMPTS = 5
+# Three parallel callers drew HTTP 429 after ~1,000 calls and a block of
+# several minutes; one at a time with a pause stays under the limit
+WORKERS = 1
+REQUEST_DELAY = 1.0
+MAX_ATTEMPTS = 6
 
 HEADERS = {"Accept": "application/json", "User-Agent": "pakketpunten/1.0 (parcel point viewer)"}
 DAYS = {"MONDAY": "ma", "TUESDAY": "di", "WEDNESDAY": "wo", "THURSDAY": "do", "FRIDAY": "vr", "SATURDAY": "za", "SUNDAY": "zo"}
@@ -45,6 +48,7 @@ SKIP_NAMES = ("Air Freight", "Freight Center")
 def search(lat, lon, offset):
     params = {"q": f"{lat:.4f},{lon:.4f}", "r": RADIUS_KM, "per": PAGE_SIZE, "offset": offset}
     for attempt in range(MAX_ATTEMPTS):
+        time.sleep(REQUEST_DELAY)
         try:
             resp = requests.get(SEARCH_URL, params=params, headers=HEADERS, timeout=30)
             resp.raise_for_status()
@@ -52,7 +56,8 @@ def search(lat, lon, offset):
         except (requests.RequestException, ValueError, KeyError) as e:
             if attempt == MAX_ATTEMPTS - 1:
                 raise RuntimeError(f"{lat:.2f},{lon:.2f} offset {offset}: {e}")
-            time.sleep(5 * 2 ** attempt)
+            # 30 s up to 8 min: a 429 blocks the whole IP for minutes
+            time.sleep(30 * 2 ** attempt)
 
 
 def fetch_circle(center):

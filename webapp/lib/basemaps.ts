@@ -1,13 +1,13 @@
 /**
  * Background maps for the basemap picker (top right, under the zoom buttons).
  *
- * Carto's Positron and Dark Matter are vector styles, drawn with MapLibre GL
+ * Carto's Positron, Voyager and Dark Matter are vector styles, drawn with MapLibre GL
  * inside Leaflet (@maplibre/maplibre-gl-leaflet); that bundle is only loaded
  * once one of them is picked. OpenStreetMap and the satellite imagery are
  * plain raster tiles. All work worldwide, so every country uses the same list.
  */
 
-export type BasemapId = 'osm' | 'light' | 'dark' | 'satellite';
+export type BasemapId = 'osm' | 'light' | 'voyager' | 'dark' | 'satellite';
 
 export type Basemap =
   | { id: BasemapId; kind: 'raster'; url: string; attribution: string; maxNativeZoom: number; subdomains?: string }
@@ -23,6 +23,7 @@ export const BASEMAPS: Basemap[] = [
     subdomains: 'abc',
   },
   { id: 'light', kind: 'vector', style: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json' },
+  { id: 'voyager', kind: 'vector', style: 'https://basemaps.cartocdn.com/gl/voyager-gl-style/style.json' },
   { id: 'dark', kind: 'vector', style: 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json' },
   {
     id: 'satellite',
