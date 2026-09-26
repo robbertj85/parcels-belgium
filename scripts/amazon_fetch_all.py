@@ -57,8 +57,10 @@ API_URL = f"https://{DOMAIN}/location_selector/fetch_locations"
 PAGE_CAP = 20
 START_CELL_KM = 16
 MIN_CELL_KM = 0.25
-WORKERS = 6
-MAX_ATTEMPTS = 5
+# amazon.it answers 503 at 6 parallel; 3 with a short pause stay under its limit
+WORKERS = 3
+REQUEST_DELAY = 0.3
+MAX_ATTEMPTS = 6
 
 _local = threading.local()
 
@@ -140,6 +142,7 @@ class Fetcher:
         params = dict(self.params, latitude=f"{lat:.5f}", longitude=f"{lon:.5f}")
         for attempt in range(MAX_ATTEMPTS):
             try:
+                time.sleep(REQUEST_DELAY)
                 resp = self.session().get(API_URL, params=params, timeout=30)
                 resp.raise_for_status()
                 data = resp.json()
@@ -149,6 +152,7 @@ class Fetcher:
             except (requests.RequestException, ValueError) as e:
                 if attempt == MAX_ATTEMPTS - 1:
                     raise RuntimeError(f"{lat:.4f},{lon:.4f}: {e}")
+                # 5, 10, 20, 40, 80 s: a 503 is Amazon's rate limit, it needs a real pause
                 time.sleep(5 * 2 ** attempt)
 
 

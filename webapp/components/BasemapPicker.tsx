@@ -14,7 +14,7 @@ export default function BasemapPicker({ value, onChange }: BasemapPickerProps) {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="absolute right-[10px] top-[84px] z-[1000]">
+    <div className="absolute right-[10px] top-[84px] z-20">
       <button
         type="button"
         onClick={() => setOpen((o) => !o)}
