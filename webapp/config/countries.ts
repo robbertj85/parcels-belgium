@@ -133,8 +133,8 @@ export const COUNTRIES: Record<string, CountryProfile> = {
     language: 'it',
 
     siteName: 'Punti di ritiro Italia',
-    siteUrl: 'https://pakketpunten-italia.vercel.app',
-    githubUrl: 'https://github.com/robbertj85/pakketpunten-italia',
+    siteUrl: 'https://parcels-italy.vercel.app',
+    githubUrl: 'https://github.com/robbertj85/parcels-italy',
     sisterSites: [
       { label: 'Pakketpunten Nederland', url: 'https://pakketpuntenviewer.nl' },
       { label: 'Pakketpunten België', url: 'https://parcels-belgium.vercel.app' },

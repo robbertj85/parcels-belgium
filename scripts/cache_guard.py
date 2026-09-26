@@ -57,6 +57,13 @@ HISTORY_PATH = Path(__file__).parent.parent / "data" / "fetch_history.json"
 MAX_HISTORY = 8
 
 
+
+def write_cache(f, output):
+    """{"metadata": ..., "locations": [...]} with one location per line."""
+    f.write('{"metadata": ' + json.dumps(output["metadata"], ensure_ascii=False) + ',\n"locations": [\n')
+    f.write(",\n".join(json.dumps(loc, ensure_ascii=False, separators=(",", ":")) for loc in output["locations"]))
+    f.write("\n]}\n")
+
 def _is_forced() -> bool:
     """True when CACHE_GUARD_FORCE asks the guard to stand down."""
     return os.environ.get("CACHE_GUARD_FORCE", "").strip().lower() in {"1", "true", "yes"}
@@ -233,8 +240,10 @@ def safe_save(
     }
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
+    # One record per line: compact (Italy's caches are tens of MB) but still
+    # a readable, line-based git diff
     with open(output_path, 'w', encoding='utf-8') as f:
-        json.dump(output, f, indent=2, ensure_ascii=False)
+        write_cache(f, output)
 
     file_size_kb = output_path.stat().st_size / 1024
     print(f"💾 Saved to: {output_path}")

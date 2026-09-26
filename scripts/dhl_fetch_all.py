@@ -41,6 +41,16 @@ MAX_ATTEMPTS = 3
 FAILED_CELLS: List[Tuple[float, float, int]] = []
 
 
+# The fields api_client._row_dhl reads, plus the id. The full record is ~2.4 KB
+# (a dated 7-day openingTimesMeta, collection schedules); Italy's 32,000 points
+# made a 156 MB cache, over GitHub's 100 MB file limit.
+KEEP_FIELDS = ("id", "name", "shopType", "address", "geoLocation", "openingTimes", "serviceTypes")
+
+
+def slim(location):
+    return {k: location[k] for k in KEEP_FIELDS if k in location}
+
+
 def lat_lon_to_km(lat1: float, lon1: float, lat2: float, lon2: float) -> float:
     """Calculate distance between two lat/lon points in km."""
     # Haversine formula
@@ -243,7 +253,7 @@ def save_results(locations: Dict[Tuple, Dict], output_file: str = None):
     # De grid-cirkels steken over de landsgrens; houd alleen punten van het land zelf
     country = CONFIG['iso2']
     location_list = [
-        loc for loc in locations.values()
+        slim(loc) for loc in locations.values()
         if (loc.get('address') or {}).get('countryCode', country) == country
     ]
     print(f"🌍 {len(location_list)} of {len(locations)} locations are in {country}")
