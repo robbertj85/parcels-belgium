@@ -27,15 +27,15 @@ Brussels Hoofdstedelijk Gewest. Stand 26 september 2026: **19.030 punten op 7.90
 | Vinted Go | Web scraping | ~1.300 |
 | PostNL | Publieke widget-API | ~1.100 |
 | DPD | Publieke REST API | ~1.000 |
-| Amazon | Browser-automatisering | ~3.500 (allemaal bpost-locaties; onvolledig, zie onder) |
+| Amazon | Locatie-API van amazon.com.be/ulp, adaptief raster (Playwright alleen voor de sessie) | ~3.700 (allemaal bpost-locaties) |
 | ViaTim | Publieke REST API | ~140 |
 
 **DHL, Amazon en bpost**: in België gebruiken DHL Parcel en Amazon het bpost-netwerk. Elk
 DHL-punt en elk gevonden Amazon-punt is een bpost-locatie. Ze staan alle drie op de kaart,
 maar de statistieken tellen ook de **unieke locaties**: ~19.000 punten op ~7.900 fysieke adressen.
 
-Amazon geeft maximaal 20 resultaten per zoekopdracht en in 482 van de 565 gemeenten zat de
-zoekopdracht aan dat maximum; het echte aantal Amazon-punten ligt dus hoger.
+Amazon geeft per zoekopdracht de 20 dichtstbijzijnde punten; de fetcher verfijnt het raster
+waar dat maximum bereikt wordt, zodat geen punten wegvallen.
 
 ### Moeilijk te verkrijgen
 
@@ -62,7 +62,7 @@ pip install -r requirements.txt
 playwright install chromium                 # alleen voor Amazon
 
 python scripts/build_municipalities.py      # gemeentelijst + grenzen (OSM)
-python scripts/fetch_all.py                 # alle vervoerders (Amazon ~50 min)
+python scripts/fetch_all.py                 # alle vervoerders
 python scripts/batch_generate.py
 python scripts/create_national_overview.py
 python scripts/create_provincial_boundaries.py

@@ -74,7 +74,7 @@ naamregels krijgt een hook in `display_name()`.
 ## 5. Draaien
 
 ```bash
-python scripts/fetch_all.py              # alle caches (Amazon duurt lang)
+python scripts/fetch_all.py              # alle caches
 python scripts/batch_generate.py
 python scripts/create_national_overview.py
 python scripts/create_provincial_boundaries.py

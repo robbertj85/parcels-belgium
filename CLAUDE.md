@@ -38,7 +38,7 @@ How to add a country: `docs/NEW_COUNTRY.md`.
 python3 -m venv venv && source venv/bin/activate && pip install -r requirements.txt
 
 python scripts/build_municipalities.py      # municipality list + boundaries (OSM), rerun after mergers
-python scripts/fetch_all.py                 # every carrier's nationwide cache (Amazon ~50 min)
+python scripts/fetch_all.py                 # every carrier's nationwide cache
 python scripts/<carrier>_fetch_all.py       # one carrier, e.g. bpost_fetch_all.py
 python scripts/batch_generate.py            # per-municipality GeoJSON (geometry only, no network)
 python scripts/create_national_overview.py
@@ -93,7 +93,7 @@ update_totals_history.py ──> totals_history.json
 | VintedGo | `vintedgo_fetch_all.py` | vintedgo.com RSC payload, bbox tiles (cap 500) | 1,300 |
 | PostNL | `postnl_fetch_all.py` | location widget `country=bel`, bbox tiles | 1,100 |
 | DPD | `dpd_fetch_all.py` | pickup.dpd.cz `getAll?country=56` | 1,000 |
-| Amazon | `amazon_fetch_all.py` | Playwright on amazon.com.be/ulp (all bpost points) | 3,500 (capped) |
+| Amazon | `amazon_fetch_all.py` | amazon.com.be `fetch_locations` (20 nearest), adaptive grid; Playwright only for the session | 3,700 |
 | ViaTim | `viatim_fetch_all.py` | ViaTim API, filtered to BE | 140 |
 
 **DHL and Amazon ride on the bpost network in Belgium**: every DHL point (id prefix
@@ -178,7 +178,6 @@ Keep the data contract stable: GeoJSON property names are Dutch (`locatieNaam`,
   because Statbel blocks automated downloads). `build_municipalities.py` sums the pre-merger
   municipalities into the 2025 NIS codes (`BE_MERGERS_2025`). Without the file it falls back to
   Wikidata (older, gaps). Replace with a newer `TF_SOC_POP_STRUCT_<year>` file when available.
-- **Amazon**: 20 results per search, and 482 of 565 municipality searches hit that cap, so Amazon is undercounted (it serves a subset of the bpost network).
 - **bpost**: no opening hours (one info call per point would be ~4,400 calls).
 - **GLS**: the bulk API only returns today's and tomorrow's hours.
 - **Bezettingsgraad** is a fixed placeholder (50), not real occupancy.
