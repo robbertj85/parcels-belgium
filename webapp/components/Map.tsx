@@ -275,12 +275,12 @@ const PROVIDER_INFO: Record<string, {
 /**
  * Coverage layers, largest first. Each gets its own pane with a fixed z-order
  * (largest lowest), so smaller circles stay on top whichever was switched on
- * last. 300 and 400 m keep the colours they always had; 500 m is a dashed
- * indigo so the three stay apart when all are on.
+ * last. 500 m is a dashed indigo, and the 400 m fill is a touch darker than
+ * blue-300 so it stands out against the 500 m fill when both are on.
  */
 const BUFFER_LAYERS = [
   { radius: 500, filter: 'showBuffer500', color: '#6366f1', fillColor: '#a5b4fc', weight: 2, dashArray: '6 6', mergedFillOpacity: 0.20, circleFillOpacity: 0.06 },
-  { radius: 400, filter: 'showBuffer400', color: '#60a5fa', fillColor: '#93c5fd', weight: 3, dashArray: undefined, mergedFillOpacity: 0.30, circleFillOpacity: 0.10 },
+  { radius: 400, filter: 'showBuffer400', color: '#60a5fa', fillColor: '#80b6fa', weight: 3, dashArray: undefined, mergedFillOpacity: 0.30, circleFillOpacity: 0.10 },
   { radius: 300, filter: 'showBuffer300', color: '#2563eb', fillColor: '#3b82f6', weight: 2, dashArray: undefined, mergedFillOpacity: 0.25, circleFillOpacity: 0.08 },
 ] as const;
 
