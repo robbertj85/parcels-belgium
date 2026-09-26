@@ -50,9 +50,9 @@ const nextConfig: NextConfig = {
               "default-src 'self'",
               "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://va.vercel-scripts.com",
               "style-src 'self' 'unsafe-inline'",
-              "img-src 'self' data: https://logo.clearbit.com https://*.tile.openstreetmap.org https://unpkg.com",
+              "img-src 'self' data: blob: https://logo.clearbit.com https://*.tile.openstreetmap.org https://unpkg.com https://server.arcgisonline.com",
               "font-src 'self' data:",
-              "connect-src 'self' https://va.vercel-scripts.com",
+              "connect-src 'self' https://va.vercel-scripts.com https://*.cartocdn.com",
               "worker-src 'self' blob:",
               "child-src 'self' blob:",
               "frame-ancestors *",
@@ -75,9 +75,9 @@ const nextConfig: NextConfig = {
               "default-src 'self'",
               "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.redoc.ly https://va.vercel-scripts.com", // Required for Leaflet, Redocly, and Vercel Analytics
               "style-src 'self' 'unsafe-inline'", // Required for dynamic styles
-              "img-src 'self' data: https://logo.clearbit.com https://*.tile.openstreetmap.org https://unpkg.com",
+              "img-src 'self' data: blob: https://logo.clearbit.com https://*.tile.openstreetmap.org https://unpkg.com https://server.arcgisonline.com",
               "font-src 'self' data:",
-              "connect-src 'self' https://va.vercel-scripts.com", // Required for Vercel Analytics
+              "connect-src 'self' https://va.vercel-scripts.com https://*.cartocdn.com", // Required for Vercel Analytics
               "worker-src 'self' blob:", // Required for ReDoc search workers
               "child-src 'self' blob:", // Required for ReDoc search workers
               "frame-ancestors 'none'",

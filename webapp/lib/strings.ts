@@ -125,6 +125,14 @@ const nl = {
     noPointsBody: 'Deze gemeente heeft momenteel geen pakketpunten in onze database. De kaart toont wel de gemeentegrens.',
   },
 
+  basemap: {
+    title: 'Achtergrondkaart',
+    osm: 'OpenStreetMap',
+    light: 'Licht (Carto Positron)',
+    dark: 'Donker (Carto Dark Matter)',
+    satellite: 'Satelliet (Esri)',
+  },
+
   popup: {
     openingHours: 'Openingstijden:',
     closed: 'gesloten',
@@ -567,6 +575,14 @@ const it: Strings = {
   map: {
     noPointsTitle: 'Nessun punto di ritiro trovato',
     noPointsBody: 'Questo comune al momento non ha punti di ritiro nel nostro database. La mappa mostra comunque il confine comunale.',
+  },
+
+  basemap: {
+    title: 'Mappa di sfondo',
+    osm: 'OpenStreetMap',
+    light: 'Chiara (Carto Positron)',
+    dark: 'Scura (Carto Dark Matter)',
+    satellite: 'Satellite (Esri)',
   },
 
   popup: {
