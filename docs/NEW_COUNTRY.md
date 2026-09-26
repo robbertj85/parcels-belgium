@@ -21,8 +21,9 @@ Voeg een blok toe aan `COUNTRIES`:
 | `carriers` | vervoerders, vaste volgorde (bepaalt de grafiekkleuren) | | |
 | per vervoerder | parameters voor de fetchers (`dhl`, `dpd`, `inpost`, `gls`, `amazon`, ...) | | |
 
-Het land kies je met `PAKKETPUNTEN_COUNTRY` (standaard `BE`). In GitHub Actions
-is dat de repository-variabele `PAKKETPUNTEN_COUNTRY`.
+Het actieve land staat in `webapp/config/active-country` (één regel, bv. `IT`).
+Pipeline, workflows en webapp lezen allemaal dat bestand; de env vars
+`PAKKETPUNTEN_COUNTRY` en `NEXT_PUBLIC_COUNTRY` gaan voor bij een losse run.
 
 ## 2. Webapp-profiel: `webapp/config/countries.ts`
 
@@ -34,7 +35,7 @@ projectie (`metricCrsLabel`, gelijk aan `metric_crs` in de pipeline), `bbox` en
 **moeilijk te verkrijgen netwerken** (`missingCarriers`, getoond in Over → Bronnen)
 en links voor Over → Links.
 
-Het profiel kies je met `NEXT_PUBLIC_COUNTRY` (Vercel env var; standaard `BE`).
+Het profiel volgt uit hetzelfde bestand (via `next.config.ts`); geen Vercel-instelling nodig.
 De taal van de interface volgt uit `language`; een nieuwe taal is een extra
 woordenboek in `webapp/lib/strings.ts` met dezelfde vorm als `nl`.
 
@@ -62,7 +63,7 @@ tinten op volgorde (zie de toelichting boven in `webapp/lib/carriers.ts`).
 ## 4. Gemeenten en grenzen
 
 ```bash
-PAKKETPUNTEN_COUNTRY=IT python scripts/build_municipalities.py
+python scripts/build_municipalities.py     # met IT in webapp/config/active-country
 ```
 
 Schrijft `data/municipalities_all.json`, `data/municipality_polygons.geojson`,
@@ -73,14 +74,13 @@ naamregels krijgt een hook in `display_name()`.
 ## 5. Draaien
 
 ```bash
-export PAKKETPUNTEN_COUNTRY=IT
 python scripts/fetch_all.py              # alle caches (Amazon duurt lang)
 python scripts/batch_generate.py
 python scripts/create_national_overview.py
 python scripts/create_provincial_boundaries.py
 python scripts/compute_statistics.py
 python scripts/update_totals_history.py
-cd webapp && NEXT_PUBLIC_COUNTRY=IT npm run dev
+cd webapp && npm run dev
 ```
 
 ## Nog te doen voor Italië

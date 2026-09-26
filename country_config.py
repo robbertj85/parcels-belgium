@@ -5,9 +5,10 @@ Alles wat per land verschilt (landcodes, projectie, bounding box, welke
 vervoerders, parameters per vervoerder) staat hier, zodat de fetch-scripts en
 de batch-pipeline landonafhankelijk blijven.
 
-Land kiezen: env var PAKKETPUNTEN_COUNTRY (BE, IT). De webapp leest hetzelfde
-land uit NEXT_PUBLIC_COUNTRY en het profiel in webapp/config/countries.ts;
-houd de twee profielen gelijk. Een land toevoegen: zie docs/NEW_COUNTRY.md.
+Land kiezen: het bestand webapp/config/active-country (één regel: BE of IT),
+dat ook de webapp leest. De env var PAKKETPUNTEN_COUNTRY gaat voor. Het
+webapp-profiel staat in webapp/config/countries.ts; houd de twee profielen
+gelijk. Een land toevoegen: zie docs/NEW_COUNTRY.md.
 """
 
 import os
@@ -86,7 +87,11 @@ COUNTRIES = {
     },
 }
 
-COUNTRY = os.environ.get("PAKKETPUNTEN_COUNTRY", "BE")
+ACTIVE_COUNTRY_FILE = ROOT / "webapp" / "config" / "active-country"
+COUNTRY = (
+    os.environ.get("PAKKETPUNTEN_COUNTRY")
+    or ACTIVE_COUNTRY_FILE.read_text(encoding="utf-8").strip()
+).upper()
 CONFIG = COUNTRIES[COUNTRY]
 
 ISO2 = CONFIG["iso2"]

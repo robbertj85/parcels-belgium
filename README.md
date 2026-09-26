@@ -72,7 +72,7 @@ python scripts/update_totals_history.py
 cd webapp && npm install && npm run dev     # http://localhost:3000
 ```
 
-Ander land: `PAKKETPUNTEN_COUNTRY=IT` voor de pipeline en `NEXT_PUBLIC_COUNTRY=IT` voor de webapp.
+Het land staat in één bestand, `webapp/config/active-country` (`BE`), dat pipeline, workflows en webapp alle drie lezen.
 
 ## Automatisering
 
@@ -80,7 +80,7 @@ Ander land: `PAKKETPUNTEN_COUNTRY=IT` voor de pipeline en `NEXT_PUBLIC_COUNTRY=I
 - **`update-data.yml`** — dinsdag 02:00 UTC: alle andere vervoerders, gemeentebestanden,
   landelijk overzicht, provinciegrenzen, statistieken, historie; daarna de versheidscontrole
 
-Beide lezen de repository-variabele `PAKKETPUNTEN_COUNTRY` (standaard `BE`).
+Beide nemen het land uit `webapp/config/active-country`.
 
 ## Technische details
 

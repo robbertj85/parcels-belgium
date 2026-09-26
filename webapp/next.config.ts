@@ -1,6 +1,19 @@
 import type { NextConfig } from "next";
+import fs from "fs";
+import path from "path";
+
+// The country this deployment shows: NEXT_PUBLIC_COUNTRY if set, otherwise the
+// committed config/active-country file (shared with country_config.py), so a
+// repository's country is one line in one file.
+const country =
+  process.env.NEXT_PUBLIC_COUNTRY ||
+  fs.readFileSync(path.join(__dirname, "config", "active-country"), "utf8").trim();
 
 const nextConfig: NextConfig = {
+  env: {
+    NEXT_PUBLIC_COUNTRY: country,
+  },
+
   // Enable compression for all responses
   compress: true,
 

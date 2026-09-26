@@ -15,11 +15,16 @@ One repository = one country = one Vercel project. The data files are those of o
 
 ## Country configuration (read this first)
 
+The active country is one committed line in `webapp/config/active-country` (`BE`),
+read by `country_config.py` (pipeline and workflows) and by `webapp/next.config.ts`
+(which exposes it as `NEXT_PUBLIC_COUNTRY`). The env vars `PAKKETPUNTEN_COUNTRY` and
+`NEXT_PUBLIC_COUNTRY` override it for a one-off run.
+
 Everything that differs per country lives in two mirrored profiles:
 
-- `country_config.py` (`COUNTRIES`, selected by env `PAKKETPUNTEN_COUNTRY`, default `BE`):
+- `country_config.py` (`COUNTRIES`):
   ISO codes, metric CRS, bbox, national slug, OSM boundary settings, carrier list, per-carrier fetch parameters.
-- `webapp/config/countries.ts` (selected by `NEXT_PUBLIC_COUNTRY`, default `BE`):
+- `webapp/config/countries.ts` (`COUNTRIES`):
   locale, site name/URL, national slug and labels, default municipality, region label,
   geocoder bbox, carrier list, `missingCarriers` (hard-to-get networks shown in About), About links.
 
@@ -130,7 +135,7 @@ Runs **last** in `update-data.yml`, after the push. The threshold is mirrored as
 - `update-data.yml` — Tuesday 02:00 UTC: `fetch_all.py --skip Amazon` → batch → national
   overview → province chunks → statistics → history → commit → freshness gate
 
-Both read the repository variable `PAKKETPUNTEN_COUNTRY` (default `BE`). Tuesday on
+Both take the country from `webapp/config/active-country`. Tuesday on
 purpose: the Dutch viewer runs Monday against the same DHL/DPD/InPost APIs.
 
 ### Repository size

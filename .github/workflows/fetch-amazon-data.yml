@@ -11,9 +11,6 @@ on:
         type: boolean
         default: false
 
-env:
-  PAKKETPUNTEN_COUNTRY: ${{ vars.PAKKETPUNTEN_COUNTRY || 'BE' }}
-
 jobs:
   fetch-amazon:
     runs-on: ubuntu-latest

@@ -13,10 +13,6 @@ on:
         type: boolean
         default: false
 
-# The country this repository publishes (country_config.py). Set the repository
-# variable PAKKETPUNTEN_COUNTRY to reuse these workflows for another country.
-env:
-  PAKKETPUNTEN_COUNTRY: ${{ vars.PAKKETPUNTEN_COUNTRY || 'BE' }}
 
 jobs:
   update-data:
