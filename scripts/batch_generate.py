@@ -12,7 +12,6 @@ from datetime import datetime
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from api_client import get_data_pakketpunten
-from geo_analysis import get_bufferzones
 from utils import get_gemeente_polygon
 from country_config import MUNICIPALITIES_FILE, CONFIG
 import geopandas as gpd
@@ -91,7 +90,7 @@ def process_municipality(gemeente_data):
             }
 
             with open(output_file, "w", encoding="utf-8") as f:
-                json.dump(empty_geojson, f, ensure_ascii=False, indent=2)
+                json.dump(empty_geojson, f, ensure_ascii=False, separators=(",", ":"))
 
             print(f"✅ Created empty GeoJSON for {gemeente_name}")
             return {"success": True, "error": "No data found (empty GeoJSON created)", "count": 0, "carrier_status": carrier_status}
@@ -101,14 +100,6 @@ def process_municipality(gemeente_data):
 
         # Replace NaN values with None for valid JSON
         gdf_pakketpunten = gdf_pakketpunten.fillna("")
-
-        # Generate buffers
-        gdf_buffers300, gdf_bufferunion300 = get_bufferzones(gdf_pakketpunten, radius=300)
-        gdf_buffers400, gdf_bufferunion400 = get_bufferzones(gdf_pakketpunten, radius=400)
-
-        # Convert back to WGS84 for web display
-        gdf_buffers300_wgs = gdf_buffers300.to_crs(epsg=4326)
-        gdf_buffers400_wgs = gdf_buffers400.to_crs(epsg=4326)
 
         # Prepare output directory (relative to project root, not scripts dir)
         output_dir = Path(__file__).parent.parent / "webapp" / "public" / "data"
@@ -144,29 +135,10 @@ def process_municipality(gemeente_data):
                 }
             })
 
-        # Add buffer union 300m
-        for _, row in gdf_bufferunion300.iterrows():
-            geom = row.geometry
-            features.append({
-                "type": "Feature",
-                "geometry": json.loads(gpd.GeoSeries([geom]).to_json())["features"][0]["geometry"],
-                "properties": {
-                    "type": "buffer_union_300m",
-                    "buffer_m": 300
-                }
-            })
-
-        # Add buffer union 400m
-        for _, row in gdf_bufferunion400.iterrows():
-            geom = row.geometry
-            features.append({
-                "type": "Feature",
-                "geometry": json.loads(gpd.GeoSeries([geom]).to_json())["features"][0]["geometry"],
-                "properties": {
-                    "type": "buffer_union_400m",
-                    "buffer_m": 400
-                }
-            })
+        # No 300/400 m buffer features: the webapp draws coverage itself from the
+        # points (Turf.js in components/Map.tsx) and never read the stored ones,
+        # which were more than half of every file. compute_statistics.py does its
+        # own buffering for the coverage figures.
 
         # Add municipality boundary
         try:
@@ -199,9 +171,10 @@ def process_municipality(gemeente_data):
             "features": features
         }
 
-        # Write to file
+        # Write to file. Compact, not indented: indentation roughly doubled the
+        # size of every file, and nothing reads these by eye.
         with open(output_file, "w", encoding="utf-8") as f:
-            json.dump(geojson_data, f, ensure_ascii=False, indent=2)
+            json.dump(geojson_data, f, ensure_ascii=False, separators=(",", ":"))
 
         # Calculate file size
         file_size_kb = output_file.stat().st_size / 1024

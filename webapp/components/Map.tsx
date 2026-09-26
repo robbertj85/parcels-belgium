@@ -22,7 +22,7 @@
 'use client';
 
 import { useEffect, useState, useMemo, useRef } from 'react';
-import { MapContainer, TileLayer, GeoJSON, Marker, Popup, useMap, CircleMarker, Circle, Polyline } from 'react-leaflet';
+import { MapContainer, TileLayer, GeoJSON, Marker, Popup, useMap, CircleMarker, Circle, Polyline, Pane } from 'react-leaflet';
 import type { LatLngBoundsExpression } from 'leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -33,6 +33,8 @@ import { PakketpuntData, PakketpuntFeature, Filters, PakketpuntProperties, getPo
 import { CARRIER_BRAND, CARRIER_ORDER, CARRIER_SERIES_COLORS } from '@/lib/carriers';
 
 import { COUNTRY } from '@/config/country';
+import { MAX_BUFFER_POINTS, usesNationalCoverage } from '@/lib/mapLimits';
+import type { Feature as GeoJSONFeature, FeatureCollection as GeoJSONFeatureCollection } from 'geojson';
 import { t } from '@/lib/strings';
 const WEEK_DAYS: { key: keyof Exclude<OpeningHours, string>; label: string }[] = [
   { key: 'ma', label: t.days.short.ma },
@@ -210,6 +212,22 @@ function ZoomWatcher({ onZoomChange }: { onZoomChange: (zoom: number) => void })
   return null;
 }
 
+// Reports the visible map area after every pan or zoom
+function ViewportWatcher({ onViewportChange }: { onViewportChange: (bounds: L.LatLngBounds) => void }) {
+  const map = useMap();
+
+  useEffect(() => {
+    const handleMove = () => onViewportChange(map.getBounds());
+    map.on('moveend', handleMove);
+    handleMove();
+    return () => {
+      map.off('moveend', handleMove);
+    };
+  }, [map, onViewportChange]);
+
+  return null;
+}
+
 // Component to add scale control (distance legend)
 function ScaleControl() {
   const map = useMap();
@@ -254,6 +272,18 @@ const PROVIDER_INFO: Record<string, {
 );
 
 // Performance thresholds
+/**
+ * Coverage layers, largest first. Each gets its own pane with a fixed z-order
+ * (largest lowest), so smaller circles stay on top whichever was switched on
+ * last. 300 and 400 m keep the colours they always had; 500 m is a dashed
+ * indigo so the three stay apart when all are on.
+ */
+const BUFFER_LAYERS = [
+  { radius: 500, filter: 'showBuffer500', color: '#6366f1', fillColor: '#a5b4fc', weight: 2, dashArray: '6 6', mergedFillOpacity: 0.20, circleFillOpacity: 0.06 },
+  { radius: 400, filter: 'showBuffer400', color: '#60a5fa', fillColor: '#93c5fd', weight: 3, dashArray: undefined, mergedFillOpacity: 0.30, circleFillOpacity: 0.10 },
+  { radius: 300, filter: 'showBuffer300', color: '#2563eb', fillColor: '#3b82f6', weight: 2, dashArray: undefined, mergedFillOpacity: 0.25, circleFillOpacity: 0.08 },
+] as const;
+
 const PERFORMANCE_CONFIG = {
   // Use simple circles instead of custom icons above this marker count
   SIMPLE_MARKER_THRESHOLD: 3000,
@@ -577,6 +607,9 @@ function MapComponent(props?: MapProps) {
   // Hooks MUST be at the very top
   const [mounted, setMounted] = useState(false);
   const [currentZoom, setCurrentZoom] = useState(12);
+  const [viewBounds, setViewBounds] = useState<L.LatLngBounds | null>(null);
+  // Precomputed national coverage per radius, fetched on first use
+  const [nationalCoverage, setNationalCoverage] = useState<Record<number, GeoJSONFeatureCollection>>({});
 
   // Extract props with defaults AFTER hooks
   const data = props?.data ?? null;
@@ -589,6 +622,7 @@ function MapComponent(props?: MapProps) {
     providers: [],
     showBuffer300: true,
     showBuffer400: true,
+    showBuffer500: false,
     showBufferFill: false,
     bufferMerged: true,
     showBoundary: false,
@@ -712,31 +746,85 @@ function MapComponent(props?: MapProps) {
     return pairwiseUnion(next);
   };
 
-  // Compute merged buffer union polygons from filtered points using Turf.js (deferred for loading UX)
-  // Compute merged buffer union polygons from filtered points using Turf.js
-  const mergedBuffer300 = useMemo(() => {
-    if (!activeFilters.bufferMerged || !activeFilters.showBuffer300 || points.length === 0 || points.length > 3000) return null;
-    try {
-      const pts = featureCollection(
-        points.map(f => point(f.geometry.coordinates as [number, number]))
-      );
-      const buffered = buffer(pts, 0.3, { units: 'kilometers', steps: 4 });
-      if (!buffered || buffered.features.length === 0) return null;
-      return pairwiseUnion(buffered.features);
-    } catch { return null; }
-  }, [points, activeFilters.bufferMerged, activeFilters.showBuffer300]);
+  // The national view with every filter at its default shows the coverage the
+  // pipeline precomputed for all points (scripts/create_national_coverage.py)
+  // instead of drawing it: live, all of Belgium takes 30-40 s per radius.
+  const nationalCoverageActive =
+    data?.metadata.slug === COUNTRY.nationalSlug &&
+    usesNationalCoverage(activeFilters, data?.metadata.providers ?? []);
 
-  const mergedBuffer400 = useMemo(() => {
-    if (!activeFilters.bufferMerged || !activeFilters.showBuffer400 || points.length === 0 || points.length > 3000) return null;
-    try {
-      const pts = featureCollection(
-        points.map(f => point(f.geometry.coordinates as [number, number]))
-      );
-      const buffered = buffer(pts, 0.4, { units: 'kilometers', steps: 4 });
-      if (!buffered || buffered.features.length === 0) return null;
-      return pairwiseUnion(buffered.features);
-    } catch { return null; }
-  }, [points, activeFilters.bufferMerged, activeFilters.showBuffer400]);
+  const wantedNationalRadii = nationalCoverageActive
+    ? BUFFER_LAYERS.filter((layer) => activeFilters[layer.filter]).map((layer) => layer.radius).join(',')
+    : '';
+
+  useEffect(() => {
+    if (!wantedNationalRadii) return;
+    for (const radius of wantedNationalRadii.split(',').map(Number)) {
+      if (nationalCoverage[radius]) continue;
+      fetch(`/data/geo/coverage_${radius}.geojson`)
+        .then((res) => (res.ok ? res.json() : null))
+        .then((json) => {
+          if (json) setNationalCoverage((loaded) => ({ ...loaded, [radius]: json }));
+        })
+        .catch((err) => console.error(`Loading national coverage ${radius} m failed:`, err));
+    }
+  }, [wantedNationalRadii, nationalCoverage]);
+
+  // Points that get coverage circles. A municipality draws them for all its
+  // points; above MAX_BUFFER_POINTS (the national view) only for the points in
+  // and just around the viewport, and none until that is at most the limit.
+  // The selection is a string of point indices, so a pan that keeps the same
+  // points yields an equal string and the Turf unions below are not recomputed.
+  const bufferSelection = useMemo(() => {
+    if (nationalCoverageActive) return '';
+    if (points.length <= MAX_BUFFER_POINTS) return 'all';
+    if (!viewBounds) return '';
+    // Pad so a circle whose point is just off-screen still shows its edge
+    const area = viewBounds.pad(0.1);
+    const indices: number[] = [];
+    points.forEach((f, i) => {
+      const [lng, lat] = f.geometry.coordinates as [number, number];
+      if (area.contains([lat, lng])) indices.push(i);
+    });
+    return indices.length > 0 && indices.length <= MAX_BUFFER_POINTS ? indices.join(',') : '';
+  }, [points, viewBounds, nationalCoverageActive]);
+
+  const bufferPoints = useMemo(() => {
+    if (bufferSelection === 'all') return points;
+    if (bufferSelection === '') return [];
+    return bufferSelection.split(',').map((i) => points[Number(i)]);
+  }, [points, bufferSelection]);
+
+  // react-leaflet's GeoJSON ignores new `data`; a key per point set forces a redraw
+  const bufferKey = useMemo(() => {
+    let hash = 0;
+    for (let i = 0; i < bufferSelection.length; i++) {
+      hash = (hash * 31 + bufferSelection.charCodeAt(i)) | 0;
+    }
+    return `${bufferPoints.length}-${hash}`;
+  }, [bufferSelection, bufferPoints.length]);
+
+  // Which coverage layers are switched on, e.g. "500,300"
+  const enabledRadii = BUFFER_LAYERS.filter((layer) => activeFilters[layer.filter])
+    .map((layer) => layer.radius).join(',');
+
+  // Merged buffer union polygons per enabled radius, from the buffer points (Turf.js)
+  const mergedBuffers = useMemo(() => {
+    const result: Record<number, GeoJSONFeature> = {};
+    if (!activeFilters.bufferMerged || bufferPoints.length === 0 || !enabledRadii) return result;
+    const pts = featureCollection(
+      bufferPoints.map(f => point(f.geometry.coordinates as [number, number]))
+    );
+    for (const radius of enabledRadii.split(',').map(Number)) {
+      try {
+        const buffered = buffer(pts, radius / 1000, { units: 'kilometers', steps: 4 });
+        if (buffered && buffered.features.length > 0) {
+          result[radius] = pairwiseUnion(buffered.features);
+        }
+      } catch { /* leave this radius out */ }
+    }
+    return result;
+  }, [bufferPoints, activeFilters.bufferMerged, enabledRadii]);
 
   // Group markers by exact coordinates and spread them at high zoom (manual spiderfy)
   const spreadPoints = useMemo(
@@ -814,7 +902,6 @@ function MapComponent(props?: MapProps) {
   }, [data, bounds]);
 
   // Use simple markers based on user preference from filters
-  const markerCount = points.length;
   const useSimpleMarkers = activeFilters.useSimpleMarkers;
 
   // Helper to check if a point is highlighted
@@ -1079,79 +1166,65 @@ function MapComponent(props?: MapProps) {
         onZoomedToTarget={onZoomedToTarget}
       />
       <ZoomWatcher onZoomChange={setCurrentZoom} />
+      <ViewportWatcher onViewportChange={setViewBounds} />
       <ScaleControl />
 
-      {/* Render buffer zones - merged union polygons or individual circles */}
-      {/* 400m buffers rendered first (underneath) */}
-      {activeFilters.showBuffer400 && markerCount <= 3000 && (
-        activeFilters.bufferMerged && mergedBuffer400 ? (
+      {/* Buffer zones - merged union polygons or individual circles, one pane per
+          radius, largest lowest (below the overlay pane's 400, above tiles) */}
+      {BUFFER_LAYERS.map((layer, index) => (
+        <Pane key={`coverage-${layer.radius}`} name={`coverage-${layer.radius}`} style={{ zIndex: 380 + index }}>
+        {nationalCoverageActive && activeFilters[layer.filter] && nationalCoverage[layer.radius] && (
           <GeoJSON
-            key={`buffer400-merged-${data?.metadata?.slug}-${points.length}-fill${activeFilters.showBufferFill}`}
-            data={mergedBuffer400 as any}
+            key={`coverage-national-${layer.radius}-fill${activeFilters.showBufferFill}`}
+            data={nationalCoverage[layer.radius]}
             style={() => ({
-              color: '#60a5fa',
-              fillColor: '#93c5fd',
-              weight: 3,
-              fillOpacity: activeFilters.showBufferFill ? 0.30 : 0,
+              color: layer.color,
+              fillColor: layer.fillColor,
+              weight: layer.weight,
+              dashArray: layer.dashArray,
+              fillOpacity: activeFilters.showBufferFill ? layer.mergedFillOpacity : 0,
               opacity: 1,
             })}
           />
-        ) : !activeFilters.bufferMerged ? (
-          <>{points.map((feature, idx) => {
+        )}
+        {bufferPoints.length > 0 && activeFilters[layer.filter] && (activeFilters.bufferMerged ? (
+          mergedBuffers[layer.radius] ? (
+            <GeoJSON
+              key={`buffer${layer.radius}-merged-${data?.metadata?.slug}-${bufferKey}-fill${activeFilters.showBufferFill}`}
+              data={mergedBuffers[layer.radius]}
+              style={() => ({
+                color: layer.color,
+                fillColor: layer.fillColor,
+                weight: layer.weight,
+                dashArray: layer.dashArray,
+                fillOpacity: activeFilters.showBufferFill ? layer.mergedFillOpacity : 0,
+                opacity: 1,
+              })}
+            />
+          ) : null
+        ) : (
+          bufferPoints.map((feature, idx) => {
             const coords = feature.geometry.coordinates as [number, number];
             return (
               <Circle
-                key={`buffer400-${idx}`}
+                key={`buffer${layer.radius}-${idx}`}
                 center={[coords[1], coords[0]]}
-                radius={400}
+                radius={layer.radius}
                 pathOptions={{
-                  color: '#60a5fa',
-                  fillColor: '#93c5fd',
-                  weight: 3,
-                  fillOpacity: activeFilters.showBufferFill ? 0.10 : 0,
+                  color: layer.color,
+                  fillColor: layer.fillColor,
+                  weight: layer.weight,
+                  dashArray: layer.dashArray,
+                  fillOpacity: activeFilters.showBufferFill ? layer.circleFillOpacity : 0,
                   opacity: 1,
                 }}
                 interactive={false}
               />
             );
-          })}</>
-        ) : null
-      )}
-      {/* 300m buffers rendered on top */}
-      {activeFilters.showBuffer300 && markerCount <= 3000 && (
-        activeFilters.bufferMerged && mergedBuffer300 ? (
-          <GeoJSON
-            key={`buffer300-merged-${data?.metadata?.slug}-${points.length}-fill${activeFilters.showBufferFill}`}
-            data={mergedBuffer300 as any}
-            style={() => ({
-              color: '#2563eb',
-              fillColor: '#3b82f6',
-              weight: 2,
-              fillOpacity: activeFilters.showBufferFill ? 0.25 : 0,
-              opacity: 1,
-            })}
-          />
-        ) : !activeFilters.bufferMerged ? (
-          <>{points.map((feature, idx) => {
-            const coords = feature.geometry.coordinates as [number, number];
-            return (
-              <Circle
-                key={`buffer300-${idx}`}
-                center={[coords[1], coords[0]]}
-                radius={300}
-                pathOptions={{
-                  color: '#2563eb',
-                  fillColor: '#3b82f6',
-                  weight: 2,
-                  fillOpacity: activeFilters.showBufferFill ? 0.08 : 0,
-                  opacity: 1,
-                }}
-                interactive={false}
-              />
-            );
-          })}</>
-        ) : null
-      )}
+          })
+        ))}
+        </Pane>
+      ))}
 
       {/* Render municipal boundaries */}
       {boundaries.map((feature, idx) => (

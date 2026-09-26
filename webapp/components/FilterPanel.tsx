@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { Filters, PointCategory, ServiceFilter, getCategoryLabel } from '@/types/pakketpunten';
 import { BoundaryLoadProgress } from '@/utils/boundaryLoader';
 import { CARRIER_LABELS, CARRIER_ORDER, CARRIER_SERIES_COLORS } from '@/lib/carriers';
+import { MAX_BUFFER_POINTS, usesNationalCoverage } from '@/lib/mapLimits';
 import { t } from '@/lib/strings';
 
 interface FilterPanelProps {
@@ -17,6 +18,8 @@ interface FilterPanelProps {
   boundariesLoading?: boolean;
   boundaryLoadProgress?: BoundaryLoadProgress | null;
   totalPoints?: number;
+  /** The national view, where default filters show the precomputed coverage. */
+  nationalView?: boolean;
 }
 
 /**
@@ -105,11 +108,23 @@ function InlineSpinner() {
   );
 }
 
-export default function FilterPanel({ filters, onChange, availableProviders, providerCounts, categoryCounts, serviceCounts, sharedLocationCount, boundariesLoading, boundaryLoadProgress, totalPoints }: FilterPanelProps) {
-  const buffersDisabled = (totalPoints ?? 0) > 3000;
+export default function FilterPanel({ filters, onChange, availableProviders, providerCounts, categoryCounts, serviceCounts, sharedLocationCount, boundariesLoading, boundaryLoadProgress, totalPoints, nationalView }: FilterPanelProps) {
+  // Above this many points the map only draws coverage for what is in view,
+  // unless the national view can show its precomputed coverage
+  const buffersNeedZoom =
+    (totalPoints ?? 0) > MAX_BUFFER_POINTS &&
+    !(nationalView && usesNationalCoverage(filters, availableProviders ?? []));
 
   // Local spinner state for merged buffer toggle
   const [mergeSpinner, setMergeSpinner] = useState(false);
+  // Local spinner state for the "toggle all carriers" heading click
+  const [providersSpinner, setProvidersSpinner] = useState(false);
+
+  useEffect(() => {
+    if (!providersSpinner) return;
+    const timer = setTimeout(() => setProvidersSpinner(false), 400);
+    return () => clearTimeout(timer);
+  }, [filters.providers, providersSpinner]);
 
   // Clear spinner once the filter change has been applied (computation done, re-render complete)
   useEffect(() => {
@@ -143,6 +158,16 @@ export default function FilterPanel({ filters, onChange, availableProviders, pro
   };
 
   const providers = availableProviders || Object.keys(PROVIDER_INFO);
+  const anyProviderSelected = filters.providers.length > 0;
+
+  // Clicking the "Vervoerders" heading switches every carrier off, or all on
+  // when none is selected (as in pakketpunten-analyse)
+  const toggleAllProviders = () => {
+    const next = anyProviderSelected ? [] : [...providers];
+    setProvidersSpinner(true);
+    // Defer so the browser paints the spinner before the heavy re-render
+    setTimeout(() => onChange({ ...filters, providers: next }), 20);
+  };
   const categories: PointCategory[] = ['locker', 'shop'];
   const services: ServiceFilter[] = ['pickup', 'dropoff'];
 
@@ -154,7 +179,15 @@ export default function FilterPanel({ filters, onChange, availableProviders, pro
 
       {/* Provider filters */}
       <div>
-        <label className="block text-sm font-medium text-foreground mb-2">{t.filters.carriers}</label>
+        <button
+          type="button"
+          onClick={toggleAllProviders}
+          title={anyProviderSelected ? t.filters.allCarriersOff : t.filters.allCarriersOn}
+          className="flex items-center gap-2 w-full text-left text-sm font-medium text-foreground mb-2 hover:text-primary transition cursor-pointer select-none"
+        >
+          <span>{t.filters.carriers}</span>
+          {providersSpinner && <InlineSpinner />}
+        </button>
         <div className="space-y-1 md:space-y-2">
           {providers.map((provider) => {
             const info = PROVIDER_INFO[provider as keyof typeof PROVIDER_INFO];
@@ -320,38 +353,47 @@ export default function FilterPanel({ filters, onChange, availableProviders, pro
       {/* Buffer zones */}
       <div>
         <label className="block text-sm font-medium text-foreground mb-2">{t.filters.coverage}</label>
+        {buffersNeedZoom && (
+          <p className="text-xs text-subtle-foreground mb-2">{t.filters.buffersZoomHint(MAX_BUFFER_POINTS)}</p>
+        )}
         <div className="space-y-1 md:space-y-2">
-          <label className={`flex items-center space-x-2 py-1.5 md:py-0.5 -mx-1 px-1 rounded transition ${buffersDisabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:bg-muted active:bg-secondary'}`}>
+          <label className={`flex items-center space-x-2 py-1.5 md:py-0.5 -mx-1 px-1 rounded transition cursor-pointer hover:bg-muted active:bg-secondary`}>
             <input
               type="checkbox"
               checked={filters.showBuffer300}
               onChange={(e) => onChange({ ...filters, showBuffer300: e.target.checked })}
-              disabled={buffersDisabled}
               className="w-5 h-5 md:w-4 md:h-4 text-primary rounded focus:ring-2 focus:ring-ring disabled:opacity-50"
             />
             <span className="text-sm text-foreground">{t.filters.buffer300}</span>
           </label>
-          <label className={`flex items-center space-x-2 py-1.5 md:py-0.5 -mx-1 px-1 rounded transition ${buffersDisabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:bg-muted active:bg-secondary'}`}>
+          <label className={`flex items-center space-x-2 py-1.5 md:py-0.5 -mx-1 px-1 rounded transition cursor-pointer hover:bg-muted active:bg-secondary`}>
             <input
               type="checkbox"
               checked={filters.showBuffer400}
               onChange={(e) => onChange({ ...filters, showBuffer400: e.target.checked })}
-              disabled={buffersDisabled}
               className="w-5 h-5 md:w-4 md:h-4 text-primary rounded focus:ring-2 focus:ring-ring disabled:opacity-50"
             />
             <span className="text-sm text-foreground">{t.filters.buffer400}</span>
           </label>
-          <label className={`flex items-center space-x-2 py-1.5 md:py-0.5 -mx-1 px-1 rounded transition ${buffersDisabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:bg-muted active:bg-secondary'}`}>
+          <label className={`flex items-center space-x-2 py-1.5 md:py-0.5 -mx-1 px-1 rounded transition cursor-pointer hover:bg-muted active:bg-secondary`}>
+            <input
+              type="checkbox"
+              checked={filters.showBuffer500}
+              onChange={(e) => onChange({ ...filters, showBuffer500: e.target.checked })}
+              className="w-5 h-5 md:w-4 md:h-4 text-primary rounded focus:ring-2 focus:ring-ring disabled:opacity-50"
+            />
+            <span className="text-sm text-foreground">{t.filters.buffer500}</span>
+          </label>
+          <label className={`flex items-center space-x-2 py-1.5 md:py-0.5 -mx-1 px-1 rounded transition cursor-pointer hover:bg-muted active:bg-secondary`}>
             <input
               type="checkbox"
               checked={filters.showBufferFill}
               onChange={(e) => onChange({ ...filters, showBufferFill: e.target.checked })}
-              disabled={buffersDisabled}
               className="w-5 h-5 md:w-4 md:h-4 text-primary rounded focus:ring-2 focus:ring-ring disabled:opacity-50"
             />
             <span className="text-sm text-foreground">{t.filters.bufferFill}</span>
           </label>
-          <label className={`flex items-center space-x-2 py-1.5 md:py-0.5 -mx-1 px-1 rounded transition ${buffersDisabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:bg-muted active:bg-secondary'}`}>
+          <label className={`flex items-center space-x-2 py-1.5 md:py-0.5 -mx-1 px-1 rounded transition cursor-pointer hover:bg-muted active:bg-secondary`}>
             <input
               type="checkbox"
               checked={filters.bufferMerged || mergeSpinner}
@@ -365,7 +407,6 @@ export default function FilterPanel({ filters, onChange, availableProviders, pro
                   onChange({ ...filters, bufferMerged: false });
                 }
               }}
-              disabled={buffersDisabled}
               className="w-5 h-5 md:w-4 md:h-4 text-primary rounded focus:ring-2 focus:ring-ring disabled:opacity-50"
             />
             <span className="text-sm text-foreground">{t.filters.mergedBuffers}</span>
@@ -416,6 +457,7 @@ export default function FilterPanel({ filters, onChange, availableProviders, pro
             providers: providers,
             showBuffer300: true,
             showBuffer400: true,
+            showBuffer500: false,
             showBufferFill: false,
             bufferMerged: true,
             showBoundary: false,

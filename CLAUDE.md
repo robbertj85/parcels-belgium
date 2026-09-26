@@ -66,6 +66,7 @@ api_client.get_data_pakketpunten(gemeente)
 batch_generate.py ──> webapp/public/data/<slug>.geojson + summary.json
 create_national_overview.py ──> <national_slug>.geojson
 create_provincial_boundaries.py ──> boundaries/index.json + provincie-<slug>.geojson
+create_national_coverage.py ──> geo/coverage_{300,400,500}.geojson (national unions)
 compute_statistics.py ──> statistics.json (incl. `unieke_locaties`)
 update_totals_history.py ──> totals_history.json
 ```
@@ -158,6 +159,14 @@ or squash old data commits.
   `public/data/geo/municipality_polygons.geojson`), not from geocoder names.
 - `components/Map.tsx` → adaptive rendering (canvas + simple markers for the national view),
   spiderfy at zoom ≥15, hourly-rotated carrier render priority.
+- **Coverage circles (300/400/500 m)** are never stored per municipality. The map draws
+  them with Turf for at most `MAX_BUFFER_POINTS` (1,000, `lib/mapLimits.ts`) points —
+  all points of a municipality, or above that only the points in view. Live, all of
+  Belgium would take 30–40 s per radius; so the national view with default filters
+  shows the unions `create_national_coverage.py` precomputes (~1.5 s each in GEOS).
+  Each radius has its own Leaflet pane (500 lowest), so the stacking never changes.
+- Clicking the "Vervoerders" heading switches all carriers off, or all on when none is
+  (same behaviour as pakketpunten-analyse).
 - Municipality search also matches `aliases` (other-language names: Luik → Liège).
 
 Keep the data contract stable: GeoJSON property names are Dutch (`locatieNaam`,

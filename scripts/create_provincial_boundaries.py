@@ -128,7 +128,7 @@ def create_provincial_boundaries():
         # Save file
         output_file = boundaries_dir / f"provincie-{province_slug}.geojson"
         with open(output_file, 'w', encoding='utf-8') as f:
-            json.dump(province_data, f, ensure_ascii=False, indent=2)
+            json.dump(province_data, f, ensure_ascii=False, separators=(",", ":"))
 
         file_size_mb = output_file.stat().st_size / (1024 * 1024)
         file_sizes[province] = file_size_mb
@@ -166,7 +166,7 @@ def create_provincial_boundaries():
     print("📊 Summary:")
     print(f"   Total boundaries: {total_boundaries}")
     print(f"   Provincial files: {len(provincial_boundaries)}")
-    print(f"   Total size: {total_size_mb:.1f} MB (was 187 MB)")
+    print(f"   Total size: {total_size_mb:.1f} MB")
     print(f"   Average size: {avg_size_mb:.1f} MB per province")
     print(f"   Largest: {max(file_sizes.values()):.1f} MB ({max(file_sizes, key=file_sizes.get)})")
     print(f"   Smallest: {min(file_sizes.values()):.1f} MB ({min(file_sizes, key=file_sizes.get)})")

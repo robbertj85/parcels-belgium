@@ -3,14 +3,16 @@ info:
   title: Pakketpunten API
   version: 1.0.0
   description: |
-    REST API for retrieving parcel point (pakketpunten) data for Dutch municipalities.
+    REST API for retrieving parcel point (pakketpunten) data per municipality.
 
-    This API provides access to comprehensive geospatial data about parcel pickup locations
-    across the Netherlands, including:
+    This API provides access to geospatial data about parcel pickup locations, including:
     - **Parcel point locations** (coordinates, addresses, providers)
-    - **Coverage buffer zones** (300m and 400m radius)
     - **Municipality boundaries**
-    - **Provider statistics** (DHL, PostNL, DPD, VintedGo, Amazon, De Buren)
+    - **Provider statistics**
+
+    Coverage areas (300/400/500 m) are not part of the municipality data: compute
+    them from the points, or use the national unions at
+    `/data/geo/coverage_300.geojson`, `coverage_400.geojson` and `coverage_500.geojson`.
 
     ## Features
     - ✅ No authentication required
@@ -167,7 +169,6 @@ paths:
 
         Returns a GeoJSON FeatureCollection containing:
         - Parcel point locations (type: `pakketpunt`)
-        - Buffer zones at 300m and 400m (type: `buffer_union_300m`, `buffer_union_400m`)
         - Municipality boundary (type: `boundary`)
 
       operationId: getMunicipalityData
@@ -370,7 +371,7 @@ components:
               example: [4.72, 52.28, 5.07, 52.43]
         features:
           type: array
-          description: GeoJSON features (parcel points, buffers, boundaries)
+          description: GeoJSON features (parcel points, boundary)
           items:
             $ref: "#/components/schemas/GeoJSONFeature"
 
@@ -387,7 +388,6 @@ components:
         properties:
           oneOf:
             - $ref: "#/components/schemas/PakketpuntProperties"
-            - $ref: "#/components/schemas/BufferProperties"
             - $ref: "#/components/schemas/BoundaryProperties"
         geometry:
           $ref: "#/components/schemas/GeoJSONGeometry"
@@ -444,23 +444,6 @@ components:
           format: double
           description: Longitude (WGS84)
           example: 4.900272
-
-    BufferProperties:
-      type: object
-      description: Buffer zone properties
-      required:
-        - type
-        - buffer_m
-      properties:
-        type:
-          type: string
-          enum: [buffer_union_300m, buffer_union_400m]
-          description: Buffer type (300m or 400m radius)
-        buffer_m:
-          type: integer
-          enum: [300, 400]
-          description: Buffer radius in meters
-          example: 300
 
     BoundaryProperties:
       type: object
