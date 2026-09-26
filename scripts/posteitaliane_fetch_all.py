@@ -117,8 +117,9 @@ def spellings(municipality):
             if not upper:
                 continue
             variants.append(upper)
-            # Poste writes a final accented vowel as vowel + apostrophe: CANTU'
-            apostrophe = re.sub(r"([ÀÈÉÌÒÙ])$", lambda m: unicodedata.normalize("NFKD", m.group(1))[0] + "'", upper)
+            # Poste writes a word-final accented vowel as vowel + apostrophe:
+            # CANTU', ARQUA' PETRARCA
+            apostrophe = re.sub(r"([ÀÈÉÌÒÙ])(?=\s|$)", lambda m: unicodedata.normalize("NFKD", m.group(1))[0] + "'", upper)
             variants.append(apostrophe)
     seen = []
     for v in variants:
