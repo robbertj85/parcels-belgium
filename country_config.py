@@ -75,6 +75,8 @@ COUNTRIES = {
             # ~7.900 comuni: per regio ophalen, anders time-out Overpass
             "fetch": "per_region",
             "region_admin_level": "4",
+            # "Sardigna/Sardegna" -> "Sardegna"
+            "name_tag": "name:it",
             "region_resolver": "spatial",
         },
         "carriers": ["PosteItaliane", "DPD", "InPost", "GLS", "DHL", "Amazon"],

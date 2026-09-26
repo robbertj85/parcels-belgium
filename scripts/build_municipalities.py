@@ -39,6 +39,7 @@ import re
 import sys
 import unicodedata
 import zipfile
+from functools import lru_cache
 from pathlib import Path
 
 import requests
@@ -64,7 +65,9 @@ WEBAPP_SIMPLIFY_TOLERANCE = 0.0002
 
 # Onder dit aandeel van de verwachte gemeenten is het Overpass-antwoord onvolledig
 EXPECTED_MUNICIPALITIES = {"BE": 565, "IT": 7896}
-MIN_SHARE = 0.9
+MIN_SHARE = 0.98
+# Overpass answers a query that times out with an empty result, not an error
+EMPTY_RETRIES = 3
 
 WIKIDATA_BATCH = 400
 
@@ -156,7 +159,12 @@ def display_name(tags: dict, region: str) -> str:
 
 # ---------- hook: ophalen ----------
 
-def fetch_municipality_relations(area_filter: str):
+def fetch_municipality_relations(area_filter: str, label: str):
+    """Municipality relations in an area. An empty or errored answer is retried
+    and then raised: a region that silently came back empty (Toscana, once)
+    would otherwise drop out of the viewer."""
+    import time
+
     level = BOUNDARIES["admin_level"]
     query = f"""
     [out:json][timeout:600];
@@ -164,10 +172,19 @@ def fetch_municipality_relations(area_filter: str):
     relation(area.searchArea)["admin_level"="{level}"]["boundary"="administrative"];
     out geom;
     """
-    data = overpass_post(query, timeout=900)
-    return [e for e in data.get("elements", []) if e.get("type") == "relation"]
+    for attempt in range(EMPTY_RETRIES):
+        data = overpass_post(query, timeout=900)
+        relations = [e for e in data.get("elements", []) if e.get("type") == "relation"]
+        remark = data.get("remark", "")
+        if relations and "error" not in remark.lower():
+            return relations
+        print(f"   ⏳ {label}: {len(relations)} relaties{f' ({remark})' if remark else ''}, "
+              f"opnieuw ({attempt + 1}/{EMPTY_RETRIES})")
+        time.sleep(30 * (attempt + 1))
+    raise RuntimeError(f"Overpass gaf geen (volledige) gemeenten voor {label}")
 
 
+@lru_cache(maxsize=1)
 def fetch_regions():
     """Regio-relaties (naam, id, geometrie) voor per-regio ophalen en ruimtelijke toewijzing."""
     iso2 = CONFIG["iso2"]
@@ -179,34 +196,42 @@ def fetch_regions():
     out geom;
     """
     data = overpass_post(query, timeout=900)
+    name_tag = BOUNDARIES.get("name_tag", "name")
     regions = [
-        {"id": rel["id"], "name": rel["tags"].get("name", str(rel["id"])), "geom": to_geometry(rel)}
-        for rel in data.get("elements", []) if rel.get("type") == "relation"
+        {
+            "id": rel["id"],
+            "name": rel["tags"].get(name_tag) or rel["tags"].get("name", str(rel["id"])),
+            "geom": to_geometry(rel),
+        }
+        for rel in data.get("elements", [])
+        # The area query also returns neighbouring countries' regions that
+        # touch the border (Graubünden, Auvergne-Rhône-Alpes for Italy)
+        if rel.get("type") == "relation"
+        and rel.get("tags", {}).get("ISO3166-2", "").startswith(f"{iso2}-")
     ]
     print(f"   {len(regions)} regio's ontvangen")
     return regions
 
 
 def fetch_relations():
-    """Alle gemeenterelaties; bij per-regio ophalen met de regio in `_region`."""
+    """Alle gemeenterelaties van het land (per regio opgehaald als dat is ingesteld)."""
     iso2 = CONFIG["iso2"]
     print("🌍 Gemeentegrenzen ophalen via Overpass (kan enkele minuten duren)...")
 
     if BOUNDARIES["fetch"] == "national":
-        relations = fetch_municipality_relations(f'area["ISO3166-1"="{iso2}"]["admin_level"="2"]')
+        relations = fetch_municipality_relations(f'area["ISO3166-1"="{iso2}"]["admin_level"="2"]', CONFIG["name"])
     elif BOUNDARIES["fetch"] == "per_region":
         relations = []
         for region in fetch_regions():
-            # Overpass area-id = 3600000000 + relation-id
-            batch = fetch_municipality_relations(f"area({3600000000 + region['id']})")
-            for rel in batch:
-                rel["_region"] = region["name"]
+            # Overpass area-id = 3600000000 + relation-id. A comune on the
+            # border comes back for both regions; assign_regions decides.
+            batch = fetch_municipality_relations(f"area({3600000000 + region['id']})", region["name"])
             relations.extend(batch)
             print(f"   {region['name']}: {len(batch)} gemeenten")
     else:
         raise ValueError(f"Onbekende fetch-modus {BOUNDARIES['fetch']}")
 
-    # Een gemeente op een regiogrens kan twee keer terugkomen
+    # Een gemeente op een regiogrens komt twee keer terug
     unique = {rel["id"]: rel for rel in relations}
     print(f"   {len(unique)} gemeenten ontvangen")
     return list(unique.values())
@@ -227,9 +252,7 @@ def assign_regions(relations, geometries):
     if resolver == "be_nis":
         return [be_province(rel["tags"][BOUNDARIES["code_tag"]]) for rel in relations]
     if resolver == "spatial":
-        # Per-regio ophalen gaf de regio al mee
-        if all("_region" in rel for rel in relations):
-            return [rel["_region"] for rel in relations]
+        # De regio waarin een punt binnen de gemeente ligt
         regions = fetch_regions()
         tree = STRtree([r["geom"] for r in regions])
         result = []
