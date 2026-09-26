@@ -44,9 +44,11 @@ POINT_TYPES = {
     "PuntoPosteLocker": "automaat",
 }
 PAGE_SIZE = 50
-WORKERS = 4
-REQUEST_DELAY = 0.2
-MAX_ATTEMPTS = 4
+# Four workers drew HTTP 429 on ~150 of ~9,000 calls; two with a longer
+# back-off on 429 stay under Poste's limit
+WORKERS = 2
+REQUEST_DELAY = 0.3
+MAX_ATTEMPTS = 6
 
 DAYS = {
     "lunedì": "ma", "martedì": "di", "mercoledì": "wo", "giovedì": "do",
@@ -88,7 +90,8 @@ def fetch_page(comune, offset):
         except (requests.RequestException, ValueError) as e:
             if attempt == MAX_ATTEMPTS - 1:
                 raise RuntimeError(f"{comune} offset {offset}: {e}")
-            time.sleep(3 * (attempt + 1))
+            # 5, 10, 20, 40, 80 s: a 429 needs real cool-down, not a quick retry
+            time.sleep(5 * 2 ** attempt)
 
 
 def fetch_comune(comune):

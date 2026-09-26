@@ -154,7 +154,14 @@ def be_display_name(tags: dict, province: str) -> str:
 def display_name(tags: dict, region: str) -> str:
     if CONFIG["iso2"] == "BE":
         return be_display_name(tags, region)
-    return tags.get("name", "")
+    # A few relations lack `name` (ISTAT 061058 in Italy); fall back to the
+    # language name, the official name, and finally the code
+    return (
+        tags.get("name")
+        or tags.get(BOUNDARIES.get("name_tag", "name"))
+        or tags.get("official_name")
+        or tags.get(BOUNDARIES["code_tag"], "")
+    )
 
 
 # ---------- hook: ophalen ----------
