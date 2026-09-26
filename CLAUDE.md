@@ -95,6 +95,7 @@ update_totals_history.py ──> totals_history.json
 | DPD | `dpd_fetch_all.py` | pickup.dpd.cz `getAll?country=56` | 1,000 |
 | Amazon | `amazon_fetch_all.py` | amazon.com.be `fetch_locations` (20 nearest), adaptive grid; Playwright only for the session | 3,700 |
 | ViaTim | `viatim_fetch_all.py` | ViaTim API, filtered to BE | 140 |
+| FedEx | `fedex_fetch_all.py` | local.fedex.com Yext search (worldwide, keyless), 100 km circles | 620 |
 
 **DHL and Amazon ride on the bpost network in Belgium**: every DHL point (id prefix
 `8026-`) is a bpost location, and every Amazon pickup point found is a bpost shop or
@@ -105,7 +106,7 @@ count once): ~19,000 points but ~7,900 physical locations.
 PostNL's widget returns Dutch `BBN_` records without a country code at Belgian
 coordinates; the fetcher keeps only `countryCode == 'BE'`.
 
-Hard-to-get networks (UPS, Budbee, Mondial Relay own API, Cubee, DHL Express, FedEx)
+Hard-to-get networks (UPS, Budbee, Mondial Relay own API, Cubee, DHL Express)
 are listed in `missingCarriers` in the webapp profile.
 
 ### Cache Guard (`scripts/cache_guard.py`)

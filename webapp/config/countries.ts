@@ -98,7 +98,7 @@ export const COUNTRIES: Record<string, CountryProfile> = {
     geocoderCountryCodes: 'be',
     bbox: [2.54, 49.49, 6.41, 51.51],
 
-    carriers: ['bpost', 'DHL', 'GLS', 'InPost', 'VintedGo', 'PostNL', 'DPD', 'Amazon', 'ViaTim'],
+    carriers: ['bpost', 'DHL', 'GLS', 'InPost', 'VintedGo', 'PostNL', 'DPD', 'Amazon', 'ViaTim', 'FedEx'],
     amazonDomain: 'www.amazon.com.be',
 
     missingCarriers: [
@@ -107,7 +107,6 @@ export const COUNTRIES: Record<string, CountryProfile> = {
       { name: 'Mondial Relay', reason: 'De eigen API vereist handelaarsgegevens. De Belgische Mondial Relay-punten zijn overgegaan naar InPost en staan daar.' },
       { name: 'Cubee', reason: 'Geen eigen publieke API. Cubee-kluizen die bpost of GLS bedienen, staan onder die vervoerders.' },
       { name: 'DHL Express', reason: 'Vereist een API-sleutel en overlapt grotendeels met DHL Parcel (bpost-netwerk).' },
-      { name: 'FedEx / TNT', reason: 'Alleen via een API met sleutel; klein netwerk.' },
       { name: 'De Buren', reason: 'Slechts enkele Belgische locaties, niet betrouwbaar per gemeente te koppelen.' },
     ],
 
@@ -159,14 +158,15 @@ export const COUNTRIES: Record<string, CountryProfile> = {
     geocoderCountryCodes: 'it',
     bbox: [6.62, 35.49, 18.52, 47.09],
 
-    carriers: ['PosteItaliane', 'DPD', 'InPost', 'GLS', 'DHL', 'Amazon'],
+    carriers: ['PosteItaliane', 'DPD', 'InPost', 'GLS', 'DHL', 'Amazon', 'FedEx'],
     amazonDomain: 'www.amazon.it',
 
     missingCarriers: [
       { name: 'UPS Access Point', reason: 'API con account sviluppatore (OAuth).' },
-      { name: 'Kipoint', reason: 'Nessuna API pubblica.' },
-      { name: 'Esselunga Locker', reason: 'Nessuna API pubblica; pochi punti in OpenStreetMap.' },
-      { name: 'FedEx', reason: 'Solo via API con chiave.' },
+      { name: 'Mail Boxes Etc.', reason: 'Centri di spedizione (~550), non una rete di ritiro; non inclusi.' },
+      { name: 'Esselunga Locker', reason: 'Solo per gli ordini online di Esselunga, non per pacchi di altri corrieri.' },
+      { name: 'Kipoint, SDA, Mondial Relay', reason: 'Inclusi tramite altre reti: Kipoint e SDA in Poste Italiane, Mondial Relay in InPost.' },
+      { name: 'Vinted Go', reason: 'Non attivo in Italia.' },
     ],
 
     aboutLinks: [],

@@ -29,6 +29,7 @@ Brussels Hoofdstedelijk Gewest. Stand 26 september 2026: **19.030 punten op 7.90
 | DPD | Publieke REST API | ~1.000 |
 | Amazon | Locatie-API van amazon.com.be/ulp, adaptief raster (Playwright alleen voor de sessie) | ~3.700 (allemaal bpost-locaties) |
 | ViaTim | Publieke REST API | ~140 |
+| FedEx | Publieke zoek-API (local.fedex.com) | ~620 |
 
 **DHL, Amazon en bpost**: in België gebruiken DHL Parcel en Amazon het bpost-netwerk. Elk
 DHL-punt en elk gevonden Amazon-punt is een bpost-locatie. Ze staan alle drie op de kaart,
@@ -46,7 +47,6 @@ waar dat maximum bereikt wordt, zodat geen punten wegvallen.
 | Mondial Relay | Eigen API vereist handelaarsgegevens; Belgische punten staan onder InPost |
 | Cubee | Geen eigen API; Cubee-kluizen die bpost of GLS bedienen staan onder die vervoerders |
 | DHL Express | API-sleutel vereist; overlapt met DHL Parcel |
-| FedEx / TNT | Alleen via API met sleutel; klein netwerk |
 | De Buren | Enkele Belgische locaties, niet betrouwbaar per gemeente |
 
 Webshops en winkelketens (bol, Coolblue, Zalando, Delhaize, Carrefour, Shop&Go) zijn geen
@@ -110,6 +110,7 @@ Data bronnen:
 - DPD (https://www.dpd.com)
 - Amazon Hub (https://www.amazon.com.be/ulp)
 - ViaTim (https://viatim.be)
+- FedEx (https://local.fedex.com)
 - Gemeentegrenzen en adreszoeken © OpenStreetMap contributors
 - Inwonertallen: Statbel (1 januari 2023, omgerekend naar de gemeenten van 2025)
 ```

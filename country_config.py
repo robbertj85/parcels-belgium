@@ -45,7 +45,7 @@ COUNTRIES = {
         # Alle vervoerders zijn landelijke caches in data/<carrier>_all_locations.json.
         # Zelfde volgorde als `carriers` in webapp/config/countries.ts (bepaalt
         # de grafiekkleuren daar).
-        "carriers": ["bpost", "DHL", "GLS", "InPost", "VintedGo", "PostNL", "DPD", "Amazon", "ViaTim"],
+        "carriers": ["bpost", "DHL", "GLS", "InPost", "VintedGo", "PostNL", "DPD", "Amazon", "ViaTim", "FedEx"],
         "dhl": {"country_path": "BE"},
         "dpd": {"country_code": 56},
         "inpost": {"country": "BE"},
@@ -79,7 +79,7 @@ COUNTRIES = {
             "name_tag": "name:it",
             "region_resolver": "spatial",
         },
-        "carriers": ["PosteItaliane", "DPD", "InPost", "GLS", "DHL", "Amazon"],
+        "carriers": ["PosteItaliane", "DPD", "InPost", "GLS", "DHL", "Amazon", "FedEx"],
         "dhl": {"country_path": "IT"},
         # DPD Italia = BRT: BRT-fermopoint en BRT-lockers zitten in deze feed
         "dpd": {"country_code": 380},

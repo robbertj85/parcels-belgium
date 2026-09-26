@@ -111,6 +111,10 @@ export const CARRIER_CATALOG: Record<string, CarrierBrand> = {
     label: 'ViaTim', background: '#E3007A', logoUrl: '/logos/viatim.svg',
     source: { name: 'ViaTim', endpoint: 'production.viapunt-api.viatim.nl/public/servicepoints', method: 'Publieke API', url: 'https://viatim.be' },
   },
+  FedEx: {
+    label: 'FedEx', background: '#4D148C', borderColor: '#FF6200', logoUrl: '/logos/fedex.svg',
+    source: { name: 'FedEx OnSite & Stations', endpoint: 'local.fedex.com/en/search', method: 'Publieke API', url: 'https://www.fedex.com' },
+  },
   PosteItaliane: {
     label: 'Poste Italiane', background: '#FFD100', borderColor: '#0047BB', logoUrl: '/logos/posteitaliane.svg',
     source: { name: 'Poste Italiane (Uffici Postali, Punto Poste, Locker)', endpoint: 'mapcollection.poste.it/v2/map', method: 'Publieke API', url: 'https://www.poste.it' },
