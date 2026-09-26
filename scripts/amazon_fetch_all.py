@@ -71,8 +71,26 @@ def haversine_km(lat1, lon1, lat2, lon2):
     return 12742 * math.asin(math.sqrt(a))
 
 
+USER_AGENT = (
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+    "(KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+)
+
+
+def default_client_id():
+    """The finder's clientId follows the store: amazon_be_..., amazon_it_..."""
+    store = DOMAIN.removeprefix("www.amazon.").split(".")[-1]
+    return f"amazon_{store}_add_to_addressbook_mkt_mobile"
+
+
 def browser_session():
-    """Cookies, user agent and clientId from one visit to the finder page."""
+    """Cookies and clientId from a visit to the store and its finder page.
+
+    From a GitHub runner amazon.com.be answered /ulp with a download instead of
+    the page ("Download is starting"), so the homepage comes first for the
+    session cookies, a failed /ulp load is tolerated, and the clientId falls
+    back to the store's pattern when the page made no call.
+    """
     client_ids = []
 
     def on_request(request):
@@ -81,21 +99,27 @@ def browser_session():
 
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
-        context = browser.new_context(locale=CONFIG["amazon"]["locale"])
+        context = browser.new_context(
+            locale=CONFIG["amazon"]["locale"], user_agent=USER_AGENT, accept_downloads=True,
+        )
         page = context.new_page()
         page.on("request", on_request)
-        page.goto(ULP_URL, wait_until="domcontentloaded", timeout=60000)
-        for _ in range(30):
+        for url in (f"https://{DOMAIN}/", ULP_URL):
+            try:
+                page.goto(url, wait_until="domcontentloaded", timeout=60000)
+            except Exception as e:  # PlaywrightError: download, timeout, reset
+                print(f"   ⚠️  {url}: {str(e).splitlines()[0]}")
+                continue
+            time.sleep(3)
+        for _ in range(20):
             if client_ids:
                 break
             time.sleep(0.5)
         cookies = {c["name"]: c["value"] for c in context.cookies()}
-        user_agent = page.evaluate("navigator.userAgent").replace("HeadlessChrome", "Chrome")
         browser.close()
 
-    if not client_ids:
-        raise RuntimeError(f"{ULP_URL} made no fetch_locations call; page layout changed?")
-    return cookies, user_agent, client_ids[0]
+    client_id = client_ids[0] if client_ids else default_client_id()
+    return cookies, USER_AGENT, client_id
 
 
 def country_cells():
@@ -146,8 +170,10 @@ class Fetcher:
                 resp = self.session().get(API_URL, params=params, timeout=30)
                 resp.raise_for_status()
                 data = resp.json()
-                if data.get("isErrored"):
-                    raise ValueError("isErrored")
+                # A throttled call is valid JSON without points:
+                # {"exceptionClassName":"ThrottlingException"}
+                if data.get("isErrored") or data.get("exceptionClassName"):
+                    raise ValueError(data.get("exceptionClassName") or "isErrored")
                 return data.get("locationList") or []
             except (requests.RequestException, ValueError) as e:
                 if attempt == MAX_ATTEMPTS - 1:
