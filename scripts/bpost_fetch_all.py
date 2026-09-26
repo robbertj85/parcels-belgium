@@ -47,6 +47,9 @@ SEED_POSTCODES = [
     "8500", "8900", "9000", "9100", "9300",
 ]
 
+# Searches that failed three times; any of them leaves a possible hole
+FAILED_POSTCODES = []
+
 POINT_TYPES = {
     "1": "postkantoor",
     "2": "servicepunt",
@@ -83,6 +86,7 @@ def search(session, postcode):
         except (requests.RequestException, ET.ParseError) as e:
             if attempt == 2:
                 print(f"   ⚠️  {postcode}: {e}")
+                FAILED_POSTCODES.append(postcode)
                 return []
             time.sleep(2 * (attempt + 1))
 
@@ -200,6 +204,10 @@ def main():
     if unknown:
         print(f"   ⚠️  Onbekende types (als servicepunt opgeslagen): {dict(unknown)}")
 
+    if FAILED_POSTCODES:
+        print(f"❌ {len(FAILED_POSTCODES)} zoekopdrachten mislukt ({', '.join(FAILED_POSTCODES[:10])}); "
+              "cache niet bijgewerkt")
+        return 1
     if not locations:
         print("❌ Geen locaties opgehaald")
         return 1

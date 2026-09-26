@@ -37,6 +37,8 @@ GRID_SPACING_KM = 12   # 12km between grid points (ensures better coverage with 
 DHL_API_URL = f"https://api-gw.dhlparcel.nl/parcel-shop-locations/{CONFIG['dhl']['country_path']}/by-geo"
 API_LIMIT = 50
 RATE_LIMIT_DELAY = 0.5  # seconds between requests
+MAX_ATTEMPTS = 3
+FAILED_CELLS: List[Tuple[float, float, int]] = []
 
 
 def lat_lon_to_km(lat1: float, lon1: float, lat2: float, lon2: float) -> float:
@@ -100,14 +102,21 @@ def fetch_dhl_locations(lat: float, lon: float, radius: int, limit: int = API_LI
         "limit": limit,
     }
 
-    try:
-        response = requests.get(DHL_API_URL, params=params, timeout=30)
-        response.raise_for_status()
-        data = response.json()
-        return data.get('results', [])
-    except Exception as e:
-        print(f"  ⚠️  API error at ({lat:.4f}, {lon:.4f}): {e}")
-        return []
+    for attempt in range(MAX_ATTEMPTS):
+        try:
+            response = requests.get(DHL_API_URL, params=params, timeout=30)
+            response.raise_for_status()
+            data = response.json()
+            return data.get('results', [])
+        except Exception as e:
+            print(f"  ⚠️  API error at ({lat:.4f}, {lon:.4f}), attempt {attempt + 1}/{MAX_ATTEMPTS}: {e}")
+            if attempt < MAX_ATTEMPTS - 1:
+                time.sleep(3 * (attempt + 1))
+
+    # A cell that keeps failing leaves a hole in the country; record it so the
+    # run is not saved as complete.
+    FAILED_CELLS.append((lat, lon, radius))
+    return []
 
 
 def location_to_key(location: Dict) -> Tuple:
@@ -286,6 +295,10 @@ if __name__ == "__main__":
 
     # Analyze
     analyze_results(locations)
+
+    if FAILED_CELLS:
+        print(f"❌ {len(FAILED_CELLS)} grid cells failed after {MAX_ATTEMPTS} attempts; not saving a partial fetch")
+        sys.exit(1)
 
     # Save results
     save_results(locations)

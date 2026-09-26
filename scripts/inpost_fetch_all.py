@@ -27,6 +27,9 @@ from typing import Dict, List
 from collections import defaultdict
 
 
+MAX_ATTEMPTS = 4
+
+
 def fetch_all_inpost_locations() -> List[Dict]:
     """
     Fetch all InPost points in the configured country via paginated API.
@@ -51,53 +54,55 @@ def fetch_all_inpost_locations() -> List[Dict]:
     per_page = 100
     total_pages = None
 
-    try:
-        while True:
-            response = requests.get(
-                "https://api-global-points.easypack24.net/v1/points",
-                params={
-                    "country": CONFIG["inpost"]["country"],
-                    "per_page": per_page,
-                    "page": page,
-                },
-                headers={"Accept": "application/json"},
-                timeout=30,
-            )
-            response.raise_for_status()
-            data = response.json()
-
-            items = data.get("items", [])
-            total_pages = data.get("total_pages", 1)
-            total_count = data.get("count", 0)
-
-            if page == 1:
-                print(f"   Total locations reported: {total_count}")
-                print(f"   Total pages: {total_pages}")
-
-            all_items.extend(items)
-            print(f"   Page {page}/{total_pages}: fetched {len(items)} items (total so far: {len(all_items)})")
-
-            if page >= total_pages or not items:
+    while True:
+        # A page that keeps failing aborts the whole fetch: saving the pages
+        # before it would publish a partial country as complete, and on a
+        # first run there is no previous count for the cache guard to compare.
+        data = None
+        for attempt in range(MAX_ATTEMPTS):
+            try:
+                response = requests.get(
+                    "https://api-global-points.easypack24.net/v1/points",
+                    params={
+                        "country": CONFIG["inpost"]["country"],
+                        "per_page": per_page,
+                        "page": page,
+                    },
+                    headers={"Accept": "application/json"},
+                    timeout=60,
+                )
+                response.raise_for_status()
+                data = response.json()
                 break
+            except (requests.exceptions.RequestException, ValueError) as e:
+                wait = 5 * (attempt + 1)
+                print(f"   ⚠️  Page {page}, attempt {attempt + 1}/{MAX_ATTEMPTS}: {e}")
+                if attempt < MAX_ATTEMPTS - 1:
+                    time.sleep(wait)
 
-            page += 1
-            time.sleep(1)  # Rate limiting
-
-        print()
-        print(f"✅ Fetched {len(all_items)} total InPost locations")
-
-    except requests.exceptions.RequestException as e:
-        print(f"❌ Network error on page {page}: {e}")
-        if all_items:
-            print(f"   Continuing with {len(all_items)} items fetched so far")
-        else:
+        if data is None:
+            print(f"❌ Page {page} failed {MAX_ATTEMPTS} times; not saving a partial fetch")
             return []
-    except Exception as e:
-        print(f"❌ Unexpected error: {e}")
-        import traceback
-        traceback.print_exc()
-        if not all_items:
-            return []
+
+        items = data.get("items", [])
+        total_pages = data.get("total_pages", 1)
+        total_count = data.get("count", 0)
+
+        if page == 1:
+            print(f"   Total locations reported: {total_count}")
+            print(f"   Total pages: {total_pages}")
+
+        all_items.extend(items)
+        print(f"   Page {page}/{total_pages}: fetched {len(items)} items (total so far: {len(all_items)})")
+
+        if page >= total_pages or not items:
+            break
+
+        page += 1
+        time.sleep(1)  # Rate limiting
+
+    print()
+    print(f"✅ Fetched {len(all_items)} total InPost locations")
 
     # Filter to operating points only, exclude test items
     operating = []
