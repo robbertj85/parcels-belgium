@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-26T12:42:24.291351Z",
+  "generated_at": "2026-09-26T14:21:09.161320Z",
   "total_municipalities": 565,
   "successful": 565,
   "failed": 0,
@@ -8,70 +8,70 @@
       "successful_municipalities": 565,
       "failed_municipalities": 0,
       "total_points": 3694,
-      "latest_update": "2026-09-26T12:42:24.288984Z",
+      "latest_update": "2026-09-26T14:21:09.156203Z",
       "overall_success_rate": 100.0
     },
     "DHL": {
       "successful_municipalities": 565,
       "failed_municipalities": 0,
-      "total_points": 4405,
-      "latest_update": "2026-09-26T12:42:24.288984Z",
+      "total_points": 4403,
+      "latest_update": "2026-09-26T14:21:09.156203Z",
       "overall_success_rate": 100.0
     },
     "DPD": {
       "successful_municipalities": 565,
       "failed_municipalities": 0,
-      "total_points": 1012,
-      "latest_update": "2026-09-26T12:42:24.288984Z",
+      "total_points": 1018,
+      "latest_update": "2026-09-26T14:21:09.156203Z",
       "overall_success_rate": 100.0
     },
     "FedEx": {
       "successful_municipalities": 565,
       "failed_municipalities": 0,
-      "total_points": 620,
-      "latest_update": "2026-09-26T12:42:24.288984Z",
+      "total_points": 622,
+      "latest_update": "2026-09-26T14:21:09.156203Z",
       "overall_success_rate": 100.0
     },
     "GLS": {
       "successful_municipalities": 565,
       "failed_municipalities": 0,
       "total_points": 1872,
-      "latest_update": "2026-09-26T12:42:24.288984Z",
+      "latest_update": "2026-09-26T14:21:09.156203Z",
       "overall_success_rate": 100.0
     },
     "InPost": {
       "successful_municipalities": 565,
       "failed_municipalities": 0,
-      "total_points": 1335,
-      "latest_update": "2026-09-26T12:42:24.288984Z",
+      "total_points": 1360,
+      "latest_update": "2026-09-26T14:21:09.156203Z",
       "overall_success_rate": 100.0
     },
     "PostNL": {
       "successful_municipalities": 565,
       "failed_municipalities": 0,
-      "total_points": 1108,
-      "latest_update": "2026-09-26T12:42:24.288984Z",
+      "total_points": 1107,
+      "latest_update": "2026-09-26T14:21:09.156203Z",
       "overall_success_rate": 100.0
     },
     "ViaTim": {
       "successful_municipalities": 565,
       "failed_municipalities": 0,
       "total_points": 143,
-      "latest_update": "2026-09-26T12:42:24.288984Z",
+      "latest_update": "2026-09-26T14:21:09.156203Z",
       "overall_success_rate": 100.0
     },
     "VintedGo": {
       "successful_municipalities": 565,
       "failed_municipalities": 0,
       "total_points": 1285,
-      "latest_update": "2026-09-26T12:42:24.288984Z",
+      "latest_update": "2026-09-26T14:21:09.156203Z",
       "overall_success_rate": 100.0
     },
     "bpost": {
       "successful_municipalities": 565,
       "failed_municipalities": 0,
-      "total_points": 4408,
-      "latest_update": "2026-09-26T12:42:24.288984Z",
+      "total_points": 4405,
+      "latest_update": "2026-09-26T14:21:09.156203Z",
       "overall_success_rate": 100.0
     }
   },
@@ -80,8 +80,8 @@
       "gemeente": "Aalst",
       "slug": "aalst",
       "success": true,
-      "count": 112,
-      "file_size_kb": 61.0341796875,
+      "count": 113,
+      "file_size_kb": 61.3134765625,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -100,7 +100,7 @@
         },
         "InPost": {
           "success": true,
-          "count": 3,
+          "count": 4,
           "error": null
         },
         "VintedGo": {
@@ -134,14 +134,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:18.425783Z"
+      "generated_at": "2026-09-26T14:20:57.896828Z"
     },
     {
       "gemeente": "Aalter",
       "slug": "aalter",
       "success": true,
       "count": 71,
-      "file_size_kb": 42.26171875,
+      "file_size_kb": 42.232421875,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -194,14 +194,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:18.438795Z"
+      "generated_at": "2026-09-26T14:20:57.921572Z"
     },
     {
       "gemeente": "Aarschot",
       "slug": "aarschot",
       "success": true,
       "count": 57,
-      "file_size_kb": 37.4775390625,
+      "file_size_kb": 37.4736328125,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -254,7 +254,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:18.450299Z"
+      "generated_at": "2026-09-26T14:20:57.944481Z"
     },
     {
       "gemeente": "Aartselaar",
@@ -314,7 +314,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:18.459941Z"
+      "generated_at": "2026-09-26T14:20:57.963610Z"
     },
     {
       "gemeente": "Affligem",
@@ -374,7 +374,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:18.468803Z"
+      "generated_at": "2026-09-26T14:20:57.981128Z"
     },
     {
       "gemeente": "Aiseau-Presles",
@@ -434,14 +434,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:18.478225Z"
+      "generated_at": "2026-09-26T14:20:57.999463Z"
     },
     {
       "gemeente": "Alken",
       "slug": "alken",
       "success": true,
       "count": 29,
-      "file_size_kb": 22.568359375,
+      "file_size_kb": 22.54296875,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -494,14 +494,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:18.487896Z"
+      "generated_at": "2026-09-26T14:20:58.019294Z"
     },
     {
       "gemeente": "Alveringem",
       "slug": "alveringem",
       "success": true,
       "count": 13,
-      "file_size_kb": 22.8037109375,
+      "file_size_kb": 22.7744140625,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -554,7 +554,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:18.498113Z"
+      "generated_at": "2026-09-26T14:20:58.039038Z"
     },
     {
       "gemeente": "Amay",
@@ -614,7 +614,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:18.507303Z"
+      "generated_at": "2026-09-26T14:20:58.057000Z"
     },
     {
       "gemeente": "Amel",
@@ -674,7 +674,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:18.517136Z"
+      "generated_at": "2026-09-26T14:20:58.075543Z"
     },
     {
       "gemeente": "Andenne",
@@ -734,14 +734,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:18.527496Z"
+      "generated_at": "2026-09-26T14:20:58.096761Z"
     },
     {
       "gemeente": "Anderlecht",
       "slug": "anderlecht",
       "success": true,
-      "count": 184,
-      "file_size_kb": 82.7060546875,
+      "count": 183,
+      "file_size_kb": 82.3779296875,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -760,7 +760,7 @@
         },
         "InPost": {
           "success": true,
-          "count": 17,
+          "count": 16,
           "error": null
         },
         "VintedGo": {
@@ -794,7 +794,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:18.544219Z"
+      "generated_at": "2026-09-26T14:20:58.130912Z"
     },
     {
       "gemeente": "Anderlues",
@@ -854,14 +854,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:18.553588Z"
+      "generated_at": "2026-09-26T14:20:58.149375Z"
     },
     {
       "gemeente": "Anhée",
       "slug": "anhee",
       "success": true,
       "count": 16,
-      "file_size_kb": 15.03515625,
+      "file_size_kb": 15.0498046875,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -914,7 +914,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:18.563905Z"
+      "generated_at": "2026-09-26T14:20:58.167919Z"
     },
     {
       "gemeente": "Ans",
@@ -974,14 +974,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:18.574526Z"
+      "generated_at": "2026-09-26T14:20:58.188667Z"
     },
     {
       "gemeente": "Anthisnes",
       "slug": "anthisnes",
       "success": true,
       "count": 10,
-      "file_size_kb": 12.6298828125,
+      "file_size_kb": 12.615234375,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -1034,7 +1034,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:18.584792Z"
+      "generated_at": "2026-09-26T14:20:58.206654Z"
     },
     {
       "gemeente": "Antoing",
@@ -1094,14 +1094,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:18.594191Z"
+      "generated_at": "2026-09-26T14:20:58.224787Z"
     },
     {
       "gemeente": "Antwerpen",
       "slug": "antwerpen",
       "success": true,
       "count": 790,
-      "file_size_kb": 341.7041015625,
+      "file_size_kb": 341.5751953125,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -1154,7 +1154,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:18.641613Z"
+      "generated_at": "2026-09-26T14:20:58.320239Z"
     },
     {
       "gemeente": "Anzegem",
@@ -1214,14 +1214,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:18.657023Z"
+      "generated_at": "2026-09-26T14:20:58.340957Z"
     },
     {
       "gemeente": "Ardooie",
       "slug": "ardooie",
       "success": true,
       "count": 40,
-      "file_size_kb": 22.666015625,
+      "file_size_kb": 22.6259765625,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -1274,7 +1274,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:18.667896Z"
+      "generated_at": "2026-09-26T14:20:58.360732Z"
     },
     {
       "gemeente": "Arendonk",
@@ -1334,14 +1334,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:18.677386Z"
+      "generated_at": "2026-09-26T14:20:58.378081Z"
     },
     {
       "gemeente": "Arlon",
       "slug": "arlon",
       "success": true,
-      "count": 57,
-      "file_size_kb": 46.7890625,
+      "count": 59,
+      "file_size_kb": 47.8486328125,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -1390,11 +1390,11 @@
         },
         "FedEx": {
           "success": true,
-          "count": 0,
+          "count": 2,
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:18.692700Z"
+      "generated_at": "2026-09-26T14:20:58.402685Z"
     },
     {
       "gemeente": "As",
@@ -1454,14 +1454,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:18.702809Z"
+      "generated_at": "2026-09-26T14:20:58.419066Z"
     },
     {
       "gemeente": "Asse",
       "slug": "asse",
       "success": true,
-      "count": 43,
-      "file_size_kb": 32.1650390625,
+      "count": 44,
+      "file_size_kb": 32.537109375,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -1480,7 +1480,7 @@
         },
         "InPost": {
           "success": true,
-          "count": 1,
+          "count": 2,
           "error": null
         },
         "VintedGo": {
@@ -1514,7 +1514,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:18.717193Z"
+      "generated_at": "2026-09-26T14:20:58.440955Z"
     },
     {
       "gemeente": "Assenede",
@@ -1574,7 +1574,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:18.728145Z"
+      "generated_at": "2026-09-26T14:20:58.458715Z"
     },
     {
       "gemeente": "Assesse",
@@ -1634,14 +1634,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:18.737080Z"
+      "generated_at": "2026-09-26T14:20:58.476063Z"
     },
     {
       "gemeente": "Ath",
       "slug": "ath",
       "success": true,
       "count": 83,
-      "file_size_kb": 45.1494140625,
+      "file_size_kb": 45.1240234375,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -1694,7 +1694,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:18.750503Z"
+      "generated_at": "2026-09-26T14:20:58.500351Z"
     },
     {
       "gemeente": "Attert",
@@ -1754,7 +1754,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:18.759625Z"
+      "generated_at": "2026-09-26T14:20:58.517101Z"
     },
     {
       "gemeente": "Aubange",
@@ -1814,7 +1814,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:18.770569Z"
+      "generated_at": "2026-09-26T14:20:58.538664Z"
     },
     {
       "gemeente": "Aubel",
@@ -1874,7 +1874,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:18.780047Z"
+      "generated_at": "2026-09-26T14:20:58.556281Z"
     },
     {
       "gemeente": "Avelgem",
@@ -1934,14 +1934,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:18.789634Z"
+      "generated_at": "2026-09-26T14:20:58.576012Z"
     },
     {
       "gemeente": "Awans",
       "slug": "awans",
       "success": true,
       "count": 27,
-      "file_size_kb": 16.4755859375,
+      "file_size_kb": 16.4501953125,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -1994,7 +1994,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:18.798992Z"
+      "generated_at": "2026-09-26T14:20:58.594441Z"
     },
     {
       "gemeente": "Aywaille",
@@ -2054,7 +2054,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:18.810012Z"
+      "generated_at": "2026-09-26T14:20:58.616116Z"
     },
     {
       "gemeente": "Baarle-Hertog",
@@ -2114,7 +2114,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:18.820112Z"
+      "generated_at": "2026-09-26T14:20:58.635264Z"
     },
     {
       "gemeente": "Baelen",
@@ -2174,14 +2174,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:18.829886Z"
+      "generated_at": "2026-09-26T14:20:58.653469Z"
     },
     {
       "gemeente": "Balen",
       "slug": "balen",
       "success": true,
       "count": 42,
-      "file_size_kb": 29.9599609375,
+      "file_size_kb": 29.9306640625,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -2234,14 +2234,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:18.840857Z"
+      "generated_at": "2026-09-26T14:20:58.675885Z"
     },
     {
       "gemeente": "Bassenge",
       "slug": "bassenge",
       "success": true,
       "count": 20,
-      "file_size_kb": 18.494140625,
+      "file_size_kb": 18.4794921875,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -2294,7 +2294,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:18.850210Z"
+      "generated_at": "2026-09-26T14:20:58.694789Z"
     },
     {
       "gemeente": "Bastogne",
@@ -2354,7 +2354,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:18.863340Z"
+      "generated_at": "2026-09-26T14:20:58.719355Z"
     },
     {
       "gemeente": "Beaumont",
@@ -2414,7 +2414,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:18.873291Z"
+      "generated_at": "2026-09-26T14:20:58.738800Z"
     },
     {
       "gemeente": "Beauraing",
@@ -2474,7 +2474,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:18.884196Z"
+      "generated_at": "2026-09-26T14:20:58.760085Z"
     },
     {
       "gemeente": "Beauvechain",
@@ -2534,14 +2534,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:18.892196Z"
+      "generated_at": "2026-09-26T14:20:58.776331Z"
     },
     {
       "gemeente": "Beernem",
       "slug": "beernem",
       "success": true,
       "count": 34,
-      "file_size_kb": 22.0615234375,
+      "file_size_kb": 22.0322265625,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -2594,7 +2594,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:18.902000Z"
+      "generated_at": "2026-09-26T14:20:58.795546Z"
     },
     {
       "gemeente": "Beerse",
@@ -2654,14 +2654,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:18.910489Z"
+      "generated_at": "2026-09-26T14:20:58.813106Z"
     },
     {
       "gemeente": "Beersel",
       "slug": "beersel",
       "success": true,
       "count": 41,
-      "file_size_kb": 27.484375,
+      "file_size_kb": 27.4697265625,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -2714,7 +2714,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:18.920743Z"
+      "generated_at": "2026-09-26T14:20:58.834268Z"
     },
     {
       "gemeente": "Begijnendijk",
@@ -2774,7 +2774,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:18.929905Z"
+      "generated_at": "2026-09-26T14:20:58.853562Z"
     },
     {
       "gemeente": "Bekkevoort",
@@ -2834,14 +2834,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:18.938585Z"
+      "generated_at": "2026-09-26T14:20:58.871433Z"
     },
     {
       "gemeente": "Belœil",
       "slug": "belil",
       "success": true,
       "count": 31,
-      "file_size_kb": 25.9052734375,
+      "file_size_kb": 25.8798828125,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -2894,14 +2894,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:18.948487Z"
+      "generated_at": "2026-09-26T14:20:58.891568Z"
     },
     {
       "gemeente": "Beringen",
       "slug": "beringen",
       "success": true,
       "count": 77,
-      "file_size_kb": 45.5595703125,
+      "file_size_kb": 45.544921875,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -2954,7 +2954,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:18.961072Z"
+      "generated_at": "2026-09-26T14:20:58.916249Z"
     },
     {
       "gemeente": "Berlaar",
@@ -3014,7 +3014,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:18.971193Z"
+      "generated_at": "2026-09-26T14:20:58.934654Z"
     },
     {
       "gemeente": "Berlare",
@@ -3074,7 +3074,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:18.980624Z"
+      "generated_at": "2026-09-26T14:20:58.956497Z"
     },
     {
       "gemeente": "Berloz",
@@ -3134,7 +3134,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:18.988650Z"
+      "generated_at": "2026-09-26T14:20:58.971634Z"
     },
     {
       "gemeente": "Bernissart",
@@ -3194,7 +3194,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:18.997748Z"
+      "generated_at": "2026-09-26T14:20:58.990197Z"
     },
     {
       "gemeente": "Bertem",
@@ -3254,7 +3254,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.007670Z"
+      "generated_at": "2026-09-26T14:20:59.008075Z"
     },
     {
       "gemeente": "Bertrix",
@@ -3314,14 +3314,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.022224Z"
+      "generated_at": "2026-09-26T14:20:59.028959Z"
     },
     {
       "gemeente": "Bever",
       "slug": "bever",
       "success": true,
       "count": 6,
-      "file_size_kb": 8.923828125,
+      "file_size_kb": 8.9091796875,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -3374,14 +3374,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.039335Z"
+      "generated_at": "2026-09-26T14:20:59.045013Z"
     },
     {
       "gemeente": "Beveren-Kruibeke-Zwijndrecht",
       "slug": "beveren-kruibeke-zwijndrecht",
       "success": true,
-      "count": 143,
-      "file_size_kb": 66.044921875,
+      "count": 144,
+      "file_size_kb": 66.3935546875,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -3400,7 +3400,7 @@
         },
         "InPost": {
           "success": true,
-          "count": 6,
+          "count": 7,
           "error": null
         },
         "VintedGo": {
@@ -3434,7 +3434,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.056355Z"
+      "generated_at": "2026-09-26T14:20:59.074980Z"
     },
     {
       "gemeente": "Beyne-Heusay",
@@ -3494,7 +3494,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.070221Z"
+      "generated_at": "2026-09-26T14:20:59.094043Z"
     },
     {
       "gemeente": "Bierbeek",
@@ -3554,14 +3554,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.080350Z"
+      "generated_at": "2026-09-26T14:20:59.111933Z"
     },
     {
       "gemeente": "Bilzen-Hoeselt",
       "slug": "bilzen-hoeselt",
       "success": true,
-      "count": 88,
-      "file_size_kb": 47.7958984375,
+      "count": 87,
+      "file_size_kb": 47.1669921875,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -3610,11 +3610,11 @@
         },
         "FedEx": {
           "success": true,
-          "count": 1,
+          "count": 0,
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.094415Z"
+      "generated_at": "2026-09-26T14:20:59.137056Z"
     },
     {
       "gemeente": "Binche",
@@ -3674,14 +3674,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.110485Z"
+      "generated_at": "2026-09-26T14:20:59.160575Z"
     },
     {
       "gemeente": "Bièvre",
       "slug": "bievre",
       "success": true,
       "count": 10,
-      "file_size_kb": 15.150390625,
+      "file_size_kb": 15.1611328125,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -3734,7 +3734,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.120402Z"
+      "generated_at": "2026-09-26T14:20:59.178422Z"
     },
     {
       "gemeente": "Blankenberge",
@@ -3794,7 +3794,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.131254Z"
+      "generated_at": "2026-09-26T14:20:59.197456Z"
     },
     {
       "gemeente": "Blegny",
@@ -3854,7 +3854,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.140755Z"
+      "generated_at": "2026-09-26T14:20:59.216140Z"
     },
     {
       "gemeente": "Bocholt",
@@ -3914,7 +3914,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.151469Z"
+      "generated_at": "2026-09-26T14:20:59.234732Z"
     },
     {
       "gemeente": "Boechout",
@@ -3974,7 +3974,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.161237Z"
+      "generated_at": "2026-09-26T14:20:59.252715Z"
     },
     {
       "gemeente": "Bonheiden",
@@ -4034,7 +4034,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.170975Z"
+      "generated_at": "2026-09-26T14:20:59.271198Z"
     },
     {
       "gemeente": "Boom",
@@ -4094,7 +4094,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.180439Z"
+      "generated_at": "2026-09-26T14:20:59.292191Z"
     },
     {
       "gemeente": "Boortmeerbeek",
@@ -4154,14 +4154,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.189732Z"
+      "generated_at": "2026-09-26T14:20:59.310439Z"
     },
     {
       "gemeente": "Bornem",
       "slug": "bornem",
       "success": true,
       "count": 27,
-      "file_size_kb": 18.9931640625,
+      "file_size_kb": 18.9638671875,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -4214,7 +4214,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.200130Z"
+      "generated_at": "2026-09-26T14:20:59.329508Z"
     },
     {
       "gemeente": "Bouillon",
@@ -4274,7 +4274,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.210898Z"
+      "generated_at": "2026-09-26T14:20:59.347844Z"
     },
     {
       "gemeente": "Boussu",
@@ -4334,7 +4334,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.221606Z"
+      "generated_at": "2026-09-26T14:20:59.369865Z"
     },
     {
       "gemeente": "Boutersem",
@@ -4394,7 +4394,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.233118Z"
+      "generated_at": "2026-09-26T14:20:59.388834Z"
     },
     {
       "gemeente": "Braine-l'Alleud",
@@ -4454,14 +4454,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.246098Z"
+      "generated_at": "2026-09-26T14:20:59.412540Z"
     },
     {
       "gemeente": "Braine-le-Château",
       "slug": "braine-le-chateau",
       "success": true,
-      "count": 20,
-      "file_size_kb": 11.990234375,
+      "count": 21,
+      "file_size_kb": 12.4453125,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -4480,7 +4480,7 @@
         },
         "InPost": {
           "success": true,
-          "count": 1,
+          "count": 2,
           "error": null
         },
         "VintedGo": {
@@ -4514,7 +4514,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.254355Z"
+      "generated_at": "2026-09-26T14:20:59.429956Z"
     },
     {
       "gemeente": "Braine-le-Comte",
@@ -4574,14 +4574,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.266490Z"
+      "generated_at": "2026-09-26T14:20:59.452726Z"
     },
     {
       "gemeente": "Braives",
       "slug": "braives",
       "success": true,
       "count": 17,
-      "file_size_kb": 15.5283203125,
+      "file_size_kb": 15.4990234375,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -4634,7 +4634,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.275950Z"
+      "generated_at": "2026-09-26T14:20:59.470757Z"
     },
     {
       "gemeente": "Brakel",
@@ -4694,14 +4694,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.286410Z"
+      "generated_at": "2026-09-26T14:20:59.490817Z"
     },
     {
       "gemeente": "Brasschaat",
       "slug": "brasschaat",
       "success": true,
       "count": 52,
-      "file_size_kb": 26.6728515625,
+      "file_size_kb": 26.662109375,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -4754,14 +4754,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.298240Z"
+      "generated_at": "2026-09-26T14:20:59.511333Z"
     },
     {
       "gemeente": "Brecht",
       "slug": "brecht",
       "success": true,
       "count": 49,
-      "file_size_kb": 22.375,
+      "file_size_kb": 22.3603515625,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -4814,7 +4814,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.309094Z"
+      "generated_at": "2026-09-26T14:20:59.531113Z"
     },
     {
       "gemeente": "Bredene",
@@ -4874,7 +4874,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.318248Z"
+      "generated_at": "2026-09-26T14:20:59.548832Z"
     },
     {
       "gemeente": "Bree",
@@ -4934,7 +4934,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.329374Z"
+      "generated_at": "2026-09-26T14:20:59.569710Z"
     },
     {
       "gemeente": "Brugelette",
@@ -4994,14 +4994,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.336823Z"
+      "generated_at": "2026-09-26T14:20:59.585176Z"
     },
     {
       "gemeente": "Brugge",
       "slug": "brugge",
       "success": true,
-      "count": 237,
-      "file_size_kb": 107.4052734375,
+      "count": 238,
+      "file_size_kb": 107.8427734375,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -5020,7 +5020,7 @@
         },
         "InPost": {
           "success": true,
-          "count": 12,
+          "count": 13,
           "error": null
         },
         "VintedGo": {
@@ -5030,12 +5030,12 @@
         },
         "PostNL": {
           "success": true,
-          "count": 17,
+          "count": 16,
           "error": null
         },
         "DPD": {
           "success": true,
-          "count": 11,
+          "count": 12,
           "error": null
         },
         "Amazon": {
@@ -5054,7 +5054,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.356811Z"
+      "generated_at": "2026-09-26T14:20:59.627105Z"
     },
     {
       "gemeente": "Brunehaut",
@@ -5114,14 +5114,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.365554Z"
+      "generated_at": "2026-09-26T14:20:59.645636Z"
     },
     {
       "gemeente": "Brussel (Bruxelles)",
       "slug": "brussel-bruxelles",
       "success": true,
-      "count": 234,
-      "file_size_kb": 106.7919921875,
+      "count": 235,
+      "file_size_kb": 107.162109375,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -5140,7 +5140,7 @@
         },
         "InPost": {
           "success": true,
-          "count": 17,
+          "count": 18,
           "error": null
         },
         "VintedGo": {
@@ -5174,14 +5174,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.385857Z"
+      "generated_at": "2026-09-26T14:20:59.691380Z"
     },
     {
       "gemeente": "Buggenhout",
       "slug": "buggenhout",
       "success": true,
-      "count": 19,
-      "file_size_kb": 15.0703125,
+      "count": 20,
+      "file_size_kb": 15.40625,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -5200,7 +5200,7 @@
         },
         "InPost": {
           "success": true,
-          "count": 0,
+          "count": 1,
           "error": null
         },
         "VintedGo": {
@@ -5234,7 +5234,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.394677Z"
+      "generated_at": "2026-09-26T14:20:59.709824Z"
     },
     {
       "gemeente": "Burdinne",
@@ -5294,7 +5294,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.402023Z"
+      "generated_at": "2026-09-26T14:20:59.725472Z"
     },
     {
       "gemeente": "Burg-Reuland",
@@ -5354,7 +5354,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.411537Z"
+      "generated_at": "2026-09-26T14:20:59.744020Z"
     },
     {
       "gemeente": "Büllingen",
@@ -5414,7 +5414,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.421067Z"
+      "generated_at": "2026-09-26T14:20:59.761774Z"
     },
     {
       "gemeente": "Bütgenbach",
@@ -5474,14 +5474,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.430013Z"
+      "generated_at": "2026-09-26T14:20:59.780009Z"
     },
     {
       "gemeente": "Celles",
       "slug": "celles",
       "success": true,
       "count": 13,
-      "file_size_kb": 17.7783203125,
+      "file_size_kb": 17.763671875,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -5534,7 +5534,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.438870Z"
+      "generated_at": "2026-09-26T14:20:59.798139Z"
     },
     {
       "gemeente": "Cerfontaine",
@@ -5594,14 +5594,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.447001Z"
+      "generated_at": "2026-09-26T14:20:59.814708Z"
     },
     {
       "gemeente": "Chapelle-lez-Herlaimont",
       "slug": "chapelle-lez-herlaimont",
       "success": true,
-      "count": 18,
-      "file_size_kb": 16.8818359375,
+      "count": 19,
+      "file_size_kb": 17.3427734375,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -5620,7 +5620,7 @@
         },
         "InPost": {
           "success": true,
-          "count": 1,
+          "count": 2,
           "error": null
         },
         "VintedGo": {
@@ -5654,14 +5654,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.455927Z"
+      "generated_at": "2026-09-26T14:20:59.832921Z"
     },
     {
       "gemeente": "Charleroi",
       "slug": "charleroi",
       "success": true,
       "count": 357,
-      "file_size_kb": 160.0400390625,
+      "file_size_kb": 160.04296875,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -5680,7 +5680,7 @@
         },
         "InPost": {
           "success": true,
-          "count": 27,
+          "count": 28,
           "error": null
         },
         "VintedGo": {
@@ -5690,7 +5690,7 @@
         },
         "PostNL": {
           "success": true,
-          "count": 16,
+          "count": 15,
           "error": null
         },
         "DPD": {
@@ -5714,14 +5714,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.481566Z"
+      "generated_at": "2026-09-26T14:20:59.880115Z"
     },
     {
       "gemeente": "Chastre",
       "slug": "chastre",
       "success": true,
       "count": 7,
-      "file_size_kb": 9.5810546875,
+      "file_size_kb": 9.56640625,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -5774,7 +5774,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.491395Z"
+      "generated_at": "2026-09-26T14:20:59.895535Z"
     },
     {
       "gemeente": "Chaudfontaine",
@@ -5834,7 +5834,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.503483Z"
+      "generated_at": "2026-09-26T14:20:59.916674Z"
     },
     {
       "gemeente": "Chaumont-Gistoux",
@@ -5894,7 +5894,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.511843Z"
+      "generated_at": "2026-09-26T14:20:59.932470Z"
     },
     {
       "gemeente": "Chimay",
@@ -5954,7 +5954,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.523992Z"
+      "generated_at": "2026-09-26T14:20:59.954038Z"
     },
     {
       "gemeente": "Chiny",
@@ -6014,7 +6014,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.534751Z"
+      "generated_at": "2026-09-26T14:20:59.971782Z"
     },
     {
       "gemeente": "Chièvres",
@@ -6074,7 +6074,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.543717Z"
+      "generated_at": "2026-09-26T14:20:59.989702Z"
     },
     {
       "gemeente": "Châtelet",
@@ -6134,7 +6134,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.554555Z"
+      "generated_at": "2026-09-26T14:21:00.013706Z"
     },
     {
       "gemeente": "Ciney",
@@ -6194,7 +6194,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.564691Z"
+      "generated_at": "2026-09-26T14:21:00.036118Z"
     },
     {
       "gemeente": "Clavier",
@@ -6254,7 +6254,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.573443Z"
+      "generated_at": "2026-09-26T14:21:00.055560Z"
     },
     {
       "gemeente": "Colfontaine",
@@ -6314,7 +6314,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.586332Z"
+      "generated_at": "2026-09-26T14:21:00.075677Z"
     },
     {
       "gemeente": "Comblain-au-Pont",
@@ -6374,7 +6374,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.597046Z"
+      "generated_at": "2026-09-26T14:21:00.092243Z"
     },
     {
       "gemeente": "Comines-Warneton - Komen-Waasten",
@@ -6434,14 +6434,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.608552Z"
+      "generated_at": "2026-09-26T14:21:00.113092Z"
     },
     {
       "gemeente": "Courcelles",
       "slug": "courcelles",
       "success": true,
-      "count": 58,
-      "file_size_kb": 33.5302734375,
+      "count": 59,
+      "file_size_kb": 34.068359375,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -6475,7 +6475,7 @@
         },
         "DPD": {
           "success": true,
-          "count": 1,
+          "count": 2,
           "error": null
         },
         "Amazon": {
@@ -6494,7 +6494,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.620858Z"
+      "generated_at": "2026-09-26T14:21:00.135767Z"
     },
     {
       "gemeente": "Court-Saint-Etienne",
@@ -6554,14 +6554,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.629854Z"
+      "generated_at": "2026-09-26T14:21:00.154058Z"
     },
     {
       "gemeente": "Couvin",
       "slug": "couvin",
       "success": true,
       "count": 37,
-      "file_size_kb": 28.6396484375,
+      "file_size_kb": 28.625,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -6614,7 +6614,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.640218Z"
+      "generated_at": "2026-09-26T14:21:00.175268Z"
     },
     {
       "gemeente": "Crisnée",
@@ -6674,7 +6674,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.648409Z"
+      "generated_at": "2026-09-26T14:21:00.191799Z"
     },
     {
       "gemeente": "Dalhem",
@@ -6734,14 +6734,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.657256Z"
+      "generated_at": "2026-09-26T14:21:00.208821Z"
     },
     {
       "gemeente": "Damme",
       "slug": "damme",
       "success": true,
       "count": 29,
-      "file_size_kb": 19.9970703125,
+      "file_size_kb": 19.982421875,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -6794,7 +6794,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.668148Z"
+      "generated_at": "2026-09-26T14:21:00.227710Z"
     },
     {
       "gemeente": "Daverdisse",
@@ -6854,7 +6854,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.685619Z"
+      "generated_at": "2026-09-26T14:21:00.243980Z"
     },
     {
       "gemeente": "De Haan",
@@ -6914,14 +6914,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.701711Z"
+      "generated_at": "2026-09-26T14:21:00.260814Z"
     },
     {
       "gemeente": "De Panne",
       "slug": "de-panne",
       "success": true,
       "count": 14,
-      "file_size_kb": 7.982421875,
+      "file_size_kb": 7.95703125,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -6974,14 +6974,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.718152Z"
+      "generated_at": "2026-09-26T14:21:00.276749Z"
     },
     {
       "gemeente": "Deerlijk",
       "slug": "deerlijk",
       "success": true,
       "count": 25,
-      "file_size_kb": 15.6669921875,
+      "file_size_kb": 15.65234375,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -7034,14 +7034,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.728287Z"
+      "generated_at": "2026-09-26T14:21:00.294498Z"
     },
     {
       "gemeente": "Deinze",
       "slug": "deinze",
       "success": true,
-      "count": 64,
-      "file_size_kb": 43.6669921875,
+      "count": 65,
+      "file_size_kb": 43.97265625,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -7060,7 +7060,7 @@
         },
         "InPost": {
           "success": true,
-          "count": 4,
+          "count": 5,
           "error": null
         },
         "VintedGo": {
@@ -7094,7 +7094,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.758173Z"
+      "generated_at": "2026-09-26T14:21:00.323954Z"
     },
     {
       "gemeente": "Denderleeuw",
@@ -7154,7 +7154,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.769429Z"
+      "generated_at": "2026-09-26T14:21:00.344003Z"
     },
     {
       "gemeente": "Dendermonde",
@@ -7214,7 +7214,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.783821Z"
+      "generated_at": "2026-09-26T14:21:00.367054Z"
     },
     {
       "gemeente": "Dentergem",
@@ -7274,7 +7274,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.807885Z"
+      "generated_at": "2026-09-26T14:21:00.385815Z"
     },
     {
       "gemeente": "Dessel",
@@ -7334,14 +7334,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.818560Z"
+      "generated_at": "2026-09-26T14:21:00.402803Z"
     },
     {
       "gemeente": "Destelbergen",
       "slug": "destelbergen",
       "success": true,
-      "count": 35,
-      "file_size_kb": 19.7548828125,
+      "count": 34,
+      "file_size_kb": 19.3828125,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -7360,7 +7360,7 @@
         },
         "InPost": {
           "success": true,
-          "count": 2,
+          "count": 1,
           "error": null
         },
         "VintedGo": {
@@ -7394,7 +7394,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.829505Z"
+      "generated_at": "2026-09-26T14:21:00.421714Z"
     },
     {
       "gemeente": "Diepenbeek",
@@ -7454,7 +7454,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.839583Z"
+      "generated_at": "2026-09-26T14:21:00.440681Z"
     },
     {
       "gemeente": "Diest",
@@ -7514,14 +7514,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.851515Z"
+      "generated_at": "2026-09-26T14:21:00.462104Z"
     },
     {
       "gemeente": "Diksmuide",
       "slug": "diksmuide",
       "success": true,
       "count": 53,
-      "file_size_kb": 36.5615234375,
+      "file_size_kb": 36.546875,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -7574,14 +7574,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.863697Z"
+      "generated_at": "2026-09-26T14:21:00.484563Z"
     },
     {
       "gemeente": "Dilbeek",
       "slug": "dilbeek",
       "success": true,
       "count": 43,
-      "file_size_kb": 28.1630859375,
+      "file_size_kb": 28.1484375,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -7634,7 +7634,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.874375Z"
+      "generated_at": "2026-09-26T14:21:00.504908Z"
     },
     {
       "gemeente": "Dilsen-Stokkem",
@@ -7694,7 +7694,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.884275Z"
+      "generated_at": "2026-09-26T14:21:00.523450Z"
     },
     {
       "gemeente": "Dinant",
@@ -7754,7 +7754,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.894015Z"
+      "generated_at": "2026-09-26T14:21:00.543063Z"
     },
     {
       "gemeente": "Dison",
@@ -7814,7 +7814,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.904127Z"
+      "generated_at": "2026-09-26T14:21:00.562186Z"
     },
     {
       "gemeente": "Doische",
@@ -7874,7 +7874,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.912622Z"
+      "generated_at": "2026-09-26T14:21:00.578273Z"
     },
     {
       "gemeente": "Donceel",
@@ -7934,14 +7934,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.919880Z"
+      "generated_at": "2026-09-26T14:21:00.593101Z"
     },
     {
       "gemeente": "Dour",
       "slug": "dour",
       "success": true,
       "count": 33,
-      "file_size_kb": 20.0712890625,
+      "file_size_kb": 20.0166015625,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -7994,7 +7994,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.930323Z"
+      "generated_at": "2026-09-26T14:21:00.611858Z"
     },
     {
       "gemeente": "Drogenbos",
@@ -8054,7 +8054,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.941488Z"
+      "generated_at": "2026-09-26T14:21:00.630519Z"
     },
     {
       "gemeente": "Duffel",
@@ -8114,7 +8114,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.952807Z"
+      "generated_at": "2026-09-26T14:21:00.652485Z"
     },
     {
       "gemeente": "Durbuy",
@@ -8174,14 +8174,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.966759Z"
+      "generated_at": "2026-09-26T14:21:00.675285Z"
     },
     {
       "gemeente": "Edegem",
       "slug": "edegem",
       "success": true,
       "count": 26,
-      "file_size_kb": 15.5888671875,
+      "file_size_kb": 15.603515625,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -8234,14 +8234,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.976184Z"
+      "generated_at": "2026-09-26T14:21:00.693194Z"
     },
     {
       "gemeente": "Eeklo",
       "slug": "eeklo",
       "success": true,
-      "count": 34,
-      "file_size_kb": 16.392578125,
+      "count": 33,
+      "file_size_kb": 16.0380859375,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -8260,7 +8260,7 @@
         },
         "InPost": {
           "success": true,
-          "count": 2,
+          "count": 1,
           "error": null
         },
         "VintedGo": {
@@ -8294,14 +8294,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:19.996481Z"
+      "generated_at": "2026-09-26T14:21:00.710600Z"
     },
     {
       "gemeente": "Eghezée",
       "slug": "eghezee",
       "success": true,
-      "count": 37,
-      "file_size_kb": 20.5439453125,
+      "count": 38,
+      "file_size_kb": 20.8828125,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -8320,7 +8320,7 @@
         },
         "InPost": {
           "success": true,
-          "count": 2,
+          "count": 3,
           "error": null
         },
         "VintedGo": {
@@ -8354,14 +8354,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.016344Z"
+      "generated_at": "2026-09-26T14:21:00.729679Z"
     },
     {
       "gemeente": "Ellezelles",
       "slug": "ellezelles",
       "success": true,
       "count": 7,
-      "file_size_kb": 11.56640625,
+      "file_size_kb": 11.5517578125,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -8414,14 +8414,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.032953Z"
+      "generated_at": "2026-09-26T14:21:00.746244Z"
     },
     {
       "gemeente": "Elsene (Ixelles)",
       "slug": "elsene-ixelles",
       "success": true,
-      "count": 121,
-      "file_size_kb": 55.291015625,
+      "count": 123,
+      "file_size_kb": 56.07421875,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -8440,7 +8440,7 @@
         },
         "InPost": {
           "success": true,
-          "count": 10,
+          "count": 12,
           "error": null
         },
         "VintedGo": {
@@ -8474,7 +8474,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.058143Z"
+      "generated_at": "2026-09-26T14:21:00.772432Z"
     },
     {
       "gemeente": "Enghien - Edingen",
@@ -8534,7 +8534,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.073776Z"
+      "generated_at": "2026-09-26T14:21:00.790715Z"
     },
     {
       "gemeente": "Engis",
@@ -8594,14 +8594,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.083417Z"
+      "generated_at": "2026-09-26T14:21:00.807547Z"
     },
     {
       "gemeente": "Erpe-Mere",
       "slug": "erpe-mere",
       "success": true,
       "count": 26,
-      "file_size_kb": 21.7802734375,
+      "file_size_kb": 21.7548828125,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -8654,7 +8654,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.093714Z"
+      "generated_at": "2026-09-26T14:21:00.826456Z"
     },
     {
       "gemeente": "Erquelinnes",
@@ -8714,14 +8714,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.102781Z"
+      "generated_at": "2026-09-26T14:21:00.844317Z"
     },
     {
       "gemeente": "Esneux",
       "slug": "esneux",
       "success": true,
-      "count": 13,
-      "file_size_kb": 16.7685546875,
+      "count": 15,
+      "file_size_kb": 17.478515625,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -8740,7 +8740,7 @@
         },
         "InPost": {
           "success": true,
-          "count": 1,
+          "count": 2,
           "error": null
         },
         "VintedGo": {
@@ -8750,7 +8750,7 @@
         },
         "PostNL": {
           "success": true,
-          "count": 0,
+          "count": 1,
           "error": null
         },
         "DPD": {
@@ -8774,14 +8774,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.111756Z"
+      "generated_at": "2026-09-26T14:21:00.862950Z"
     },
     {
       "gemeente": "Essen",
       "slug": "essen",
       "success": true,
       "count": 25,
-      "file_size_kb": 13.25,
+      "file_size_kb": 13.2353515625,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -8834,14 +8834,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.120046Z"
+      "generated_at": "2026-09-26T14:21:00.880213Z"
     },
     {
       "gemeente": "Estaimpuis",
       "slug": "estaimpuis",
       "success": true,
       "count": 21,
-      "file_size_kb": 16.3095703125,
+      "file_size_kb": 16.294921875,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -8894,7 +8894,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.128708Z"
+      "generated_at": "2026-09-26T14:21:00.898222Z"
     },
     {
       "gemeente": "Estinnes",
@@ -8954,14 +8954,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.137719Z"
+      "generated_at": "2026-09-26T14:21:00.916277Z"
     },
     {
       "gemeente": "Etterbeek",
       "slug": "etterbeek",
       "success": true,
-      "count": 51,
-      "file_size_kb": 22.83984375,
+      "count": 52,
+      "file_size_kb": 23.3359375,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -9010,11 +9010,11 @@
         },
         "FedEx": {
           "success": true,
-          "count": 1,
+          "count": 2,
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.147221Z"
+      "generated_at": "2026-09-26T14:21:00.936276Z"
     },
     {
       "gemeente": "Eupen",
@@ -9074,14 +9074,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.158029Z"
+      "generated_at": "2026-09-26T14:21:00.958072Z"
     },
     {
       "gemeente": "Evere",
       "slug": "evere",
       "success": true,
       "count": 68,
-      "file_size_kb": 29.6044921875,
+      "file_size_kb": 29.59375,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -9134,7 +9134,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.168504Z"
+      "generated_at": "2026-09-26T14:21:00.979270Z"
     },
     {
       "gemeente": "Evergem",
@@ -9194,7 +9194,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.178685Z"
+      "generated_at": "2026-09-26T14:21:01.000361Z"
     },
     {
       "gemeente": "Faimes",
@@ -9254,7 +9254,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.186328Z"
+      "generated_at": "2026-09-26T14:21:01.015626Z"
     },
     {
       "gemeente": "Farciennes",
@@ -9314,7 +9314,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.195116Z"
+      "generated_at": "2026-09-26T14:21:01.033156Z"
     },
     {
       "gemeente": "Fauvillers",
@@ -9374,7 +9374,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.205053Z"
+      "generated_at": "2026-09-26T14:21:01.051414Z"
     },
     {
       "gemeente": "Fernelmont",
@@ -9434,7 +9434,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.215161Z"
+      "generated_at": "2026-09-26T14:21:01.068371Z"
     },
     {
       "gemeente": "Ferrières",
@@ -9494,7 +9494,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.225660Z"
+      "generated_at": "2026-09-26T14:21:01.086736Z"
     },
     {
       "gemeente": "Fexhe-le-Haut-Clocher",
@@ -9554,7 +9554,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.233648Z"
+      "generated_at": "2026-09-26T14:21:01.101913Z"
     },
     {
       "gemeente": "Fleurus",
@@ -9614,7 +9614,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.244068Z"
+      "generated_at": "2026-09-26T14:21:01.122835Z"
     },
     {
       "gemeente": "Flobecq",
@@ -9674,14 +9674,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.252386Z"
+      "generated_at": "2026-09-26T14:21:01.139764Z"
     },
     {
       "gemeente": "Floreffe",
       "slug": "floreffe",
       "success": true,
-      "count": 7,
-      "file_size_kb": 7.041015625,
+      "count": 8,
+      "file_size_kb": 7.3779296875,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -9700,7 +9700,7 @@
         },
         "InPost": {
           "success": true,
-          "count": 0,
+          "count": 1,
           "error": null
         },
         "VintedGo": {
@@ -9734,7 +9734,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.259983Z"
+      "generated_at": "2026-09-26T14:21:01.155960Z"
     },
     {
       "gemeente": "Florennes",
@@ -9794,7 +9794,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.270676Z"
+      "generated_at": "2026-09-26T14:21:01.175550Z"
     },
     {
       "gemeente": "Florenville",
@@ -9854,14 +9854,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.289211Z"
+      "generated_at": "2026-09-26T14:21:01.195485Z"
     },
     {
       "gemeente": "Flémalle",
       "slug": "flemalle",
       "success": true,
       "count": 54,
-      "file_size_kb": 30.1689453125,
+      "file_size_kb": 30.154296875,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -9914,14 +9914,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.301281Z"
+      "generated_at": "2026-09-26T14:21:01.215942Z"
     },
     {
       "gemeente": "Fléron",
       "slug": "fleron",
       "success": true,
       "count": 26,
-      "file_size_kb": 19.3466796875,
+      "file_size_kb": 19.33203125,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -9974,7 +9974,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.310748Z"
+      "generated_at": "2026-09-26T14:21:01.234761Z"
     },
     {
       "gemeente": "Fontaine-l'Évêque",
@@ -10034,7 +10034,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.320531Z"
+      "generated_at": "2026-09-26T14:21:01.252755Z"
     },
     {
       "gemeente": "Fosses-la-Ville",
@@ -10094,14 +10094,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.331286Z"
+      "generated_at": "2026-09-26T14:21:01.270797Z"
     },
     {
       "gemeente": "Frameries",
       "slug": "frameries",
       "success": true,
       "count": 40,
-      "file_size_kb": 23.2841796875,
+      "file_size_kb": 23.2548828125,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -10154,14 +10154,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.341217Z"
+      "generated_at": "2026-09-26T14:21:01.290262Z"
     },
     {
       "gemeente": "Frasnes-lez-Anvaing",
       "slug": "frasnes-lez-anvaing",
       "success": true,
       "count": 19,
-      "file_size_kb": 25.2802734375,
+      "file_size_kb": 25.2548828125,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -10214,7 +10214,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.352958Z"
+      "generated_at": "2026-09-26T14:21:01.309807Z"
     },
     {
       "gemeente": "Froidchapelle",
@@ -10274,7 +10274,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.363953Z"
+      "generated_at": "2026-09-26T14:21:01.327566Z"
     },
     {
       "gemeente": "Ganshoren",
@@ -10334,14 +10334,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.371813Z"
+      "generated_at": "2026-09-26T14:21:01.343175Z"
     },
     {
       "gemeente": "Gavere",
       "slug": "gavere",
       "success": true,
-      "count": 22,
-      "file_size_kb": 18.2158203125,
+      "count": 23,
+      "file_size_kb": 18.5654296875,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -10360,7 +10360,7 @@
         },
         "InPost": {
           "success": true,
-          "count": 1,
+          "count": 2,
           "error": null
         },
         "VintedGo": {
@@ -10394,7 +10394,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.381683Z"
+      "generated_at": "2026-09-26T14:21:01.361634Z"
     },
     {
       "gemeente": "Gedinne",
@@ -10454,14 +10454,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.390818Z"
+      "generated_at": "2026-09-26T14:21:01.378276Z"
     },
     {
       "gemeente": "Geel",
       "slug": "geel",
       "success": true,
       "count": 71,
-      "file_size_kb": 42.3203125,
+      "file_size_kb": 42.265625,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -10514,7 +10514,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.403476Z"
+      "generated_at": "2026-09-26T14:21:01.402018Z"
     },
     {
       "gemeente": "Geer",
@@ -10574,7 +10574,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.410605Z"
+      "generated_at": "2026-09-26T14:21:01.416591Z"
     },
     {
       "gemeente": "Geetbets",
@@ -10634,14 +10634,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.419537Z"
+      "generated_at": "2026-09-26T14:21:01.434596Z"
     },
     {
       "gemeente": "Gembloux",
       "slug": "gembloux",
       "success": true,
-      "count": 51,
-      "file_size_kb": 29.6162109375,
+      "count": 53,
+      "file_size_kb": 30.298828125,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -10660,7 +10660,7 @@
         },
         "InPost": {
           "success": true,
-          "count": 3,
+          "count": 5,
           "error": null
         },
         "VintedGo": {
@@ -10694,18 +10694,18 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.429777Z"
+      "generated_at": "2026-09-26T14:21:01.455238Z"
     },
     {
       "gemeente": "Genappe",
       "slug": "genappe",
       "success": true,
-      "count": 24,
-      "file_size_kb": 18.822265625,
+      "count": 23,
+      "file_size_kb": 18.48046875,
       "carrier_status": {
         "bpost": {
           "success": true,
-          "count": 4,
+          "count": 3,
           "error": null
         },
         "DHL": {
@@ -10754,7 +10754,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.438704Z"
+      "generated_at": "2026-09-26T14:21:01.473641Z"
     },
     {
       "gemeente": "Genk",
@@ -10814,14 +10814,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.452859Z"
+      "generated_at": "2026-09-26T14:21:01.496433Z"
     },
     {
       "gemeente": "Gent",
       "slug": "gent",
       "success": true,
-      "count": 437,
-      "file_size_kb": 197.8466796875,
+      "count": 439,
+      "file_size_kb": 198.2802734375,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -10840,7 +10840,7 @@
         },
         "InPost": {
           "success": true,
-          "count": 10,
+          "count": 13,
           "error": null
         },
         "VintedGo": {
@@ -10870,18 +10870,18 @@
         },
         "FedEx": {
           "success": true,
-          "count": 3,
+          "count": 2,
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.482672Z"
+      "generated_at": "2026-09-26T14:21:01.552114Z"
     },
     {
       "gemeente": "Geraardsbergen",
       "slug": "geraardsbergen",
       "success": true,
       "count": 50,
-      "file_size_kb": 39.98828125,
+      "file_size_kb": 39.9736328125,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -10934,7 +10934,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.494734Z"
+      "generated_at": "2026-09-26T14:21:01.575093Z"
     },
     {
       "gemeente": "Gerpinnes",
@@ -10994,7 +10994,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.504131Z"
+      "generated_at": "2026-09-26T14:21:01.594361Z"
     },
     {
       "gemeente": "Gesves",
@@ -11054,7 +11054,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.512041Z"
+      "generated_at": "2026-09-26T14:21:01.611062Z"
     },
     {
       "gemeente": "Gingelom",
@@ -11114,7 +11114,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.521089Z"
+      "generated_at": "2026-09-26T14:21:01.628918Z"
     },
     {
       "gemeente": "Gistel",
@@ -11174,7 +11174,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.530326Z"
+      "generated_at": "2026-09-26T14:21:01.648603Z"
     },
     {
       "gemeente": "Glabbeek",
@@ -11234,7 +11234,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.538966Z"
+      "generated_at": "2026-09-26T14:21:01.665336Z"
     },
     {
       "gemeente": "Gouvy",
@@ -11294,7 +11294,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.548726Z"
+      "generated_at": "2026-09-26T14:21:01.685336Z"
     },
     {
       "gemeente": "Grez-Doiceau",
@@ -11354,7 +11354,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.558010Z"
+      "generated_at": "2026-09-26T14:21:01.703835Z"
     },
     {
       "gemeente": "Grimbergen",
@@ -11414,14 +11414,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.569225Z"
+      "generated_at": "2026-09-26T14:21:01.726647Z"
     },
     {
       "gemeente": "Grobbendonk",
       "slug": "grobbendonk",
       "success": true,
       "count": 22,
-      "file_size_kb": 15.4365234375,
+      "file_size_kb": 15.421875,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -11474,7 +11474,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.577966Z"
+      "generated_at": "2026-09-26T14:21:01.745059Z"
     },
     {
       "gemeente": "Grâce-Hollogne",
@@ -11534,14 +11534,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.588022Z"
+      "generated_at": "2026-09-26T14:21:01.766023Z"
     },
     {
       "gemeente": "Haacht",
       "slug": "haacht",
       "success": true,
       "count": 26,
-      "file_size_kb": 20.318359375,
+      "file_size_kb": 20.2890625,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -11594,7 +11594,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.597291Z"
+      "generated_at": "2026-09-26T14:21:01.784884Z"
     },
     {
       "gemeente": "Haaltert",
@@ -11654,7 +11654,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.606616Z"
+      "generated_at": "2026-09-26T14:21:01.803590Z"
     },
     {
       "gemeente": "Habay",
@@ -11714,14 +11714,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.616827Z"
+      "generated_at": "2026-09-26T14:21:01.822929Z"
     },
     {
       "gemeente": "Halen",
       "slug": "halen",
       "success": true,
       "count": 30,
-      "file_size_kb": 21.1953125,
+      "file_size_kb": 21.1806640625,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -11774,14 +11774,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.626222Z"
+      "generated_at": "2026-09-26T14:21:01.842044Z"
     },
     {
       "gemeente": "Halle",
       "slug": "halle",
       "success": true,
       "count": 56,
-      "file_size_kb": 35.5205078125,
+      "file_size_kb": 35.505859375,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -11834,7 +11834,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.637238Z"
+      "generated_at": "2026-09-26T14:21:01.864059Z"
     },
     {
       "gemeente": "Ham-sur-Heure-Nalinnes",
@@ -11894,14 +11894,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.646899Z"
+      "generated_at": "2026-09-26T14:21:01.883266Z"
     },
     {
       "gemeente": "Hamme",
       "slug": "hamme",
       "success": true,
-      "count": 30,
-      "file_size_kb": 21.568359375,
+      "count": 31,
+      "file_size_kb": 22.171875,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -11950,11 +11950,11 @@
         },
         "FedEx": {
           "success": true,
-          "count": 1,
+          "count": 2,
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.656184Z"
+      "generated_at": "2026-09-26T14:21:01.902609Z"
     },
     {
       "gemeente": "Hamoir",
@@ -12014,14 +12014,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.664334Z"
+      "generated_at": "2026-09-26T14:21:01.919305Z"
     },
     {
       "gemeente": "Hamois",
       "slug": "hamois",
       "success": true,
       "count": 23,
-      "file_size_kb": 17.6083984375,
+      "file_size_kb": 17.5830078125,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -12074,7 +12074,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.673179Z"
+      "generated_at": "2026-09-26T14:21:01.942541Z"
     },
     {
       "gemeente": "Hamont-Achel",
@@ -12134,7 +12134,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.682372Z"
+      "generated_at": "2026-09-26T14:21:01.959907Z"
     },
     {
       "gemeente": "Hannut",
@@ -12194,14 +12194,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.692016Z"
+      "generated_at": "2026-09-26T14:21:01.983120Z"
     },
     {
       "gemeente": "Harelbeke",
       "slug": "harelbeke",
       "success": true,
-      "count": 39,
-      "file_size_kb": 22.828125,
+      "count": 40,
+      "file_size_kb": 23.1357421875,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -12220,7 +12220,7 @@
         },
         "InPost": {
           "success": true,
-          "count": 2,
+          "count": 3,
           "error": null
         },
         "VintedGo": {
@@ -12254,14 +12254,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.701612Z"
+      "generated_at": "2026-09-26T14:21:02.002691Z"
     },
     {
       "gemeente": "Hasselt",
       "slug": "hasselt",
       "success": true,
-      "count": 216,
-      "file_size_kb": 117.6083984375,
+      "count": 217,
+      "file_size_kb": 118.1201171875,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -12310,11 +12310,11 @@
         },
         "FedEx": {
           "success": true,
-          "count": 6,
+          "count": 7,
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.723217Z"
+      "generated_at": "2026-09-26T14:21:02.042818Z"
     },
     {
       "gemeente": "Hastière",
@@ -12374,7 +12374,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.732008Z"
+      "generated_at": "2026-09-26T14:21:02.060511Z"
     },
     {
       "gemeente": "Havelange",
@@ -12434,14 +12434,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.740645Z"
+      "generated_at": "2026-09-26T14:21:02.078244Z"
     },
     {
       "gemeente": "Hechtel-Eksel",
       "slug": "hechtel-eksel",
       "success": true,
       "count": 25,
-      "file_size_kb": 20.5283203125,
+      "file_size_kb": 20.517578125,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -12494,7 +12494,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.750217Z"
+      "generated_at": "2026-09-26T14:21:02.096739Z"
     },
     {
       "gemeente": "Heers",
@@ -12554,14 +12554,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.760780Z"
+      "generated_at": "2026-09-26T14:21:02.116512Z"
     },
     {
       "gemeente": "Heist-op-den-Berg",
       "slug": "heist-op-den-berg",
       "success": true,
       "count": 62,
-      "file_size_kb": 41.298828125,
+      "file_size_kb": 41.2841796875,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -12614,7 +12614,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.773509Z"
+      "generated_at": "2026-09-26T14:21:02.139822Z"
     },
     {
       "gemeente": "Hemiksem",
@@ -12674,14 +12674,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.781838Z"
+      "generated_at": "2026-09-26T14:21:02.155801Z"
     },
     {
       "gemeente": "Hensies",
       "slug": "hensies",
       "success": true,
-      "count": 21,
-      "file_size_kb": 15.6640625,
+      "count": 22,
+      "file_size_kb": 16.0146484375,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -12710,7 +12710,7 @@
         },
         "PostNL": {
           "success": true,
-          "count": 1,
+          "count": 2,
           "error": null
         },
         "DPD": {
@@ -12734,7 +12734,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.790862Z"
+      "generated_at": "2026-09-26T14:21:02.172856Z"
     },
     {
       "gemeente": "Herbeumont",
@@ -12794,14 +12794,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.799510Z"
+      "generated_at": "2026-09-26T14:21:02.189215Z"
     },
     {
       "gemeente": "Herent",
       "slug": "herent",
       "success": true,
       "count": 54,
-      "file_size_kb": 30.091796875,
+      "file_size_kb": 30.0625,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -12854,14 +12854,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.809597Z"
+      "generated_at": "2026-09-26T14:21:02.209984Z"
     },
     {
       "gemeente": "Herentals",
       "slug": "herentals",
       "success": true,
       "count": 54,
-      "file_size_kb": 34.388671875,
+      "file_size_kb": 34.3486328125,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -12914,7 +12914,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.820597Z"
+      "generated_at": "2026-09-26T14:21:02.231964Z"
     },
     {
       "gemeente": "Herenthout",
@@ -12974,7 +12974,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.829052Z"
+      "generated_at": "2026-09-26T14:21:02.249735Z"
     },
     {
       "gemeente": "Herk-de-Stad",
@@ -13034,7 +13034,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.838515Z"
+      "generated_at": "2026-09-26T14:21:02.269303Z"
     },
     {
       "gemeente": "Herselt",
@@ -13094,7 +13094,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.848944Z"
+      "generated_at": "2026-09-26T14:21:02.288968Z"
     },
     {
       "gemeente": "Herstal",
@@ -13154,7 +13154,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.860615Z"
+      "generated_at": "2026-09-26T14:21:02.312572Z"
     },
     {
       "gemeente": "Herstappe",
@@ -13214,14 +13214,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.867327Z"
+      "generated_at": "2026-09-26T14:21:02.326778Z"
     },
     {
       "gemeente": "Herve",
       "slug": "herve",
       "success": true,
       "count": 25,
-      "file_size_kb": 28.7783203125,
+      "file_size_kb": 28.912109375,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -13240,7 +13240,7 @@
         },
         "InPost": {
           "success": true,
-          "count": 3,
+          "count": 2,
           "error": null
         },
         "VintedGo": {
@@ -13270,18 +13270,18 @@
         },
         "FedEx": {
           "success": true,
-          "count": 1,
+          "count": 2,
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.877813Z"
+      "generated_at": "2026-09-26T14:21:02.347645Z"
     },
     {
       "gemeente": "Herzele",
       "slug": "herzele",
       "success": true,
       "count": 23,
-      "file_size_kb": 20.44921875,
+      "file_size_kb": 20.4052734375,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -13334,14 +13334,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.886815Z"
+      "generated_at": "2026-09-26T14:21:02.366151Z"
     },
     {
       "gemeente": "Heusden-Zolder",
       "slug": "heusden-zolder",
       "success": true,
       "count": 43,
-      "file_size_kb": 26.0185546875,
+      "file_size_kb": 26.00390625,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -13394,14 +13394,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.896536Z"
+      "generated_at": "2026-09-26T14:21:02.386188Z"
     },
     {
       "gemeente": "Heuvelland",
       "slug": "heuvelland",
       "success": true,
       "count": 23,
-      "file_size_kb": 27.7900390625,
+      "file_size_kb": 27.7607421875,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -13454,7 +13454,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.906947Z"
+      "generated_at": "2026-09-26T14:21:02.406634Z"
     },
     {
       "gemeente": "Hoegaarden",
@@ -13514,7 +13514,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.915325Z"
+      "generated_at": "2026-09-26T14:21:02.427819Z"
     },
     {
       "gemeente": "Hoeilaart",
@@ -13574,7 +13574,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.922574Z"
+      "generated_at": "2026-09-26T14:21:02.443294Z"
     },
     {
       "gemeente": "Holsbeek",
@@ -13634,7 +13634,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.931836Z"
+      "generated_at": "2026-09-26T14:21:02.461454Z"
     },
     {
       "gemeente": "Honnelles",
@@ -13694,7 +13694,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.940431Z"
+      "generated_at": "2026-09-26T14:21:02.478556Z"
     },
     {
       "gemeente": "Hooglede",
@@ -13754,14 +13754,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.949553Z"
+      "generated_at": "2026-09-26T14:21:02.496981Z"
     },
     {
       "gemeente": "Hoogstraten",
       "slug": "hoogstraten",
       "success": true,
       "count": 32,
-      "file_size_kb": 33.1142578125,
+      "file_size_kb": 33.099609375,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -13814,7 +13814,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.961336Z"
+      "generated_at": "2026-09-26T14:21:02.517621Z"
     },
     {
       "gemeente": "Horebeke",
@@ -13874,7 +13874,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.969138Z"
+      "generated_at": "2026-09-26T14:21:02.533269Z"
     },
     {
       "gemeente": "Hotton",
@@ -13934,7 +13934,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.979091Z"
+      "generated_at": "2026-09-26T14:21:02.552658Z"
     },
     {
       "gemeente": "Houffalize",
@@ -13994,14 +13994,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.990132Z"
+      "generated_at": "2026-09-26T14:21:02.573834Z"
     },
     {
       "gemeente": "Houthalen-Helchteren",
       "slug": "houthalen-helchteren",
       "success": true,
       "count": 42,
-      "file_size_kb": 21.1611328125,
+      "file_size_kb": 21.146484375,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -14054,7 +14054,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:20.999462Z"
+      "generated_at": "2026-09-26T14:21:02.593137Z"
     },
     {
       "gemeente": "Houthulst",
@@ -14114,7 +14114,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.008309Z"
+      "generated_at": "2026-09-26T14:21:02.611881Z"
     },
     {
       "gemeente": "Houyet",
@@ -14174,7 +14174,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.018325Z"
+      "generated_at": "2026-09-26T14:21:02.631931Z"
     },
     {
       "gemeente": "Hove",
@@ -14234,14 +14234,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.025598Z"
+      "generated_at": "2026-09-26T14:21:02.648242Z"
     },
     {
       "gemeente": "Huldenberg",
       "slug": "huldenberg",
       "success": true,
       "count": 30,
-      "file_size_kb": 26.7724609375,
+      "file_size_kb": 26.7578125,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -14294,14 +14294,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.035504Z"
+      "generated_at": "2026-09-26T14:21:02.668423Z"
     },
     {
       "gemeente": "Hulshout",
       "slug": "hulshout",
       "success": true,
       "count": 23,
-      "file_size_kb": 17.625,
+      "file_size_kb": 17.6396484375,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -14354,7 +14354,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.044291Z"
+      "generated_at": "2026-09-26T14:21:02.686836Z"
     },
     {
       "gemeente": "Huy",
@@ -14414,7 +14414,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.054821Z"
+      "generated_at": "2026-09-26T14:21:02.708112Z"
     },
     {
       "gemeente": "Hélécine",
@@ -14474,7 +14474,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.061998Z"
+      "generated_at": "2026-09-26T14:21:02.723312Z"
     },
     {
       "gemeente": "Héron",
@@ -14534,7 +14534,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.069882Z"
+      "generated_at": "2026-09-26T14:21:02.739962Z"
     },
     {
       "gemeente": "Ichtegem",
@@ -14594,14 +14594,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.079447Z"
+      "generated_at": "2026-09-26T14:21:02.781812Z"
     },
     {
       "gemeente": "Ieper",
       "slug": "ieper",
       "success": true,
       "count": 65,
-      "file_size_kb": 45.7587890625,
+      "file_size_kb": 45.7041015625,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -14654,7 +14654,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.091940Z"
+      "generated_at": "2026-09-26T14:21:02.806192Z"
     },
     {
       "gemeente": "Incourt",
@@ -14714,14 +14714,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.100397Z"
+      "generated_at": "2026-09-26T14:21:02.823435Z"
     },
     {
       "gemeente": "Ingelmunster",
       "slug": "ingelmunster",
       "success": true,
       "count": 22,
-      "file_size_kb": 16.2890625,
+      "file_size_kb": 16.2744140625,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -14774,7 +14774,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.108819Z"
+      "generated_at": "2026-09-26T14:21:02.840934Z"
     },
     {
       "gemeente": "Ittre",
@@ -14834,7 +14834,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.116426Z"
+      "generated_at": "2026-09-26T14:21:02.856715Z"
     },
     {
       "gemeente": "Izegem",
@@ -14894,7 +14894,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.125938Z"
+      "generated_at": "2026-09-26T14:21:02.876804Z"
     },
     {
       "gemeente": "Jabbeke",
@@ -14954,7 +14954,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.134348Z"
+      "generated_at": "2026-09-26T14:21:02.894520Z"
     },
     {
       "gemeente": "Jalhay",
@@ -15014,14 +15014,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.143522Z"
+      "generated_at": "2026-09-26T14:21:02.912505Z"
     },
     {
       "gemeente": "Jemeppe-sur-Sambre",
       "slug": "jemeppe-sur-sambre",
       "success": true,
       "count": 33,
-      "file_size_kb": 18.5185546875,
+      "file_size_kb": 18.50390625,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -15074,14 +15074,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.152575Z"
+      "generated_at": "2026-09-26T14:21:02.931768Z"
     },
     {
       "gemeente": "Jette",
       "slug": "jette",
       "success": true,
-      "count": 78,
-      "file_size_kb": 35.01171875,
+      "count": 79,
+      "file_size_kb": 35.4970703125,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -15115,7 +15115,7 @@
         },
         "DPD": {
           "success": true,
-          "count": 3,
+          "count": 4,
           "error": null
         },
         "Amazon": {
@@ -15134,7 +15134,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.162802Z"
+      "generated_at": "2026-09-26T14:21:02.953525Z"
     },
     {
       "gemeente": "Jodoigne",
@@ -15194,14 +15194,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.172328Z"
+      "generated_at": "2026-09-26T14:21:02.973221Z"
     },
     {
       "gemeente": "Juprelle",
       "slug": "juprelle",
       "success": true,
       "count": 9,
-      "file_size_kb": 11.1474609375,
+      "file_size_kb": 11.1328125,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -15254,14 +15254,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.180794Z"
+      "generated_at": "2026-09-26T14:21:02.990348Z"
     },
     {
       "gemeente": "Jurbise",
       "slug": "jurbise",
       "success": true,
-      "count": 23,
-      "file_size_kb": 19.9150390625,
+      "count": 24,
+      "file_size_kb": 20.2470703125,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -15280,7 +15280,7 @@
         },
         "InPost": {
           "success": true,
-          "count": 1,
+          "count": 2,
           "error": null
         },
         "VintedGo": {
@@ -15314,7 +15314,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.189972Z"
+      "generated_at": "2026-09-26T14:21:03.009083Z"
     },
     {
       "gemeente": "Kalmthout",
@@ -15374,14 +15374,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.198448Z"
+      "generated_at": "2026-09-26T14:21:03.026807Z"
     },
     {
       "gemeente": "Kampenhout",
       "slug": "kampenhout",
       "success": true,
       "count": 35,
-      "file_size_kb": 23.7841796875,
+      "file_size_kb": 23.76953125,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -15434,14 +15434,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.207894Z"
+      "generated_at": "2026-09-26T14:21:03.046100Z"
     },
     {
       "gemeente": "Kapelle-op-den-Bos",
       "slug": "kapelle-op-den-bos",
       "success": true,
       "count": 21,
-      "file_size_kb": 16.2734375,
+      "file_size_kb": 16.244140625,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -15494,23 +15494,23 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.217553Z"
+      "generated_at": "2026-09-26T14:21:03.064326Z"
     },
     {
       "gemeente": "Kapellen",
       "slug": "kapellen",
       "success": true,
-      "count": 34,
-      "file_size_kb": 18.1083984375,
+      "count": 32,
+      "file_size_kb": 17.2734375,
       "carrier_status": {
         "bpost": {
           "success": true,
-          "count": 11,
+          "count": 10,
           "error": null
         },
         "DHL": {
           "success": true,
-          "count": 11,
+          "count": 10,
           "error": null
         },
         "GLS": {
@@ -15554,7 +15554,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.226897Z"
+      "generated_at": "2026-09-26T14:21:03.082823Z"
     },
     {
       "gemeente": "Kaprijke",
@@ -15614,14 +15614,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.235437Z"
+      "generated_at": "2026-09-26T14:21:03.100316Z"
     },
     {
       "gemeente": "Kasterlee",
       "slug": "kasterlee",
       "success": true,
       "count": 29,
-      "file_size_kb": 21.1787109375,
+      "file_size_kb": 21.1640625,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -15674,7 +15674,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.244465Z"
+      "generated_at": "2026-09-26T14:21:03.119143Z"
     },
     {
       "gemeente": "Keerbergen",
@@ -15734,7 +15734,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.252727Z"
+      "generated_at": "2026-09-26T14:21:03.136157Z"
     },
     {
       "gemeente": "Kelmis - La Calamine",
@@ -15794,14 +15794,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.260295Z"
+      "generated_at": "2026-09-26T14:21:03.151786Z"
     },
     {
       "gemeente": "Kinrooi",
       "slug": "kinrooi",
       "success": true,
       "count": 16,
-      "file_size_kb": 15.51171875,
+      "file_size_kb": 15.482421875,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -15854,7 +15854,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.268708Z"
+      "generated_at": "2026-09-26T14:21:03.169049Z"
     },
     {
       "gemeente": "Kluisbergen",
@@ -15914,14 +15914,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.276697Z"
+      "generated_at": "2026-09-26T14:21:03.186113Z"
     },
     {
       "gemeente": "Knokke-Heist",
       "slug": "knokke-heist",
       "success": true,
       "count": 53,
-      "file_size_kb": 25.8173828125,
+      "file_size_kb": 25.802734375,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -15974,14 +15974,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.285897Z"
+      "generated_at": "2026-09-26T14:21:03.205363Z"
     },
     {
       "gemeente": "Koekelare",
       "slug": "koekelare",
       "success": true,
       "count": 22,
-      "file_size_kb": 16.521484375,
+      "file_size_kb": 16.5107421875,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -16034,7 +16034,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.294698Z"
+      "generated_at": "2026-09-26T14:21:03.223986Z"
     },
     {
       "gemeente": "Koekelberg",
@@ -16094,7 +16094,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.301899Z"
+      "generated_at": "2026-09-26T14:21:03.241134Z"
     },
     {
       "gemeente": "Koksijde",
@@ -16154,7 +16154,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.310637Z"
+      "generated_at": "2026-09-26T14:21:03.259735Z"
     },
     {
       "gemeente": "Kontich",
@@ -16214,14 +16214,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.319900Z"
+      "generated_at": "2026-09-26T14:21:03.279449Z"
     },
     {
       "gemeente": "Kortemark",
       "slug": "kortemark",
       "success": true,
       "count": 24,
-      "file_size_kb": 21.6181640625,
+      "file_size_kb": 21.5888671875,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -16274,14 +16274,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.331921Z"
+      "generated_at": "2026-09-26T14:21:03.298278Z"
     },
     {
       "gemeente": "Kortenaken",
       "slug": "kortenaken",
       "success": true,
       "count": 24,
-      "file_size_kb": 20.7451171875,
+      "file_size_kb": 20.73046875,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -16334,7 +16334,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.343464Z"
+      "generated_at": "2026-09-26T14:21:03.317428Z"
     },
     {
       "gemeente": "Kortenberg",
@@ -16394,14 +16394,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.352612Z"
+      "generated_at": "2026-09-26T14:21:03.336075Z"
     },
     {
       "gemeente": "Kortrijk",
       "slug": "kortrijk",
       "success": true,
-      "count": 146,
-      "file_size_kb": 73.572265625,
+      "count": 144,
+      "file_size_kb": 72.6396484375,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -16420,7 +16420,7 @@
         },
         "InPost": {
           "success": true,
-          "count": 2,
+          "count": 1,
           "error": null
         },
         "VintedGo": {
@@ -16450,11 +16450,11 @@
         },
         "FedEx": {
           "success": true,
-          "count": 1,
+          "count": 0,
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.369591Z"
+      "generated_at": "2026-09-26T14:21:03.366684Z"
     },
     {
       "gemeente": "Kraainem",
@@ -16514,14 +16514,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.379534Z"
+      "generated_at": "2026-09-26T14:21:03.384234Z"
     },
     {
       "gemeente": "Kruisem",
       "slug": "kruisem",
       "success": true,
       "count": 31,
-      "file_size_kb": 23.826171875,
+      "file_size_kb": 23.796875,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -16574,7 +16574,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.389989Z"
+      "generated_at": "2026-09-26T14:21:03.404581Z"
     },
     {
       "gemeente": "Kuurne",
@@ -16634,7 +16634,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.397879Z"
+      "generated_at": "2026-09-26T14:21:03.421447Z"
     },
     {
       "gemeente": "La Bruyère",
@@ -16694,7 +16694,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.406289Z"
+      "generated_at": "2026-09-26T14:21:03.439350Z"
     },
     {
       "gemeente": "La Hulpe",
@@ -16754,14 +16754,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.413987Z"
+      "generated_at": "2026-09-26T14:21:03.456429Z"
     },
     {
       "gemeente": "La Louvière",
       "slug": "la-louviere",
       "success": true,
       "count": 105,
-      "file_size_kb": 53.724609375,
+      "file_size_kb": 53.7138671875,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -16814,7 +16814,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.427547Z"
+      "generated_at": "2026-09-26T14:21:03.482593Z"
     },
     {
       "gemeente": "La Roche-en-Ardenne",
@@ -16874,7 +16874,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.439164Z"
+      "generated_at": "2026-09-26T14:21:03.504169Z"
     },
     {
       "gemeente": "Laakdal",
@@ -16934,7 +16934,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.448741Z"
+      "generated_at": "2026-09-26T14:21:03.523648Z"
     },
     {
       "gemeente": "Laarne",
@@ -16994,14 +16994,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.457184Z"
+      "generated_at": "2026-09-26T14:21:03.541312Z"
     },
     {
       "gemeente": "Lanaken",
       "slug": "lanaken",
       "success": true,
       "count": 42,
-      "file_size_kb": 24.666015625,
+      "file_size_kb": 24.6806640625,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -17054,14 +17054,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.466684Z"
+      "generated_at": "2026-09-26T14:21:03.561808Z"
     },
     {
       "gemeente": "Landen",
       "slug": "landen",
       "success": true,
       "count": 25,
-      "file_size_kb": 20.5947265625,
+      "file_size_kb": 20.580078125,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -17114,14 +17114,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.475710Z"
+      "generated_at": "2026-09-26T14:21:03.580842Z"
     },
     {
       "gemeente": "Langemark-Poelkapelle",
       "slug": "langemark-poelkapelle",
       "success": true,
-      "count": 18,
-      "file_size_kb": 15.34375,
+      "count": 17,
+      "file_size_kb": 15.013671875,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -17140,7 +17140,7 @@
         },
         "InPost": {
           "success": true,
-          "count": 2,
+          "count": 1,
           "error": null
         },
         "VintedGo": {
@@ -17174,14 +17174,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.484560Z"
+      "generated_at": "2026-09-26T14:21:03.599111Z"
     },
     {
       "gemeente": "Lasne",
       "slug": "lasne",
       "success": true,
       "count": 25,
-      "file_size_kb": 17.7890625,
+      "file_size_kb": 17.7783203125,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -17234,7 +17234,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.494450Z"
+      "generated_at": "2026-09-26T14:21:03.618091Z"
     },
     {
       "gemeente": "Le Rœulx",
@@ -17294,7 +17294,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.503735Z"
+      "generated_at": "2026-09-26T14:21:03.637430Z"
     },
     {
       "gemeente": "Lebbeke",
@@ -17354,7 +17354,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.512463Z"
+      "generated_at": "2026-09-26T14:21:03.655307Z"
     },
     {
       "gemeente": "Lede",
@@ -17414,14 +17414,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.521742Z"
+      "generated_at": "2026-09-26T14:21:03.674755Z"
     },
     {
       "gemeente": "Ledegem",
       "slug": "ledegem",
       "success": true,
       "count": 22,
-      "file_size_kb": 15.173828125,
+      "file_size_kb": 15.1591796875,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -17474,14 +17474,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.530476Z"
+      "generated_at": "2026-09-26T14:21:03.694721Z"
     },
     {
       "gemeente": "Lendelede",
       "slug": "lendelede",
       "success": true,
       "count": 14,
-      "file_size_kb": 9.8232421875,
+      "file_size_kb": 9.80859375,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -17534,7 +17534,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.538171Z"
+      "generated_at": "2026-09-26T14:21:03.712636Z"
     },
     {
       "gemeente": "Lennik",
@@ -17594,7 +17594,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.546637Z"
+      "generated_at": "2026-09-26T14:21:03.731928Z"
     },
     {
       "gemeente": "Lens",
@@ -17654,14 +17654,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.554608Z"
+      "generated_at": "2026-09-26T14:21:03.749778Z"
     },
     {
       "gemeente": "Leopoldsburg",
       "slug": "leopoldsburg",
       "success": true,
       "count": 26,
-      "file_size_kb": 14.4697265625,
+      "file_size_kb": 14.455078125,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -17714,14 +17714,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.563055Z"
+      "generated_at": "2026-09-26T14:21:03.767331Z"
     },
     {
       "gemeente": "Les Bons Villers",
       "slug": "les-bons-villers",
       "success": true,
-      "count": 15,
-      "file_size_kb": 14.4677734375,
+      "count": 16,
+      "file_size_kb": 14.810546875,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -17740,7 +17740,7 @@
         },
         "InPost": {
           "success": true,
-          "count": 1,
+          "count": 2,
           "error": null
         },
         "VintedGo": {
@@ -17774,7 +17774,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.571636Z"
+      "generated_at": "2026-09-26T14:21:03.785378Z"
     },
     {
       "gemeente": "Lessines",
@@ -17834,14 +17834,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.581433Z"
+      "generated_at": "2026-09-26T14:21:03.805842Z"
     },
     {
       "gemeente": "Leuven",
       "slug": "leuven",
       "success": true,
       "count": 200,
-      "file_size_kb": 95.5009765625,
+      "file_size_kb": 95.45703125,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -17894,14 +17894,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.599057Z"
+      "generated_at": "2026-09-26T14:21:03.840382Z"
     },
     {
       "gemeente": "Leuze-en-Hainaut",
       "slug": "leuze-en-hainaut",
       "success": true,
       "count": 37,
-      "file_size_kb": 27.44140625,
+      "file_size_kb": 27.4267578125,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -17954,14 +17954,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.608855Z"
+      "generated_at": "2026-09-26T14:21:03.859881Z"
     },
     {
       "gemeente": "Libin",
       "slug": "libin",
       "success": true,
       "count": 18,
-      "file_size_kb": 25.396484375,
+      "file_size_kb": 25.3818359375,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -18014,7 +18014,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.618829Z"
+      "generated_at": "2026-09-26T14:21:03.879100Z"
     },
     {
       "gemeente": "Libramont-Chevigny",
@@ -18074,7 +18074,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.628657Z"
+      "generated_at": "2026-09-26T14:21:03.899409Z"
     },
     {
       "gemeente": "Lichtervelde",
@@ -18134,7 +18134,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.637517Z"
+      "generated_at": "2026-09-26T14:21:03.916920Z"
     },
     {
       "gemeente": "Liedekerke",
@@ -18194,14 +18194,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.645713Z"
+      "generated_at": "2026-09-26T14:21:03.933701Z"
     },
     {
       "gemeente": "Lier",
       "slug": "lier",
       "success": true,
       "count": 70,
-      "file_size_kb": 43.529296875,
+      "file_size_kb": 43.5,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -18254,7 +18254,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.657671Z"
+      "generated_at": "2026-09-26T14:21:03.958007Z"
     },
     {
       "gemeente": "Lierde",
@@ -18314,7 +18314,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.665558Z"
+      "generated_at": "2026-09-26T14:21:03.974072Z"
     },
     {
       "gemeente": "Lierneux",
@@ -18374,7 +18374,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.674924Z"
+      "generated_at": "2026-09-26T14:21:03.991313Z"
     },
     {
       "gemeente": "Lievegem",
@@ -18434,7 +18434,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.685319Z"
+      "generated_at": "2026-09-26T14:21:04.010033Z"
     },
     {
       "gemeente": "Lille",
@@ -18494,7 +18494,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.694076Z"
+      "generated_at": "2026-09-26T14:21:04.027487Z"
     },
     {
       "gemeente": "Limbourg",
@@ -18554,7 +18554,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.702792Z"
+      "generated_at": "2026-09-26T14:21:04.044518Z"
     },
     {
       "gemeente": "Lincent",
@@ -18614,7 +18614,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.709909Z"
+      "generated_at": "2026-09-26T14:21:04.059878Z"
     },
     {
       "gemeente": "Linkebeek",
@@ -18674,7 +18674,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.717033Z"
+      "generated_at": "2026-09-26T14:21:04.075159Z"
     },
     {
       "gemeente": "Lint",
@@ -18734,7 +18734,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.724381Z"
+      "generated_at": "2026-09-26T14:21:04.090757Z"
     },
     {
       "gemeente": "Linter",
@@ -18794,14 +18794,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.733007Z"
+      "generated_at": "2026-09-26T14:21:04.108129Z"
     },
     {
       "gemeente": "Liège",
       "slug": "liege",
       "success": true,
-      "count": 446,
-      "file_size_kb": 199.3671875,
+      "count": 447,
+      "file_size_kb": 199.666015625,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -18820,7 +18820,7 @@
         },
         "InPost": {
           "success": true,
-          "count": 36,
+          "count": 37,
           "error": null
         },
         "VintedGo": {
@@ -18854,14 +18854,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.761869Z"
+      "generated_at": "2026-09-26T14:21:04.163909Z"
     },
     {
       "gemeente": "Lo-Reninge",
       "slug": "lo-reninge",
       "success": true,
       "count": 18,
-      "file_size_kb": 19.9609375,
+      "file_size_kb": 19.9462890625,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -18914,14 +18914,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.771537Z"
+      "generated_at": "2026-09-26T14:21:04.182984Z"
     },
     {
       "gemeente": "Lobbes",
       "slug": "lobbes",
       "success": true,
       "count": 10,
-      "file_size_kb": 14.318359375,
+      "file_size_kb": 14.3076171875,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -18974,14 +18974,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.780248Z"
+      "generated_at": "2026-09-26T14:21:04.200341Z"
     },
     {
       "gemeente": "Lochristi",
       "slug": "lochristi",
       "success": true,
       "count": 47,
-      "file_size_kb": 29.474609375,
+      "file_size_kb": 29.4638671875,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -19034,14 +19034,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.790397Z"
+      "generated_at": "2026-09-26T14:21:04.221133Z"
     },
     {
       "gemeente": "Lokeren",
       "slug": "lokeren",
       "success": true,
       "count": 73,
-      "file_size_kb": 36.83984375,
+      "file_size_kb": 36.810546875,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -19094,14 +19094,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.801365Z"
+      "generated_at": "2026-09-26T14:21:04.243494Z"
     },
     {
       "gemeente": "Lommel",
       "slug": "lommel",
       "success": true,
       "count": 55,
-      "file_size_kb": 27.044921875,
+      "file_size_kb": 27.0302734375,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -19154,14 +19154,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.810856Z"
+      "generated_at": "2026-09-26T14:21:04.263319Z"
     },
     {
       "gemeente": "Londerzeel",
       "slug": "londerzeel",
       "success": true,
-      "count": 25,
-      "file_size_kb": 18.38671875,
+      "count": 26,
+      "file_size_kb": 18.7099609375,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -19180,7 +19180,7 @@
         },
         "InPost": {
           "success": true,
-          "count": 0,
+          "count": 1,
           "error": null
         },
         "VintedGo": {
@@ -19214,7 +19214,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.819580Z"
+      "generated_at": "2026-09-26T14:21:04.281220Z"
     },
     {
       "gemeente": "Lontzen",
@@ -19274,14 +19274,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.827738Z"
+      "generated_at": "2026-09-26T14:21:04.298019Z"
     },
     {
       "gemeente": "Lubbeek",
       "slug": "lubbeek",
       "success": true,
-      "count": 17,
-      "file_size_kb": 17.693359375,
+      "count": 18,
+      "file_size_kb": 18.0390625,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -19300,7 +19300,7 @@
         },
         "InPost": {
           "success": true,
-          "count": 0,
+          "count": 1,
           "error": null
         },
         "VintedGo": {
@@ -19334,14 +19334,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.836964Z"
+      "generated_at": "2026-09-26T14:21:04.316302Z"
     },
     {
       "gemeente": "Lummen",
       "slug": "lummen",
       "success": true,
       "count": 29,
-      "file_size_kb": 24.4560546875,
+      "file_size_kb": 24.4453125,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -19394,7 +19394,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.846826Z"
+      "generated_at": "2026-09-26T14:21:04.336091Z"
     },
     {
       "gemeente": "Léglise",
@@ -19454,7 +19454,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.857371Z"
+      "generated_at": "2026-09-26T14:21:04.355933Z"
     },
     {
       "gemeente": "Maarkedal",
@@ -19514,14 +19514,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.866199Z"
+      "generated_at": "2026-09-26T14:21:04.372883Z"
     },
     {
       "gemeente": "Maaseik",
       "slug": "maaseik",
       "success": true,
-      "count": 44,
-      "file_size_kb": 30.388671875,
+      "count": 43,
+      "file_size_kb": 30.0361328125,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -19550,7 +19550,7 @@
         },
         "PostNL": {
           "success": true,
-          "count": 6,
+          "count": 5,
           "error": null
         },
         "DPD": {
@@ -19574,14 +19574,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.876597Z"
+      "generated_at": "2026-09-26T14:21:04.394084Z"
     },
     {
       "gemeente": "Maasmechelen",
       "slug": "maasmechelen",
       "success": true,
       "count": 52,
-      "file_size_kb": 27.1416015625,
+      "file_size_kb": 26.9619140625,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -19600,7 +19600,7 @@
         },
         "InPost": {
           "success": true,
-          "count": 3,
+          "count": 4,
           "error": null
         },
         "VintedGo": {
@@ -19630,11 +19630,11 @@
         },
         "FedEx": {
           "success": true,
-          "count": 3,
+          "count": 2,
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.886345Z"
+      "generated_at": "2026-09-26T14:21:04.414632Z"
     },
     {
       "gemeente": "Machelen",
@@ -19694,7 +19694,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.894558Z"
+      "generated_at": "2026-09-26T14:21:04.431983Z"
     },
     {
       "gemeente": "Maldegem",
@@ -19754,14 +19754,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.903694Z"
+      "generated_at": "2026-09-26T14:21:04.450617Z"
     },
     {
       "gemeente": "Malle",
       "slug": "malle",
       "success": true,
       "count": 19,
-      "file_size_kb": 18.1337890625,
+      "file_size_kb": 18.119140625,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -19814,7 +19814,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.913382Z"
+      "generated_at": "2026-09-26T14:21:04.469185Z"
     },
     {
       "gemeente": "Malmedy",
@@ -19874,14 +19874,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.924199Z"
+      "generated_at": "2026-09-26T14:21:04.490384Z"
     },
     {
       "gemeente": "Manage",
       "slug": "manage",
       "success": true,
       "count": 41,
-      "file_size_kb": 23.6904296875,
+      "file_size_kb": 23.67578125,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -19934,7 +19934,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.934626Z"
+      "generated_at": "2026-09-26T14:21:04.510107Z"
     },
     {
       "gemeente": "Manhay",
@@ -19994,14 +19994,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.943878Z"
+      "generated_at": "2026-09-26T14:21:04.528670Z"
     },
     {
       "gemeente": "Marche-en-Famenne",
       "slug": "marche-en-famenne",
       "success": true,
-      "count": 54,
-      "file_size_kb": 41.861328125,
+      "count": 53,
+      "file_size_kb": 41.525390625,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -20020,7 +20020,7 @@
         },
         "InPost": {
           "success": true,
-          "count": 6,
+          "count": 5,
           "error": null
         },
         "VintedGo": {
@@ -20054,7 +20054,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.955982Z"
+      "generated_at": "2026-09-26T14:21:04.552089Z"
     },
     {
       "gemeente": "Marchin",
@@ -20114,7 +20114,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.963492Z"
+      "generated_at": "2026-09-26T14:21:04.568046Z"
     },
     {
       "gemeente": "Martelange",
@@ -20174,14 +20174,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.970798Z"
+      "generated_at": "2026-09-26T14:21:04.583039Z"
     },
     {
       "gemeente": "Mechelen",
       "slug": "mechelen",
       "success": true,
-      "count": 235,
-      "file_size_kb": 113.447265625,
+      "count": 236,
+      "file_size_kb": 113.7880859375,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -20210,7 +20210,7 @@
         },
         "PostNL": {
           "success": true,
-          "count": 11,
+          "count": 12,
           "error": null
         },
         "DPD": {
@@ -20234,14 +20234,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.990274Z"
+      "generated_at": "2026-09-26T14:21:04.620437Z"
     },
     {
       "gemeente": "Meerhout",
       "slug": "meerhout",
       "success": true,
       "count": 28,
-      "file_size_kb": 19.6923828125,
+      "file_size_kb": 19.677734375,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -20294,7 +20294,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:21.999676Z"
+      "generated_at": "2026-09-26T14:21:04.638969Z"
     },
     {
       "gemeente": "Meise",
@@ -20354,7 +20354,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.008659Z"
+      "generated_at": "2026-09-26T14:21:04.657325Z"
     },
     {
       "gemeente": "Meix-devant-Virton",
@@ -20414,14 +20414,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.017649Z"
+      "generated_at": "2026-09-26T14:21:04.674272Z"
     },
     {
       "gemeente": "Menen",
       "slug": "menen",
       "success": true,
       "count": 69,
-      "file_size_kb": 36.10546875,
+      "file_size_kb": 36.076171875,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -20474,7 +20474,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.029178Z"
+      "generated_at": "2026-09-26T14:21:04.696533Z"
     },
     {
       "gemeente": "Merbes-le-Château",
@@ -20534,7 +20534,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.038498Z"
+      "generated_at": "2026-09-26T14:21:04.713128Z"
     },
     {
       "gemeente": "Merchtem",
@@ -20594,7 +20594,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.048684Z"
+      "generated_at": "2026-09-26T14:21:04.732782Z"
     },
     {
       "gemeente": "Merelbeke-Melle",
@@ -20654,7 +20654,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.060051Z"
+      "generated_at": "2026-09-26T14:21:04.754910Z"
     },
     {
       "gemeente": "Merksplas",
@@ -20714,7 +20714,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.068613Z"
+      "generated_at": "2026-09-26T14:21:04.770729Z"
     },
     {
       "gemeente": "Mesen",
@@ -20774,7 +20774,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.075294Z"
+      "generated_at": "2026-09-26T14:21:04.785008Z"
     },
     {
       "gemeente": "Messancy",
@@ -20834,14 +20834,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.084542Z"
+      "generated_at": "2026-09-26T14:21:04.802888Z"
     },
     {
       "gemeente": "Mettet",
       "slug": "mettet",
       "success": true,
-      "count": 18,
-      "file_size_kb": 17.3857421875,
+      "count": 19,
+      "file_size_kb": 17.7431640625,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -20860,7 +20860,7 @@
         },
         "InPost": {
           "success": true,
-          "count": 1,
+          "count": 2,
           "error": null
         },
         "VintedGo": {
@@ -20894,14 +20894,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.093520Z"
+      "generated_at": "2026-09-26T14:21:04.820555Z"
     },
     {
       "gemeente": "Middelkerke",
       "slug": "middelkerke",
       "success": true,
       "count": 35,
-      "file_size_kb": 24.470703125,
+      "file_size_kb": 24.4560546875,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -20954,7 +20954,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.103319Z"
+      "generated_at": "2026-09-26T14:21:04.840381Z"
     },
     {
       "gemeente": "Modave",
@@ -21014,14 +21014,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.111691Z"
+      "generated_at": "2026-09-26T14:21:04.857369Z"
     },
     {
       "gemeente": "Mol",
       "slug": "mol",
       "success": true,
       "count": 65,
-      "file_size_kb": 36.1162109375,
+      "file_size_kb": 36.1015625,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -21074,7 +21074,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.122959Z"
+      "generated_at": "2026-09-26T14:21:04.879778Z"
     },
     {
       "gemeente": "Momignies",
@@ -21134,14 +21134,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.132779Z"
+      "generated_at": "2026-09-26T14:21:04.899168Z"
     },
     {
       "gemeente": "Mons",
       "slug": "mons",
       "success": true,
       "count": 166,
-      "file_size_kb": 79.361328125,
+      "file_size_kb": 79.3466796875,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -21194,7 +21194,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.149464Z"
+      "generated_at": "2026-09-26T14:21:04.929918Z"
     },
     {
       "gemeente": "Mont-de-l'Enclus",
@@ -21254,7 +21254,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.157730Z"
+      "generated_at": "2026-09-26T14:21:04.946030Z"
     },
     {
       "gemeente": "Mont-Saint-Guibert",
@@ -21314,7 +21314,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.166383Z"
+      "generated_at": "2026-09-26T14:21:04.964614Z"
     },
     {
       "gemeente": "Montigny-le-Tilleul",
@@ -21374,14 +21374,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.175070Z"
+      "generated_at": "2026-09-26T14:21:04.982219Z"
     },
     {
       "gemeente": "Moorslede",
       "slug": "moorslede",
       "success": true,
       "count": 23,
-      "file_size_kb": 19.3203125,
+      "file_size_kb": 19.294921875,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -21434,14 +21434,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.184362Z"
+      "generated_at": "2026-09-26T14:21:05.000593Z"
     },
     {
       "gemeente": "Morlanwelz",
       "slug": "morlanwelz",
       "success": true,
-      "count": 46,
-      "file_size_kb": 23.8486328125,
+      "count": 47,
+      "file_size_kb": 24.1875,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -21460,7 +21460,7 @@
         },
         "InPost": {
           "success": true,
-          "count": 2,
+          "count": 3,
           "error": null
         },
         "VintedGo": {
@@ -21494,7 +21494,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.196080Z"
+      "generated_at": "2026-09-26T14:21:05.020704Z"
     },
     {
       "gemeente": "Mortsel",
@@ -21554,14 +21554,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.207142Z"
+      "generated_at": "2026-09-26T14:21:05.040830Z"
     },
     {
       "gemeente": "Mouscron",
       "slug": "mouscron",
       "success": true,
-      "count": 94,
-      "file_size_kb": 47.5546875,
+      "count": 92,
+      "file_size_kb": 46.6728515625,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -21580,7 +21580,7 @@
         },
         "InPost": {
           "success": true,
-          "count": 10,
+          "count": 9,
           "error": null
         },
         "VintedGo": {
@@ -21610,11 +21610,11 @@
         },
         "FedEx": {
           "success": true,
-          "count": 3,
+          "count": 2,
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.221355Z"
+      "generated_at": "2026-09-26T14:21:05.065445Z"
     },
     {
       "gemeente": "Musson",
@@ -21674,14 +21674,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.230428Z"
+      "generated_at": "2026-09-26T14:21:05.082917Z"
     },
     {
       "gemeente": "Namur",
       "slug": "namur",
       "success": true,
       "count": 225,
-      "file_size_kb": 102.16796875,
+      "file_size_kb": 102.138671875,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -21734,7 +21734,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.249038Z"
+      "generated_at": "2026-09-26T14:21:05.119558Z"
     },
     {
       "gemeente": "Nandrin",
@@ -21794,7 +21794,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.257962Z"
+      "generated_at": "2026-09-26T14:21:05.138060Z"
     },
     {
       "gemeente": "Nassogne",
@@ -21854,7 +21854,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.268235Z"
+      "generated_at": "2026-09-26T14:21:05.156509Z"
     },
     {
       "gemeente": "Nazareth-De Pinte",
@@ -21914,14 +21914,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.278413Z"
+      "generated_at": "2026-09-26T14:21:05.175351Z"
     },
     {
       "gemeente": "Neufchâteau",
       "slug": "neufchateau",
       "success": true,
       "count": 19,
-      "file_size_kb": 23.1591796875,
+      "file_size_kb": 23.1298828125,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -21974,7 +21974,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.288710Z"
+      "generated_at": "2026-09-26T14:21:05.194165Z"
     },
     {
       "gemeente": "Neupré",
@@ -22034,7 +22034,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.298247Z"
+      "generated_at": "2026-09-26T14:21:05.212855Z"
     },
     {
       "gemeente": "Niel",
@@ -22094,7 +22094,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.305766Z"
+      "generated_at": "2026-09-26T14:21:05.229377Z"
     },
     {
       "gemeente": "Nieuwerkerken",
@@ -22154,7 +22154,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.314691Z"
+      "generated_at": "2026-09-26T14:21:05.248109Z"
     },
     {
       "gemeente": "Nieuwpoort",
@@ -22214,7 +22214,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.323227Z"
+      "generated_at": "2026-09-26T14:21:05.266489Z"
     },
     {
       "gemeente": "Nijlen",
@@ -22274,14 +22274,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.332846Z"
+      "generated_at": "2026-09-26T14:21:05.286762Z"
     },
     {
       "gemeente": "Ninove",
       "slug": "ninove",
       "success": true,
       "count": 51,
-      "file_size_kb": 34.1669921875,
+      "file_size_kb": 34.1416015625,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -22334,14 +22334,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.343432Z"
+      "generated_at": "2026-09-26T14:21:05.309797Z"
     },
     {
       "gemeente": "Nivelles",
       "slug": "nivelles",
       "success": true,
-      "count": 57,
-      "file_size_kb": 35.701171875,
+      "count": 58,
+      "file_size_kb": 36.208984375,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -22375,7 +22375,7 @@
         },
         "DPD": {
           "success": true,
-          "count": 2,
+          "count": 3,
           "error": null
         },
         "Amazon": {
@@ -22394,7 +22394,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.353962Z"
+      "generated_at": "2026-09-26T14:21:05.336904Z"
     },
     {
       "gemeente": "Ohey",
@@ -22454,14 +22454,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.361998Z"
+      "generated_at": "2026-09-26T14:21:05.356309Z"
     },
     {
       "gemeente": "Olen",
       "slug": "olen",
       "success": true,
       "count": 22,
-      "file_size_kb": 14.1552734375,
+      "file_size_kb": 14.140625,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -22514,7 +22514,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.370403Z"
+      "generated_at": "2026-09-26T14:21:05.377628Z"
     },
     {
       "gemeente": "Olne",
@@ -22574,7 +22574,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.377882Z"
+      "generated_at": "2026-09-26T14:21:05.395824Z"
     },
     {
       "gemeente": "Onhaye",
@@ -22634,14 +22634,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.386203Z"
+      "generated_at": "2026-09-26T14:21:05.414928Z"
     },
     {
       "gemeente": "Oostende",
       "slug": "oostende",
       "success": true,
       "count": 141,
-      "file_size_kb": 64.5029296875,
+      "file_size_kb": 64.4736328125,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -22694,7 +22694,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.400951Z"
+      "generated_at": "2026-09-26T14:21:05.444842Z"
     },
     {
       "gemeente": "Oosterzele",
@@ -22754,7 +22754,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.409652Z"
+      "generated_at": "2026-09-26T14:21:05.463170Z"
     },
     {
       "gemeente": "Oostkamp",
@@ -22814,7 +22814,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.418759Z"
+      "generated_at": "2026-09-26T14:21:05.482430Z"
     },
     {
       "gemeente": "Oostrozebeke",
@@ -22874,7 +22874,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.427589Z"
+      "generated_at": "2026-09-26T14:21:05.501574Z"
     },
     {
       "gemeente": "Opwijk",
@@ -22934,7 +22934,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.436238Z"
+      "generated_at": "2026-09-26T14:21:05.519713Z"
     },
     {
       "gemeente": "Oreye",
@@ -22994,7 +22994,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.443612Z"
+      "generated_at": "2026-09-26T14:21:05.536346Z"
     },
     {
       "gemeente": "Orp-Jauche",
@@ -23054,14 +23054,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.451983Z"
+      "generated_at": "2026-09-26T14:21:05.553811Z"
     },
     {
       "gemeente": "Ottignies-Louvain-la-Neuve",
       "slug": "ottignies-louvain-la-neuve",
       "success": true,
       "count": 36,
-      "file_size_kb": 21.6650390625,
+      "file_size_kb": 21.654296875,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -23114,7 +23114,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.460948Z"
+      "generated_at": "2026-09-26T14:21:05.577797Z"
     },
     {
       "gemeente": "Oud-Heverlee",
@@ -23174,7 +23174,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.469712Z"
+      "generated_at": "2026-09-26T14:21:05.597509Z"
     },
     {
       "gemeente": "Oud-Turnhout",
@@ -23234,14 +23234,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.477986Z"
+      "generated_at": "2026-09-26T14:21:05.618312Z"
     },
     {
       "gemeente": "Oudenaarde",
       "slug": "oudenaarde",
       "success": true,
       "count": 48,
-      "file_size_kb": 33.4150390625,
+      "file_size_kb": 33.37890625,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -23294,7 +23294,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.488581Z"
+      "generated_at": "2026-09-26T14:21:05.644494Z"
     },
     {
       "gemeente": "Oudenburg",
@@ -23354,14 +23354,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.497322Z"
+      "generated_at": "2026-09-26T14:21:05.663300Z"
     },
     {
       "gemeente": "Oudergem (Auderghem)",
       "slug": "oudergem-auderghem",
       "success": true,
-      "count": 58,
-      "file_size_kb": 28.00390625,
+      "count": 57,
+      "file_size_kb": 27.533203125,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -23380,7 +23380,7 @@
         },
         "InPost": {
           "success": true,
-          "count": 7,
+          "count": 6,
           "error": null
         },
         "VintedGo": {
@@ -23414,14 +23414,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.507105Z"
+      "generated_at": "2026-09-26T14:21:05.684740Z"
     },
     {
       "gemeente": "Oudsbergen",
       "slug": "oudsbergen",
       "success": true,
       "count": 27,
-      "file_size_kb": 25.1962890625,
+      "file_size_kb": 25.181640625,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -23474,7 +23474,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.540752Z"
+      "generated_at": "2026-09-26T14:21:05.705586Z"
     },
     {
       "gemeente": "Ouffet",
@@ -23534,7 +23534,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.549274Z"
+      "generated_at": "2026-09-26T14:21:05.724864Z"
     },
     {
       "gemeente": "Oupeye",
@@ -23594,14 +23594,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.558676Z"
+      "generated_at": "2026-09-26T14:21:05.746130Z"
     },
     {
       "gemeente": "Overijse",
       "slug": "overijse",
       "success": true,
       "count": 31,
-      "file_size_kb": 27.9853515625,
+      "file_size_kb": 27.9599609375,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -23654,23 +23654,23 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.569264Z"
+      "generated_at": "2026-09-26T14:21:05.767089Z"
     },
     {
       "gemeente": "Pajottegem",
       "slug": "pajottegem",
       "success": true,
-      "count": 64,
-      "file_size_kb": 45.015625,
+      "count": 62,
+      "file_size_kb": 44.1630859375,
       "carrier_status": {
         "bpost": {
           "success": true,
-          "count": 16,
+          "count": 15,
           "error": null
         },
         "DHL": {
           "success": true,
-          "count": 16,
+          "count": 15,
           "error": null
         },
         "GLS": {
@@ -23714,7 +23714,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.581503Z"
+      "generated_at": "2026-09-26T14:21:05.791328Z"
     },
     {
       "gemeente": "Paliseul",
@@ -23774,14 +23774,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.590980Z"
+      "generated_at": "2026-09-26T14:21:05.810314Z"
     },
     {
       "gemeente": "Pecq",
       "slug": "pecq",
       "success": true,
       "count": 13,
-      "file_size_kb": 12.3701171875,
+      "file_size_kb": 12.35546875,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -23834,7 +23834,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.599312Z"
+      "generated_at": "2026-09-26T14:21:05.827532Z"
     },
     {
       "gemeente": "Peer",
@@ -23894,14 +23894,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.609970Z"
+      "generated_at": "2026-09-26T14:21:05.848968Z"
     },
     {
       "gemeente": "Pelt",
       "slug": "pelt",
       "success": true,
-      "count": 41,
-      "file_size_kb": 21.4638671875,
+      "count": 42,
+      "file_size_kb": 21.9052734375,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -23920,7 +23920,7 @@
         },
         "InPost": {
           "success": true,
-          "count": 0,
+          "count": 1,
           "error": null
         },
         "VintedGo": {
@@ -23954,7 +23954,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.620576Z"
+      "generated_at": "2026-09-26T14:21:05.868647Z"
     },
     {
       "gemeente": "Pepingen",
@@ -24014,7 +24014,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.634414Z"
+      "generated_at": "2026-09-26T14:21:05.885858Z"
     },
     {
       "gemeente": "Pepinster",
@@ -24074,7 +24074,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.644268Z"
+      "generated_at": "2026-09-26T14:21:05.903390Z"
     },
     {
       "gemeente": "Perwez",
@@ -24134,7 +24134,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.653270Z"
+      "generated_at": "2026-09-26T14:21:05.924214Z"
     },
     {
       "gemeente": "Philippeville",
@@ -24194,7 +24194,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.663575Z"
+      "generated_at": "2026-09-26T14:21:05.942414Z"
     },
     {
       "gemeente": "Pittem",
@@ -24254,7 +24254,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.672661Z"
+      "generated_at": "2026-09-26T14:21:05.959025Z"
     },
     {
       "gemeente": "Plombières",
@@ -24314,7 +24314,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.682409Z"
+      "generated_at": "2026-09-26T14:21:05.975507Z"
     },
     {
       "gemeente": "Pont-à-Celles",
@@ -24374,14 +24374,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.691722Z"
+      "generated_at": "2026-09-26T14:21:05.994483Z"
     },
     {
       "gemeente": "Poperinge",
       "slug": "poperinge",
       "success": true,
-      "count": 47,
-      "file_size_kb": 42.8466796875,
+      "count": 49,
+      "file_size_kb": 43.521484375,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -24400,7 +24400,7 @@
         },
         "InPost": {
           "success": true,
-          "count": 0,
+          "count": 2,
           "error": null
         },
         "VintedGo": {
@@ -24434,7 +24434,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.704898Z"
+      "generated_at": "2026-09-26T14:21:06.018455Z"
     },
     {
       "gemeente": "Profondeville",
@@ -24494,7 +24494,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.715555Z"
+      "generated_at": "2026-09-26T14:21:06.036158Z"
     },
     {
       "gemeente": "Putte",
@@ -24554,7 +24554,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.726507Z"
+      "generated_at": "2026-09-26T14:21:06.056963Z"
     },
     {
       "gemeente": "Puurs-Sint-Amands",
@@ -24614,7 +24614,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.736289Z"
+      "generated_at": "2026-09-26T14:21:06.076572Z"
     },
     {
       "gemeente": "Péruwelz",
@@ -24674,7 +24674,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.748215Z"
+      "generated_at": "2026-09-26T14:21:06.097032Z"
     },
     {
       "gemeente": "Quaregnon",
@@ -24734,7 +24734,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.758098Z"
+      "generated_at": "2026-09-26T14:21:06.114729Z"
     },
     {
       "gemeente": "Quiévrain",
@@ -24794,7 +24794,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.770591Z"
+      "generated_at": "2026-09-26T14:21:06.132236Z"
     },
     {
       "gemeente": "Quévy",
@@ -24854,7 +24854,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.782505Z"
+      "generated_at": "2026-09-26T14:21:06.150307Z"
     },
     {
       "gemeente": "Raeren",
@@ -24914,14 +24914,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.793534Z"
+      "generated_at": "2026-09-26T14:21:06.169188Z"
     },
     {
       "gemeente": "Ramillies",
       "slug": "ramillies",
       "success": true,
       "count": 9,
-      "file_size_kb": 10.8544921875,
+      "file_size_kb": 10.8251953125,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -24974,14 +24974,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.803416Z"
+      "generated_at": "2026-09-26T14:21:06.185564Z"
     },
     {
       "gemeente": "Ranst",
       "slug": "ranst",
       "success": true,
       "count": 42,
-      "file_size_kb": 26.7607421875,
+      "file_size_kb": 26.74609375,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -25034,7 +25034,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.815512Z"
+      "generated_at": "2026-09-26T14:21:06.205763Z"
     },
     {
       "gemeente": "Ravels",
@@ -25094,14 +25094,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.826046Z"
+      "generated_at": "2026-09-26T14:21:06.223573Z"
     },
     {
       "gemeente": "Rebecq",
       "slug": "rebecq",
       "success": true,
       "count": 27,
-      "file_size_kb": 17.7861328125,
+      "file_size_kb": 17.7568359375,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -25154,7 +25154,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.853874Z"
+      "generated_at": "2026-09-26T14:21:06.242259Z"
     },
     {
       "gemeente": "Remicourt",
@@ -25214,7 +25214,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.862835Z"
+      "generated_at": "2026-09-26T14:21:06.256975Z"
     },
     {
       "gemeente": "Rendeux",
@@ -25274,7 +25274,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.873372Z"
+      "generated_at": "2026-09-26T14:21:06.276195Z"
     },
     {
       "gemeente": "Retie",
@@ -25334,14 +25334,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.882300Z"
+      "generated_at": "2026-09-26T14:21:06.293731Z"
     },
     {
       "gemeente": "Riemst",
       "slug": "riemst",
       "success": true,
       "count": 31,
-      "file_size_kb": 21.70703125,
+      "file_size_kb": 21.681640625,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -25394,7 +25394,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.891631Z"
+      "generated_at": "2026-09-26T14:21:06.312873Z"
     },
     {
       "gemeente": "Rijkevorsel",
@@ -25454,14 +25454,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.900092Z"
+      "generated_at": "2026-09-26T14:21:06.330270Z"
     },
     {
       "gemeente": "Rixensart",
       "slug": "rixensart",
       "success": true,
       "count": 38,
-      "file_size_kb": 21.728515625,
+      "file_size_kb": 21.7138671875,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -25514,7 +25514,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.910899Z"
+      "generated_at": "2026-09-26T14:21:06.349505Z"
     },
     {
       "gemeente": "Rochefort",
@@ -25574,14 +25574,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.921649Z"
+      "generated_at": "2026-09-26T14:21:06.370601Z"
     },
     {
       "gemeente": "Roeselare",
       "slug": "roeselare",
       "success": true,
-      "count": 134,
-      "file_size_kb": 62.955078125,
+      "count": 132,
+      "file_size_kb": 62.1572265625,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -25600,7 +25600,7 @@
         },
         "InPost": {
           "success": true,
-          "count": 4,
+          "count": 3,
           "error": null
         },
         "VintedGo": {
@@ -25610,7 +25610,7 @@
         },
         "PostNL": {
           "success": true,
-          "count": 10,
+          "count": 9,
           "error": null
         },
         "DPD": {
@@ -25634,14 +25634,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.936130Z"
+      "generated_at": "2026-09-26T14:21:06.398077Z"
     },
     {
       "gemeente": "Ronse",
       "slug": "ronse",
       "success": true,
       "count": 28,
-      "file_size_kb": 20.08984375,
+      "file_size_kb": 20.0751953125,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -25694,7 +25694,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.945426Z"
+      "generated_at": "2026-09-26T14:21:06.416176Z"
     },
     {
       "gemeente": "Roosdaal",
@@ -25754,14 +25754,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.954352Z"
+      "generated_at": "2026-09-26T14:21:06.434199Z"
     },
     {
       "gemeente": "Rotselaar",
       "slug": "rotselaar",
       "success": true,
       "count": 22,
-      "file_size_kb": 22.4091796875,
+      "file_size_kb": 22.3837890625,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -25814,7 +25814,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.963765Z"
+      "generated_at": "2026-09-26T14:21:06.453074Z"
     },
     {
       "gemeente": "Rouvroy",
@@ -25874,14 +25874,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.971808Z"
+      "generated_at": "2026-09-26T14:21:06.469887Z"
     },
     {
       "gemeente": "Rumes",
       "slug": "rumes",
       "success": true,
       "count": 16,
-      "file_size_kb": 16.08984375,
+      "file_size_kb": 16.0751953125,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -25934,14 +25934,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.980409Z"
+      "generated_at": "2026-09-26T14:21:06.487279Z"
     },
     {
       "gemeente": "Rumst",
       "slug": "rumst",
       "success": true,
-      "count": 27,
-      "file_size_kb": 16.8544921875,
+      "count": 28,
+      "file_size_kb": 17.3798828125,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -25990,11 +25990,11 @@
         },
         "FedEx": {
           "success": true,
-          "count": 0,
+          "count": 1,
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.990665Z"
+      "generated_at": "2026-09-26T14:21:06.505704Z"
     },
     {
       "gemeente": "Saint-Georges-sur-Meuse",
@@ -26054,7 +26054,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:22.999354Z"
+      "generated_at": "2026-09-26T14:21:06.522718Z"
     },
     {
       "gemeente": "Saint-Ghislain",
@@ -26114,7 +26114,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.028410Z"
+      "generated_at": "2026-09-26T14:21:06.544870Z"
     },
     {
       "gemeente": "Saint-Hubert",
@@ -26174,7 +26174,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.039452Z"
+      "generated_at": "2026-09-26T14:21:06.563533Z"
     },
     {
       "gemeente": "Saint-Léger",
@@ -26234,7 +26234,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.048394Z"
+      "generated_at": "2026-09-26T14:21:06.579231Z"
     },
     {
       "gemeente": "Saint-Nicolas",
@@ -26294,7 +26294,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.056788Z"
+      "generated_at": "2026-09-26T14:21:06.596350Z"
     },
     {
       "gemeente": "Sainte-Ode",
@@ -26354,14 +26354,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.065843Z"
+      "generated_at": "2026-09-26T14:21:06.613203Z"
     },
     {
       "gemeente": "Sambreville",
       "slug": "sambreville",
       "success": true,
       "count": 71,
-      "file_size_kb": 34.5712890625,
+      "file_size_kb": 34.775390625,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -26380,7 +26380,7 @@
         },
         "InPost": {
           "success": true,
-          "count": 11,
+          "count": 10,
           "error": null
         },
         "VintedGo": {
@@ -26395,7 +26395,7 @@
         },
         "DPD": {
           "success": true,
-          "count": 2,
+          "count": 3,
           "error": null
         },
         "Amazon": {
@@ -26414,14 +26414,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.076868Z"
+      "generated_at": "2026-09-26T14:21:06.635008Z"
     },
     {
       "gemeente": "Sankt Vith",
       "slug": "sankt-vith",
       "success": true,
       "count": 11,
-      "file_size_kb": 28.443359375,
+      "file_size_kb": 28.4287109375,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -26474,14 +26474,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.087216Z"
+      "generated_at": "2026-09-26T14:21:06.654228Z"
     },
     {
       "gemeente": "Schaarbeek (Schaerbeek)",
       "slug": "schaarbeek-schaerbeek",
       "success": true,
       "count": 146,
-      "file_size_kb": 62.2431640625,
+      "file_size_kb": 62.31640625,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -26534,7 +26534,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.100625Z"
+      "generated_at": "2026-09-26T14:21:06.681807Z"
     },
     {
       "gemeente": "Schelle",
@@ -26594,14 +26594,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.109169Z"
+      "generated_at": "2026-09-26T14:21:06.698625Z"
     },
     {
       "gemeente": "Scherpenheuvel-Zichem",
       "slug": "scherpenheuvel-zichem",
       "success": true,
       "count": 38,
-      "file_size_kb": 24.859375,
+      "file_size_kb": 24.8447265625,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -26654,7 +26654,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.118959Z"
+      "generated_at": "2026-09-26T14:21:06.718602Z"
     },
     {
       "gemeente": "Schilde",
@@ -26714,14 +26714,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.127529Z"
+      "generated_at": "2026-09-26T14:21:06.736134Z"
     },
     {
       "gemeente": "Schoten",
       "slug": "schoten",
       "success": true,
-      "count": 40,
-      "file_size_kb": 25.9091796875,
+      "count": 41,
+      "file_size_kb": 26.255859375,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -26740,7 +26740,7 @@
         },
         "InPost": {
           "success": true,
-          "count": 1,
+          "count": 2,
           "error": null
         },
         "VintedGo": {
@@ -26774,7 +26774,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.137445Z"
+      "generated_at": "2026-09-26T14:21:06.756348Z"
     },
     {
       "gemeente": "Seneffe",
@@ -26834,7 +26834,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.148116Z"
+      "generated_at": "2026-09-26T14:21:06.776632Z"
     },
     {
       "gemeente": "Seraing",
@@ -26894,7 +26894,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.161288Z"
+      "generated_at": "2026-09-26T14:21:06.802588Z"
     },
     {
       "gemeente": "Silly",
@@ -26954,7 +26954,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.175173Z"
+      "generated_at": "2026-09-26T14:21:06.820515Z"
     },
     {
       "gemeente": "Sint-Agatha-Berchem (Berchem-Sainte-Agathe)",
@@ -27014,23 +27014,23 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.184257Z"
+      "generated_at": "2026-09-26T14:21:06.838362Z"
     },
     {
       "gemeente": "Sint-Genesius-Rode",
       "slug": "sint-genesius-rode",
       "success": true,
-      "count": 22,
-      "file_size_kb": 15.580078125,
+      "count": 19,
+      "file_size_kb": 14.3173828125,
       "carrier_status": {
         "bpost": {
           "success": true,
-          "count": 6,
+          "count": 5,
           "error": null
         },
         "DHL": {
           "success": true,
-          "count": 6,
+          "count": 5,
           "error": null
         },
         "GLS": {
@@ -27040,7 +27040,7 @@
         },
         "InPost": {
           "success": true,
-          "count": 1,
+          "count": 0,
           "error": null
         },
         "VintedGo": {
@@ -27074,14 +27074,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.192959Z"
+      "generated_at": "2026-09-26T14:21:06.859644Z"
     },
     {
       "gemeente": "Sint-Gillis (Saint-Gilles)",
       "slug": "sint-gillis-saint-gilles",
       "success": true,
       "count": 62,
-      "file_size_kb": 27.8662109375,
+      "file_size_kb": 27.876953125,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -27134,14 +27134,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.203087Z"
+      "generated_at": "2026-09-26T14:21:06.881119Z"
     },
     {
       "gemeente": "Sint-Gillis-Waas",
       "slug": "sint-gillis-waas",
       "success": true,
-      "count": 26,
-      "file_size_kb": 15.466796875,
+      "count": 25,
+      "file_size_kb": 15.1328125,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -27160,7 +27160,7 @@
         },
         "InPost": {
           "success": true,
-          "count": 2,
+          "count": 1,
           "error": null
         },
         "VintedGo": {
@@ -27194,14 +27194,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.211682Z"
+      "generated_at": "2026-09-26T14:21:06.900336Z"
     },
     {
       "gemeente": "Sint-Jans-Molenbeek (Molenbeek-Saint-Jean)",
       "slug": "sint-jans-molenbeek-molenbeek-saint-jean",
       "success": true,
-      "count": 108,
-      "file_size_kb": 48.087890625,
+      "count": 107,
+      "file_size_kb": 47.5986328125,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -27235,7 +27235,7 @@
         },
         "DPD": {
           "success": true,
-          "count": 6,
+          "count": 5,
           "error": null
         },
         "Amazon": {
@@ -27254,7 +27254,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.223642Z"
+      "generated_at": "2026-09-26T14:21:06.926087Z"
     },
     {
       "gemeente": "Sint-Joost-ten-Node (Saint-Josse-ten-Noode)",
@@ -27314,14 +27314,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.232390Z"
+      "generated_at": "2026-09-26T14:21:06.945718Z"
     },
     {
       "gemeente": "Sint-Katelijne-Waver",
       "slug": "sint-katelijne-waver",
       "success": true,
       "count": 44,
-      "file_size_kb": 26.0048828125,
+      "file_size_kb": 25.990234375,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -27374,23 +27374,23 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.242038Z"
+      "generated_at": "2026-09-26T14:21:06.966438Z"
     },
     {
       "gemeente": "Sint-Lambrechts-Woluwe (Woluwe-Saint-Lambert)",
       "slug": "sint-lambrechts-woluwe-woluwe-saint-lambert",
       "success": true,
-      "count": 72,
-      "file_size_kb": 32.8740234375,
+      "count": 75,
+      "file_size_kb": 34.1796875,
       "carrier_status": {
         "bpost": {
           "success": true,
-          "count": 18,
+          "count": 19,
           "error": null
         },
         "DHL": {
           "success": true,
-          "count": 18,
+          "count": 19,
           "error": null
         },
         "GLS": {
@@ -27400,7 +27400,7 @@
         },
         "InPost": {
           "success": true,
-          "count": 3,
+          "count": 4,
           "error": null
         },
         "VintedGo": {
@@ -27434,7 +27434,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.252507Z"
+      "generated_at": "2026-09-26T14:21:06.988390Z"
     },
     {
       "gemeente": "Sint-Laureins",
@@ -27494,7 +27494,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.260105Z"
+      "generated_at": "2026-09-26T14:21:07.004989Z"
     },
     {
       "gemeente": "Sint-Lievens-Houtem",
@@ -27554,7 +27554,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.267644Z"
+      "generated_at": "2026-09-26T14:21:07.020909Z"
     },
     {
       "gemeente": "Sint-Martens-Latem",
@@ -27614,7 +27614,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.275110Z"
+      "generated_at": "2026-09-26T14:21:07.037053Z"
     },
     {
       "gemeente": "Sint-Niklaas",
@@ -27674,14 +27674,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.289345Z"
+      "generated_at": "2026-09-26T14:21:07.066449Z"
     },
     {
       "gemeente": "Sint-Pieters-Leeuw",
       "slug": "sint-pieters-leeuw",
       "success": true,
       "count": 47,
-      "file_size_kb": 34.4521484375,
+      "file_size_kb": 34.44140625,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -27734,7 +27734,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.300255Z"
+      "generated_at": "2026-09-26T14:21:07.088781Z"
     },
     {
       "gemeente": "Sint-Pieters-Woluwe (Woluwe-Saint-Pierre)",
@@ -27794,14 +27794,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.309706Z"
+      "generated_at": "2026-09-26T14:21:07.108281Z"
     },
     {
       "gemeente": "Sint-Truiden",
       "slug": "sint-truiden",
       "success": true,
       "count": 90,
-      "file_size_kb": 53.6044921875,
+      "file_size_kb": 53.58984375,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -27854,7 +27854,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.323027Z"
+      "generated_at": "2026-09-26T14:21:07.134664Z"
     },
     {
       "gemeente": "Sivry-Rance",
@@ -27914,14 +27914,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.332129Z"
+      "generated_at": "2026-09-26T14:21:07.152842Z"
     },
     {
       "gemeente": "Soignies",
       "slug": "soignies",
       "success": true,
       "count": 68,
-      "file_size_kb": 40.7880859375,
+      "file_size_kb": 40.7734375,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -27974,7 +27974,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.343446Z"
+      "generated_at": "2026-09-26T14:21:07.176184Z"
     },
     {
       "gemeente": "Sombreffe",
@@ -28034,14 +28034,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.351322Z"
+      "generated_at": "2026-09-26T14:21:07.192870Z"
     },
     {
       "gemeente": "Somme-Leuze",
       "slug": "somme-leuze",
       "success": true,
       "count": 13,
-      "file_size_kb": 19.96875,
+      "file_size_kb": 19.9541015625,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -28094,7 +28094,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.360618Z"
+      "generated_at": "2026-09-26T14:21:07.211967Z"
     },
     {
       "gemeente": "Soumagne",
@@ -28154,7 +28154,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.369602Z"
+      "generated_at": "2026-09-26T14:21:07.231436Z"
     },
     {
       "gemeente": "Spa",
@@ -28214,7 +28214,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.377831Z"
+      "generated_at": "2026-09-26T14:21:07.248314Z"
     },
     {
       "gemeente": "Spiere-Helkijn",
@@ -28274,7 +28274,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.385405Z"
+      "generated_at": "2026-09-26T14:21:07.264376Z"
     },
     {
       "gemeente": "Sprimont",
@@ -28334,14 +28334,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.395106Z"
+      "generated_at": "2026-09-26T14:21:07.284018Z"
     },
     {
       "gemeente": "Stabroek",
       "slug": "stabroek",
       "success": true,
       "count": 31,
-      "file_size_kb": 14.388671875,
+      "file_size_kb": 14.359375,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -28394,7 +28394,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.403438Z"
+      "generated_at": "2026-09-26T14:21:07.301337Z"
     },
     {
       "gemeente": "Staden",
@@ -28454,7 +28454,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.412018Z"
+      "generated_at": "2026-09-26T14:21:07.319503Z"
     },
     {
       "gemeente": "Stavelot",
@@ -28514,7 +28514,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.422099Z"
+      "generated_at": "2026-09-26T14:21:07.339322Z"
     },
     {
       "gemeente": "Steenokkerzeel",
@@ -28574,7 +28574,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.430220Z"
+      "generated_at": "2026-09-26T14:21:07.355734Z"
     },
     {
       "gemeente": "Stekene",
@@ -28634,7 +28634,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.438573Z"
+      "generated_at": "2026-09-26T14:21:07.373259Z"
     },
     {
       "gemeente": "Stoumont",
@@ -28694,7 +28694,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.446962Z"
+      "generated_at": "2026-09-26T14:21:07.390433Z"
     },
     {
       "gemeente": "Tellin",
@@ -28754,7 +28754,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.454453Z"
+      "generated_at": "2026-09-26T14:21:07.406259Z"
     },
     {
       "gemeente": "Temse",
@@ -28814,7 +28814,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.463197Z"
+      "generated_at": "2026-09-26T14:21:07.424823Z"
     },
     {
       "gemeente": "Tenneville",
@@ -28874,14 +28874,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.472834Z"
+      "generated_at": "2026-09-26T14:21:07.444802Z"
     },
     {
       "gemeente": "Ternat",
       "slug": "ternat",
       "success": true,
       "count": 21,
-      "file_size_kb": 17.2119140625,
+      "file_size_kb": 17.197265625,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -28934,7 +28934,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.481599Z"
+      "generated_at": "2026-09-26T14:21:07.463070Z"
     },
     {
       "gemeente": "Tervuren",
@@ -28994,7 +28994,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.489446Z"
+      "generated_at": "2026-09-26T14:21:07.480495Z"
     },
     {
       "gemeente": "Tessenderlo-Ham",
@@ -29054,7 +29054,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.502194Z"
+      "generated_at": "2026-09-26T14:21:07.505191Z"
     },
     {
       "gemeente": "Theux",
@@ -29114,7 +29114,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.511509Z"
+      "generated_at": "2026-09-26T14:21:07.523085Z"
     },
     {
       "gemeente": "Thimister-Clermont",
@@ -29174,7 +29174,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.520094Z"
+      "generated_at": "2026-09-26T14:21:07.540334Z"
     },
     {
       "gemeente": "Thuin",
@@ -29234,14 +29234,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.530265Z"
+      "generated_at": "2026-09-26T14:21:07.560543Z"
     },
     {
       "gemeente": "Tielt",
       "slug": "tielt",
       "success": true,
       "count": 59,
-      "file_size_kb": 41.64453125,
+      "file_size_kb": 41.623046875,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -29294,7 +29294,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.542162Z"
+      "generated_at": "2026-09-26T14:21:07.584138Z"
     },
     {
       "gemeente": "Tielt-Winge",
@@ -29354,14 +29354,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.550986Z"
+      "generated_at": "2026-09-26T14:21:07.601493Z"
     },
     {
       "gemeente": "Tienen",
       "slug": "tienen",
       "success": true,
-      "count": 66,
-      "file_size_kb": 38.421875,
+      "count": 68,
+      "file_size_kb": 39.4111328125,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -29395,7 +29395,7 @@
         },
         "DPD": {
           "success": true,
-          "count": 2,
+          "count": 4,
           "error": null
         },
         "Amazon": {
@@ -29414,7 +29414,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.562198Z"
+      "generated_at": "2026-09-26T14:21:07.624493Z"
     },
     {
       "gemeente": "Tinlot",
@@ -29474,7 +29474,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.569649Z"
+      "generated_at": "2026-09-26T14:21:07.640325Z"
     },
     {
       "gemeente": "Tintigny",
@@ -29534,14 +29534,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.578882Z"
+      "generated_at": "2026-09-26T14:21:07.658300Z"
     },
     {
       "gemeente": "Tongeren-Borgloon",
       "slug": "tongeren-borgloon",
       "success": true,
       "count": 85,
-      "file_size_kb": 55.783203125,
+      "file_size_kb": 55.7685546875,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -29594,7 +29594,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.592685Z"
+      "generated_at": "2026-09-26T14:21:07.685516Z"
     },
     {
       "gemeente": "Torhout",
@@ -29654,14 +29654,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.602014Z"
+      "generated_at": "2026-09-26T14:21:07.705037Z"
     },
     {
       "gemeente": "Tournai",
       "slug": "tournai",
       "success": true,
       "count": 145,
-      "file_size_kb": 83.3671875,
+      "file_size_kb": 83.3525390625,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -29714,7 +29714,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.619208Z"
+      "generated_at": "2026-09-26T14:21:07.737659Z"
     },
     {
       "gemeente": "Tremelo",
@@ -29774,14 +29774,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.627714Z"
+      "generated_at": "2026-09-26T14:21:07.754820Z"
     },
     {
       "gemeente": "Trois-Ponts",
       "slug": "trois-ponts",
       "success": true,
       "count": 14,
-      "file_size_kb": 21.3935546875,
+      "file_size_kb": 21.3642578125,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -29834,7 +29834,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.636941Z"
+      "generated_at": "2026-09-26T14:21:07.773145Z"
     },
     {
       "gemeente": "Trooz",
@@ -29894,7 +29894,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.646368Z"
+      "generated_at": "2026-09-26T14:21:07.791988Z"
     },
     {
       "gemeente": "Tubize",
@@ -29954,14 +29954,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.656038Z"
+      "generated_at": "2026-09-26T14:21:07.811713Z"
     },
     {
       "gemeente": "Turnhout",
       "slug": "turnhout",
       "success": true,
-      "count": 59,
-      "file_size_kb": 31.6923828125,
+      "count": 60,
+      "file_size_kb": 32.0234375,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -29980,7 +29980,7 @@
         },
         "InPost": {
           "success": true,
-          "count": 3,
+          "count": 4,
           "error": null
         },
         "VintedGo": {
@@ -30014,7 +30014,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.666503Z"
+      "generated_at": "2026-09-26T14:21:07.834494Z"
     },
     {
       "gemeente": "Ukkel (Uccle)",
@@ -30074,7 +30074,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.678378Z"
+      "generated_at": "2026-09-26T14:21:07.861143Z"
     },
     {
       "gemeente": "Vaux-sur-Sûre",
@@ -30134,7 +30134,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.687752Z"
+      "generated_at": "2026-09-26T14:21:07.880708Z"
     },
     {
       "gemeente": "Verlaine",
@@ -30194,14 +30194,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.695410Z"
+      "generated_at": "2026-09-26T14:21:07.897162Z"
     },
     {
       "gemeente": "Verviers",
       "slug": "verviers",
       "success": true,
       "count": 105,
-      "file_size_kb": 54.060546875,
+      "file_size_kb": 54.0498046875,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -30254,7 +30254,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.708618Z"
+      "generated_at": "2026-09-26T14:21:07.923154Z"
     },
     {
       "gemeente": "Veurne",
@@ -30314,14 +30314,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.718350Z"
+      "generated_at": "2026-09-26T14:21:07.942187Z"
     },
     {
       "gemeente": "Vielsalm",
       "slug": "vielsalm",
       "success": true,
       "count": 12,
-      "file_size_kb": 28.08203125,
+      "file_size_kb": 28.107421875,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -30374,7 +30374,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.728909Z"
+      "generated_at": "2026-09-26T14:21:07.961908Z"
     },
     {
       "gemeente": "Villers-la-Ville",
@@ -30434,14 +30434,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.736932Z"
+      "generated_at": "2026-09-26T14:21:07.978498Z"
     },
     {
       "gemeente": "Villers-le-Bouillet",
       "slug": "villers-le-bouillet",
       "success": true,
       "count": 12,
-      "file_size_kb": 13.9951171875,
+      "file_size_kb": 13.98046875,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -30494,14 +30494,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.745213Z"
+      "generated_at": "2026-09-26T14:21:07.995345Z"
     },
     {
       "gemeente": "Vilvoorde",
       "slug": "vilvoorde",
       "success": true,
-      "count": 95,
-      "file_size_kb": 48.6826171875,
+      "count": 93,
+      "file_size_kb": 47.8466796875,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -30520,7 +30520,7 @@
         },
         "InPost": {
           "success": true,
-          "count": 4,
+          "count": 3,
           "error": null
         },
         "VintedGo": {
@@ -30550,18 +30550,18 @@
         },
         "FedEx": {
           "success": true,
-          "count": 4,
+          "count": 3,
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.757747Z"
+      "generated_at": "2026-09-26T14:21:08.019990Z"
     },
     {
       "gemeente": "Viroinval",
       "slug": "viroinval",
       "success": true,
       "count": 16,
-      "file_size_kb": 16.3876953125,
+      "file_size_kb": 16.373046875,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -30614,7 +30614,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.766316Z"
+      "generated_at": "2026-09-26T14:21:08.037429Z"
     },
     {
       "gemeente": "Virton",
@@ -30674,7 +30674,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.776225Z"
+      "generated_at": "2026-09-26T14:21:08.087552Z"
     },
     {
       "gemeente": "Visé",
@@ -30734,7 +30734,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.785778Z"
+      "generated_at": "2026-09-26T14:21:08.106688Z"
     },
     {
       "gemeente": "Vleteren",
@@ -30794,7 +30794,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.794293Z"
+      "generated_at": "2026-09-26T14:21:08.124362Z"
     },
     {
       "gemeente": "Voeren",
@@ -30854,14 +30854,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.804889Z"
+      "generated_at": "2026-09-26T14:21:08.141414Z"
     },
     {
       "gemeente": "Vorselaar",
       "slug": "vorselaar",
       "success": true,
       "count": 16,
-      "file_size_kb": 14.5595703125,
+      "file_size_kb": 14.544921875,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -30914,14 +30914,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.814531Z"
+      "generated_at": "2026-09-26T14:21:08.159157Z"
     },
     {
       "gemeente": "Vorst (Forest)",
       "slug": "vorst-forest",
       "success": true,
       "count": 77,
-      "file_size_kb": 35.9326171875,
+      "file_size_kb": 35.91796875,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -30974,7 +30974,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.825444Z"
+      "generated_at": "2026-09-26T14:21:08.181296Z"
     },
     {
       "gemeente": "Vosselaar",
@@ -31034,14 +31034,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.833672Z"
+      "generated_at": "2026-09-26T14:21:08.202371Z"
     },
     {
       "gemeente": "Vresse-sur-Semois",
       "slug": "vresse-sur-semois",
       "success": true,
       "count": 11,
-      "file_size_kb": 18.01953125,
+      "file_size_kb": 18.0048828125,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -31094,7 +31094,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.842387Z"
+      "generated_at": "2026-09-26T14:21:08.220003Z"
     },
     {
       "gemeente": "Waasmunster",
@@ -31154,7 +31154,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.851248Z"
+      "generated_at": "2026-09-26T14:21:08.238456Z"
     },
     {
       "gemeente": "Waimes",
@@ -31214,14 +31214,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.861733Z"
+      "generated_at": "2026-09-26T14:21:08.258990Z"
     },
     {
       "gemeente": "Walcourt",
       "slug": "walcourt",
       "success": true,
       "count": 26,
-      "file_size_kb": 22.634765625,
+      "file_size_kb": 22.609375,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -31274,7 +31274,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.871285Z"
+      "generated_at": "2026-09-26T14:21:08.278688Z"
     },
     {
       "gemeente": "Walhain",
@@ -31334,7 +31334,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.879901Z"
+      "generated_at": "2026-09-26T14:21:08.296447Z"
     },
     {
       "gemeente": "Wanze",
@@ -31394,14 +31394,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.888645Z"
+      "generated_at": "2026-09-26T14:21:08.315153Z"
     },
     {
       "gemeente": "Waregem",
       "slug": "waregem",
       "success": true,
-      "count": 84,
-      "file_size_kb": 41.76953125,
+      "count": 86,
+      "file_size_kb": 42.4296875,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -31420,7 +31420,7 @@
         },
         "InPost": {
           "success": true,
-          "count": 3,
+          "count": 5,
           "error": null
         },
         "VintedGo": {
@@ -31454,14 +31454,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.900283Z"
+      "generated_at": "2026-09-26T14:21:08.339922Z"
     },
     {
       "gemeente": "Waremme",
       "slug": "waremme",
       "success": true,
-      "count": 36,
-      "file_size_kb": 22.064453125,
+      "count": 37,
+      "file_size_kb": 22.42578125,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -31480,7 +31480,7 @@
         },
         "InPost": {
           "success": true,
-          "count": 5,
+          "count": 6,
           "error": null
         },
         "VintedGo": {
@@ -31514,7 +31514,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.909465Z"
+      "generated_at": "2026-09-26T14:21:08.359563Z"
     },
     {
       "gemeente": "Wasseiges",
@@ -31574,7 +31574,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.916786Z"
+      "generated_at": "2026-09-26T14:21:08.375874Z"
     },
     {
       "gemeente": "Waterloo",
@@ -31634,14 +31634,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.926444Z"
+      "generated_at": "2026-09-26T14:21:08.396315Z"
     },
     {
       "gemeente": "Watermaal-Bosvoorde (Watermael-Boitsfort)",
       "slug": "watermaal-bosvoorde-watermael-boitsfort",
       "success": true,
-      "count": 17,
-      "file_size_kb": 9.865234375,
+      "count": 18,
+      "file_size_kb": 10.3955078125,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -31690,11 +31690,11 @@
         },
         "FedEx": {
           "success": true,
-          "count": 0,
+          "count": 1,
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.934955Z"
+      "generated_at": "2026-09-26T14:21:08.413471Z"
     },
     {
       "gemeente": "Wavre",
@@ -31754,14 +31754,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.946253Z"
+      "generated_at": "2026-09-26T14:21:08.437076Z"
     },
     {
       "gemeente": "Welkenraedt",
       "slug": "welkenraedt",
       "success": true,
       "count": 19,
-      "file_size_kb": 12.728515625,
+      "file_size_kb": 12.703125,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -31814,14 +31814,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.954573Z"
+      "generated_at": "2026-09-26T14:21:08.454918Z"
     },
     {
       "gemeente": "Wellen",
       "slug": "wellen",
       "success": true,
       "count": 18,
-      "file_size_kb": 13.1591796875,
+      "file_size_kb": 13.1484375,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -31874,7 +31874,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.963645Z"
+      "generated_at": "2026-09-26T14:21:08.472869Z"
     },
     {
       "gemeente": "Wellin",
@@ -31934,7 +31934,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.972869Z"
+      "generated_at": "2026-09-26T14:21:08.490091Z"
     },
     {
       "gemeente": "Wemmel",
@@ -31994,14 +31994,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.983412Z"
+      "generated_at": "2026-09-26T14:21:08.513148Z"
     },
     {
       "gemeente": "Wervik",
       "slug": "wervik",
       "success": true,
       "count": 29,
-      "file_size_kb": 21.2490234375,
+      "file_size_kb": 21.234375,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -32054,14 +32054,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:23.994252Z"
+      "generated_at": "2026-09-26T14:21:08.533196Z"
     },
     {
       "gemeente": "Westerlo",
       "slug": "westerlo",
       "success": true,
       "count": 37,
-      "file_size_kb": 24.94140625,
+      "file_size_kb": 24.9267578125,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -32114,7 +32114,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:24.004193Z"
+      "generated_at": "2026-09-26T14:21:08.554382Z"
     },
     {
       "gemeente": "Wetteren",
@@ -32174,14 +32174,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:24.014705Z"
+      "generated_at": "2026-09-26T14:21:08.575460Z"
     },
     {
       "gemeente": "Wevelgem",
       "slug": "wevelgem",
       "success": true,
       "count": 47,
-      "file_size_kb": 26.8046875,
+      "file_size_kb": 26.7900390625,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -32234,7 +32234,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:24.025069Z"
+      "generated_at": "2026-09-26T14:21:08.596820Z"
     },
     {
       "gemeente": "Wezembeek-Oppem",
@@ -32294,14 +32294,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:24.033132Z"
+      "generated_at": "2026-09-26T14:21:08.614066Z"
     },
     {
       "gemeente": "Wichelen",
       "slug": "wichelen",
       "success": true,
       "count": 20,
-      "file_size_kb": 16.94140625,
+      "file_size_kb": 16.9267578125,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -32354,7 +32354,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:24.042483Z"
+      "generated_at": "2026-09-26T14:21:08.632567Z"
     },
     {
       "gemeente": "Wielsbeke",
@@ -32414,7 +32414,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:24.051376Z"
+      "generated_at": "2026-09-26T14:21:08.650770Z"
     },
     {
       "gemeente": "Wijnegem",
@@ -32474,14 +32474,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:24.059932Z"
+      "generated_at": "2026-09-26T14:21:08.669189Z"
     },
     {
       "gemeente": "Willebroek",
       "slug": "willebroek",
       "success": true,
       "count": 56,
-      "file_size_kb": 29.8017578125,
+      "file_size_kb": 29.787109375,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -32534,14 +32534,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:24.069979Z"
+      "generated_at": "2026-09-26T14:21:08.690077Z"
     },
     {
       "gemeente": "Wingene",
       "slug": "wingene",
       "success": true,
       "count": 28,
-      "file_size_kb": 28.9619140625,
+      "file_size_kb": 28.947265625,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -32594,7 +32594,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:24.080289Z"
+      "generated_at": "2026-09-26T14:21:08.711232Z"
     },
     {
       "gemeente": "Wommelgem",
@@ -32654,7 +32654,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:24.089541Z"
+      "generated_at": "2026-09-26T14:21:08.732318Z"
     },
     {
       "gemeente": "Wortegem-Petegem",
@@ -32714,14 +32714,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:24.098259Z"
+      "generated_at": "2026-09-26T14:21:08.751653Z"
     },
     {
       "gemeente": "Wuustwezel",
       "slug": "wuustwezel",
       "success": true,
       "count": 36,
-      "file_size_kb": 17.70703125,
+      "file_size_kb": 17.6923828125,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -32774,7 +32774,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:24.107285Z"
+      "generated_at": "2026-09-26T14:21:08.771531Z"
     },
     {
       "gemeente": "Yvoir",
@@ -32834,7 +32834,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:24.115925Z"
+      "generated_at": "2026-09-26T14:21:08.790577Z"
     },
     {
       "gemeente": "Zandhoven",
@@ -32894,14 +32894,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:24.124985Z"
+      "generated_at": "2026-09-26T14:21:08.810783Z"
     },
     {
       "gemeente": "Zaventem",
       "slug": "zaventem",
       "success": true,
       "count": 59,
-      "file_size_kb": 30.1123046875,
+      "file_size_kb": 30.09765625,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -32954,7 +32954,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:24.135992Z"
+      "generated_at": "2026-09-26T14:21:08.833191Z"
     },
     {
       "gemeente": "Zedelgem",
@@ -33014,14 +33014,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:24.144743Z"
+      "generated_at": "2026-09-26T14:21:08.856786Z"
     },
     {
       "gemeente": "Zele",
       "slug": "zele",
       "success": true,
       "count": 24,
-      "file_size_kb": 15.08984375,
+      "file_size_kb": 15.064453125,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -33074,7 +33074,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:24.153227Z"
+      "generated_at": "2026-09-26T14:21:08.875441Z"
     },
     {
       "gemeente": "Zelzate",
@@ -33134,7 +33134,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:24.161078Z"
+      "generated_at": "2026-09-26T14:21:08.892928Z"
     },
     {
       "gemeente": "Zemst",
@@ -33194,7 +33194,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:24.170710Z"
+      "generated_at": "2026-09-26T14:21:08.913618Z"
     },
     {
       "gemeente": "Zoersel",
@@ -33254,7 +33254,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:24.179671Z"
+      "generated_at": "2026-09-26T14:21:08.932475Z"
     },
     {
       "gemeente": "Zonhoven",
@@ -33314,7 +33314,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:24.189124Z"
+      "generated_at": "2026-09-26T14:21:08.952822Z"
     },
     {
       "gemeente": "Zonnebeke",
@@ -33374,14 +33374,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:24.199556Z"
+      "generated_at": "2026-09-26T14:21:08.973616Z"
     },
     {
       "gemeente": "Zottegem",
       "slug": "zottegem",
       "success": true,
       "count": 30,
-      "file_size_kb": 25.677734375,
+      "file_size_kb": 25.6376953125,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -33434,14 +33434,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:24.209884Z"
+      "generated_at": "2026-09-26T14:21:08.993825Z"
     },
     {
       "gemeente": "Zoutleeuw",
       "slug": "zoutleeuw",
       "success": true,
       "count": 20,
-      "file_size_kb": 19.93359375,
+      "file_size_kb": 19.9189453125,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -33494,7 +33494,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:24.219207Z"
+      "generated_at": "2026-09-26T14:21:09.012880Z"
     },
     {
       "gemeente": "Zuienkerke",
@@ -33554,7 +33554,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:24.226795Z"
+      "generated_at": "2026-09-26T14:21:09.028881Z"
     },
     {
       "gemeente": "Zulte",
@@ -33614,14 +33614,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:24.235363Z"
+      "generated_at": "2026-09-26T14:21:09.047545Z"
     },
     {
       "gemeente": "Zutendaal",
       "slug": "zutendaal",
       "success": true,
       "count": 19,
-      "file_size_kb": 10.4853515625,
+      "file_size_kb": 10.474609375,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -33674,7 +33674,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:24.243070Z"
+      "generated_at": "2026-09-26T14:21:09.064331Z"
     },
     {
       "gemeente": "Zwalm",
@@ -33734,14 +33734,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:24.251579Z"
+      "generated_at": "2026-09-26T14:21:09.081744Z"
     },
     {
       "gemeente": "Zwevegem",
       "slug": "zwevegem",
       "success": true,
       "count": 36,
-      "file_size_kb": 26.7109375,
+      "file_size_kb": 26.6962890625,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -33794,7 +33794,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:24.261916Z"
+      "generated_at": "2026-09-26T14:21:09.102379Z"
     },
     {
       "gemeente": "Écaussinnes",
@@ -33854,7 +33854,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:24.270252Z"
+      "generated_at": "2026-09-26T14:21:09.119503Z"
     },
     {
       "gemeente": "Érezée",
@@ -33914,14 +33914,14 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:24.279917Z"
+      "generated_at": "2026-09-26T14:21:09.138450Z"
     },
     {
       "gemeente": "Étalle",
       "slug": "etalle",
       "success": true,
       "count": 9,
-      "file_size_kb": 19.0546875,
+      "file_size_kb": 19.0400390625,
       "carrier_status": {
         "bpost": {
           "success": true,
@@ -33974,7 +33974,7 @@
           "error": null
         }
       },
-      "generated_at": "2026-09-26T12:42:24.288984Z"
+      "generated_at": "2026-09-26T14:21:09.156203Z"
     }
   ]
 }
